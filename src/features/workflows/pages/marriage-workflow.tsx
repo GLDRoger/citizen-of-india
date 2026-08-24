@@ -9,17 +9,35 @@ import { useAuthStore } from "@/features/auth/store";
 import { getDocuments, getPerson } from "@/features/graph/selectors";
 import type { GraphMutation, Verification } from "@/features/graph/schema";
 import { useCitizenStore } from "@/features/graph/store";
+import type { Language } from "@/i18n/messages";
+import { useI18n } from "@/i18n/use-i18n";
 import { formatDate, maskIdentifier } from "@/lib/format";
 import { bookAppointment, processPayment, submitMarriageRegistration } from "@/lib/mockGov";
 import { CompletionCard, ProcedureShell, StepCard, type ProcedureStep } from "../components/procedure-shell";
 
-const steps: ProcedureStep[] = [
-  { id: "invite", title: "Invite Priya", description: "Start one shared application." },
-  { id: "consent", title: "Partner consent", description: "Priya approves from her login." },
-  { id: "documents", title: "Documents and witnesses", description: "Reuse identity records and choose witnesses." },
-  { id: "appointment", title: "Appointment and fee", description: "Book Bengaluru and pay ₹500." },
-  { id: "certificate", title: "Register marriage", description: "Issue a shared certificate." },
-];
+const stepsByLanguage: Record<Language, ProcedureStep[]> = {
+  en: [
+    { id: "invite", title: "Invite Priya", description: "Start one shared application." },
+    { id: "consent", title: "Partner consent", description: "Priya approves from her login." },
+    { id: "documents", title: "Documents and witnesses", description: "Reuse identity records and choose witnesses." },
+    { id: "appointment", title: "Appointment and fee", description: "Book Bengaluru and pay ₹500." },
+    { id: "certificate", title: "Register marriage", description: "Receive one shared certificate." },
+  ],
+  hi: [
+    { id: "invite", title: "प्रिया को आमंत्रित करें", description: "एक साझा आवेदन शुरू करें।" },
+    { id: "consent", title: "साथी की सहमति", description: "प्रिया अपने लॉगिन से सहमति देंगी।" },
+    { id: "documents", title: "दस्तावेज़ और गवाह", description: "पहचान के दस्तावेज़ दोबारा इस्तेमाल करें और गवाह चुनें।" },
+    { id: "appointment", title: "अपॉइंटमेंट और शुल्क", description: "बेंगलुरु में अपॉइंटमेंट बुक करें और ₹500 भरें।" },
+    { id: "certificate", title: "विवाह पंजीकरण", description: "दोनों के लिए एक साझा प्रमाणपत्र पाएँ।" },
+  ],
+  kn: [
+    { id: "invite", title: "ಪ್ರಿಯಾ ಅವರನ್ನು ಆಹ್ವಾನಿಸಿ", description: "ಒಂದು ಜಂಟಿ ಅರ್ಜಿಯನ್ನು ಪ್ರಾರಂಭಿಸಿ." },
+    { id: "consent", title: "ಸಂಗಾತಿಯ ಒಪ್ಪಿಗೆ", description: "ಪ್ರಿಯಾ ತಮ್ಮ ಲಾಗಿನ್‌ನಿಂದ ಒಪ್ಪಿಗೆ ನೀಡುತ್ತಾರೆ." },
+    { id: "documents", title: "ದಾಖಲೆಗಳು ಮತ್ತು ಸಾಕ್ಷಿಗಳು", description: "ಗುರುತಿನ ದಾಖಲೆಗಳನ್ನು ಮರುಬಳಸಿ, ಸಾಕ್ಷಿಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ." },
+    { id: "appointment", title: "ಭೇಟಿ ಮತ್ತು ಶುಲ್ಕ", description: "ಬೆಂಗಳೂರಿನಲ್ಲಿ ಭೇಟಿ ನಿಗದಿಪಡಿಸಿ ₹500 ಪಾವತಿಸಿ." },
+    { id: "certificate", title: "ವಿವಾಹ ನೋಂದಣಿ", description: "ಇಬ್ಬರಿಗೂ ಒಂದೇ ಪ್ರಮಾಣಪತ್ರ ಪಡೆಯಿರಿ." },
+  ],
+};
 
 function verification(source: Verification["source"] = "Self"): Verification {
   return { source, state: source === "Self" ? "self-declared" : "verified", asOf: "2026-08-24" };
@@ -27,6 +45,7 @@ function verification(source: Verification["source"] = "Self"): Verification {
 
 export function MarriageWorkflow() {
   const router = useRouter();
+  const { language } = useI18n();
   const personId = useAuthStore((state) => state.personId);
   const switchPersona = useAuthStore((state) => state.switchPersona);
   const graph = useCitizenStore((state) => state.graph);
@@ -43,6 +62,7 @@ export function MarriageWorkflow() {
     .find((node) => node.id === "app:marriage-arjun-priya");
   const currentStep = application?.attrs.currentStep ?? 0;
   const complete = application?.attrs.status === "completed";
+  const steps = stepsByLanguage[language];
 
   const run = async (action: () => Promise<void>) => {
     setLoading(true);

@@ -39,7 +39,7 @@ export default function AboutPage() {
             <ul className="grid gap-4">{realItems.map((item) => <li className="flex gap-3 text-sm leading-6 text-ink-muted" key={item}><Check aria-hidden className="mt-1 size-4 shrink-0 text-success" />{item}</li>)}</ul>
           </article>
           <article className="grid content-start gap-6 border-t border-saffron pt-5">
-            <div className="flex items-center gap-3"><span className="grid size-10 place-items-center rounded-full bg-saffron-soft text-saffron-ink"><FlaskConical aria-hidden className="size-5" /></span><h2 className="font-display text-3xl font-semibold">Connected in test mode</h2></div>
+            <div className="flex items-center gap-3"><span className="grid size-10 place-items-center rounded-full bg-saffron-soft text-saffron-ink"><FlaskConical aria-hidden className="size-5" /></span><h2 className="font-display text-3xl font-semibold">Simulated in this preview</h2></div>
             <ul className="grid gap-4">{simulatedItems.map((item) => <li className="flex gap-3 text-sm leading-6 text-ink-muted" key={item}><X aria-hidden className="mt-1 size-4 shrink-0 text-saffron-ink" />{item}</li>)}</ul>
           </article>
         </section>

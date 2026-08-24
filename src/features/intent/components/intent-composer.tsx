@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight, Mic, Send, Sparkles } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { SimulatedChip } from "@/components/ui/status";
 import { useAuthStore } from "@/features/auth/store";
@@ -26,6 +26,11 @@ export function IntentComposer() {
   const [result, setResult] = useState<IntentResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [listening, setListening] = useState(false);
+  const resultRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (result) resultRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }, [result]);
 
   const submit = async (nextText = text) => {
     const trimmed = nextText.trim();
@@ -90,7 +95,7 @@ export function IntentComposer() {
       </div>
 
       {result ? (
-        <article className="page-enter grid gap-5 rounded-[22px] border border-action/25 bg-action-soft p-5 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end sm:p-6">
+        <article className="page-enter grid gap-5 rounded-[22px] border border-action/25 bg-action-soft p-5 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end sm:p-6" ref={resultRef}>
           <div className="grid gap-3">
             <div className="flex flex-wrap items-center gap-2"><Sparkles aria-hidden className="size-4 text-action" /><p className="eyebrow">{result.title}</p><SimulatedChip authority={result.authority} /></div>
             <p className="max-w-2xl text-sm leading-6 text-ink sm:text-base">{result.reply}</p>

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { classifyIntentLocally } from "@/features/intent/intent-fallback";
+import { classifyIntentLocally, reconcileIntentResponse } from "@/features/intent/intent-fallback";
 import { intentRequestSchema, intentResponseSchema } from "@/features/intent/schema";
 import { invalidRequest, noStoreHeaders, readJsonBody, rejectCrossSiteRequest } from "@/lib/api-response";
 import { generateStructured } from "@/lib/openai/structured";
@@ -12,7 +12,10 @@ export async function POST(request: Request) {
   const body = await readJsonBody(request);
   if (!body.ok) return body.response;
   const parsed = intentRequestSchema.safeParse(body.value);
-  if (!parsed.success) return invalidRequest("Enter a request between 3 and 800 characters.");
+  if (!parsed.success) {
+    const textIsInvalid = parsed.error.issues.some((issue) => issue.path[0] === "text");
+    return invalidRequest(textIsInvalid ? "Enter a request between 3 and 800 characters." : "Request data is malformed.");
+  }
 
   const fallback = classifyIntentLocally(parsed.data.text);
   try {
@@ -28,7 +31,8 @@ export async function POST(request: Request) {
       ].join(" "),
       input: `Citizen context:\n${JSON.stringify(parsed.data.context)}\n\nCitizen request:\n${parsed.data.text}`,
     });
-    return NextResponse.json(generated ?? fallback, { headers: { ...noStoreHeaders, "x-citizen-fallback": generated ? "false" : "true" } });
+    const { response, usedFallback } = reconcileIntentResponse(fallback, generated);
+    return NextResponse.json(response, { headers: { ...noStoreHeaders, "x-citizen-fallback": usedFallback ? "true" : "false" } });
   } catch {
     return NextResponse.json(fallback, { headers: { ...noStoreHeaders, "x-citizen-fallback": "true" } });
   }

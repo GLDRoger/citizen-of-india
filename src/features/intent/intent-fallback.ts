@@ -9,12 +9,12 @@ function detectLanguage(text: string): IntentResponse["language"] {
 
 function detectRoute(text: string): WorkflowSlug {
   const normalized = text.toLowerCase();
-  if (/(death|died|passed away|death ho|तेर|मृत्यु|ನಿಧನ|ತೀರಿಕೊಂಡ|ಮರಣ)/u.test(normalized)) return "death";
-  if (/(marriage|marry|wedding|shaadi|शादी|ವಿವಾಹ|ಮದುವೆ)/u.test(normalized)) return "marriage";
+  if (/(death|died|passed away|death ho|निधन|मृत्यु|तेरहवीं|ನಿಧನ|ತೀರಿಕೊಂಡ|ಮರಣ)/u.test(normalized)) return "death";
+  if (/(marriage|marry|wedding|shaadi|शादी|विवाह|ವಿವಾಹ|ಮದುವೆ)/u.test(normalized)) return "marriage";
   if (/(loan|mudra|credit|कर्ज|लोन|ಸಾಲ)/u.test(normalized)) return "loan";
-  if (/(scam|fraud|suspicious|message|धोखा|फ्रॉड|ವಂಚನೆ|ಸಂದೇಶ)/u.test(normalized)) return "scam-check";
+  if (/(scam|fraud|suspicious|message|धोखा|फ्रॉड|ठगी|संदिग्ध|संदेश|ವಂಚನೆ|ಅನುಮಾನಾಸ್ಪದ|ಸಂದೇಶ)/u.test(normalized)) return "scam-check";
   if (/(start.*business|new business|business plan|व्यवसाय|बिज़नेस|ವ್ಯವಹಾರ)/u.test(normalized)) return "start-business";
-  if (/(challan|deadline|tax|obligation|refund|payment|जुर्माना|कर|ತೆರಿಗೆ|ದಂಡ)/u.test(normalized)) return "obligations";
+  if (/(challan|deadline|tax|obligation|refund|payment|जुर्माना|चालान|भुगतान|बकाया|देय|आयकर|समय-सीमा|ತೆರಿಗೆ|ದಂಡ|ಪಾವತಿ|ಬಾಕಿ|ಗಡುವು)/u.test(normalized)) return "obligations";
   return "service-unavailable";
 }
 
@@ -70,4 +70,11 @@ export function classifyIntentLocally(text: string): IntentResponse {
     return { route, language, ...unavailable[language], simulated: true, authority: "Citizen planning assistant" };
   }
   return { route, language, ...plans[language][route], clarification: null, simulated: true, authority: "Citizen planning assistant" };
+}
+
+export function reconcileIntentResponse(fallback: IntentResponse, generated: IntentResponse | null): { response: IntentResponse; usedFallback: boolean } {
+  if (!generated || (fallback.route !== "service-unavailable" && generated.route !== fallback.route)) {
+    return { response: fallback, usedFallback: true };
+  }
+  return { response: generated, usedFallback: false };
 }

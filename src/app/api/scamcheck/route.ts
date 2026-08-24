@@ -12,7 +12,10 @@ export async function POST(request: Request) {
   const body = await readJsonBody(request);
   if (!body.ok) return body.response;
   const parsed = scamCheckRequestSchema.safeParse(body.value);
-  if (!parsed.success) return invalidRequest("Enter a message between 5 and 2,000 characters.");
+  if (!parsed.success) {
+    const messageIsInvalid = parsed.error.issues.some((issue) => issue.path[0] === "message");
+    return invalidRequest(messageIsInvalid ? "Enter a message between 5 and 2,000 characters." : "Request data is malformed.");
+  }
   const fallback = analyzeScamLocally(parsed.data.message, parsed.data.language);
   try {
     const generated = await generateStructured({
