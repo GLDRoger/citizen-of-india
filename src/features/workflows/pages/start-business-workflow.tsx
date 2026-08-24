@@ -8,14 +8,15 @@ import { useAuthStore } from "@/features/auth/store";
 import type { GraphMutation } from "@/features/graph/schema";
 import { useCitizenStore } from "@/features/graph/store";
 import { buildIntentContext, classifyIntent } from "@/features/intent/intent-client";
+import type { Language } from "@/i18n/messages";
 import { useI18n } from "@/i18n/use-i18n";
 import { CompletionCard, ProcedureShell, StepCard, type ProcedureStep } from "../components/procedure-shell";
 
-const steps: ProcedureStep[] = [
-  { id: "intent", title: "Describe the business", description: "Type and location, in plain language." },
-  { id: "plan", title: "Review the plan", description: "Registrations, licences and schemes." },
-  { id: "start", title: "Start the first action", description: "Create an honest draft." },
-];
+const stepsByLanguage: Record<Language, ProcedureStep[]> = {
+  en: [{ id: "intent", title: "Describe the business", description: "Type and location, in plain language." }, { id: "plan", title: "Review the plan", description: "Registrations, licences and schemes." }, { id: "start", title: "Start the first action", description: "Create an honest draft." }],
+  hi: [{ id: "intent", title: "व्यवसाय बताएँ", description: "प्रकार और स्थान आसान भाषा में।" }, { id: "plan", title: "योजना जाँचें", description: "पंजीकरण, लाइसेंस और योजनाएँ।" }, { id: "start", title: "पहला काम शुरू करें", description: "एक साफ़ ड्राफ्ट बनाएँ।" }],
+  kn: [{ id: "intent", title: "ವ್ಯವಹಾರ ವಿವರಿಸಿ", description: "ವಿಧ ಮತ್ತು ಸ್ಥಳವನ್ನು ಸರಳವಾಗಿ ತಿಳಿಸಿ." }, { id: "plan", title: "ಯೋಜನೆ ಪರಿಶೀಲಿಸಿ", description: "ನೋಂದಣಿ, ಪರವಾನಗಿ ಮತ್ತು ಯೋಜನೆಗಳು." }, { id: "start", title: "ಮೊದಲ ಕ್ರಮ ಪ್ರಾರಂಭಿಸಿ", description: "ಸ್ಪಷ್ಟ ಕರಡು ರಚಿಸಿ." }],
+};
 
 interface PlanItem {
   title: string;
@@ -37,7 +38,8 @@ function createPlan(businessType: string, city: string): PlanItem[] {
 const planIcons = { registration: Building2, licence: FileCheck2, scheme: WandSparkles, finance: BadgeIndianRupee };
 
 export function StartBusinessWorkflow() {
-  const { t } = useI18n();
+  const { language, t } = useI18n();
+  const steps = stepsByLanguage[language];
   const personId = useAuthStore((state) => state.personId);
   const graph = useCitizenStore((state) => state.graph);
   const commit = useCitizenStore((state) => state.commit);

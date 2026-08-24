@@ -7,11 +7,9 @@ import type { MessageKey } from "@/i18n/messages";
 import { useI18n } from "@/i18n/use-i18n";
 
 const routeLabels: Record<string, MessageKey> = {
-  activity: "activity",
   dashboard: "dashboard",
   discover: "discover",
   documents: "documents",
-  inbox: "inbox",
   services: "services",
   you: "fullProfile",
 };

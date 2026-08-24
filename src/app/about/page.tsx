@@ -24,7 +24,7 @@ export default function AboutPage() {
       <div className="mx-auto grid min-h-dvh max-w-[1120px] gap-14 px-5 py-7 sm:px-10 sm:py-12">
         <header className="flex items-center justify-between gap-4">
           <Link className="flex min-h-11 items-center gap-2 text-sm font-bold text-ink-muted hover:text-ink" href="/"><ArrowLeft aria-hidden className="size-4" />Citizen</Link>
-          <span className="rounded-full border border-saffron-line bg-saffron-soft px-3 py-1 text-[0.68rem] font-bold uppercase tracking-[0.14em] text-saffron-ink">Independent service preview</span>
+          <span className="rounded-full border border-saffron-line bg-saffron-soft px-3 py-1 text-[0.68rem] font-bold uppercase tracking-[0.14em] text-saffron-ink">Independent prototype</span>
         </header>
 
         <section className="grid max-w-4xl gap-5">

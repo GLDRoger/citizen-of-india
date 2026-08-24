@@ -8,20 +8,22 @@ import { useAuthStore } from "@/features/auth/store";
 import { getNotices } from "@/features/graph/selectors";
 import type { GraphMutation } from "@/features/graph/schema";
 import { useCitizenStore } from "@/features/graph/store";
+import type { Language } from "@/i18n/messages";
 import { useI18n } from "@/i18n/use-i18n";
 import { submitCybercrimeReport } from "@/lib/mockGov";
 import { analyzeScamLocally } from "../lib/scam-fallback";
 import { scamCheckResponseSchema, type ScamCheckResponse } from "../lib/scam-schema";
 import { CompletionCard, ProcedureShell, StepCard, type ProcedureStep } from "../components/procedure-shell";
 
-const steps: ProcedureStep[] = [
-  { id: "paste", title: "Add the message", description: "Paste text without opening links." },
-  { id: "inspect", title: "Inspect warning signs", description: "Sender, domain, urgency and history." },
-  { id: "respond", title: "Choose a safe action", description: "Ignore, verify or start a report." },
-];
+const stepsByLanguage: Record<Language, ProcedureStep[]> = {
+  en: [{ id: "paste", title: "Add the message", description: "Paste text without opening links." }, { id: "inspect", title: "Inspect warning signs", description: "Sender, domain, urgency and history." }, { id: "respond", title: "Choose a safe action", description: "Ignore, verify or start a report." }],
+  hi: [{ id: "paste", title: "संदेश जोड़ें", description: "लिंक खोले बिना संदेश चिपकाएँ।" }, { id: "inspect", title: "चेतावनी संकेत जाँचें", description: "भेजने वाला, डोमेन, जल्दबाज़ी और इतिहास।" }, { id: "respond", title: "सुरक्षित कदम चुनें", description: "अनदेखा करें, पुष्टि करें या रिपोर्ट बनाएँ।" }],
+  kn: [{ id: "paste", title: "ಸಂದೇಶ ಸೇರಿಸಿ", description: "ಲಿಂಕ್ ತೆರೆಯದೆ ಪಠ್ಯ ಅಂಟಿಸಿ." }, { id: "inspect", title: "ಎಚ್ಚರಿಕೆ ಲಕ್ಷಣ ಪರಿಶೀಲಿಸಿ", description: "ಕಳುಹಿಸಿದವರು, ಡೊಮೇನ್, ತುರ್ತು ಮತ್ತು ಇತಿಹಾಸ." }, { id: "respond", title: "ಸುರಕ್ಷಿತ ಕ್ರಮ ಆರಿಸಿ", description: "ನಿರ್ಲಕ್ಷಿಸಿ, ಖಚಿತಪಡಿಸಿ ಅಥವಾ ವರದಿ ರಚಿಸಿ." }],
+};
 
 export function ScamWorkflow() {
   const { language, t } = useI18n();
+  const steps = stepsByLanguage[language];
   const personId = useAuthStore((state) => state.personId);
   const graph = useCitizenStore((state) => state.graph);
   const commit = useCitizenStore((state) => state.commit);

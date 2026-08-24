@@ -8,18 +8,21 @@ import { useAuthStore } from "@/features/auth/store";
 import { getNodeByType } from "@/features/graph/selectors";
 import type { GraphMutation } from "@/features/graph/schema";
 import { useCitizenStore } from "@/features/graph/store";
+import type { Language } from "@/i18n/messages";
 import { useI18n } from "@/i18n/use-i18n";
 import { formatCurrency, formatDate, maskIdentifier } from "@/lib/format";
 import { processPayment } from "@/lib/mockGov";
 import { CompletionCard, ProcedureShell, StepCard, type ProcedureStep } from "../components/procedure-shell";
 
-const steps: ProcedureStep[] = [
-  { id: "review", title: "Review challan", description: "Match it to the vehicle and notice." },
-  { id: "payment", title: "Confirm payment", description: "Create a simulated service receipt." },
-];
+const stepsByLanguage: Record<Language, ProcedureStep[]> = {
+  en: [{ id: "review", title: "Review challan", description: "Match it to the vehicle and notice." }, { id: "payment", title: "Confirm payment", description: "Create a simulated service receipt." }],
+  hi: [{ id: "review", title: "चालान जाँचें", description: "वाहन और संदेश से मिलान करें।" }, { id: "payment", title: "भुगतान पक्का करें", description: "सिम्युलेटेड सेवा रसीद बनाएँ।" }],
+  kn: [{ id: "review", title: "ದಂಡ ಪರಿಶೀಲಿಸಿ", description: "ವಾಹನ ಮತ್ತು ಸಂದೇಶದೊಂದಿಗೆ ಹೋಲಿಸಿ." }, { id: "payment", title: "ಪಾವತಿ ಖಚಿತಪಡಿಸಿ", description: "ಅನುಕರಿಸಿದ ಸೇವಾ ರಸೀದಿ ರಚಿಸಿ." }],
+};
 
 export function ObligationsWorkflow() {
-  const { t } = useI18n();
+  const { language, t } = useI18n();
+  const steps = stepsByLanguage[language];
   const personId = useAuthStore((state) => state.personId);
   const graph = useCitizenStore((state) => state.graph);
   const commit = useCitizenStore((state) => state.commit);

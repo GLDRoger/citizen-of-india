@@ -9,15 +9,16 @@ import { getEligibility, getMoneySummary, getNodeByType } from "@/features/graph
 import type { GraphMutation } from "@/features/graph/schema";
 import { useCitizenStore } from "@/features/graph/store";
 import { explainResponseSchema } from "@/features/inbox/schema";
+import type { Language } from "@/i18n/messages";
 import { useI18n } from "@/i18n/use-i18n";
 import { formatCurrency, formatEvidence } from "@/lib/format";
 import { CompletionCard, ProcedureShell, StepCard, type ProcedureStep } from "../components/procedure-shell";
 
-const steps: ProcedureStep[] = [
-  { id: "evidence", title: "Check connected evidence", description: "Business, tax, and obligation records." },
-  { id: "compare", title: "Compare two paths", description: "Government-backed and standard credit." },
-  { id: "decide", title: "Explain risk", description: "See missing proof before applying." },
-];
+const stepsByLanguage: Record<Language, ProcedureStep[]> = {
+  en: [{ id: "evidence", title: "Check connected evidence", description: "Business, tax, and obligation records." }, { id: "compare", title: "Compare options", description: "Amount, term and tradeoffs." }, { id: "decide", title: "Explain risk", description: "See missing proof before applying." }],
+  hi: [{ id: "evidence", title: "जुड़े प्रमाण जाँचें", description: "व्यवसाय, कर और दायित्व रिकॉर्ड।" }, { id: "compare", title: "विकल्पों की तुलना", description: "राशि, अवधि और समझौते।" }, { id: "decide", title: "जोखिम समझें", description: "आवेदन से पहले बाकी प्रमाण देखें।" }],
+  kn: [{ id: "evidence", title: "ಸಂಪರ್ಕಿತ ಸಾಕ್ಷ್ಯ ಪರಿಶೀಲಿಸಿ", description: "ವ್ಯವಹಾರ, ತೆರಿಗೆ ಮತ್ತು ಬಾಕಿ ದಾಖಲೆಗಳು." }, { id: "compare", title: "ಆಯ್ಕೆಗಳನ್ನು ಹೋಲಿಸಿ", description: "ಮೊತ್ತ, ಅವಧಿ ಮತ್ತು ವ್ಯತ್ಯಾಸಗಳು." }, { id: "decide", title: "ಅಪಾಯ ತಿಳಿಯಿರಿ", description: "ಅರ್ಜಿಗೂ ಮುನ್ನ ಬಾಕಿ ಸಾಕ್ಷ್ಯ ನೋಡಿ." }],
+};
 
 const desiredAmount = 1_200_000;
 const loanOptions = [
@@ -27,6 +28,7 @@ const loanOptions = [
 
 export function LoanWorkflow() {
   const { language, t } = useI18n();
+  const steps = stepsByLanguage[language];
   const personId = useAuthStore((state) => state.personId);
   const switchPersona = useAuthStore((state) => state.switchPersona);
   const graph = useCitizenStore((state) => state.graph);
@@ -74,12 +76,12 @@ export function LoanWorkflow() {
   };
 
   if (!business || !mudra) {
-    return <ProcedureShell authority="Citizen eligibility engine" currentStep={0} description={t("loanWorkflowBody")} steps={steps} title={t("loanWorkflowTitle")}><StepCard eyebrow="No linked business" title="Switch to Arjun’s profile" body="The loan decision reads Sharma Web Solutions, its Udyam record, turnover, and obligations. This profile has no connected business."><Button onClick={() => switchPersona("person:arjun")} variant="secondary">Switch to Arjun</Button></StepCard></ProcedureShell>;
+    return <ProcedureShell authority="Citizen eligibility engine" currentStep={0} description={t("loanWorkflowBody")} steps={steps} title={t("loanWorkflowTitle")}><StepCard eyebrow={t("noLinkedBusiness")} title={t("switchArjunTitle")} body={t("switchArjunBody")}><Button onClick={() => switchPersona("person:arjun")} variant="secondary">{t("switchArjun")}</Button></StepCard></ProcedureShell>;
   }
 
-  const affordability = Math.min(100, Math.round((desiredAmount / business.attrs.turnoverFY25) * 100));
+  const affordability = Math.max(0, 100 - Math.min(100, Math.round((desiredAmount / business.attrs.turnoverFY25) * 100)));
   const content = complete ? (
-    <CompletionCard title="Your loan application is ready to continue." body="Citizen created a draft without hiding the missing ITR-V. The selected option and supporting evidence remain visible in Dashboard."><LinkButton href="/dashboard" variant="inverse">View application <ArrowRight aria-hidden className="size-4" /></LinkButton></CompletionCard>
+    <CompletionCard title={t("loanCompleteTitle")} body={t("loanCompleteBody")}><LinkButton href="/dashboard" variant="inverse">{t("viewApplication")} <ArrowRight aria-hidden className="size-4" /></LinkButton></CompletionCard>
   ) : (
     <div className="grid gap-7">
       <article className="grid gap-6 rounded-[22px] border border-action/30 bg-action-soft p-6 sm:grid-cols-[minmax(0,1fr)_16rem] sm:items-end sm:p-8">
@@ -91,8 +93,8 @@ export function LoanWorkflow() {
 
       <section className="grid gap-4 md:grid-cols-3">
         <article className="grid content-start gap-4 rounded-[20px] border border-line bg-surface p-5"><ShieldCheck aria-hidden className="size-5 text-success" /><h3 className="font-display text-2xl font-semibold text-ink">{t("whyThisFits")}</h3><div className="grid gap-2">{mudra.passedReasons.slice(0, 3).map((reason) => <p className="flex gap-2 text-xs leading-5 text-ink-muted" key={reason}><Check aria-hidden className="mt-0.5 size-3.5 shrink-0 text-success" />{reason}</p>)}</div></article>
-        <article className="grid content-start gap-4 rounded-[20px] border border-line bg-surface p-5"><FileWarning aria-hidden className="size-5 text-warning" /><h3 className="font-display text-2xl font-semibold text-ink">{t("warningSigns")}</h3><div className="grid gap-2">{mudra.missingEvidence.map((evidence) => <p className="flex gap-2 text-xs leading-5 text-ink-muted" key={evidence}><CircleHelp aria-hidden className="mt-0.5 size-3.5 shrink-0 text-warning" />{formatEvidence(evidence)}</p>)}<p className="text-xs leading-5 text-ink-muted">{formatCurrency(payable)}</p></div></article>
-        <article className="grid content-start gap-4 rounded-[20px] border border-line bg-surface p-5"><Scale aria-hidden className="size-5 text-action" /><h3 className="font-display text-2xl font-semibold text-ink">{t("nextAction")}</h3><p className="text-xs leading-5 text-ink-muted">{risk || selectedOption.note}</p><div className="grid gap-2"><Button loading={loading} onClick={() => void explainRisk()} variant="secondary">Explain my risk</Button>{risk ? <Button onClick={startApplication}>Start {selectedOption.name} draft</Button> : null}</div></article>
+        <article className="grid content-start gap-4 rounded-[20px] border border-line bg-surface p-5"><FileWarning aria-hidden className="size-5 text-warning" /><h3 className="font-display text-2xl font-semibold text-ink">{t("risks")}</h3><div className="grid gap-2">{mudra.missingEvidence.map((evidence) => <p className="flex gap-2 text-xs leading-5 text-ink-muted" key={evidence}><CircleHelp aria-hidden className="mt-0.5 size-3.5 shrink-0 text-warning" />{formatEvidence(evidence)}</p>)}{payable > 0 ? <p className="text-xs leading-5 text-ink-muted">{t("due")}: {formatCurrency(payable)}</p> : null}</div></article>
+        <article className="grid content-start gap-4 rounded-[20px] border border-line bg-surface p-5"><Scale aria-hidden className="size-5 text-action" /><h3 className="font-display text-2xl font-semibold text-ink">{t("nextAction")}</h3><p className="text-xs leading-5 text-ink-muted">{risk || selectedOption.note}</p><div className="grid gap-2"><Button loading={loading} onClick={() => void explainRisk()} variant="secondary">{t("explainMyRisk")}</Button>{risk ? <Button onClick={startApplication}>{t("start")}</Button> : null}</div></article>
       </section>
     </div>
   );
