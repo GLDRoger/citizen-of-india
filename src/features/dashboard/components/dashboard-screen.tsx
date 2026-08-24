@@ -7,7 +7,7 @@ import { Button, LinkButton } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/feedback";
 import { ListRow } from "@/components/ui/list-row";
 import { Page, PageHeader, SectionHeader } from "@/components/ui/page";
-import { FilePanel, LedgerRow } from "@/components/ui/file-panel";
+import { FilePanel } from "@/components/ui/file-panel";
 import { SimulatedChip, StatusPill, VerificationBadge } from "@/components/ui/status";
 import { useAuthStore } from "@/features/auth/store";
 import { getActivityEvents, getApplications, getDocuments, getMoneySummary, getNotices, getObligations, type NoticeView } from "@/features/graph/selectors";
@@ -16,6 +16,15 @@ import { createFallbackExplanation } from "@/features/inbox/fallback";
 import { explainResponseSchema, type ExplainResponse } from "@/features/inbox/schema";
 import { useI18n } from "@/i18n/use-i18n";
 import { daysUntil, formatCurrency, formatDate } from "@/lib/format";
+
+function SummaryLedgerItem({ label, value }: { label: string; value: string | number }) {
+  return (
+    <div className="grid min-h-24 content-between gap-3 border-b border-paper-line py-4">
+      <span className="eyebrow">{label}</span>
+      <strong className="font-display text-3xl font-bold leading-none tabular-nums text-ink">{value}</strong>
+    </div>
+  );
+}
 
 function NoticeDetail({ notice }: { notice: NoticeView }) {
   const { language, t } = useI18n();
@@ -93,7 +102,7 @@ export function DashboardScreen() {
   return (
     <Page className="grid gap-10 lg:gap-14">
       <PageHeader eyebrow={t("dashboard")} title={t("dashboardHeadline")} description={t("dashboardBody")} action={<LinkButton href="/workflows/scam-check" variant="secondary"><SearchCheck aria-hidden className="size-4" />{t("checkMessage")}</LinkButton>} />
-      <FilePanel label={t("dashboard")}><div className="grid sm:grid-cols-2 lg:grid-cols-4"><LedgerRow label={t("deadlines")} value={deadlineCount} /><LedgerRow label={t("expiry")} value={expiringDocuments.length} /><LedgerRow label={t("pendingApplications")} value={applications.length} /><LedgerRow label={t("due")} value={formatCurrency(money.payable)} /></div></FilePanel>
+      <FilePanel label={t("dashboard")}><div className="grid grid-cols-2 gap-x-6 lg:grid-cols-4"><SummaryLedgerItem label={t("deadlines")} value={deadlineCount} /><SummaryLedgerItem label={t("expiry")} value={expiringDocuments.length} /><SummaryLedgerItem label={t("pendingApplications")} value={applications.length} /><SummaryLedgerItem label={t("due")} value={formatCurrency(money.payable)} /></div></FilePanel>
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_19rem] lg:items-start">
         <div className="grid gap-10">
           <section className="grid gap-5" id="attention"><SectionHeader eyebrow={`${notices.length + obligations.length} ${t("thingsToDo").toLowerCase()}`} title={t("thingsToDo")} /><div className="border-y border-paper-line">{notices.map((notice) => <ListRow action={<Button className="min-h-10 px-4" onClick={() => openNotice(notice.node.id)} variant="secondary">{t("view")}</Button>} icon={notice.node.attrs.legitimacy === "scam" ? AlertTriangle : Bell} key={notice.node.id} meta={`${notice.node.attrs.sender} · ${formatDate(notice.node.attrs.receivedOn)}`} status={<StatusPill label={notice.node.attrs.legitimacy === "scam" ? t("warningSigns") : notice.read ? t("done") : t("unread")} tone={notice.node.attrs.legitimacy === "scam" ? "warning" : notice.read ? "neutral" : "info"} />} title={notice.node.attrs.subject} tone={notice.node.attrs.legitimacy === "scam" ? "danger" : "info"} />)}{obligations.map((obligation) => <ListRow action={obligation.id === "obl:echallan-500" ? <LinkButton className="min-h-10 px-4" href="/workflows/obligations">{t("pay")}</LinkButton> : <StatusPill label={obligation.attrs.status ?? t("pending")} tone={obligation.attrs.direction === "receivable" ? "success" : "warning"} />} icon={obligation.attrs.direction === "payable" ? IndianRupee : CalendarDays} key={obligation.id} meta={`${obligation.attrs.authority}${obligation.attrs.dueDate ? ` · ${formatDate(obligation.attrs.dueDate)}` : ""}`} title={obligation.attrs.title} tone={obligation.attrs.direction === "receivable" ? "success" : "saffron"} />)}</div></section>

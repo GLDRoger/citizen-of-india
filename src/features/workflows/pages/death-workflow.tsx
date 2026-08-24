@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { ArrowRight, Building2, CarFront, FileCheck2, HeartHandshake, Landmark, ShieldCheck, UsersRound } from "lucide-react";
+import { ArrowRight, Building2, CarFront, FileCheck2, HeartHandshake, Landmark, ShieldCheck } from "lucide-react";
 import { useState } from "react";
 import { Button, LinkButton } from "@/components/ui/button";
 import { VerificationBadge } from "@/components/ui/status";
@@ -11,7 +11,7 @@ import type { GraphMutation, Verification } from "@/features/graph/schema";
 import { useCitizenStore } from "@/features/graph/store";
 import type { Language } from "@/i18n/messages";
 import { useI18n } from "@/i18n/use-i18n";
-import { formatCurrency, maskIdentifier } from "@/lib/format";
+import { formatCurrency, getInitials, maskIdentifier } from "@/lib/format";
 import { issueDeathCertificate, registerDeath, requestFamilyConsent, submitClaim } from "@/lib/mockGov";
 import { CompletionCard, ProcedureShell, StepCard, type ProcedureStep } from "../components/procedure-shell";
 
@@ -168,7 +168,7 @@ export function DeathWorkflow() {
   const content = complete ? (
     <CompletionCard title="The family record is up to date." body="The certificate is reusable, pension and nominee claims are submitted, legal-heir consent is recorded, and property and vehicle transfer drafts remain visible."><div className="flex flex-wrap gap-2"><Button onClick={openSunitaEligibility} variant="inverse">See Sunita’s eligibility <ArrowRight aria-hidden className="size-4" /></Button><LinkButton href="/dashboard" variant="secondary">View audit trail</LinkButton></div></CompletionCard>
   ) : currentStep === 0 ? (
-    <StepCard eyebrow="Verified family records" title={relationshipTitle} body={`${relationshipBody} Confirm the connected record before anything changes.`}><div className="grid gap-4 rounded-[8px] bg-paper-line p-4 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:items-center"><span className="grid size-12 place-items-center rounded-[4px] bg-ink text-paper"><UsersRound aria-hidden className="size-6" /></span><div><strong className="block text-ink">{rajesh.attrs.name}</strong><span className="text-xs text-ink-mute">EPS pensioner · Bengaluru</span></div><VerificationBadge verification={rajesh.verification} /></div><Button onClick={identify}>Confirm Rajesh <ArrowRight aria-hidden className="size-4" /></Button></StepCard>
+    <StepCard eyebrow="Verified family records" title={relationshipTitle} body={`${relationshipBody} Confirm the connected record before anything changes.`}><div className="grid gap-4 rounded-[8px] bg-paper-line p-4 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:items-center"><span className="grid size-12 place-items-center rounded-[50%] border border-paper-line bg-paper-shade font-display text-sm font-bold text-ink">{getInitials(rajesh.attrs.name)}</span><div><strong className="block text-ink">{rajesh.attrs.name}</strong><span className="text-xs text-ink-mute">EPS pensioner · Bengaluru</span></div><VerificationBadge verification={rajesh.verification} /></div><Button onClick={identify}>Confirm Rajesh <ArrowRight aria-hidden className="size-4" /></Button></StepCard>
   ) : currentStep === 1 ? (
     <StepCard eyebrow="BBMP Births & Deaths" title="Review the registration" body="The form is prefilled from Rajesh’s verified identity and family records. This creates a simulated registration only."><div className="grid gap-3 rounded-[8px] bg-paper-line p-4 text-sm"><span className="flex justify-between gap-3"><span className="text-ink-mute">Name</span><strong>{rajesh.attrs.name}</strong></span><span className="flex justify-between gap-3"><span className="text-ink-mute">Date</span><strong>24 Aug 2026</strong></span><span className="flex justify-between gap-3"><span className="text-ink-mute">Reporter</span><strong>{getPerson(graph, personId)?.attrs.name}</strong></span></div><Button loading={loading} onClick={() => void register()}>Register death <ArrowRight aria-hidden className="size-4" /></Button></StepCard>
   ) : currentStep === 2 ? (
