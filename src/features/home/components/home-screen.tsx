@@ -1,14 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight, CalendarClock, FileCheck2, IndianRupee, MoveRight } from "lucide-react";
-import { Page, SectionHeader } from "@/components/ui/page";
-import { StatusPill, VerificationBadge } from "@/components/ui/status";
+import { ArrowRight, Bell, FileText, Gift, IndianRupee, ListChecks, UserRound } from "lucide-react";
+import { Page } from "@/components/ui/page";
+import { StatCard } from "@/components/ui/stat-card";
+import { VerificationBadge } from "@/components/ui/status";
 import { useAuthStore } from "@/features/auth/store";
-import { getApplicationHref } from "@/features/graph/navigation";
 import {
-  getApplications,
+  getDocuments,
+  getEligibility,
   getMoneySummary,
+  getNotices,
+  getOwnedAssets,
   getProfileSummary,
   getThingsToDo,
 } from "@/features/graph/selectors";
@@ -31,70 +34,42 @@ export function HomeScreen() {
   if (!personId) return null;
   const profile = getProfileSummary(graph, personId);
   if (!profile) return null;
+
+  const firstName = profile.person.attrs.name.split(" ")[0];
   const tasks = getThingsToDo(graph, personId);
+  const documents = getDocuments(graph, personId);
+  const benefits = getEligibility(graph, personId).filter((result) => result.status !== "not-eligible");
+  const unreadNotices = getNotices(graph, personId).filter((notice) => !notice.read);
   const money = getMoneySummary(graph, personId);
-  const applications = getApplications(graph, personId).slice(0, 3);
+  const assets = getOwnedAssets(graph, personId);
+  const businesses = assets.filter((asset) => asset.type === "business").length;
+  const properties = assets.filter((asset) => asset.type === "property").length;
 
   return (
-    <Page className="grid gap-10 sm:gap-12">
-      <header className="grid gap-5 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
-        <div className="grid gap-2">
-          <p className="eyebrow">{t(greetingKey())}</p>
-          <h1 className="font-display text-[2.8rem] font-semibold leading-[0.9] tracking-[-0.045em] text-ink sm:text-6xl">
-            {profile.person.attrs.name.split(" ")[0]}<span className="text-saffron">.</span>
-          </h1>
+    <Page className="grid gap-14 lg:gap-20">
+      <section className="grid gap-8 pt-5 lg:pt-12">
+        <div className="grid max-w-4xl gap-5">
+          <p className="text-sm font-bold text-action-strong">{t(greetingKey())}, {firstName}</p>
+          <h1 className="font-display text-[clamp(4rem,11vw,8.4rem)] font-semibold leading-[0.79] tracking-[-0.065em] text-ink">{t("needPrompt")}</h1>
+          <p className="max-w-2xl text-base leading-7 text-ink-muted sm:text-lg">{t("homeHeroBody")}</p>
         </div>
-        <div className="flex flex-wrap gap-x-6 gap-y-3 border-y border-line py-3 text-xs sm:border-y-0 sm:py-0">
-          <div><span className="block text-ink-faint">{profile.residence}</span><strong className="text-ink">{profile.age} years</strong></div>
-          <div><span className="block text-ink-faint">{t("documents")}</span><strong className="text-ink">{profile.verifiedDocumentCount}/{profile.documentCount} {t("verified").toLowerCase()}</strong></div>
-        </div>
-      </header>
-
-      <IntentComposer />
-
-      <section className="grid gap-5">
-        <SectionHeader title={t("thingsToDo")} action={<Link className="text-xs font-bold text-action-strong hover:underline" href="/activity">{t("seeAll")}</Link>} />
-        {tasks.length ? (
-          <div className="divide-y divide-line border-y border-line">
-            {tasks.slice(0, 4).map((task, index) => (
-              <Link className="group grid min-h-20 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 py-3 transition hover:pl-1" href={task.href} key={task.id}>
-                <span className="grid size-9 place-items-center rounded-full bg-surface-strong font-display text-xs font-bold text-ink">{String(index + 1).padStart(2, "0")}</span>
-                <span className="min-w-0"><strong className="block truncate text-sm text-ink">{task.title}</strong><span className="block truncate text-xs text-ink-muted">{task.meta}</span></span>
-                {task.urgent ? <StatusPill label="Soon" tone="warning" /> : <ArrowUpRight aria-hidden className="size-4 text-ink-faint transition group-hover:text-action group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />}
-              </Link>
-            ))}
-          </div>
-        ) : <p className="border-y border-line py-7 text-sm text-ink-muted">{t("noItems")}</p>}
+        <IntentComposer />
       </section>
 
-      <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-        <section className="relative overflow-hidden rounded-[24px] bg-action p-6 text-action-ink sm:p-7">
-          <IndianRupee aria-hidden className="absolute -bottom-8 -right-6 size-36 text-action-ink/10" strokeWidth={1} />
-          <div className="relative grid gap-7">
-            <p className="text-xs font-bold uppercase tracking-[0.16em] text-action-ink/70">{t("money")}</p>
-            <div className="grid grid-cols-2 gap-6">
-              <div><span className="block text-xs text-action-ink/65">{t("due")}</span><strong className="font-display text-3xl font-semibold tracking-tight">{formatCurrency(money.payable)}</strong></div>
-              <div><span className="block text-xs text-action-ink/65">{t("comingToYou")}</span><strong className="font-display text-3xl font-semibold tracking-tight">{formatCurrency(money.receivable)}</strong></div>
-            </div>
-            <Link className="flex min-h-11 items-center justify-between border-t border-action-ink/20 pt-3 text-sm font-bold" href="/activity">{t("view")} <MoveRight aria-hidden className="size-4" /></Link>
-          </div>
-        </section>
-
-        <section className="grid content-start gap-5">
-          <SectionHeader title={t("pendingApplications")} />
-          <div className="grid gap-2">
-            {applications.length ? applications.map((application) => (
-              <Link className="flex min-h-20 items-center gap-4 rounded-[18px] border border-line bg-surface px-4 transition hover:border-action/35" href={getApplicationHref(application) ?? "/activity"} key={application.id}>
-                <span className="grid size-10 place-items-center rounded-full bg-surface-strong text-action"><CalendarClock aria-hidden className="size-5" /></span>
-                <span className="min-w-0 flex-1"><strong className="block truncate text-sm text-ink">{application.attrs.title}</strong><span className="text-xs capitalize text-ink-muted">{application.attrs.status.replaceAll("-", " ")}</span></span>
-                <VerificationBadge verification={application.verification} />
-              </Link>
-            )) : (
-              <div className="flex min-h-24 items-center gap-3 border-y border-line py-4 text-sm text-ink-muted"><FileCheck2 aria-hidden className="size-5 text-success" />{t("noItems")}</div>
-            )}
-          </div>
-        </section>
-      </div>
+      <section className="grid gap-6">
+        <h2 className="font-display text-3xl font-semibold tracking-[-0.035em] text-ink sm:text-4xl">{t("snapshotHeading")}</h2>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <Link className="group grid min-h-56 content-between gap-8 rounded-[22px] bg-ink p-6 text-canvas sm:col-span-2 lg:col-span-1 lg:row-span-2" href="/you">
+            <div className="flex items-start justify-between gap-4"><span className="grid size-11 place-items-center rounded-[12px] bg-canvas/10 text-saffron"><UserRound aria-hidden className="size-5" /></span><VerificationBadge verification={profile.person.verification} /></div>
+            <div className="grid gap-5"><div className="grid gap-1"><span className="text-xs font-bold text-canvas/60">{t("mySnapshot")}</span><strong className="font-display text-4xl font-semibold leading-none tracking-[-0.04em]">{profile.person.attrs.name}</strong><span className="text-sm text-canvas/65">{profile.residence} · {profile.age}</span></div><div className="grid grid-cols-3 gap-3 border-t border-canvas/15 pt-4 text-xs"><span><strong className="block font-display text-2xl text-canvas">{profile.relationships}</strong>{t("familyCount")}</span><span><strong className="block font-display text-2xl text-canvas">{businesses}</strong>{t("businessCount")}</span><span><strong className="block font-display text-2xl text-canvas">{properties}</strong>{t("propertyCount")}</span></div><span className="flex items-center gap-2 text-sm font-bold text-saffron">{t("viewFullProfile")}<ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" /></span></div>
+          </Link>
+          <StatCard detail={tasks[0]?.title ?? t("noItems")} href="/dashboard" icon={ListChecks} title={t("openTasks")} tone="saffron" value={tasks.length} />
+          <StatCard detail={`${profile.verifiedDocumentCount}/${documents.length} ${t("verified").toLowerCase()}`} href="/documents" icon={FileText} title={t("documents")} tone="info" value={documents.length} />
+          <StatCard detail={benefits[0]?.benefit.attrs.name ?? t("eligibilityRechecks")} href="/discover" icon={Gift} title={t("availableBenefits")} tone="success" value={benefits.length} />
+          <StatCard detail={`${t("due")}: ${formatCurrency(money.payable)} · ${t("comingToYou")}: ${formatCurrency(money.receivable)}`} href="/dashboard" icon={IndianRupee} title={t("dueAndRefundable")} value={formatCurrency(money.payable)} />
+          <StatCard detail={unreadNotices[0]?.node.attrs.subject ?? t("noItems")} href="/dashboard" icon={Bell} title={t("unreadNotices")} tone="saffron" value={unreadNotices.length} />
+        </div>
+      </section>
     </Page>
   );
 }

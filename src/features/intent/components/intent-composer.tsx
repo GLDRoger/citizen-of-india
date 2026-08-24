@@ -53,36 +53,16 @@ export function IntentComposer() {
   };
 
   return (
-    <section className="grid min-w-0 gap-5">
-      <div className="relative overflow-hidden rounded-[26px] bg-ink p-5 text-canvas sm:p-8">
-        <div aria-hidden className="absolute -right-12 -top-16 size-44 rounded-full border-[28px] border-saffron/90 sm:size-56" />
-        <div className="relative grid gap-5">
-          <div className="flex items-center justify-between gap-4">
-            <p className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-canvas/60">{t("needPrompt")}</p>
-            <SimulatedChip authority="Citizen intent assistant" />
-          </div>
-          <label className="grid gap-3">
-            <span className="sr-only">{t("needPrompt")}</span>
-            <textarea
-              className="min-h-32 w-full resize-none border-0 bg-transparent font-display text-[2rem] font-medium leading-[1.05] tracking-[-0.035em] text-canvas outline-none placeholder:text-canvas/35 sm:min-h-36 sm:text-[2.7rem]"
-              maxLength={800}
-              onChange={(event) => setText(event.target.value)}
-              onKeyDown={(event) => {
-                if ((event.metaKey || event.ctrlKey) && event.key === "Enter") void submit();
-              }}
-              placeholder={t("intentPlaceholder")}
-              value={text}
-            />
-          </label>
-          <div className="flex flex-col gap-3 border-t border-canvas/15 pt-4 sm:flex-row sm:items-center sm:justify-between">
-            <button className="flex min-h-11 items-center gap-2 rounded-full px-3 text-xs font-bold text-canvas/70 transition hover:bg-canvas/10 hover:text-canvas" onClick={mockVoice} type="button">
-              <Mic aria-hidden className={cn("size-4", listening && "animate-pulse text-saffron")} />
-              {listening ? t("listening") : t("voiceInput")}
-            </button>
-            <Button className="bg-canvas text-ink hover:bg-saffron" loading={loading} onClick={() => void submit()}>
-              {t("send")} <Send aria-hidden className="size-4" />
-            </Button>
-          </div>
+    <section className="grid min-w-0 gap-4">
+      <div className="grid gap-4 rounded-[24px] border border-line bg-surface p-4 shadow-[0_20px_70px_oklch(0.28_0.03_85/0.08)] sm:p-5">
+        <div className="flex justify-end"><SimulatedChip authority="Citizen intent assistant" /></div>
+        <label>
+          <span className="sr-only">{t("needPrompt")}</span>
+          <textarea className="min-h-24 w-full resize-none border-0 bg-transparent font-display text-[1.75rem] font-medium leading-[1.05] tracking-[-0.035em] text-ink outline-none placeholder:text-ink-faint sm:min-h-28 sm:text-[2.35rem]" maxLength={800} onChange={(event) => setText(event.target.value)} onKeyDown={(event) => { if ((event.metaKey || event.ctrlKey) && event.key === "Enter") void submit(); }} placeholder={t("intentPlaceholder")} value={text} />
+        </label>
+        <div className="flex items-center justify-between gap-3 border-t border-line pt-3">
+          <button className="flex min-h-11 items-center gap-2 rounded-full px-2 text-xs font-bold text-ink-muted transition hover:bg-surface-strong hover:text-ink" onClick={mockVoice} type="button"><Mic aria-hidden className={cn("size-4", listening && "animate-pulse text-saffron")} />{listening ? t("listening") : t("voiceInput")}</button>
+          <Button className="min-h-11 shrink-0 px-4" loading={loading} onClick={() => void submit()}>{t("send")} <Send aria-hidden className="size-4" /></Button>
         </div>
       </div>
 
