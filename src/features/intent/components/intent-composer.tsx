@@ -59,7 +59,7 @@ export function IntentComposer() {
         <div className="flex justify-end"><SimulatedChip authority="Citizen intent assistant" /></div>
         <label>
           <span className="sr-only">{t("needPrompt")}</span>
-          <textarea className="min-h-20 w-full resize-none border border-ink/20 bg-paper p-4 font-display text-[1.75rem] font-medium leading-[1.05] text-ink outline-none placeholder:text-ink-mute sm:min-h-28 sm:text-[2.35rem]" maxLength={800} onChange={(event) => setText(event.target.value)} onKeyDown={(event) => { if ((event.metaKey || event.ctrlKey) && event.key === "Enter") void submit(); }} placeholder={t("intentPlaceholder")} value={text} />
+          <textarea className="min-h-32 w-full resize-none border border-ink/20 bg-paper p-4 font-display text-[1.75rem] font-medium leading-[1.05] text-ink outline-none placeholder:text-ink-mute focus:border-l-2 focus:border-l-green-deep sm:min-h-32 sm:text-[2.35rem]" maxLength={800} onChange={(event) => setText(event.target.value)} onKeyDown={(event) => { if ((event.metaKey || event.ctrlKey) && event.key === "Enter") void submit(); }} placeholder={t("intentPlaceholder")} value={text} />
         </label>
         <div className="flex items-center justify-between gap-3 border-t border-paper-line pt-3">
           <button className="flex min-h-11 items-center gap-2 rounded-[4px] px-2 text-xs font-bold text-ink-mute transition hover:bg-paper-line hover:text-ink" onClick={mockVoice} type="button"><Mic aria-hidden className={cn("size-4", listening && "animate-pulse text-brick")} />{listening ? t("listening") : t("voiceInput")}</button>
