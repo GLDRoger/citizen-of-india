@@ -91,8 +91,8 @@ These features define Citizen. The prototype should feel broken without them.
 - Rule explanation
 
 ### Language & Inclusion
-- Intent input understands any Indian language, including romanized Hinglish (“papa ki death ho gayi, kya karna hoga?”)
-- UI language toggle: English + Hindi at minimum; Tamil, Telugu, Bengali, Marathi as stretch
+- Intent input understands any Indian language, including romanized Hinglish (“papa ki death ho gayi, kya karna hoga?”) and Kannada (“ಅಪ್ಪ ತೀರಿಕೊಂಡರು, ಮುಂದೇನು ಮಾಡಬೇಕು?”)
+- UI language toggle: English + Kannada + Hindi at minimum; Tamil, Telugu, Marathi as stretch
 - Replies, action plans and clarification questions come back in the language the citizen used
 - “Explain in my language” on every notice, requirement and eligibility rule
 - Voice entry in Indian languages (UI + transcription mock)

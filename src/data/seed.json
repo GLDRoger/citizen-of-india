@@ -1,0 +1,582 @@
+{
+  "meta": {
+    "seedVersion": 1,
+    "disclaimer": "Independent hackathon prototype. All people, IDs, numbers and government responses are synthetic and simulated.",
+    "seedDate": "2026-08-24"
+  },
+  "logins": [
+    { "phone": "9800000001", "personId": "person:arjun", "label": "Arjun Sharma (primary demo)" },
+    { "phone": "9800000002", "personId": "person:priya", "label": "Priya Patel (marriage partner)" },
+    { "phone": "9800000003", "personId": "person:sunita", "label": "Sunita Sharma (delegation view)" }
+  ],
+  "nodes": [
+    {
+      "id": "person:arjun",
+      "type": "person",
+      "attrs": {
+        "name": "Arjun Sharma",
+        "nameOnPan": "ARJUN KUMAR SHARMA",
+        "dob": "1997-03-14",
+        "gender": "male",
+        "phone": "9800000001",
+        "email": "arjun.sharma.demo@example.in",
+        "maritalStatus": "single",
+        "preferredLanguage": "en"
+      },
+      "verification": { "source": "UIDAI", "state": "verified", "asOf": "2026-05-10" }
+    },
+    {
+      "id": "person:priya",
+      "type": "person",
+      "attrs": {
+        "name": "Priya Patel",
+        "dob": "1999-07-22",
+        "gender": "female",
+        "phone": "9800000002",
+        "email": "priya.patel.demo@example.in",
+        "maritalStatus": "single",
+        "preferredLanguage": "en"
+      },
+      "verification": { "source": "UIDAI", "state": "verified", "asOf": "2026-04-02" }
+    },
+    {
+      "id": "person:rajesh",
+      "type": "person",
+      "attrs": {
+        "name": "Rajesh Sharma",
+        "dob": "1965-01-30",
+        "gender": "male",
+        "phone": "9800000004",
+        "maritalStatus": "married",
+        "preferredLanguage": "hi",
+        "pension": { "scheme": "EPS-95", "monthlyAmount": 8200, "ppoNumber": "PPO-KA-2023-448211" },
+        "epf": { "uan": "100900112233", "balance": 610000 }
+      },
+      "verification": { "source": "UIDAI", "state": "verified", "asOf": "2026-02-18" }
+    },
+    {
+      "id": "person:sunita",
+      "type": "person",
+      "attrs": {
+        "name": "Sunita Sharma",
+        "dob": "1970-09-05",
+        "gender": "female",
+        "phone": "9800000003",
+        "maritalStatus": "married",
+        "preferredLanguage": "hi"
+      },
+      "verification": { "source": "UIDAI", "state": "verified", "asOf": "2026-02-18" }
+    },
+    {
+      "id": "person:kavita",
+      "type": "person",
+      "attrs": {
+        "name": "Kavita Verma",
+        "maidenName": "Kavita Sharma",
+        "dob": "1993-11-12",
+        "gender": "female",
+        "phone": "9800000005",
+        "maritalStatus": "married",
+        "preferredLanguage": "hi"
+      },
+      "verification": { "source": "UIDAI", "state": "verified", "asOf": "2025-12-01" }
+    },
+    {
+      "id": "person:rohit",
+      "type": "person",
+      "attrs": {
+        "name": "Rohit Verma",
+        "dob": "1991-04-08",
+        "gender": "male",
+        "maritalStatus": "married"
+      },
+      "verification": { "source": "Self", "state": "self-declared", "asOf": "2025-12-01" }
+    },
+    {
+      "id": "addr:jpnagar",
+      "type": "address",
+      "attrs": {
+        "line1": "112, 24th Main Road, 5th Phase, J.P. Nagar",
+        "city": "Bengaluru",
+        "state": "Karnataka",
+        "pincode": "560078",
+        "since": "2004-06-01"
+      },
+      "verification": { "source": "UIDAI", "state": "verified", "asOf": "2026-05-10" }
+    },
+    {
+      "id": "addr:ahmedabad",
+      "type": "address",
+      "attrs": {
+        "line1": "B-404, Shivalik Heights, Satellite",
+        "city": "Ahmedabad",
+        "state": "Gujarat",
+        "pincode": "380015",
+        "since": "2021-08-01"
+      },
+      "verification": { "source": "UIDAI", "state": "verified", "asOf": "2026-04-02" }
+    },
+    {
+      "id": "addr:delhi",
+      "type": "address",
+      "attrs": {
+        "line1": "C-56, Sarita Vihar",
+        "city": "New Delhi",
+        "state": "Delhi",
+        "pincode": "110076",
+        "since": "2019-12-01"
+      },
+      "verification": { "source": "UIDAI", "state": "verified", "asOf": "2025-12-01" }
+    },
+    {
+      "id": "emp:arjun-meridian",
+      "type": "employment",
+      "attrs": {
+        "employer": "Meridian Tech Pvt Ltd",
+        "location": "Bengaluru",
+        "designation": "Software Engineer II",
+        "uan": "101234567890",
+        "epfBalance": 340000,
+        "monthlyGross": 145000,
+        "since": "2021-07-05"
+      },
+      "verification": { "source": "EPFO", "state": "verified", "asOf": "2026-07-31" }
+    },
+    {
+      "id": "emp:rajesh-kswc",
+      "type": "employment",
+      "attrs": {
+        "employer": "Karnataka State Warehousing Corporation",
+        "location": "Bengaluru",
+        "designation": "Senior Accountant (retired)",
+        "retiredOn": "2023-01-31",
+        "uan": "100900112233"
+      },
+      "verification": { "source": "EPFO", "state": "verified", "asOf": "2023-02-15" }
+    },
+    {
+      "id": "emp:priya-studio",
+      "type": "employment",
+      "attrs": {
+        "employer": "Kite & Loom Design Studio LLP",
+        "location": "Ahmedabad",
+        "designation": "UX Designer",
+        "since": "2022-03-01"
+      },
+      "verification": { "source": "EPFO", "state": "verified", "asOf": "2026-06-30" }
+    },
+    {
+      "id": "biz:sharma-web",
+      "type": "business",
+      "attrs": {
+        "name": "Sharma Web Solutions",
+        "entityType": "proprietorship",
+        "udyamNumber": "UDYAM-KR-03-0099887",
+        "gstin": "29ZZAPS0000Z1Z9",
+        "registeredOn": "2024-04-10",
+        "turnoverFY25": 1800000,
+        "sector": "IT services",
+        "state": "Karnataka"
+      },
+      "verification": { "source": "MCA", "state": "verified", "asOf": "2026-04-15" }
+    },
+    {
+      "id": "prop:jpnagar-house",
+      "type": "property",
+      "attrs": {
+        "kind": "residential house",
+        "addressId": "addr:jpnagar",
+        "khataNumber": "BBMP-KH-2004-771123",
+        "authority": "BBMP",
+        "areaSqft": 1800,
+        "acquiredOn": "2004-05-12",
+        "estimatedValue": 21500000
+      },
+      "verification": { "source": "Municipal", "state": "verified", "asOf": "2025-11-20" }
+    },
+    {
+      "id": "veh:activa",
+      "type": "vehicle",
+      "attrs": {
+        "make": "Honda",
+        "model": "Activa 6G",
+        "regNumber": "KA05MJ4821",
+        "class": "two-wheeler",
+        "registeredOn": "2022-02-18",
+        "rto": "RTO Jayanagar (KA-05)"
+      },
+      "verification": { "source": "RTO", "state": "verified", "asOf": "2026-01-10" }
+    },
+    {
+      "id": "veh:dzire",
+      "type": "vehicle",
+      "attrs": {
+        "make": "Maruti Suzuki",
+        "model": "Dzire VXi",
+        "regNumber": "KA01HT2266",
+        "class": "four-wheeler",
+        "registeredOn": "2018-11-03",
+        "rto": "RTO Koramangala (KA-01)"
+      },
+      "verification": { "source": "RTO", "state": "verified", "asOf": "2025-09-14" }
+    },
+    {
+      "id": "doc:arjun-aadhaar",
+      "type": "document",
+      "attrs": { "kind": "aadhaar", "holderName": "Arjun Sharma", "numberMasked": "XXXX XXXX 4821", "issuedOn": "2012-08-14" },
+      "verification": { "source": "UIDAI", "state": "verified", "asOf": "2026-05-10" }
+    },
+    {
+      "id": "doc:arjun-pan",
+      "type": "document",
+      "attrs": { "kind": "pan", "holderName": "ARJUN KUMAR SHARMA", "numberMasked": "AXXPS**21K", "issuedOn": "2015-06-02" },
+      "verification": {
+        "source": "NSDL",
+        "state": "mismatch",
+        "asOf": "2026-05-10",
+        "note": "Name on PAN ('ARJUN KUMAR SHARMA') differs from Aadhaar ('Arjun Sharma')."
+      }
+    },
+    {
+      "id": "doc:arjun-passport",
+      "type": "document",
+      "attrs": { "kind": "passport", "holderName": "Arjun Sharma", "numberMasked": "S98***21", "issuedOn": "2017-01-20", "expiresOn": "2027-01-19" },
+      "verification": { "source": "Self", "state": "verified", "asOf": "2026-05-10" }
+    },
+    {
+      "id": "doc:arjun-dl",
+      "type": "document",
+      "attrs": { "kind": "driving-licence", "holderName": "Arjun Sharma", "numberMasked": "KA05 2016 00***21", "issuedOn": "2016-04-11", "expiresOn": "2036-04-10" },
+      "verification": { "source": "RTO", "state": "verified", "asOf": "2026-01-10" }
+    },
+    {
+      "id": "doc:arjun-rc-activa",
+      "type": "document",
+      "attrs": { "kind": "vehicle-rc", "holderName": "Arjun Sharma", "vehicleId": "veh:activa", "issuedOn": "2022-02-18" },
+      "verification": { "source": "RTO", "state": "verified", "asOf": "2026-01-10" }
+    },
+    {
+      "id": "doc:arjun-udyam",
+      "type": "document",
+      "attrs": { "kind": "udyam-certificate", "holderName": "Sharma Web Solutions", "businessId": "biz:sharma-web", "issuedOn": "2024-04-10" },
+      "verification": { "source": "MCA", "state": "verified", "asOf": "2026-04-15" }
+    },
+    {
+      "id": "doc:arjun-gst",
+      "type": "document",
+      "attrs": { "kind": "gst-registration", "holderName": "Sharma Web Solutions", "businessId": "biz:sharma-web", "issuedOn": "2024-04-22" },
+      "verification": { "source": "Self", "state": "verified", "asOf": "2026-04-15" }
+    },
+    {
+      "id": "doc:priya-aadhaar",
+      "type": "document",
+      "attrs": { "kind": "aadhaar", "holderName": "Priya Patel", "numberMasked": "XXXX XXXX 7734", "issuedOn": "2013-02-19" },
+      "verification": { "source": "UIDAI", "state": "verified", "asOf": "2026-04-02" }
+    },
+    {
+      "id": "doc:priya-pan",
+      "type": "document",
+      "attrs": { "kind": "pan", "holderName": "PRIYA PATEL", "numberMasked": "BXXPP**34Q", "issuedOn": "2018-09-12" },
+      "verification": { "source": "NSDL", "state": "verified", "asOf": "2026-04-02" }
+    },
+    {
+      "id": "doc:priya-passport",
+      "type": "document",
+      "attrs": { "kind": "passport", "holderName": "Priya Patel", "numberMasked": "T11***34", "issuedOn": "2022-05-30", "expiresOn": "2032-05-29" },
+      "verification": { "source": "Self", "state": "verified", "asOf": "2026-04-02" }
+    },
+    {
+      "id": "doc:rajesh-aadhaar",
+      "type": "document",
+      "attrs": { "kind": "aadhaar", "holderName": "Rajesh Sharma", "numberMasked": "XXXX XXXX 1190", "issuedOn": "2011-10-05" },
+      "verification": { "source": "UIDAI", "state": "verified", "asOf": "2026-02-18" }
+    },
+    {
+      "id": "doc:rajesh-pan",
+      "type": "document",
+      "attrs": { "kind": "pan", "holderName": "RAJESH SHARMA", "numberMasked": "CXXPS**90H", "issuedOn": "1998-03-20" },
+      "verification": { "source": "NSDL", "state": "verified", "asOf": "2026-02-18" }
+    },
+    {
+      "id": "doc:rajesh-rc-dzire",
+      "type": "document",
+      "attrs": { "kind": "vehicle-rc", "holderName": "Rajesh Sharma", "vehicleId": "veh:dzire", "issuedOn": "2018-11-03" },
+      "verification": { "source": "RTO", "state": "verified", "asOf": "2025-09-14" }
+    },
+    {
+      "id": "doc:rajesh-khata",
+      "type": "document",
+      "attrs": { "kind": "property-khata", "holderName": "Rajesh Sharma", "propertyId": "prop:jpnagar-house", "issuedOn": "2004-05-12" },
+      "verification": { "source": "Municipal", "state": "verified", "asOf": "2025-11-20" }
+    },
+    {
+      "id": "doc:sunita-aadhaar",
+      "type": "document",
+      "attrs": { "kind": "aadhaar", "holderName": "Sunita Sharma", "numberMasked": "XXXX XXXX 3356", "issuedOn": "2011-10-05" },
+      "verification": { "source": "UIDAI", "state": "verified", "asOf": "2026-02-18" }
+    },
+    {
+      "id": "doc:kavita-aadhaar",
+      "type": "document",
+      "attrs": { "kind": "aadhaar", "holderName": "Kavita Verma", "numberMasked": "XXXX XXXX 6642", "issuedOn": "2012-01-16" },
+      "verification": { "source": "UIDAI", "state": "verified", "asOf": "2025-12-01" }
+    },
+    {
+      "id": "ben:pmsby",
+      "type": "benefit",
+      "attrs": {
+        "name": "Pradhan Mantri Suraksha Bima Yojana",
+        "authority": "Ministry of Finance",
+        "valuePerYear": "₹2 lakh accident cover for ₹20/year",
+        "rules": [
+          { "field": "person.age", "op": "between", "value": [18, 70], "explanation": "You are between 18 and 70." },
+          { "field": "person.hasBankAccount", "op": "==", "value": true, "explanation": "You have an active bank account." }
+        ]
+      },
+      "verification": { "source": "Self", "state": "verified", "asOf": "2026-08-01" }
+    },
+    {
+      "id": "ben:mudra-kishor",
+      "type": "benefit",
+      "attrs": {
+        "name": "PM Mudra Loan (Kishor)",
+        "authority": "SIDBI / member banks",
+        "valuePerYear": "Collateral-free business loan ₹50,000–₹5 lakh",
+        "rules": [
+          { "field": "business.entityType", "op": "in", "value": ["proprietorship", "partnership"], "explanation": "Sharma Web Solutions is a proprietorship." },
+          { "field": "business.udyamRegistered", "op": "==", "value": true, "explanation": "Udyam registration is active." },
+          { "field": "business.vintageYears", "op": ">=", "value": 2, "explanation": "The business is at least 2 years old." },
+          { "field": "person.itrFiledLastYear", "op": "==", "value": true, "explanation": "Latest ITR acknowledgement (ITR-V) is required.", "missingEvidence": "doc:itr-v-fy25" }
+        ]
+      },
+      "verification": { "source": "Self", "state": "verified", "asOf": "2026-08-01" }
+    },
+    {
+      "id": "ben:eps-family-pension",
+      "type": "benefit",
+      "attrs": {
+        "name": "EPS-95 Family Pension",
+        "authority": "EPFO",
+        "valuePerYear": "≈ ₹49,200/year (50% of member pension)",
+        "rules": [
+          { "field": "spouse.deceased", "op": "==", "value": true, "explanation": "Payable to the surviving spouse of an EPS pensioner." },
+          { "field": "spouse.epsPension", "op": "exists", "value": true, "explanation": "Rajesh Sharma held an EPS-95 pension." },
+          { "field": "documents.deathCertificate", "op": "exists", "value": true, "explanation": "Death certificate is required.", "missingEvidence": "death-certificate" }
+        ]
+      },
+      "verification": { "source": "EPFO", "state": "verified", "asOf": "2026-08-01" }
+    },
+    {
+      "id": "ben:ka-widow-pension",
+      "type": "benefit",
+      "attrs": {
+        "name": "Karnataka Vidhava Vetana (Widow Pension)",
+        "authority": "Govt of Karnataka, Revenue Dept",
+        "valuePerYear": "₹9,600/year",
+        "rules": [
+          { "field": "person.widowed", "op": "==", "value": true, "explanation": "Payable to widowed residents of Karnataka." },
+          { "field": "person.residentState", "op": "==", "value": "Karnataka", "explanation": "Sunita is a resident of Karnataka." },
+          { "field": "documents.deathCertificate", "op": "exists", "value": true, "explanation": "Death certificate is required.", "missingEvidence": "death-certificate" },
+          { "field": "household.income", "op": "<=", "value": 200000, "explanation": "Household income must be within the limit — needs income declaration.", "missingEvidence": "income-declaration" }
+        ]
+      },
+      "verification": { "source": "Self", "state": "verified", "asOf": "2026-08-01" }
+    },
+    {
+      "id": "obl:gstr3b-sep",
+      "type": "obligation",
+      "attrs": {
+        "title": "File GSTR-3B for August",
+        "authority": "GSTN",
+        "direction": "action",
+        "dueDate": "2026-09-20",
+        "relatedTo": "biz:sharma-web",
+        "consequence": "Late fee ₹50/day plus interest on tax due."
+      },
+      "verification": { "source": "Self", "state": "verified", "asOf": "2026-08-20" }
+    },
+    {
+      "id": "obl:echallan-500",
+      "type": "obligation",
+      "attrs": {
+        "title": "Traffic e-challan — signal jump, Hosur Road",
+        "authority": "Bengaluru Traffic Police",
+        "direction": "payable",
+        "amount": 500,
+        "issuedOn": "2026-08-02",
+        "dueDate": "2026-09-01",
+        "relatedTo": "veh:activa",
+        "consequence": "Court referral if unpaid past due date."
+      },
+      "verification": { "source": "RTO", "state": "verified", "asOf": "2026-08-02" }
+    },
+    {
+      "id": "obl:bbmp-property-tax",
+      "type": "obligation",
+      "attrs": {
+        "title": "BBMP property tax FY 2026-27 (second half)",
+        "authority": "BBMP",
+        "direction": "payable",
+        "amount": 9840,
+        "dueDate": "2026-10-31",
+        "relatedTo": "prop:jpnagar-house",
+        "note": "Property is in Rajesh Sharma's name; Arjun usually pays."
+      },
+      "verification": { "source": "Municipal", "state": "verified", "asOf": "2026-08-01" }
+    },
+    {
+      "id": "obl:itr-refund",
+      "type": "obligation",
+      "attrs": {
+        "title": "Income tax refund AY 2026-27",
+        "authority": "Income Tax Department",
+        "direction": "receivable",
+        "amount": 12400,
+        "status": "processing",
+        "initiatedOn": "2026-08-11",
+        "note": "Refund initiated; expected within 4–6 weeks."
+      },
+      "verification": { "source": "NSDL", "state": "verified", "asOf": "2026-08-11" }
+    },
+    {
+      "id": "obl:passport-renewal",
+      "type": "obligation",
+      "attrs": {
+        "title": "Passport expires in under 6 months of buffer for visas",
+        "authority": "Ministry of External Affairs",
+        "direction": "action",
+        "dueDate": "2027-01-19",
+        "relatedTo": "doc:arjun-passport",
+        "note": "Many countries require 6 months validity — renew by mid-2026 travel plans."
+      },
+      "verification": { "source": "Self", "state": "verified", "asOf": "2026-08-01" }
+    },
+    {
+      "id": "ntc:itr-refund",
+      "type": "notice",
+      "attrs": {
+        "channel": "email",
+        "sender": "intimations@incometax.gov.in",
+        "receivedOn": "2026-08-11",
+        "subject": "Refund of ₹12,400 initiated for AY 2026-27",
+        "body": "Dear Taxpayer, your refund for AY 2026-27 of INR 12,400 has been initiated and will be credited to your validated bank account ending 0042.",
+        "legitimacy": "legitimate",
+        "relatedTo": "obl:itr-refund"
+      },
+      "verification": { "source": "NSDL", "state": "verified", "asOf": "2026-08-11" }
+    },
+    {
+      "id": "ntc:epfo-passbook",
+      "type": "notice",
+      "attrs": {
+        "channel": "sms",
+        "sender": "EPFOHO",
+        "receivedOn": "2026-08-05",
+        "subject": "EPF contribution credited",
+        "body": "Dear member, contribution of Rs 21,600 for Jul-2026 credited to UAN 101234567890. Balance: Rs 3,40,000.",
+        "legitimacy": "legitimate",
+        "relatedTo": "emp:arjun-meridian"
+      },
+      "verification": { "source": "EPFO", "state": "verified", "asOf": "2026-08-05" }
+    },
+    {
+      "id": "ntc:scam-pan",
+      "type": "notice",
+      "attrs": {
+        "channel": "sms",
+        "sender": "+91 79 8834 1102",
+        "receivedOn": "2026-08-22",
+        "subject": "PAN card block warning",
+        "body": "Dear customer your PAN card will be block in 24 hrs. Update KYC immediatly click http://pan-updat.info/verify or call 7988341102.",
+        "legitimacy": "scam",
+        "scamSignals": [
+          "Sender is a personal mobile number, not a registered government header",
+          "Link domain 'pan-updat.info' is not incometax.gov.in",
+          "Urgency and threat within 24 hours",
+          "Spelling errors: 'will be block', 'immediatly'",
+          "The Income Tax Department never blocks PAN by SMS deadline"
+        ]
+      },
+      "verification": { "source": "Self", "state": "pending", "asOf": "2026-08-22" }
+    },
+    {
+      "id": "ntc:echallan",
+      "type": "notice",
+      "attrs": {
+        "channel": "sms",
+        "sender": "BTPOLC",
+        "receivedOn": "2026-08-02",
+        "subject": "e-Challan issued",
+        "body": "e-Challan KA05-2026-0812445 of Rs 500 issued against KA05MJ4821 for signal jump at Hosur Road on 02-08-2026. Pay by 01-09-2026.",
+        "legitimacy": "legitimate",
+        "relatedTo": "obl:echallan-500"
+      },
+      "verification": { "source": "RTO", "state": "verified", "asOf": "2026-08-02" }
+    },
+    {
+      "id": "app:pan-name-correction",
+      "type": "application",
+      "attrs": {
+        "title": "PAN name correction to match Aadhaar",
+        "authority": "NSDL",
+        "status": "draft",
+        "createdOn": "2026-08-15",
+        "relatedTo": "doc:arjun-pan",
+        "note": "Started from the record-mismatch prompt; not yet submitted."
+      },
+      "verification": { "source": "Self", "state": "self-declared", "asOf": "2026-08-15" }
+    }
+  ],
+  "edges": [
+    { "id": "e:arjun-childof-rajesh", "type": "childOf", "from": "person:arjun", "to": "person:rajesh", "attrs": {}, "validFrom": "1997-03-14", "status": "active" },
+    { "id": "e:arjun-childof-sunita", "type": "childOf", "from": "person:arjun", "to": "person:sunita", "attrs": {}, "validFrom": "1997-03-14", "status": "active" },
+    { "id": "e:kavita-childof-rajesh", "type": "childOf", "from": "person:kavita", "to": "person:rajesh", "attrs": {}, "validFrom": "1993-11-12", "status": "active" },
+    { "id": "e:kavita-childof-sunita", "type": "childOf", "from": "person:kavita", "to": "person:sunita", "attrs": {}, "validFrom": "1993-11-12", "status": "active" },
+    { "id": "e:rajesh-spouseof-sunita", "type": "spouseOf", "from": "person:rajesh", "to": "person:sunita", "attrs": { "marriageRegisteredAt": "Sub-Registrar, Jaipur" }, "validFrom": "1990-12-02", "status": "active" },
+    { "id": "e:kavita-spouseof-rohit", "type": "spouseOf", "from": "person:kavita", "to": "person:rohit", "attrs": { "marriageRegisteredAt": "Sub-Registrar, New Delhi" }, "validFrom": "2019-02-14", "status": "active" },
+    { "id": "e:arjun-residesat", "type": "residesAt", "from": "person:arjun", "to": "addr:jpnagar", "attrs": {}, "validFrom": "2004-06-01", "status": "active" },
+    { "id": "e:rajesh-residesat", "type": "residesAt", "from": "person:rajesh", "to": "addr:jpnagar", "attrs": {}, "validFrom": "2004-06-01", "status": "active" },
+    { "id": "e:sunita-residesat", "type": "residesAt", "from": "person:sunita", "to": "addr:jpnagar", "attrs": {}, "validFrom": "2004-06-01", "status": "active" },
+    { "id": "e:priya-residesat", "type": "residesAt", "from": "person:priya", "to": "addr:ahmedabad", "attrs": {}, "validFrom": "2021-08-01", "status": "active" },
+    { "id": "e:kavita-residesat", "type": "residesAt", "from": "person:kavita", "to": "addr:delhi", "attrs": {}, "validFrom": "2019-12-01", "status": "active" },
+    { "id": "e:arjun-employedby", "type": "employedBy", "from": "person:arjun", "to": "emp:arjun-meridian", "attrs": {}, "validFrom": "2021-07-05", "status": "active" },
+    { "id": "e:rajesh-employedby", "type": "employedBy", "from": "person:rajesh", "to": "emp:rajesh-kswc", "attrs": { "endReason": "retirement" }, "validFrom": "1988-07-01", "validTo": "2023-01-31", "status": "ended" },
+    { "id": "e:priya-employedby", "type": "employedBy", "from": "person:priya", "to": "emp:priya-studio", "attrs": {}, "validFrom": "2022-03-01", "status": "active" },
+    { "id": "e:arjun-owns-activa", "type": "owns", "from": "person:arjun", "to": "veh:activa", "attrs": {}, "validFrom": "2022-02-18", "status": "active" },
+    { "id": "e:arjun-owns-biz", "type": "owns", "from": "person:arjun", "to": "biz:sharma-web", "attrs": {}, "validFrom": "2024-04-10", "status": "active" },
+    { "id": "e:rajesh-owns-house", "type": "owns", "from": "person:rajesh", "to": "prop:jpnagar-house", "attrs": {}, "validFrom": "2004-05-12", "status": "active" },
+    { "id": "e:rajesh-owns-dzire", "type": "owns", "from": "person:rajesh", "to": "veh:dzire", "attrs": {}, "validFrom": "2018-11-03", "status": "active" },
+    { "id": "e:sunita-nominee-epf", "type": "nomineeOf", "from": "person:sunita", "to": "emp:rajesh-kswc", "attrs": { "instrument": "EPF", "share": 1.0 }, "validFrom": "2010-06-15", "status": "active" },
+    { "id": "e:arjun-holds-aadhaar", "type": "holds", "from": "person:arjun", "to": "doc:arjun-aadhaar", "attrs": {}, "validFrom": "2012-08-14", "status": "active" },
+    { "id": "e:arjun-holds-pan", "type": "holds", "from": "person:arjun", "to": "doc:arjun-pan", "attrs": {}, "validFrom": "2015-06-02", "status": "active" },
+    { "id": "e:arjun-holds-passport", "type": "holds", "from": "person:arjun", "to": "doc:arjun-passport", "attrs": {}, "validFrom": "2017-01-20", "status": "active" },
+    { "id": "e:arjun-holds-dl", "type": "holds", "from": "person:arjun", "to": "doc:arjun-dl", "attrs": {}, "validFrom": "2016-04-11", "status": "active" },
+    { "id": "e:arjun-holds-rc", "type": "holds", "from": "person:arjun", "to": "doc:arjun-rc-activa", "attrs": {}, "validFrom": "2022-02-18", "status": "active" },
+    { "id": "e:arjun-holds-udyam", "type": "holds", "from": "person:arjun", "to": "doc:arjun-udyam", "attrs": {}, "validFrom": "2024-04-10", "status": "active" },
+    { "id": "e:arjun-holds-gst", "type": "holds", "from": "person:arjun", "to": "doc:arjun-gst", "attrs": {}, "validFrom": "2024-04-22", "status": "active" },
+    { "id": "e:priya-holds-aadhaar", "type": "holds", "from": "person:priya", "to": "doc:priya-aadhaar", "attrs": {}, "validFrom": "2013-02-19", "status": "active" },
+    { "id": "e:priya-holds-pan", "type": "holds", "from": "person:priya", "to": "doc:priya-pan", "attrs": {}, "validFrom": "2018-09-12", "status": "active" },
+    { "id": "e:priya-holds-passport", "type": "holds", "from": "person:priya", "to": "doc:priya-passport", "attrs": {}, "validFrom": "2022-05-30", "status": "active" },
+    { "id": "e:rajesh-holds-aadhaar", "type": "holds", "from": "person:rajesh", "to": "doc:rajesh-aadhaar", "attrs": {}, "validFrom": "2011-10-05", "status": "active" },
+    { "id": "e:rajesh-holds-pan", "type": "holds", "from": "person:rajesh", "to": "doc:rajesh-pan", "attrs": {}, "validFrom": "1998-03-20", "status": "active" },
+    { "id": "e:rajesh-holds-rc", "type": "holds", "from": "person:rajesh", "to": "doc:rajesh-rc-dzire", "attrs": {}, "validFrom": "2018-11-03", "status": "active" },
+    { "id": "e:rajesh-holds-khata", "type": "holds", "from": "person:rajesh", "to": "doc:rajesh-khata", "attrs": {}, "validFrom": "2004-05-12", "status": "active" },
+    { "id": "e:sunita-holds-aadhaar", "type": "holds", "from": "person:sunita", "to": "doc:sunita-aadhaar", "attrs": {}, "validFrom": "2011-10-05", "status": "active" },
+    { "id": "e:kavita-holds-aadhaar", "type": "holds", "from": "person:kavita", "to": "doc:kavita-aadhaar", "attrs": {}, "validFrom": "2012-01-16", "status": "active" },
+    { "id": "e:arjun-subject-gstr", "type": "subjectOf", "from": "person:arjun", "to": "obl:gstr3b-sep", "attrs": {}, "validFrom": "2026-08-20", "status": "active" },
+    { "id": "e:arjun-subject-challan", "type": "subjectOf", "from": "person:arjun", "to": "obl:echallan-500", "attrs": {}, "validFrom": "2026-08-02", "status": "active" },
+    { "id": "e:arjun-subject-proptax", "type": "subjectOf", "from": "person:arjun", "to": "obl:bbmp-property-tax", "attrs": { "role": "payer-on-behalf" }, "validFrom": "2026-08-01", "status": "active" },
+    { "id": "e:arjun-subject-refund", "type": "subjectOf", "from": "person:arjun", "to": "obl:itr-refund", "attrs": {}, "validFrom": "2026-08-11", "status": "active" },
+    { "id": "e:arjun-subject-passport", "type": "subjectOf", "from": "person:arjun", "to": "obl:passport-renewal", "attrs": {}, "validFrom": "2026-08-01", "status": "active" },
+    { "id": "e:arjun-subject-ntc1", "type": "subjectOf", "from": "person:arjun", "to": "ntc:itr-refund", "attrs": { "read": false }, "validFrom": "2026-08-11", "status": "active" },
+    { "id": "e:arjun-subject-ntc2", "type": "subjectOf", "from": "person:arjun", "to": "ntc:epfo-passbook", "attrs": { "read": true }, "validFrom": "2026-08-05", "status": "active" },
+    { "id": "e:arjun-subject-ntc3", "type": "subjectOf", "from": "person:arjun", "to": "ntc:scam-pan", "attrs": { "read": false }, "validFrom": "2026-08-22", "status": "active" },
+    { "id": "e:arjun-subject-ntc4", "type": "subjectOf", "from": "person:arjun", "to": "ntc:echallan", "attrs": { "read": true }, "validFrom": "2026-08-02", "status": "active" },
+    { "id": "e:arjun-subject-app1", "type": "subjectOf", "from": "person:arjun", "to": "app:pan-name-correction", "attrs": {}, "validFrom": "2026-08-15", "status": "active" },
+    { "id": "e:arjun-subject-pmsby", "type": "subjectOf", "from": "person:arjun", "to": "ben:pmsby", "attrs": { "eligibility": "eligible" }, "validFrom": "2026-08-01", "status": "active" },
+    { "id": "e:arjun-subject-mudra", "type": "subjectOf", "from": "person:arjun", "to": "ben:mudra-kishor", "attrs": { "eligibility": "potentially-eligible" }, "validFrom": "2026-08-01", "status": "active" },
+    { "id": "e:sunita-subject-fampension", "type": "subjectOf", "from": "person:sunita", "to": "ben:eps-family-pension", "attrs": { "eligibility": "not-eligible", "note": "Recomputed automatically when the Citizen Graph changes." }, "validFrom": "2026-08-01", "status": "active" },
+    { "id": "e:sunita-subject-widowpension", "type": "subjectOf", "from": "person:sunita", "to": "ben:ka-widow-pension", "attrs": { "eligibility": "not-eligible", "note": "Recomputed automatically when the Citizen Graph changes." }, "validFrom": "2026-08-01", "status": "active" }
+  ],
+  "events": []
+}

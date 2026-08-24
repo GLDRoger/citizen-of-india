@@ -79,15 +79,15 @@ interface GraphEdge {
 
 ---
 
-# Seed Family — the Sharmas of Jaipur
+# Seed Family — the Sharmas of JP Nagar, Bengaluru
 
-Jaipur keeps the Hindi demo natural. One family reaches every demo workflow.
+A migrant family settled in Bengaluru for two decades — itself the most Bengaluru story there is. Official surfaces are Karnataka (BBMP, KA registrations, Karnataka marriage registration); the family is Hindi-speaking at home, so Kannada, Hindi/Hinglish and English demos are all natural. One family reaches every demo workflow, and the inter-state edges (Ahmedabad, Delhi) show cross-state pain.
 
 ### Arjun Sharma — 29, primary demo login
-Salaried software engineer at Meridian Tech Pvt Ltd (EPFO member, UAN active). Runs a side proprietorship, **Sharma Web Solutions** (Udyam + GST registered, FY24 turnover ₹18L). Unmarried. Owns a Honda Activa.
+Salaried software engineer at Meridian Tech Pvt Ltd, Bengaluru (EPFO member, UAN active). Runs a side proprietorship, **Sharma Web Solutions** (Udyam + Karnataka GST registered, FY25 turnover ₹18L). Unmarried. Owns a Honda Activa (KA-05).
 
 - Documents: Aadhaar (verified) · PAN (**verified but name reads "ARJUN KUMAR SHARMA" vs Aadhaar "Arjun Sharma" — the reconciliation demo**) · Passport (**expires 2027-01-19 — proactive nudge**) · DL (valid) · Vehicle RC · Udyam certificate · GST registration.
-- Money & obligations: ITR refund **₹12,400 pending** (money due *to* him) · GSTR-3B due Sep 20 · e-challan **₹500** (signal jump, Aug 2) · property tax on the family house due Oct 31 (he pays it for his father).
+- Money & obligations: ITR refund **₹12,400 pending** (money due *to* him) · GSTR-3B due Sep 20 · Bengaluru Traffic Police e-challan **₹500** (signal jump, Hosur Road, Aug 2) · BBMP property tax on the family house due Oct 31 (he pays it for his father).
 - Drives: obligations dashboard, business loan (Mudra eligibility off real graph state), start-a-business, reconciliation, marriage.
 
 ### Priya Patel — 27, second demo login
@@ -96,7 +96,7 @@ UX designer in **Ahmedabad** (inter-state marriage = realistic complexity: domic
 - Drives: marriage workflow — invite, consent, document reuse, witness selection, appointment, mock payment, certificate issuance, `spouseOf` mutation.
 
 ### Rajesh Sharma — 61, Arjun's father (the death demo)
-Retired accountant from Rajasthan State Warehousing Corp. EPS pension **₹8,200/mo**, EPF balance ₹6.1L with **Sunita as nominee**. Owns the family house (Malviya Nagar, Jaipur) and a Maruti Dzire. Holds an active LIC-style policy (nominee: Sunita).
+Retired accountant from Karnataka State Warehousing Corporation. EPS pension **₹8,200/mo**, EPF balance ₹6.1L with **Sunita as nominee**. Owns the family house (JP Nagar, Bengaluru — BBMP khata) and a Maruti Dzire (KA-01).
 
 - The demo: "papa ki death ho gayi, kya karna hoga?" → death registration → certificate → pension stops / family-pension starts → EPF nominee claim → vehicle & property mutation → legal-heir workflow across Sunita, Arjun, Kavita.
 
@@ -116,7 +116,7 @@ Married (active `spouseOf` edge since 2019 — shows a pre-existing relationship
 
 ### Benefit seed
 - Arjun: eligible — PM Suraksha Bima; **potentially eligible — Mudra (Kishor) loan** (business vintage + turnover from graph; missing evidence: latest ITR-V).
-- Sunita (post-death only): eligible — EPS family pension; potentially eligible — state widow pension (missing evidence: death certificate → resolved by completing the death workflow: document reuse across procedures).
+- Sunita (post-death only): eligible — EPS family pension; potentially eligible — Karnataka widow pension (missing evidence: death certificate → resolved by completing the death workflow: document reuse across procedures).
 
 ---
 
