@@ -14,7 +14,7 @@ export function AppShell({ children }: { children: ReactNode }) {
     document.documentElement.lang = language;
   }, [language]);
   return (
-    <div className={cn("flex min-h-dvh flex-col bg-canvas", dataSaver && "data-saver")}>
+    <div className={cn("flex min-h-dvh flex-col bg-paper", dataSaver && "data-saver")}>
       <TopNavigation />
       <RouteBreadcrumbs />
       <main className="min-w-0 flex-1">{children}</main>

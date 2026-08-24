@@ -1,0 +1,4 @@
+import type { ReactNode } from "react";
+import { cn } from "@/lib/cn";
+export function FilePanel({ label, children, className }: { label: string; children: ReactNode; className?: string }) { return <section className={cn("relative mt-6 rounded-[8px] border border-paper-line bg-paper-shade p-5 pt-8", className)}><span className="file-tab">{label}</span>{children}</section>; }
+export function LedgerRow({ label, value, action }: { label: string; value: ReactNode; action?: ReactNode }) { return <div className="grid min-h-14 grid-cols-[minmax(0,1fr)_auto] items-center gap-4 border-b border-paper-line py-3 last:border-b-0"><span className="text-sm text-ink-mute">{label}</span><div className="flex items-center gap-4"><strong className="font-display text-lg font-bold tabular-nums text-ink">{value}</strong>{action}</div></div>; }

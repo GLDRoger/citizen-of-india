@@ -17,11 +17,11 @@ export function PageHeader({
   action?: ReactNode;
 }) {
   return (
-    <header className="grid gap-5 border-b border-line pb-7 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
+    <header className="grid gap-5 border-b border-paper-line pb-7 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
       <div className="grid gap-2">
         {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
         <h1 className="font-display text-[clamp(2.65rem,7vw,5.6rem)] font-semibold leading-[0.9] tracking-[-0.05em] text-ink">{title}</h1>
-        {description ? <p className="max-w-2xl text-sm leading-6 text-ink-muted sm:text-base">{description}</p> : null}
+        {description ? <p className="max-w-2xl text-sm leading-6 text-ink-mute sm:text-base">{description}</p> : null}
       </div>
       {action}
     </header>

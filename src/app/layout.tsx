@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Anek_Devanagari, Anek_Kannada, Anek_Latin, Manrope } from "next/font/google";
+import { Anek_Devanagari, Anek_Kannada, Anek_Latin, Geist } from "next/font/google";
 import type { ReactNode } from "react";
 import "./globals.css";
 
-const bodyFont = Manrope({
+const bodyFont = Geist({
   variable: "--font-body",
   subsets: ["latin"],
   display: "swap",

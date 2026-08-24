@@ -33,11 +33,11 @@ export function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
   const { t } = useI18n();
   return (
     <nav aria-label={t("breadcrumbs")}>
-      <ol className="flex min-w-0 items-center gap-1.5 overflow-x-auto py-1 text-[0.7rem] font-bold text-ink-faint [scrollbar-width:none] sm:text-xs">
+      <ol className="flex min-w-0 items-center gap-1.5 overflow-x-auto py-1 text-[0.7rem] font-bold text-ink-mute [scrollbar-width:none] sm:text-xs">
         {items.map((item, index) => (
           <li className="flex shrink-0 items-center gap-1.5" key={`${item.label}:${item.href ?? index}`}>
             {index > 0 ? <ChevronRight aria-hidden className="size-3 text-line" /> : null}
-            {item.href ? <Link className="transition hover:text-action-strong" href={item.href}>{item.label}</Link> : <span aria-current="page" className="text-ink-muted">{item.label}</span>}
+            {item.href ? <Link className="transition hover:text-green-deep" href={item.href}>{item.label}</Link> : <span aria-current="page" className="text-ink-mute">{item.label}</span>}
           </li>
         ))}
       </ol>
