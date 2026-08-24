@@ -69,13 +69,13 @@ function EligibilityCard({ result, personId }: { result: EligibilityResult; pers
   };
 
   return (
-    <article className="grid min-h-[330px] content-between gap-7 rounded-[22px] border border-line bg-surface p-5 sm:p-6">
+    <article className="grid min-h-[330px] content-between gap-7 rounded-[8px] border border-paper-line bg-paper-shade p-5 sm:p-6">
       <div className="grid gap-5">
         <div className="flex flex-wrap items-center justify-between gap-3"><StatusPill label={statusLabel} tone={tone(result.status)} /><SimulatedChip authority={result.benefit.attrs.authority} /></div>
-        <div className="grid gap-2"><p className="eyebrow">{result.benefit.attrs.authority}</p><h2 className="font-display text-2xl font-semibold leading-tight tracking-[-0.025em] text-ink">{result.benefit.attrs.name}</h2><p className="text-sm font-bold text-action-strong">{result.benefit.attrs.valuePerYear}</p></div>
-        {result.passedReasons.length ? <ul className="grid gap-2">{result.passedReasons.slice(0, 3).map((reason) => <li className="flex gap-2 text-xs leading-5 text-ink-muted" key={reason}><Check aria-hidden className="mt-0.5 size-3.5 shrink-0 text-success" />{reason}</li>)}</ul> : null}
-        {result.failedReasons.length ? <ul className="grid gap-2">{result.failedReasons.slice(0, 2).map((reason) => <li className="flex gap-2 text-xs leading-5 text-ink-muted" key={reason}><CircleHelp aria-hidden className="mt-0.5 size-3.5 shrink-0 text-ink-faint" />{reason}</li>)}</ul> : null}
-        {result.missingEvidence.length ? <div className="grid gap-2 rounded-[14px] bg-warning-soft p-3"><p className="flex items-center gap-2 text-xs font-bold text-warning"><FileWarning aria-hidden className="size-3.5" />{t("missingEvidence")}</p>{result.missingEvidence.map((evidence) => <span className="text-xs text-warning" key={evidence}>{formatEvidence(evidence)}</span>)}</div> : null}
+        <div className="grid gap-2"><p className="eyebrow">{result.benefit.attrs.authority}</p><h2 className="font-display text-2xl font-semibold leading-tight tracking-[-0.025em] text-ink">{result.benefit.attrs.name}</h2><p className="text-sm font-bold text-green-deep">{result.benefit.attrs.valuePerYear}</p></div>
+        {result.passedReasons.length ? <ul className="grid gap-2">{result.passedReasons.slice(0, 3).map((reason) => <li className="flex gap-2 text-xs leading-5 text-ink-mute" key={reason}><Check aria-hidden className="mt-0.5 size-3.5 shrink-0 text-green-deep" />{reason}</li>)}</ul> : null}
+        {result.failedReasons.length ? <ul className="grid gap-2">{result.failedReasons.slice(0, 2).map((reason) => <li className="flex gap-2 text-xs leading-5 text-ink-mute" key={reason}><CircleHelp aria-hidden className="mt-0.5 size-3.5 shrink-0 text-ink-mute" />{reason}</li>)}</ul> : null}
+        {result.missingEvidence.length ? <div className="grid gap-2 rounded-[8px] bg-brick-tint p-3"><p className="flex items-center gap-2 text-xs font-bold text-brick"><FileWarning aria-hidden className="size-3.5" />{t("missingEvidence")}</p>{result.missingEvidence.map((evidence) => <span className="text-xs text-brick" key={evidence}>{formatEvidence(evidence)}</span>)}</div> : null}
       </div>
       <Button disabled={Boolean(existing) || result.status === "not-eligible"} onClick={apply} variant={result.status === "eligible" ? "primary" : "secondary"}>
         {existing ? t("pending") : t("apply")} <MoveRight aria-hidden className="size-4" />
@@ -93,7 +93,7 @@ export function DiscoverScreen() {
 
   return (
     <Page className="grid gap-8">
-      <PageHeader eyebrow={t("discover")} title={t("eligibility")} description={t("eligibilityRechecks")} action={<div className="flex items-center gap-2 text-xs font-bold text-action-strong"><Sparkles aria-hidden className="size-4" /> Continuous eligibility</div>} />
+      <PageHeader eyebrow={t("discover")} title={t("eligibility")} description={t("eligibilityRechecks")} action={<div className="flex items-center gap-2 text-xs font-bold text-green-deep"><Sparkles aria-hidden className="size-4" /> Continuous eligibility</div>} />
       {results.length ? <div className="grid gap-4 md:grid-cols-2">{results.map((result) => <EligibilityCard key={result.benefit.id} personId={personId} result={result} />)}</div> : <EmptyState title="No linked schemes yet" body="Citizen will show benefits here as your connected records change." />}
     </Page>
   );

@@ -16,17 +16,17 @@ export function ConsentScreen() {
   ];
 
   return (
-    <main className="grid min-h-dvh place-items-center bg-canvas px-5 py-10">
-      <section className="grid w-full max-w-2xl gap-8 rounded-[28px] border border-line bg-surface p-6 sm:p-10">
+    <main className="grid min-h-dvh place-items-center bg-paper px-5 py-10">
+      <section className="grid w-full max-w-2xl gap-8 rounded-[8px] border border-paper-line bg-paper-shade p-6 sm:p-10">
         <div className="grid gap-4">
-          <span className="grid size-12 place-items-center rounded-full bg-action-soft text-action"><ShieldCheck aria-hidden className="size-6" /></span>
+          <span className="grid size-12 place-items-center rounded-[4px] bg-green-tint text-green-deep"><ShieldCheck aria-hidden className="size-6" /></span>
           <h1 className="font-display text-4xl font-semibold leading-none tracking-[-0.04em] text-ink sm:text-5xl">{t("consentTitle")}</h1>
-          <p className="max-w-xl text-sm leading-6 text-ink-muted sm:text-base">{t("consentBody")}</p>
+          <p className="max-w-xl text-sm leading-6 text-ink-mute sm:text-base">{t("consentBody")}</p>
         </div>
         <div className="grid gap-3">
           {points.map(({ icon: Icon, text }) => (
-            <div className="flex gap-3 border-t border-line pt-3" key={text}>
-              <Icon aria-hidden className="mt-0.5 size-4 shrink-0 text-action" />
+            <div className="flex gap-3 border-t border-paper-line pt-3" key={text}>
+              <Icon aria-hidden className="mt-0.5 size-4 shrink-0 text-green-deep" />
               <p className="text-sm leading-6 text-ink">{text}</p>
             </div>
           ))}

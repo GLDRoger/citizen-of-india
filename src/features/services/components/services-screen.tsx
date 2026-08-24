@@ -40,11 +40,10 @@ export function ServicesScreen() {
         {services.map((service, index) => {
           const application = service.applicationKind ? applications.find((candidate) => candidate.attrs.kind === service.applicationKind) : undefined;
           const complete = application?.attrs.status === "completed";
-          const Icon = service.icon;
           return (
-            <Link className="group grid min-h-72 content-between gap-10 rounded-[22px] border border-line bg-surface p-6 transition-colors hover:border-action/40" href={`/workflows/${service.slug}`} key={service.slug}>
-              <div className="flex items-start justify-between gap-4"><span className="grid size-11 place-items-center rounded-[12px] bg-action-soft text-action-strong"><Icon aria-hidden className="size-5" /></span><div className="flex flex-wrap justify-end gap-2"><SimulatedChip />{application ? <StatusPill label={application.attrs.status.replaceAll("-", " ")} tone={complete ? "success" : "info"} /> : null}</div></div>
-              <div className="grid gap-4"><span className="font-display text-lg font-semibold text-ink-faint">0{index + 1}</span><div className="grid gap-2"><h2 className="font-display text-3xl font-semibold leading-none tracking-[-0.04em] text-ink">{t(service.title)}</h2><p className="text-sm leading-6 text-ink-muted">{t(service.promise)}</p></div><span className="flex items-center gap-2 text-sm font-bold text-action-strong">{application ? t("continueAction") : t("start")}<ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" /></span></div>
+            <Link className="group grid min-h-72 content-between gap-10 rounded-[8px] border border-paper-line bg-paper-shade p-6 transition-colors hover:border-green-deep/40" href={`/workflows/${service.slug}`} key={service.slug}>
+              <div className="flex items-start justify-between gap-4"><div className="flex flex-wrap justify-end gap-2"><SimulatedChip />{application ? <StatusPill label={application.attrs.status.replaceAll("-", " ")} tone={complete ? "success" : "info"} /> : null}</div></div>
+              <div className="grid gap-4"><span className="font-display text-lg font-semibold text-ink-mute">0{index + 1}</span><div className="grid gap-2"><h2 className="font-display text-3xl font-semibold leading-none tracking-[-0.04em] text-ink">{t(service.title)}</h2><p className="text-sm leading-6 text-ink-mute">{t(service.promise)}</p></div><span className="flex items-center gap-2 text-sm font-bold text-green-deep">{application ? t("continueAction") : t("start")}<ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" /></span></div>
             </Link>
           );
         })}
