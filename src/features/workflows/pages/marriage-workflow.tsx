@@ -13,7 +13,7 @@ import type { Language } from "@/i18n/messages";
 import { useI18n } from "@/i18n/use-i18n";
 import { formatDate, maskIdentifier } from "@/lib/format";
 import { bookAppointment, processPayment, submitMarriageRegistration } from "@/lib/mockGov";
-import { CompletionCard, ProcedureShell, StepCard, type ProcedureStep } from "../components/procedure-shell";
+import { CompletionCard, ParticipantStrip, ProcedureShell, StepCard, type ProcedureStep } from "../components/procedure-shell";
 
 const stepsByLanguage: Record<Language, ProcedureStep[]> = {
   en: [
@@ -45,7 +45,7 @@ function verification(source: Verification["source"] = "Self"): Verification {
 
 export function MarriageWorkflow() {
   const router = useRouter();
-  const { language } = useI18n();
+  const { language, t } = useI18n();
   const personId = useAuthStore((state) => state.personId);
   const switchPersona = useAuthStore((state) => state.switchPersona);
   const graph = useCitizenStore((state) => state.graph);
@@ -63,6 +63,8 @@ export function MarriageWorkflow() {
   const currentStep = application?.attrs.currentStep ?? 0;
   const complete = application?.attrs.status === "completed";
   const steps = stepsByLanguage[language];
+  const arjunStatus = complete ? t("completed") : currentStep > 0 ? t("done") : t("active");
+  const priyaStatus = complete ? t("completed") : currentStep > 1 ? t("done") : t("pending");
 
   const run = async (action: () => Promise<void>) => {
     setLoading(true);
@@ -144,10 +146,10 @@ export function MarriageWorkflow() {
   ) : currentStep === 2 ? (
     <StepCard eyebrow="Verified records only" title="Reuse documents and choose witnesses" body={`Citizen found ${reusedDocumentCount} verified identity records already held by the couple. Records needing attention are left out. Choose at least one verified family witness.`}><div className="grid gap-4 sm:grid-cols-2">{[{ name: "Arjun", docs: arjunDocs }, { name: "Priya", docs: priyaDocs }].map((group) => <div className="grid gap-2 rounded-[18px] bg-surface-strong p-4" key={group.name}><strong className="text-sm">{group.name}</strong>{group.docs.map((document) => <span className="flex items-center justify-between gap-2 text-xs capitalize text-ink-muted" key={document.id}><span className="flex items-center gap-2"><FileStack aria-hidden className="size-3.5" />{document.attrs.kind}</span><VerificationBadge verification={document.verification} /></span>)}</div>)}</div><div className="grid gap-2"><p className="text-xs font-bold text-ink">Witnesses</p><div className="grid gap-2 sm:grid-cols-2">{witnessCandidates.map((witness) => { const selected = selectedWitnesses.includes(witness.id); return <button aria-pressed={selected} className={`flex min-h-14 items-center justify-between rounded-[15px] border px-4 text-left text-sm font-bold transition ${selected ? "border-action bg-action-soft text-action-strong" : "border-line bg-surface"}`} key={witness.id} onClick={() => toggleWitness(witness.id)}><span>{witness.attrs.name}</span>{selected ? <Check aria-hidden className="size-4" /> : null}</button>; })}</div></div><Button disabled={selectedWitnesses.length === 0} onClick={reuseDocuments}>Use documents and witnesses <ArrowRight aria-hidden className="size-4" /></Button></StepCard>
   ) : currentStep === 3 ? (
-    <StepCard eyebrow="Jayanagar, Bengaluru" title="Book the appointment and pay ₹500" body={`${application?.attrs.witnesses?.length ?? 0} witness record(s) are attached. The appointment and payment responses are simulated and deterministic.`}><div className="grid gap-3 sm:grid-cols-2"><div className="rounded-[16px] bg-surface-strong p-4"><CalendarCheck aria-hidden className="mb-4 size-5 text-action" /><strong className="block text-sm">3 Sep 2026 · 11:30 AM</strong><span className="text-xs text-ink-muted">Sub-Registrar, Jayanagar</span></div><div className="rounded-[16px] bg-surface-strong p-4"><IndianRupee aria-hidden className="mb-4 size-5 text-action" /><strong className="block text-sm">₹500 registration fee</strong><span className="text-xs text-ink-muted">Karnataka One · test mode</span></div></div><Button loading={loading} onClick={() => void appointment()}>Book and pay <ArrowRight aria-hidden className="size-4" /></Button></StepCard>
+    <StepCard eyebrow="Jayanagar, Bengaluru" title="Book the appointment and pay ₹500" body={`${application?.attrs.witnesses?.length ?? 0} witness record(s) are attached. The appointment and payment responses are simulated and deterministic.`}><div className="grid gap-3 sm:grid-cols-2"><div className="rounded-[16px] bg-surface-strong p-4"><CalendarCheck aria-hidden className="mb-4 size-5 text-action" /><strong className="block text-sm">3 Sep 2026 · 11:30 AM</strong><span className="text-xs text-ink-muted">Sub-Registrar, Jayanagar</span></div><div className="rounded-[16px] bg-surface-strong p-4"><IndianRupee aria-hidden className="mb-4 size-5 text-action" /><strong className="block text-sm">₹500 registration fee</strong><span className="text-xs text-ink-muted">Karnataka One · simulated</span></div></div><Button loading={loading} onClick={() => void appointment()}>Book and pay <ArrowRight aria-hidden className="size-4" /></Button></StepCard>
   ) : (
     <StepCard eyebrow={application?.attrs.reference} title="Confirm the spouse relationship" body={`The appointment is booked for ${application?.attrs.appointmentOn ? formatDate(application.attrs.appointmentOn) : "3 Sep 2026"}. Submission adds one spouse edge and one shared certificate.`}><div className="flex items-center justify-between gap-4 rounded-[18px] bg-action-soft p-4"><div><strong className="block text-sm">spouseOf</strong><span className="text-xs text-ink-muted">Arjun Sharma ↔ Priya Patel</span></div><SimulatedChip authority="Kaveri Online Services" /></div><Button loading={loading} onClick={() => void register()}>Register marriage <ArrowRight aria-hidden className="size-4" /></Button></StepCard>
   );
 
-  return <ProcedureShell authority="Kaveri Online Services + Karnataka One" complete={complete} currentStep={currentStep} description="Invite a partner, gather separate consent, reuse verified documents, book an appointment, and update both profiles." steps={steps} title="Marriage registration">{error ? <p className="mb-3 rounded-xl bg-danger-soft p-3 text-sm font-semibold text-danger" role="alert">{error}</p> : null}{content}</ProcedureShell>;
+  return <ProcedureShell authority="Kaveri Online Services + Karnataka One" complete={complete} currentStep={currentStep} description={t("marriageWorkflowBody")} steps={steps} title={t("marriageWorkflowTitle")}><div className="grid gap-5"><ParticipantStrip left={{ name: arjun.attrs.name, status: arjunStatus, tone: complete || currentStep > 0 ? "success" : "info" }} right={{ name: priya.attrs.name, status: priyaStatus, tone: complete || currentStep > 1 ? "success" : "warning" }} />{error ? <p className="rounded-xl bg-danger-soft p-3 text-sm font-semibold text-danger" role="alert">{error}</p> : null}{content}</div></ProcedureShell>;
 }

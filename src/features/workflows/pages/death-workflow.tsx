@@ -48,7 +48,7 @@ function sourceVerification(source: "Municipal" | "EPFO" | "Self" = "Self"): Ver
 
 export function DeathWorkflow() {
   const router = useRouter();
-  const { language } = useI18n();
+  const { language, t } = useI18n();
   const personId = useAuthStore((state) => state.personId);
   const switchPersona = useAuthStore((state) => state.switchPersona);
   const graph = useCitizenStore((state) => state.graph);
@@ -166,7 +166,7 @@ export function DeathWorkflow() {
   const relationshipTitle = personId === "person:sunita" ? "Is this your husband?" : personId === "person:arjun" ? "Is this your father?" : "Is this your family member?";
   const relationshipBody = personId === "person:sunita" ? "Citizen found one verified spouse relationship." : "Citizen found a verified family relationship.";
   const content = complete ? (
-    <CompletionCard title="The family record is up to date." body="The certificate is reusable, pension and nominee claims are submitted, legal-heir consent is recorded, and property and vehicle transfer drafts remain visible."><div className="flex flex-wrap gap-2"><Button onClick={openSunitaEligibility} variant="inverse">See Sunita’s eligibility <ArrowRight aria-hidden className="size-4" /></Button><LinkButton href="/activity" variant="secondary">View audit trail</LinkButton></div></CompletionCard>
+    <CompletionCard title="The family record is up to date." body="The certificate is reusable, pension and nominee claims are submitted, legal-heir consent is recorded, and property and vehicle transfer drafts remain visible."><div className="flex flex-wrap gap-2"><Button onClick={openSunitaEligibility} variant="inverse">See Sunita’s eligibility <ArrowRight aria-hidden className="size-4" /></Button><LinkButton href="/dashboard" variant="secondary">View audit trail</LinkButton></div></CompletionCard>
   ) : currentStep === 0 ? (
     <StepCard eyebrow="Verified family records" title={relationshipTitle} body={`${relationshipBody} Confirm the connected record before anything changes.`}><div className="grid gap-4 rounded-[18px] bg-surface-strong p-4 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:items-center"><span className="grid size-12 place-items-center rounded-full bg-ink text-canvas"><UsersRound aria-hidden className="size-6" /></span><div><strong className="block text-ink">{rajesh.attrs.name}</strong><span className="text-xs text-ink-muted">EPS pensioner · Bengaluru</span></div><VerificationBadge verification={rajesh.verification} /></div><Button onClick={identify}>Confirm Rajesh <ArrowRight aria-hidden className="size-4" /></Button></StepCard>
   ) : currentStep === 1 ? (
@@ -181,5 +181,5 @@ export function DeathWorkflow() {
     <StepCard eyebrow="Keep these visible" title="Create the property and vehicle next actions" body="Citizen will not transfer ownership automatically. It creates narrow drafts so the family can complete each succession process separately."><div className="grid gap-3 sm:grid-cols-2">{assets.map((asset) => <div className="flex items-center gap-3 rounded-[16px] bg-surface-strong p-4" key={asset.id}>{asset.type === "property" ? <Building2 aria-hidden className="size-5 text-saffron-ink" /> : <CarFront aria-hidden className="size-5 text-action" />}<div className="min-w-0"><strong className="block truncate text-sm capitalize">{asset.type === "property" ? asset.attrs.kind : asset.type === "vehicle" ? `${asset.attrs.make} ${asset.attrs.model}` : "Record"}</strong><span className="text-xs text-ink-muted">Succession draft will be created</span></div></div>)}</div><Button onClick={finish}>Create drafts and finish <ArrowRight aria-hidden className="size-4" /></Button></StepCard>
   );
 
-  return <ProcedureShell authority="BBMP + EPFO + Citizen consent relay" complete={complete} currentStep={currentStep} description="One family event becomes a coordinated set of registrations, documents, benefits, nominee claims and consents." steps={steps} title="A death in the family">{error ? <p className="mb-3 rounded-xl bg-danger-soft p-3 text-sm font-semibold text-danger" role="alert">{error}</p> : null}{content}</ProcedureShell>;
+  return <ProcedureShell authority="BBMP + EPFO + Citizen consent relay" complete={complete} currentStep={currentStep} description={t("deathWorkflowBody")} steps={steps} title={t("deathWorkflowTitle")}>{error ? <p className="mb-3 rounded-xl bg-danger-soft p-3 text-sm font-semibold text-danger" role="alert">{error}</p> : null}{content}</ProcedureShell>;
 }

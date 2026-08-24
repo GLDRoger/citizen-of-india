@@ -8,6 +8,7 @@ import { useAuthStore } from "@/features/auth/store";
 import type { GraphMutation } from "@/features/graph/schema";
 import { useCitizenStore } from "@/features/graph/store";
 import { buildIntentContext, classifyIntent } from "@/features/intent/intent-client";
+import { useI18n } from "@/i18n/use-i18n";
 import { CompletionCard, ProcedureShell, StepCard, type ProcedureStep } from "../components/procedure-shell";
 
 const steps: ProcedureStep[] = [
@@ -36,6 +37,7 @@ function createPlan(businessType: string, city: string): PlanItem[] {
 const planIcons = { registration: Building2, licence: FileCheck2, scheme: WandSparkles, finance: BadgeIndianRupee };
 
 export function StartBusinessWorkflow() {
+  const { t } = useI18n();
   const personId = useAuthStore((state) => state.personId);
   const graph = useCitizenStore((state) => state.graph);
   const commit = useCitizenStore((state) => state.commit);
@@ -74,12 +76,12 @@ export function StartBusinessWorkflow() {
   };
 
   const content = complete ? (
-    <CompletionCard title="Your first registration draft is ready." body="Citizen kept the plan focused and created one honest draft. No government filing or business registration was submitted."><LinkButton href="/activity" variant="inverse">View draft <ArrowRight aria-hidden className="size-4" /></LinkButton></CompletionCard>
+    <CompletionCard title="Your first registration draft is ready." body="Citizen kept the plan focused and created one honest draft. No government filing or business registration was submitted."><LinkButton href="/dashboard" variant="inverse">View draft <ArrowRight aria-hidden className="size-4" /></LinkButton></CompletionCard>
   ) : !plan ? (
     <StepCard eyebrow="Plain-language setup" title="What are you planning to start?" body="A useful plan needs the activity and city first. Entity, licences and schemes come after that."><div className="grid gap-4 sm:grid-cols-2"><label className="grid gap-2"><span className="flex items-center gap-2 text-xs font-bold text-ink"><Store aria-hidden className="size-4 text-action" />Business type</span><input className="h-13 rounded-[15px] border border-line bg-canvas px-4 text-sm outline-none focus:border-action focus:ring-4 focus:ring-action/10" maxLength={100} onChange={(event) => setBusinessType(event.target.value)} value={businessType} /></label><label className="grid gap-2"><span className="flex items-center gap-2 text-xs font-bold text-ink"><MapPin aria-hidden className="size-4 text-action" />City</span><input className="h-13 rounded-[15px] border border-line bg-canvas px-4 text-sm outline-none focus:border-action focus:ring-4 focus:ring-action/10" maxLength={80} onChange={(event) => setCity(event.target.value)} value={city} /></label></div><Button loading={loading} onClick={() => void generatePlan()}><WandSparkles aria-hidden className="size-4" />Generate action plan</Button></StepCard>
   ) : (
     <StepCard eyebrow={`${businessType} · ${city}`} title="A focused plan, in the right order" body={summary || "Start with the entity and registrations, then confirm local licences, schemes and finance."}><div className="flex items-center gap-2"><SimulatedChip authority="Citizen planning assistant" /></div><div className="grid gap-3 sm:grid-cols-2">{plan.map((item, index) => { const Icon = planIcons[item.kind]; return <article className="grid min-h-44 content-between gap-5 rounded-[17px] bg-surface-strong p-4" key={item.title}><div className="flex items-center justify-between"><Icon aria-hidden className="size-5 text-action" /><span className="font-display text-xs font-bold text-ink-faint">{String(index + 1).padStart(2, "0")}</span></div><div><strong className="block text-sm text-ink">{item.title}</strong><p className="mt-1 text-xs leading-5 text-ink-muted">{item.body}</p></div></article>; })}</div><div className="flex flex-col gap-2 sm:flex-row"><Button onClick={startRegistration}>Start first registration <ArrowRight aria-hidden className="size-4" /></Button><Button onClick={() => setPlan(null)} variant="secondary">Change plan</Button></div></StepCard>
   );
 
-  return <ProcedureShell authority="Citizen planning assistant" complete={complete} currentStep={currentStep} description="Turn a business idea into ordered registration, licence, scheme and finance actions without exposing departmental complexity." steps={steps} title="Start a business">{content}</ProcedureShell>;
+  return <ProcedureShell authority="Citizen planning assistant" complete={complete} currentStep={currentStep} description={t("startBusinessPromise")} steps={steps} title={t("startBusinessService")}>{content}</ProcedureShell>;
 }
