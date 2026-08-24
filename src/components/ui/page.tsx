@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
 export function Page({ children, className }: { children: ReactNode; className?: string }) {
-  return <div className={cn("page-enter mx-auto min-w-0 w-full max-w-[1180px] grid-cols-[minmax(0,1fr)] px-4 pb-28 pt-5 sm:px-6 lg:px-10 lg:pb-16 lg:pt-8", className)}>{children}</div>;
+  return <div className={cn("page-enter mx-auto min-w-0 w-full max-w-[1240px] grid-cols-[minmax(0,1fr)] px-5 pb-16 pt-5 sm:px-8 lg:px-10 lg:pb-20 lg:pt-8", className)}>{children}</div>;
 }
 
 export function PageHeader({
@@ -20,7 +20,7 @@ export function PageHeader({
     <header className="grid gap-5 border-b border-line pb-7 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
       <div className="grid gap-2">
         {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
-        <h1 className="font-display text-[2.35rem] font-semibold leading-[0.98] tracking-[-0.035em] text-ink sm:text-5xl">{title}</h1>
+        <h1 className="font-display text-[clamp(2.65rem,7vw,5.6rem)] font-semibold leading-[0.9] tracking-[-0.05em] text-ink">{title}</h1>
         {description ? <p className="max-w-2xl text-sm leading-6 text-ink-muted sm:text-base">{description}</p> : null}
       </div>
       {action}

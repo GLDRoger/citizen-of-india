@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --canvas: oklch(0.975 0.012 84);
-  --surface: oklch(0.991 0.006 84);
-  --surface-strong: oklch(0.94 0.015 84);
+  --canvas: oklch(0.966 0.016 86);
+  --surface: oklch(0.989 0.009 86);
+  --surface-strong: oklch(0.928 0.021 86);
   --ink: oklch(0.245 0.055 251);
   --ink-muted: oklch(0.49 0.035 250);
   --ink-faint: oklch(0.66 0.025 250);
@@ -165,11 +165,9 @@ summary::-webkit-details-marker {
 
 @keyframes page-enter {
   from {
-    opacity: 0;
     transform: translateY(6px);
   }
   to {
-    opacity: 1;
     transform: translateY(0);
   }
 }

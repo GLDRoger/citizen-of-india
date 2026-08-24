@@ -1,10 +1,8 @@
 import {
   Compass,
-  FileText,
+  Grid2X2,
   House,
-  Inbox,
-  ListChecks,
-  UserRound,
+  LayoutDashboard,
   type LucideIcon,
 } from "lucide-react";
 import type { MessageKey } from "@/i18n/messages";
@@ -17,9 +15,7 @@ export interface NavItem {
 
 export const navItems: NavItem[] = [
   { href: "/", label: "home", icon: House },
-  { href: "/you", label: "you", icon: UserRound },
-  { href: "/activity", label: "activity", icon: ListChecks },
-  { href: "/inbox", label: "inbox", icon: Inbox },
-  { href: "/documents", label: "documents", icon: FileText },
+  { href: "/services", label: "services", icon: Grid2X2 },
   { href: "/discover", label: "discover", icon: Compass },
+  { href: "/dashboard", label: "dashboard", icon: LayoutDashboard },
 ];
