@@ -5,6 +5,7 @@ import { ArrowRight, Mic, Send, Sparkles } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { SimulatedChip } from "@/components/ui/status";
+import { FilePanel } from "@/components/ui/file-panel";
 import { useAuthStore } from "@/features/auth/store";
 import { useCitizenStore } from "@/features/graph/store";
 import { useI18n } from "@/i18n/use-i18n";
@@ -54,37 +55,37 @@ export function IntentComposer() {
 
   return (
     <section className="grid min-w-0 gap-4">
-      <div className="grid gap-4 rounded-[24px] border border-line bg-surface p-4 shadow-[0_20px_70px_oklch(0.28_0.03_85/0.08)] sm:p-5">
+      <FilePanel className="grid gap-4 bg-paper" label={t("newRequest")}>
         <div className="flex justify-end"><SimulatedChip authority="Citizen intent assistant" /></div>
         <label>
           <span className="sr-only">{t("needPrompt")}</span>
-          <textarea className="min-h-24 w-full resize-none border-0 bg-transparent font-display text-[1.75rem] font-medium leading-[1.05] tracking-[-0.035em] text-ink outline-none placeholder:text-ink-faint sm:min-h-28 sm:text-[2.35rem]" maxLength={800} onChange={(event) => setText(event.target.value)} onKeyDown={(event) => { if ((event.metaKey || event.ctrlKey) && event.key === "Enter") void submit(); }} placeholder={t("intentPlaceholder")} value={text} />
+          <textarea className="min-h-20 w-full resize-none border border-ink/20 bg-paper p-4 font-display text-[1.75rem] font-medium leading-[1.05] text-ink outline-none placeholder:text-ink-mute sm:min-h-28 sm:text-[2.35rem]" maxLength={800} onChange={(event) => setText(event.target.value)} onKeyDown={(event) => { if ((event.metaKey || event.ctrlKey) && event.key === "Enter") void submit(); }} placeholder={t("intentPlaceholder")} value={text} />
         </label>
-        <div className="flex items-center justify-between gap-3 border-t border-line pt-3">
-          <button className="flex min-h-11 items-center gap-2 rounded-full px-2 text-xs font-bold text-ink-muted transition hover:bg-surface-strong hover:text-ink" onClick={mockVoice} type="button"><Mic aria-hidden className={cn("size-4", listening && "animate-pulse text-saffron")} />{listening ? t("listening") : t("voiceInput")}</button>
+        <div className="flex items-center justify-between gap-3 border-t border-paper-line pt-3">
+          <button className="flex min-h-11 items-center gap-2 rounded-[4px] px-2 text-xs font-bold text-ink-mute transition hover:bg-paper-line hover:text-ink" onClick={mockVoice} type="button"><Mic aria-hidden className={cn("size-4", listening && "animate-pulse text-brick")} />{listening ? t("listening") : t("voiceInput")}</button>
           <Button className="min-h-11 shrink-0 px-4" loading={loading} onClick={() => void submit()}>{t("send")} <Send aria-hidden className="size-4" /></Button>
         </div>
-      </div>
+      </FilePanel>
 
       <div className="flex w-full min-w-0 max-w-full gap-2 overflow-x-auto pb-1 [scrollbar-width:none] sm:flex-wrap sm:overflow-visible" aria-label={t("suggested")}>
         {suggestions[language].map((suggestion) => (
-          <button key={suggestion} className="min-h-10 shrink-0 rounded-full border border-line bg-surface px-4 text-xs font-bold text-ink-muted transition hover:border-action/40 hover:text-action-strong" onClick={() => void submit(suggestion)}>
+          <button key={suggestion} className="min-h-10 shrink-0 px-1 underline decoration-paper-line underline-offset-4 text-xs font-bold text-ink-mute transition hover:border-green-deep/40 hover:text-green-deep" onClick={() => void submit(suggestion)}>
             {suggestion}
           </button>
         ))}
       </div>
 
       {result ? (
-        <article className="page-enter grid gap-5 rounded-[22px] border border-action/25 bg-action-soft p-5 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end sm:p-6" ref={resultRef}>
+        <article className="page-enter grid gap-5 rounded-[8px] border border-green-deep/25 bg-green-tint p-5 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end sm:p-6" ref={resultRef}>
           <div className="grid gap-3">
-            <div className="flex flex-wrap items-center gap-2"><Sparkles aria-hidden className="size-4 text-action" /><p className="eyebrow">{result.title}</p><SimulatedChip authority={result.authority} /></div>
+            <div className="flex flex-wrap items-center gap-2"><Sparkles aria-hidden className="size-4 text-green-deep" /><p className="eyebrow">{result.title}</p><SimulatedChip authority={result.authority} /></div>
             <p className="max-w-2xl text-sm leading-6 text-ink sm:text-base">{result.reply}</p>
             <ol className="grid gap-1.5">
-              {result.steps.map((step, index) => <li className="flex gap-2 text-xs font-semibold text-ink-muted" key={step}><span className="text-action">{index + 1}.</span>{step}</li>)}
+              {result.steps.map((step, index) => <li className="flex gap-2 text-xs font-semibold text-ink-mute" key={step}><span className="text-green-deep">{index + 1}.</span>{step}</li>)}
             </ol>
             {result.clarification ? <p className="text-sm font-bold text-ink">{result.clarification}</p> : null}
           </div>
-          <Link className="inline-flex min-h-12 items-center justify-center gap-2 rounded-[14px] bg-action px-5 text-sm font-bold text-action-ink transition hover:bg-action-strong" href={`/workflows/${result.route}`}>
+          <Link className="inline-flex min-h-12 items-center justify-center gap-2 rounded-[8px] bg-green-deep px-5 text-sm font-bold text-paper transition hover:bg-green-deep" href={`/workflows/${result.route}`}>
             {result.route === "service-unavailable" ? t("view") : t("start")} <ArrowRight aria-hidden className="size-4" />
           </Link>
         </article>
