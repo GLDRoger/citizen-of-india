@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Citizen of India
 
-## Getting Started
+An independent, mobile-first product preview for handling life events, obligations, benefits, and public-service paperwork in plain language. Every person and record in the repository is fictional, and all authority integrations run in a clearly labelled simulated mode.
 
-First, run the development server:
+## Run locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000). Use any available sample profile:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Arjun Sharma: `9800000001`
+- Priya Patel: `9800000002`
+- Sunita Sharma: `9800000003`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Any six-digit access code succeeds. Every guided flow remains usable without an API key through deterministic local fallbacks.
 
-## Learn More
+To enable model-assisted intent routing, notice explanations, and scam checks, set:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+OPENAI_API_KEY=your_key
+OPENAI_MODEL=gpt-5.4-mini # optional
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Architecture
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Next.js App Router** for pages and three validated model proxy routes
+- **Zustand** for the persisted Citizen Graph and local profile-access state
+- **Zod** for seed, mutation, request, and model-response validation
+- **Tailwind CSS** for the mobile-first design system
+- **OpenAI Responses API** for bounded, structured assistance with deterministic fallbacks
 
-## Deploy on Vercel
+`src/data/seed.json` is the sole source of sample profile data. Components never mutate the graph directly: workflow procedures emit typed mutations through `src/features/graph/mutations.ts`, and selector functions derive every citizen-facing view from the graph.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Verification
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npx tsc --noEmit --incremental false
+npx eslint .
+npm run build
+```
+
+## Service boundaries
+
+This is an independent product preview, not a government service. It makes no live authority API calls, accepts no real identity or payment data, and uses no government logos. Every simulated response is identified in the interface. See `/about` for the complete service-status disclosure.
