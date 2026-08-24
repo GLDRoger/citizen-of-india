@@ -41,7 +41,6 @@ export function LoginScreen() {
     <main className="min-h-dvh bg-ink text-paper">
       <div className="mx-auto grid min-h-dvh max-w-[1280px] lg:grid-cols-[1.05fr_0.95fr]">
         <section className="relative flex min-h-[42vh] flex-col justify-between overflow-hidden border-b border-canvas/15 px-5 py-6 sm:px-10 sm:py-10 lg:min-h-dvh lg:border-b-0 lg:border-r">
-          <div aria-hidden className="absolute -right-24 top-20 size-72 rounded-[4px] border-[52px] border-saffron/80 opacity-90 sm:size-[430px]" />
           <div className="relative flex items-center justify-between gap-4">
             <p className="font-display text-xl font-semibold tracking-tight">{t("brand")}<span className="text-brick">.</span></p>
             <Link className="text-xs font-bold text-paper/70 underline-offset-4 hover:underline" href="/about">

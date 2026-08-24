@@ -38,7 +38,7 @@ export default function AboutPage() {
             <div className="flex items-center gap-3"><span className="grid size-10 place-items-center rounded-[4px] bg-green-tint text-green-deep"><Check aria-hidden className="size-5" /></span><h2 className="font-display text-3xl font-semibold">Available now</h2></div>
             <ul className="grid gap-4">{realItems.map((item) => <li className="flex gap-3 text-sm leading-6 text-ink-mute" key={item}><Check aria-hidden className="mt-1 size-4 shrink-0 text-green-deep" />{item}</li>)}</ul>
           </article>
-          <article className="grid content-start gap-6 border-t border-saffron pt-5">
+          <article className="grid content-start gap-6 border-t border-brick pt-5">
             <div className="flex items-center gap-3"><span className="grid size-10 place-items-center rounded-[4px] bg-brick-tint text-brick"><FlaskConical aria-hidden className="size-5" /></span><h2 className="font-display text-3xl font-semibold">Simulated in this preview</h2></div>
             <ul className="grid gap-4">{simulatedItems.map((item) => <li className="flex gap-3 text-sm leading-6 text-ink-mute" key={item}><X aria-hidden className="mt-1 size-4 shrink-0 text-brick" />{item}</li>)}</ul>
           </article>
