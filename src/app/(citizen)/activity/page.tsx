@@ -1,8 +1,5 @@
-import type { Metadata } from "next";
-import { ActivityScreen } from "@/features/activity/components/activity-screen";
-
-export const metadata: Metadata = { title: "Activity" };
+import { redirect } from "next/navigation";
 
 export default function ActivityPage() {
-  return <ActivityScreen />;
+  redirect("/dashboard");
 }

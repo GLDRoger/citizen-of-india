@@ -1,8 +1,5 @@
-import type { Metadata } from "next";
-import { InboxScreen } from "@/features/inbox/components/inbox-screen";
-
-export const metadata: Metadata = { title: "Inbox" };
+import { redirect } from "next/navigation";
 
 export default function InboxPage() {
-  return <InboxScreen />;
+  redirect("/dashboard");
 }
