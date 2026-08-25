@@ -3,6 +3,7 @@
 import { Check, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FilePanel } from "@/components/ui/file-panel";
+import { ContrastLine } from "@/components/ui/page";
 import { StatusPill } from "@/components/ui/status";
 import { getApplications, getEligibility } from "@/features/graph/selectors";
 import { useCitizenStore } from "@/features/graph/store";
@@ -36,9 +37,9 @@ export function FamilyBriefing({ onViewSunita }: { onViewSunita: () => void }) {
 
   return (
     <FilePanel className="grid gap-8 sm:p-8" label={t("familyBriefing")}>
-      <header className="grid gap-3"><h2 className="font-display text-4xl font-bold leading-none tracking-[-0.04em] text-ink">{t("familyBriefingTitle")}</h2><p className="max-w-2xl text-sm leading-6 text-ink-mute">{t("familyBriefingBody")}</p></header>
+      <header className="grid gap-3"><h2 className="font-display text-4xl font-bold leading-none tracking-[-0.04em] text-ink">{t("familyBriefingTitle")}</h2><p className="max-w-2xl text-sm leading-6 text-ink-mute">{t("familyBriefingBody")}</p><ContrastLine>{t("contrastDeathBriefing")}</ContrastLine></header>
       <section className="grid gap-4 sm:grid-cols-2">
-        <article className="grid content-start gap-4 rounded-[8px] border border-green-deep/25 bg-green-tint p-5"><StatusPill label={t("eligible")} tone="success" /><div><h3 className="font-display text-2xl font-bold text-ink">{t("familyPensionEligible")}</h3><p className="mt-1 text-sm font-bold text-green-deep">≈ {t("monthlyAmount", { amount: "₹4,100" })}</p></div>{familyPension ? <ReasonList reasons={familyPension.passedReasons} /> : null}</article>
+        <article className="grid content-start gap-4 rounded-[8px] border border-green-deep/25 bg-green-tint p-5"><StatusPill label={t("eligible")} tone="success" /><div><h3 className="font-display text-2xl font-bold text-ink">{t("familyPensionEligible")}</h3><p className="mt-1 text-sm font-bold text-green-deep">≈ {t("monthlyAmount", { amount: "₹4,100" })}</p></div><ContrastLine>{t("contrastFamilyPension")}</ContrastLine>{familyPension ? <ReasonList reasons={familyPension.passedReasons} /> : null}</article>
         <article className="grid content-start gap-4 rounded-[8px] border border-brick/20 bg-brick-tint p-5"><StatusPill label={t("missingEvidence")} tone="warning" /><div><h3 className="font-display text-2xl font-bold text-ink">{t("widowPensionBlocked")}</h3><p className="mt-1 text-xs leading-5 text-brick">{t("blockedByIncomeDeclaration")}</p></div>{widowPension ? <ReasonList reasons={widowPension.passedReasons} /> : null}</article>
       </section>
       <section id="family-briefing"><h3 className="eyebrow">{t("successionNextActions")}</h3><div className="mt-3 border-b border-paper-line"><SuccessionDetail authority={propertyAuthority} documents={t("propertyDocuments")} timeline={t("propertyTimeline")} title={t("propertySuccession")} /><SuccessionDetail authority={vehicleAuthority} documents={t("vehicleDocuments")} timeline={t("vehicleTimeline")} title={t("vehicleSuccession")} /></div></section>

@@ -51,3 +51,7 @@ export function SectionHeader({
 export function Rule({ className }: { className?: string }) {
   return <div aria-hidden className={cn("h-px bg-line", className)} />;
 }
+
+export function ContrastLine({ children, className }: { children: ReactNode; className?: string }) {
+  return <p className={cn("flex max-w-3xl items-start gap-3 text-xs leading-5 text-ink-mute", className)}><span aria-hidden className="mt-2.5 h-px w-7 shrink-0 bg-ink/25" /><span>{children}</span></p>;
+}

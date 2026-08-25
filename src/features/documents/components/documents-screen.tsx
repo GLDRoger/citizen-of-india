@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/feedback";
-import { Page, PageHeader } from "@/components/ui/page";
+import { ContrastLine, Page, PageHeader } from "@/components/ui/page";
 import { SimulatedChip, VerificationBadge } from "@/components/ui/status";
 import { useAuthStore } from "@/features/auth/store";
 import { getDocuments, getPerson } from "@/features/graph/selectors";
@@ -78,6 +78,7 @@ function DocumentCard({ document, personId }: { document: ReturnType<typeof getD
         {document.attrs.expiresOn ? <span>{t("expiry")} {formatDate(document.attrs.expiresOn, language)}</span> : null}
         {document.attrs.downloaded ? <span className="flex items-center gap-1.5 font-bold text-green-deep"><CheckCircle2 aria-hidden className="size-3.5" />{t("storedOnDevice")}</span> : null}
       </div>
+      {document.verification.state === "mismatch" ? <ContrastLine>{t("contrastPanMismatch")}</ContrastLine> : null}
       {document.verification.state === "mismatch" && person ? <div className="grid gap-2 border-y border-brick/25 bg-brick-tint px-3 py-3 text-xs leading-5 text-brick"><p className="flex gap-2"><AlertTriangle aria-hidden className="mt-0.5 size-3.5 shrink-0" />{t("panMismatchExplanation", { aadhaarName: person.attrs.name, panName: document.attrs.holderName })}</p><Link className="ml-5 font-bold underline underline-offset-4" href="/#task-app:pan-name-correction">{t("viewCorrectionDraft")}</Link></div> : null}
       {message ? <p className="flex items-center gap-2 text-xs font-bold text-green-deep"><CheckCircle2 aria-hidden className="size-4" />{message} <SimulatedChip authority="Protean eGov (PAN)" /></p> : null}
       {error ? <p className="rounded-xl bg-brick-tint p-3 text-xs font-bold text-brick" role="alert">{error}</p> : null}

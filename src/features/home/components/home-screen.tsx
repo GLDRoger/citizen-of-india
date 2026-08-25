@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { FilePanel, LedgerRow } from "@/components/ui/file-panel";
-import { Page } from "@/components/ui/page";
+import { ContrastLine, Page } from "@/components/ui/page";
 import { useAuthStore } from "@/features/auth/store";
 import {
   getDocuments,
@@ -92,6 +92,11 @@ export function HomeScreen() {
   const deadlineCount = obligations.filter((node) => Boolean(node.attrs.dueDate)).length;
   const unreadNotices = getNotices(graph, personId).filter((notice) => !notice.read).length;
   const money = getMoneySummary(graph, personId);
+  const moneyAuthorityIds = ["obl:gstr3b-sep", "obl:bbmp-property-tax", "obl:echallan-500", "obl:itr-refund"];
+  const moneyAuthorities = moneyAuthorityIds
+    .map((id) => obligations.find((obligation) => obligation.id === id)?.attrs.authority)
+    .filter((authority): authority is string => Boolean(authority))
+    .join(" · ");
 
   return (
     <Page className="grid gap-16 lg:gap-24">
@@ -99,11 +104,12 @@ export function HomeScreen() {
         <p className="text-sm text-ink-mute">{t(greetingKey())}, {profile.person.attrs.name.split(" ")[0]}</p>
         <h1 className="max-w-5xl font-display text-[clamp(4rem,11vw,8.4rem)] font-extrabold leading-[0.78] tracking-[-0.05em] text-ink">{t("needPrompt")}</h1>
         <IntentComposer />
+        <ContrastLine className="max-w-2xl">{t("contrastHome")}</ContrastLine>
       </section>
       <FilePanel label={t("money")}><LedgerRow action={<Link className="text-xs underline" href="#money-actions">{t("view")}</Link>} label={t("due")} value={formatCurrency(money.payable)} /><LedgerRow action={<Link className="text-xs underline" href="/workflows/refund-track">{t("trackRefund")}</Link>} label={t("comingToYou")} value={formatCurrency(money.receivable)} /></FilePanel>
       <FilePanel label={t("mySnapshot")}><div className="grid grid-cols-2 gap-x-6 sm:grid-cols-3"><SummaryLedgerItem label={t("deadlines")} value={deadlineCount} /><SummaryLedgerItem label={t("expiry")} value={expiringDocuments.length} /><SummaryLedgerItem label={t("pendingApplications")} value={applications.length} /></div></FilePanel>
       <section className="grid gap-6" id="money">
-        <div className="grid gap-2"><p className="eyebrow">{unreadNotices} {t("unreadNotices").toLowerCase()}</p><h2 className="max-w-4xl font-display text-[clamp(2.5rem,7vw,5.4rem)] font-semibold leading-[0.9] tracking-[-0.05em] text-ink">{t("dashboardHeadline")}</h2><p className="max-w-2xl text-sm leading-6 text-ink-mute sm:text-base">{t("dashboardBody")}</p></div>
+        <div className="grid gap-2"><p className="eyebrow">{unreadNotices} {t("unreadNotices").toLowerCase()}</p><h2 className="max-w-4xl font-display text-[clamp(2.5rem,7vw,5.4rem)] font-semibold leading-[0.9] tracking-[-0.05em] text-ink">{t("dashboardHeadline")}</h2><p className="max-w-2xl text-sm leading-6 text-ink-mute sm:text-base">{t("dashboardBody")}</p>{moneyAuthorities ? <ContrastLine>{t("contrastMoneyAuthorities", { authorities: moneyAuthorities })}</ContrastLine> : null}</div>
         <div id="money-actions"><FilePanel label={t("thingsToDo")}>{tasks.length ? tasks.map((task, index) => <TaskLedgerRow application={applicationsById.get(task.id)} index={index} key={task.id} obligation={obligationsById.get(task.id)} task={task} />) : <p className="border-y border-paper-line py-7 text-sm text-ink-mute">{t("nothingWaiting")}</p>}</FilePanel></div>
         <HomeRecords personId={personId} />
       </section>

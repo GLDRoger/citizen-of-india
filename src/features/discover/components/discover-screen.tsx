@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { LinkButton } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/feedback";
-import { Page, PageHeader } from "@/components/ui/page";
+import { ContrastLine, Page, PageHeader } from "@/components/ui/page";
 import { SimulatedChip, StatusPill } from "@/components/ui/status";
 import { useAuthStore } from "@/features/auth/store";
 import { getEligibility, type EligibilityResult } from "@/features/graph/selectors";
@@ -78,6 +78,7 @@ function EligibilityCard({ result, personId }: { result: EligibilityResult; pers
       <div className="grid gap-5">
         <div className="flex flex-wrap items-center justify-between gap-3"><StatusPill label={statusLabel} tone={tone(result.status)} /><SimulatedChip authority={result.benefit.attrs.authority} /></div>
         <div className="grid gap-2"><p className="eyebrow">{result.benefit.attrs.authority}</p><h2 className="font-display text-2xl font-semibold leading-tight tracking-[-0.025em] text-ink">{localizeNodeTitle(language, result.benefit.id, result.benefit.attrs.name)}</h2><p className="text-sm font-bold text-green-deep">{result.benefit.attrs.valuePerYear}</p></div>
+        {result.benefit.id === "ben:eps-family-pension" ? <ContrastLine>{t("contrastFamilyPension")}</ContrastLine> : null}
         {result.passedReasons.length ? <ul className="grid gap-2">{result.passedReasons.slice(0, 3).map((reason) => <li className="flex gap-2 text-xs leading-5 text-ink-mute" key={reason}><Check aria-hidden className="mt-0.5 size-3.5 shrink-0 text-green-deep" />{localizeRuleExplanation(language, reason)}</li>)}</ul> : null}
         {result.failedReasons.length ? <ul className="grid gap-2">{result.failedReasons.slice(0, 2).map((reason) => <li className="flex gap-2 text-xs leading-5 text-ink-mute" key={reason}><CircleHelp aria-hidden className="mt-0.5 size-3.5 shrink-0 text-ink-mute" />{localizeRuleExplanation(language, reason)}</li>)}</ul> : null}
         {result.missingEvidence.length ? <div className="grid gap-2 rounded-[8px] bg-brick-tint p-3"><p className="flex items-center gap-2 text-xs font-bold text-brick"><FileWarning aria-hidden className="size-3.5" />{t("missingEvidence")}</p>{result.missingEvidence.map((evidence) => <span className="text-xs text-brick" key={evidence}>{localizeEvidence(language, evidence)}</span>)}</div> : null}
