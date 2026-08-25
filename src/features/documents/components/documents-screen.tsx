@@ -11,12 +11,14 @@ import { getDocuments, getPerson } from "@/features/graph/selectors";
 import type { GraphMutation } from "@/features/graph/schema";
 import { useCitizenStore } from "@/features/graph/store";
 import { useI18n } from "@/i18n/use-i18n";
+import { getDocumentKindMessageKey } from "@/i18n/formatters";
 import { cn } from "@/lib/cn";
 import { formatDate, maskIdentifier } from "@/lib/format";
 import { submitPanCorrection } from "@/lib/mockGov";
 
 function DocumentCard({ document, personId }: { document: ReturnType<typeof getDocuments>[number]; personId: string }) {
   const { t } = useI18n();
+  const kindKey = getDocumentKindMessageKey(document.attrs.kind);
   const commit = useCitizenStore((state) => state.commit);
   const graph = useCitizenStore((state) => state.graph);
   const person = getPerson(graph, personId);
@@ -28,7 +30,8 @@ function DocumentCard({ document, personId }: { document: ReturnType<typeof getD
     if (document.attrs.downloaded) return;
     commit({
       actorId: personId,
-      label: `${document.attrs.kind} saved to this device`,
+      labelKey: "eventDocumentSaved",
+      labelParams: { documentKind: document.attrs.kind },
       mutations: [{ type: "patchAttrs", nodeId: document.id, attrs: { downloaded: true } }],
     });
   };
@@ -53,7 +56,7 @@ function DocumentCard({ document, personId }: { document: ReturnType<typeof getD
           verification: { source: "NSDL", state: "verified", asOf: "2026-08-24" },
         },
       ];
-      commit({ actorId: personId, label: "PAN name mismatch resolved", procedureId: "pan-reconciliation", mutations });
+      commit({ actorId: personId, labelKey: "eventPanMismatchResolved", procedureId: "pan-reconciliation", mutations });
       setMessage(`${response.data.acknowledgement} · ${response.data.status}`);
     } catch {
       setError("The simulated correction service did not respond. The PAN record was not changed.");
@@ -69,7 +72,7 @@ function DocumentCard({ document, personId }: { document: ReturnType<typeof getD
         <VerificationBadge verification={document.verification} />
       </div>
       <div className="grid gap-1">
-        <p className="eyebrow">{document.attrs.kind.replaceAll("-", " ")}</p>
+        <p className="eyebrow">{kindKey ? t(kindKey) : document.attrs.kind.replaceAll("-", " ")}</p>
         <h2 className="font-display text-2xl font-semibold leading-tight text-ink">{document.attrs.holderName}</h2>
         {document.attrs.numberMasked ? <p className="text-sm font-bold tracking-wide text-ink-mute">{maskIdentifier(document.attrs.numberMasked)}</p> : null}
       </div>

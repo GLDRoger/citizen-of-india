@@ -50,7 +50,7 @@ export function ObligationsWorkflow() {
         { type: "addNode", node: { id: "doc:arjun-echallan-receipt", type: "document", attrs: { kind: "payment-receipt", holderName: "Arjun Sharma", numberMasked: maskIdentifier(response.data.receipt), issuedOn: "2026-08-24", authority: response.authority, downloaded: true }, verification: { source: "RTO", state: "verified", asOf: "2026-08-24" } } },
         { type: "addEdge", edge: { id: "e:arjun-holds-echallan-receipt", type: "holds", from: personId, to: "doc:arjun-echallan-receipt", attrs: {}, validFrom: "2026-08-24", status: "active", verification: { source: "RTO", state: "verified", asOf: "2026-08-24" } } },
       ];
-      commit({ actorId: personId, label: "Traffic e-challan paid", procedureId: "echallan-payment", mutations });
+      commit({ actorId: personId, labelKey: "eventChallanPaid", procedureId: "echallan-payment", mutations });
     } catch {
       setError("The simulated payment did not respond. The challan is still unpaid.");
     } finally {

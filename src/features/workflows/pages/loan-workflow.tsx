@@ -11,6 +11,8 @@ import { useCitizenStore } from "@/features/graph/store";
 import { explainResponseSchema } from "@/features/inbox/schema";
 import type { Language } from "@/i18n/messages";
 import { useI18n } from "@/i18n/use-i18n";
+import { localizeRuleExplanation } from "@/i18n/content";
+import { localizeEvidence } from "@/i18n/formatters";
 import { formatCurrency, formatEvidence } from "@/lib/format";
 import { CompletionCard, ProcedureShell, StepCard, type ProcedureStep } from "../components/procedure-shell";
 
@@ -72,7 +74,7 @@ export function LoanWorkflow() {
       { type: "addNode", node: { id: applicationId, type: "application", attrs: { title: selectedOption.name, authority: selectedOption.authority, status: "draft", createdOn: "2026-08-24", relatedTo: business.id, kind: "business-loan", participants: [personId], currentStep: 0, note: `Selected ${selectedOption.name}.` }, verification: { source: "Self", state: "self-declared", asOf: "2026-08-24" } } },
       { type: "addEdge", edge: { id: "e:arjun-subject-business-loan-application", type: "subjectOf", from: personId, to: applicationId, attrs: {}, validFrom: "2026-08-24", status: "active", verification: { source: "Self", state: "self-declared", asOf: "2026-08-24" } } },
     ];
-    commit({ actorId: personId, label: `${selectedOption.name} application started`, procedureId: "business-loan", mutations });
+    commit({ actorId: personId, labelKey: "eventLoanApplicationStarted", labelParams: { option: selectedOption.name }, procedureId: "business-loan", mutations });
   };
 
   if (!business || !mudra) {
@@ -92,8 +94,8 @@ export function LoanWorkflow() {
       <section className="grid gap-4"><h2 className="font-display text-3xl font-semibold tracking-[-0.035em] text-ink">{steps[1].title}</h2><div className="grid gap-4 md:grid-cols-2">{loanOptions.map((option) => <button aria-pressed={selected === option.id} className={`grid min-h-60 content-between gap-8 rounded-[8px] border p-5 text-left transition-colors ${selected === option.id ? "border-green-deep bg-green-tint" : "border-paper-line bg-paper-shade hover:border-green-deep/35"}`} key={option.id} onClick={() => { setSelected(option.id); setRisk(""); }}><div className="flex items-start justify-between gap-3"><Landmark aria-hidden className="size-5 text-green-deep" /><StatusPill label={option.rate} tone={selected === option.id ? "info" : "neutral"} /></div><div className="grid gap-2"><strong className="font-display text-2xl font-semibold leading-tight text-ink">{option.name}</strong><span className="text-sm font-bold text-green-deep">{option.amount} · {option.term}</span><p className="text-xs leading-5 text-ink-mute">{option.note}</p></div></button>)}</div></section>
 
       <section className="grid gap-4 md:grid-cols-3">
-        <article className="grid content-start gap-4 rounded-[8px] border border-paper-line bg-paper-shade p-5"><ShieldCheck aria-hidden className="size-5 text-green-deep" /><h3 className="font-display text-2xl font-semibold text-ink">{t("whyThisFits")}</h3><div className="grid gap-2">{mudra.passedReasons.slice(0, 3).map((reason) => <p className="flex gap-2 text-xs leading-5 text-ink-mute" key={reason}><Check aria-hidden className="mt-0.5 size-3.5 shrink-0 text-green-deep" />{reason}</p>)}</div></article>
-        <article className="grid content-start gap-4 rounded-[8px] border border-paper-line bg-paper-shade p-5"><FileWarning aria-hidden className="size-5 text-brick" /><h3 className="font-display text-2xl font-semibold text-ink">{t("risks")}</h3><div className="grid gap-2">{mudra.missingEvidence.map((evidence) => <p className="flex gap-2 text-xs leading-5 text-ink-mute" key={evidence}><CircleHelp aria-hidden className="mt-0.5 size-3.5 shrink-0 text-brick" />{formatEvidence(evidence)}</p>)}{payable > 0 ? <p className="text-xs leading-5 text-ink-mute">{t("due")}: {formatCurrency(payable)}</p> : null}</div></article>
+        <article className="grid content-start gap-4 rounded-[8px] border border-paper-line bg-paper-shade p-5"><ShieldCheck aria-hidden className="size-5 text-green-deep" /><h3 className="font-display text-2xl font-semibold text-ink">{t("whyThisFits")}</h3><div className="grid gap-2">{mudra.passedReasons.slice(0, 3).map((reason) => <p className="flex gap-2 text-xs leading-5 text-ink-mute" key={reason}><Check aria-hidden className="mt-0.5 size-3.5 shrink-0 text-green-deep" />{localizeRuleExplanation(language, reason)}</p>)}</div></article>
+        <article className="grid content-start gap-4 rounded-[8px] border border-paper-line bg-paper-shade p-5"><FileWarning aria-hidden className="size-5 text-brick" /><h3 className="font-display text-2xl font-semibold text-ink">{t("risks")}</h3><div className="grid gap-2">{mudra.missingEvidence.map((evidence) => <p className="flex gap-2 text-xs leading-5 text-ink-mute" key={evidence}><CircleHelp aria-hidden className="mt-0.5 size-3.5 shrink-0 text-brick" />{localizeEvidence(language, evidence)}</p>)}{payable > 0 ? <p className="text-xs leading-5 text-ink-mute">{t("due")}: {formatCurrency(payable)}</p> : null}</div></article>
         <article className="grid content-start gap-4 rounded-[8px] border border-paper-line bg-paper-shade p-5"><Scale aria-hidden className="size-5 text-green-deep" /><h3 className="font-display text-2xl font-semibold text-ink">{t("nextAction")}</h3><p className="text-xs leading-5 text-ink-mute">{risk || selectedOption.note}</p><div className="grid gap-2"><Button loading={loading} onClick={() => void explainRisk()} variant="secondary">{t("explainMyRisk")}</Button>{risk ? <Button onClick={startApplication}>{t("start")}</Button> : null}</div></article>
       </section>
     </div>

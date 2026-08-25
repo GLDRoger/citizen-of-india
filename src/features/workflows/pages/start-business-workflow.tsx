@@ -74,7 +74,7 @@ export function StartBusinessWorkflow() {
       { type: "addNode", node: { id: applicationId, type: "application", attrs: { title: `Start ${businessType} in ${city}`, authority: "Citizen action plan", status: "draft", createdOn: "2026-08-24", kind: "business-registration", participants: [personId], currentStep: 0, note: "Local draft for the first registration action." }, verification: { source: "Self", state: "self-declared", asOf: "2026-08-24" } } },
       { type: "addEdge", edge: { id: `e:${personId.slice(7)}-subject-new-business-draft`, type: "subjectOf", from: personId, to: applicationId, attrs: {}, validFrom: "2026-08-24", status: "active", verification: { source: "Self", state: "self-declared", asOf: "2026-08-24" } } },
     ];
-    commit({ actorId: personId, label: "New business registration plan started", procedureId: "start-business", mutations });
+    commit({ actorId: personId, labelKey: "eventBusinessPlanStarted", procedureId: "start-business", mutations });
   };
 
   const content = complete ? (

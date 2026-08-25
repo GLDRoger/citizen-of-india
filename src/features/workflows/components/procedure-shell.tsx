@@ -59,7 +59,8 @@ export function ParticipantStrip({ left, right }: { left: Participant; right: Pa
 }
 
 export function StepCard({ eyebrow, title, body, children }: { eyebrow?: string; title: string; body: string; children?: ReactNode }) {
-  return <FilePanel className="grid gap-6 sm:p-8" label={eyebrow ?? "Current step"}><div className="grid gap-3"><h2 className="font-display text-3xl font-semibold leading-tight tracking-[-0.035em] text-ink sm:text-4xl">{title}</h2><p className="max-w-2xl text-sm leading-6 text-ink-mute">{body}</p></div>{children}</FilePanel>;
+  const { t } = useI18n();
+  return <FilePanel className="grid gap-6 sm:p-8" label={eyebrow ?? t("currentStepLabel")}><div className="grid gap-3"><h2 className="font-display text-3xl font-semibold leading-tight tracking-[-0.035em] text-ink sm:text-4xl">{title}</h2><p className="max-w-2xl text-sm leading-6 text-ink-mute">{body}</p></div>{children}</FilePanel>;
 }
 
 export function CompletionCard({ title, body, children }: { title: string; body: string; children?: ReactNode }) {

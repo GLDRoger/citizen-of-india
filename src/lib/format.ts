@@ -1,22 +1,23 @@
+import type { Language } from "@/i18n/messages";
+
 const currencyFormatter = new Intl.NumberFormat("en-IN", {
   style: "currency",
   currency: "INR",
   maximumFractionDigits: 0,
 });
 
-const dateFormatter = new Intl.DateTimeFormat("en-IN", {
-  day: "numeric",
-  month: "short",
-  year: "numeric",
-  timeZone: "Asia/Kolkata",
-});
+const dateFormatters: Record<Language, Intl.DateTimeFormat> = {
+  en: new Intl.DateTimeFormat("en-IN", { day: "numeric", month: "short", year: "numeric", timeZone: "Asia/Kolkata" }),
+  hi: new Intl.DateTimeFormat("hi-IN", { day: "numeric", month: "short", year: "numeric", timeZone: "Asia/Kolkata" }),
+  kn: new Intl.DateTimeFormat("kn-IN", { day: "numeric", month: "short", year: "numeric", timeZone: "Asia/Kolkata" }),
+};
 
 export function formatCurrency(value: number) {
   return currencyFormatter.format(value);
 }
 
-export function formatDate(value: string) {
-  return dateFormatter.format(new Date(`${value.slice(0, 10)}T00:00:00+05:30`));
+export function formatDate(value: string, language: Language = "en") {
+  return dateFormatters[language].format(new Date(`${value.slice(0, 10)}T00:00:00+05:30`));
 }
 
 export function getInitials(name: string) {

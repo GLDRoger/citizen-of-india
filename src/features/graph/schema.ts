@@ -347,7 +347,9 @@ export interface GraphEvent {
   id: string;
   actorId: string;
   occurredAt: string;
-  label: string;
+  label?: string;
+  labelKey?: string;
+  labelParams?: Record<string, string | number>;
   procedureId?: string;
   mutations: GraphMutation[];
 }
@@ -362,10 +364,12 @@ const graphEventRuntimeSchema = z.object({
   id: z.string().startsWith("evt:"),
   actorId: z.string().startsWith("person:"),
   occurredAt: z.iso.datetime({ offset: true }),
-  label: z.string().min(1).max(300),
+  label: z.string().min(1).max(300).optional(),
+  labelKey: z.string().min(1).max(120).optional(),
+  labelParams: z.record(z.string().max(80), z.union([z.string().max(300), z.number()])).optional(),
   procedureId: z.string().max(120).optional(),
   mutations: z.array(graphMutationRuntimeSchema).min(1).max(100),
-});
+}).refine((event) => Boolean(event.label || event.labelKey), { message: "Event requires a label or label key." });
 
 export const citizenGraphSchema = z.object({
   nodes: z.array(graphNodeSchema),

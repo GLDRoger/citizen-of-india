@@ -11,6 +11,7 @@ import type { GraphMutation, Verification } from "@/features/graph/schema";
 import { useCitizenStore } from "@/features/graph/store";
 import type { Language } from "@/i18n/messages";
 import { useI18n } from "@/i18n/use-i18n";
+import { getDocumentKindMessageKey } from "@/i18n/formatters";
 import { formatDate, maskIdentifier } from "@/lib/format";
 import { bookAppointment, processPayment, submitMarriageRegistration } from "@/lib/mockGov";
 import { CompletionCard, ParticipantStrip, ProcedureShell, StepCard, type ProcedureStep } from "../components/procedure-shell";
@@ -79,17 +80,17 @@ export function MarriageWorkflow() {
       { type: "addEdge", edge: { id: "e:arjun-subject-marriage-app", type: "subjectOf", from: arjun.id, to: "app:marriage-arjun-priya", attrs: {}, validFrom: "2026-08-24", status: "active", verification: verification() } },
       { type: "addEdge", edge: { id: "e:priya-subject-marriage-app", type: "subjectOf", from: priya.id, to: "app:marriage-arjun-priya", attrs: {}, validFrom: "2026-08-24", status: "active", verification: verification() } },
     ];
-    commit({ actorId: personId, label: "Priya invited to a shared marriage application", procedureId: "marriage-arjun-priya", mutations });
+    commit({ actorId: personId, labelKey: "eventMarriageInviteSent", procedureId: "marriage-arjun-priya", mutations });
   };
 
   const consent = () => {
     if (personId !== priya.id) return;
-    commit({ actorId: personId, label: "Priya consented to the marriage registration", procedureId: "marriage-arjun-priya", mutations: [{ type: "patchAttrs", nodeId: "app:marriage-arjun-priya", attrs: { status: "documents-ready", currentStep: 2 } }] });
+    commit({ actorId: personId, labelKey: "eventMarriageConsentReceived", procedureId: "marriage-arjun-priya", mutations: [{ type: "patchAttrs", nodeId: "app:marriage-arjun-priya", attrs: { status: "documents-ready", currentStep: 2 } }] });
   };
 
   const reuseDocuments = () => {
     if (selectedWitnesses.length === 0) return;
-    commit({ actorId: personId, label: "Verified identity documents and witnesses added to marriage", procedureId: "marriage-arjun-priya", mutations: [{ type: "patchAttrs", nodeId: "app:marriage-arjun-priya", attrs: { currentStep: 3, witnesses: selectedWitnesses } }] });
+    commit({ actorId: personId, labelKey: "eventMarriageDocumentsAdded", procedureId: "marriage-arjun-priya", mutations: [{ type: "patchAttrs", nodeId: "app:marriage-arjun-priya", attrs: { currentStep: 3, witnesses: selectedWitnesses } }] });
   };
 
   const appointment = () => run(async () => {
@@ -97,7 +98,7 @@ export function MarriageWorkflow() {
       bookAppointment({ procedureId: "marriage-arjun-priya", city: "Bengaluru" }),
       processPayment({ purpose: "Marriage registration fee", amount: 500, payerId: personId }),
     ]);
-    commit({ actorId: personId, label: "Marriage appointment booked and fee paid", procedureId: "marriage-arjun-priya", mutations: [{ type: "patchAttrs", nodeId: "app:marriage-arjun-priya", attrs: { currentStep: 4, status: "appointment-booked", appointmentOn: booking.data.scheduledFor, amountPaid: payment.data.amount, reference: booking.data.appointmentId } }] });
+    commit({ actorId: personId, labelKey: "eventMarriageAppointmentBooked", procedureId: "marriage-arjun-priya", mutations: [{ type: "patchAttrs", nodeId: "app:marriage-arjun-priya", attrs: { currentStep: 4, status: "appointment-booked", appointmentOn: booking.data.scheduledFor, amountPaid: payment.data.amount, reference: booking.data.appointmentId } }] });
   });
 
   const register = () => run(async () => {
@@ -112,7 +113,7 @@ export function MarriageWorkflow() {
       { type: "patchAttrs", nodeId: priya.id, attrs: { maritalStatus: "married" } },
       { type: "patchAttrs", nodeId: "app:marriage-arjun-priya", attrs: { currentStep: 5, status: "completed", submittedOn: "2026-09-03", reference: response.data.applicationReference }, verification: verification("Municipal") },
     ];
-    commit({ actorId: personId, label: "Marriage registered and spouse relationship added", procedureId: "marriage-arjun-priya", mutations });
+    commit({ actorId: personId, labelKey: "eventMarriageRegistered", procedureId: "marriage-arjun-priya", mutations });
   });
 
   const switchTo = (nextPersonId: string) => {
@@ -144,7 +145,7 @@ export function MarriageWorkflow() {
   ) : currentStep === 1 ? (
     <StepCard eyebrow="Consent required" title={personId === priya.id ? "Priya, do you consent?" : "Waiting for Priya"} body="The invitation names Arjun, the purpose, documents requested and the exact graph change that will happen after registration."><div className="grid gap-2 rounded-[8px] bg-green-tint p-4 text-xs text-ink-mute"><span className="flex gap-2"><Check aria-hidden className="size-4 text-green-deep" />Identity verification</span><span className="flex gap-2"><Check aria-hidden className="size-4 text-green-deep" />Reuse of verified identity documents only</span><span className="flex gap-2"><Check aria-hidden className="size-4 text-green-deep" />New spouse relationship after submission</span></div>{personId === priya.id ? <Button onClick={consent}><UserRoundCheck aria-hidden className="size-4" />I consent</Button> : <Button onClick={() => switchTo(priya.id)} variant="secondary"><UsersRound aria-hidden className="size-4" />Switch to Priya’s login</Button>}</StepCard>
   ) : currentStep === 2 ? (
-    <StepCard eyebrow="Verified records only" title="Reuse documents and choose witnesses" body={`Citizen found ${reusedDocumentCount} verified identity records already held by the couple. Records needing attention are left out. Choose at least one verified family witness.`}><div className="grid gap-4 sm:grid-cols-2">{[{ name: "Arjun", docs: arjunDocs }, { name: "Priya", docs: priyaDocs }].map((group) => <div className="grid gap-2 rounded-[8px] bg-paper-line p-4" key={group.name}><strong className="text-sm">{group.name}</strong>{group.docs.map((document) => <span className="flex items-center justify-between gap-2 text-xs capitalize text-ink-mute" key={document.id}><span className="flex items-center gap-2"><FileStack aria-hidden className="size-3.5" />{document.attrs.kind}</span><VerificationBadge verification={document.verification} /></span>)}</div>)}</div><div className="grid gap-2"><p className="text-xs font-bold text-ink">Witnesses</p><div className="grid gap-2 sm:grid-cols-2">{witnessCandidates.map((witness) => { const selected = selectedWitnesses.includes(witness.id); return <button aria-pressed={selected} className={`flex min-h-14 items-center justify-between rounded-[8px] border px-4 text-left text-sm font-bold transition ${selected ? "border-green-deep bg-green-tint text-green-deep" : "border-paper-line bg-paper-shade"}`} key={witness.id} onClick={() => toggleWitness(witness.id)}><span>{witness.attrs.name}</span>{selected ? <Check aria-hidden className="size-4" /> : null}</button>; })}</div></div><Button disabled={selectedWitnesses.length === 0} onClick={reuseDocuments}>Use documents and witnesses <ArrowRight aria-hidden className="size-4" /></Button></StepCard>
+    <StepCard eyebrow="Verified records only" title="Reuse documents and choose witnesses" body={`Citizen found ${reusedDocumentCount} verified identity records already held by the couple. Records needing attention are left out. Choose at least one verified family witness.`}><div className="grid gap-4 sm:grid-cols-2">{[{ name: "Arjun", docs: arjunDocs }, { name: "Priya", docs: priyaDocs }].map((group) => <div className="grid gap-2 rounded-[8px] bg-paper-line p-4" key={group.name}><strong className="text-sm">{group.name}</strong>{group.docs.map((document) => { const kindKey = getDocumentKindMessageKey(document.attrs.kind); return <span className="flex items-center justify-between gap-2 text-xs text-ink-mute" key={document.id}><span className="flex items-center gap-2"><FileStack aria-hidden className="size-3.5" />{kindKey ? t(kindKey) : document.attrs.kind}</span><VerificationBadge verification={document.verification} /></span>; })}</div>)}</div><div className="grid gap-2"><p className="text-xs font-bold text-ink">Witnesses</p><div className="grid gap-2 sm:grid-cols-2">{witnessCandidates.map((witness) => { const selected = selectedWitnesses.includes(witness.id); return <button aria-pressed={selected} className={`flex min-h-14 items-center justify-between rounded-[8px] border px-4 text-left text-sm font-bold transition ${selected ? "border-green-deep bg-green-tint text-green-deep" : "border-paper-line bg-paper-shade"}`} key={witness.id} onClick={() => toggleWitness(witness.id)}><span>{witness.attrs.name}</span>{selected ? <Check aria-hidden className="size-4" /> : null}</button>; })}</div></div><Button disabled={selectedWitnesses.length === 0} onClick={reuseDocuments}>Use documents and witnesses <ArrowRight aria-hidden className="size-4" /></Button></StepCard>
   ) : currentStep === 3 ? (
     <StepCard eyebrow="Jayanagar, Bengaluru" title="Book the appointment and pay ₹500" body={`${application?.attrs.witnesses?.length ?? 0} witness record(s) are attached. The appointment and payment responses are simulated and deterministic.`}><div className="grid gap-3 sm:grid-cols-2"><div className="rounded-[8px] bg-paper-line p-4"><CalendarCheck aria-hidden className="mb-4 size-5 text-green-deep" /><strong className="block text-sm">3 Sep 2026 · 11:30 AM</strong><span className="text-xs text-ink-mute">Sub-Registrar, Jayanagar</span></div><div className="rounded-[8px] bg-paper-line p-4"><IndianRupee aria-hidden className="mb-4 size-5 text-green-deep" /><strong className="block text-sm">₹500 registration fee</strong><span className="text-xs text-ink-mute">Karnataka One · simulated</span></div></div><Button loading={loading} onClick={() => void appointment()}>Book and pay <ArrowRight aria-hidden className="size-4" /></Button></StepCard>
   ) : (

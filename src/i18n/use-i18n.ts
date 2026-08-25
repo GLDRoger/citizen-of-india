@@ -7,6 +7,6 @@ export function useI18n() {
   const language = useAuthStore((state) => state.language);
   return {
     language,
-    t: (key: MessageKey) => getMessage(language, key),
+    t: (key: MessageKey, params?: Record<string, string | number>) => getMessage(language, key, params),
   };
 }

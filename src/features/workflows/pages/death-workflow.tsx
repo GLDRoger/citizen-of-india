@@ -11,7 +11,7 @@ import type { GraphMutation, Verification } from "@/features/graph/schema";
 import { useCitizenStore } from "@/features/graph/store";
 import type { Language } from "@/i18n/messages";
 import { useI18n } from "@/i18n/use-i18n";
-import { formatCurrency, getInitials, maskIdentifier } from "@/lib/format";
+import { formatCurrency, formatDate, getInitials, maskIdentifier } from "@/lib/format";
 import { issueDeathCertificate, registerDeath, requestFamilyConsent, submitClaim } from "@/lib/mockGov";
 import { CompletionCard, ProcedureShell, StepCard, type ProcedureStep } from "../components/procedure-shell";
 
@@ -72,7 +72,7 @@ export function DeathWorkflow() {
     try {
       await action();
     } catch {
-      setError("The simulated service did not respond. Your records were not changed.");
+      setError(t("deathServiceError"));
     } finally {
       setLoading(false);
     }
@@ -91,7 +91,7 @@ export function DeathWorkflow() {
       },
       { type: "addEdge", edge: { id: `e:${personId.slice(7)}-subject-death-rajesh`, type: "subjectOf", from: personId, to: "app:death-rajesh", attrs: {}, validFrom: "2026-08-24", status: "active", verification: sourceVerification() } },
     ];
-    commit({ actorId: personId, label: "Rajesh confirmed for death registration", procedureId: "death-rajesh", mutations });
+    commit({ actorId: personId, labelKey: "eventRajeshConfirmed", procedureId: "death-rajesh", mutations });
   };
 
   const register = () => run(async () => {
@@ -102,7 +102,7 @@ export function DeathWorkflow() {
       { type: "endEdge", edgeId: "e:rajesh-spouseof-sunita", validTo: "2026-08-24" },
       { type: "patchAttrs", nodeId: "app:death-rajesh", attrs: { currentStep: 2, reference: response.data.registrationId, status: "processing" }, verification: sourceVerification("Municipal") },
     ];
-    commit({ actorId: personId, label: "Death registered with simulated BBMP service", procedureId: "death-rajesh", mutations });
+    commit({ actorId: personId, labelKey: "eventDeathRegistered", procedureId: "death-rajesh", mutations });
   });
 
   const issueCertificate = () => run(async () => {
@@ -113,7 +113,7 @@ export function DeathWorkflow() {
       { type: "addEdge", edge: { id: "e:sunita-holds-rajesh-death-certificate", type: "holds", from: "person:sunita", to: "doc:rajesh-death-certificate", attrs: {}, validFrom: "2026-08-24", status: "active", verification: sourceVerification("Municipal") } },
       { type: "patchAttrs", nodeId: "app:death-rajesh", attrs: { currentStep: 3 } },
     ];
-    commit({ actorId: personId, label: "Death certificate issued and saved", procedureId: "death-rajesh", mutations });
+    commit({ actorId: personId, labelKey: "eventDeathCertificateSaved", procedureId: "death-rajesh", mutations });
   });
 
   const startClaims = () => run(async () => {
@@ -128,7 +128,7 @@ export function DeathWorkflow() {
       { type: "addEdge", edge: { id: "e:sunita-subject-epf-claim-app", type: "subjectOf", from: sunita.id, to: "app:sunita-epf-nominee-claim", attrs: {}, validFrom: "2026-08-24", status: "active", verification: sourceVerification("EPFO") } },
       { type: "patchAttrs", nodeId: "app:death-rajesh", attrs: { currentStep: 4 } },
     ];
-    commit({ actorId: personId, label: "Family pension and EPF nominee claims submitted", procedureId: "death-rajesh", mutations: applications });
+    commit({ actorId: personId, labelKey: "eventDeathClaimsSubmitted", procedureId: "death-rajesh", mutations: applications });
   });
 
   const collectHeirConsent = () => run(async () => {
@@ -140,7 +140,7 @@ export function DeathWorkflow() {
     ];
     const mutations: GraphMutation[] = heirs.map((heir) => ({ type: "addEdge", edge: { id: `e:${heir.label}-legalheir-rajesh`, type: "legalHeirOf", from: heir.id, to: rajesh.id, attrs: { share: heir.share, consent: "granted" }, validFrom: "2026-08-24", status: "active", verification: sourceVerification() } }));
     mutations.push({ type: "patchAttrs", nodeId: "app:death-rajesh", attrs: { currentStep: 5 } });
-    commit({ actorId: personId, label: "Legal-heir consent received from all three heirs", procedureId: "death-rajesh", mutations });
+    commit({ actorId: personId, labelKey: "eventHeirConsentReceived", procedureId: "death-rajesh", mutations });
   });
 
   const assets = getOwnedAssets(graph, rajesh.id);
@@ -155,7 +155,7 @@ export function DeathWorkflow() {
         { type: "addEdge", edge: { id: `e:arjun-subject-${assetKey}-succession`, type: "subjectOf", from: "person:arjun", to: `app:rajesh-${assetKey}-succession`, attrs: {}, validFrom: "2026-08-24", status: "active", verification: sourceVerification() } },
       ];
     });
-    commit({ actorId: personId, label: "Death and family-actions journey completed", procedureId: "death-rajesh", mutations: [...downstreamMutations, { type: "patchAttrs", nodeId: "app:death-rajesh", attrs: { currentStep: 6, status: "completed" }, verification: sourceVerification("Municipal") }] });
+    commit({ actorId: personId, labelKey: "eventDeathJourneyCompleted", procedureId: "death-rajesh", mutations: [...downstreamMutations, { type: "patchAttrs", nodeId: "app:death-rajesh", attrs: { currentStep: 6, status: "completed" }, verification: sourceVerification("Municipal") }] });
   };
 
   const openSunitaEligibility = () => {
@@ -163,23 +163,23 @@ export function DeathWorkflow() {
     router.push("/discover");
   };
 
-  const relationshipTitle = personId === "person:sunita" ? "Is this your husband?" : personId === "person:arjun" ? "Is this your father?" : "Is this your family member?";
-  const relationshipBody = personId === "person:sunita" ? "Citizen found one verified spouse relationship." : "Citizen found a verified family relationship.";
+  const relationshipTitle = personId === "person:sunita" ? t("deathRelationshipHusband") : personId === "person:arjun" ? t("deathRelationshipFather") : t("deathRelationshipFamily");
+  const relationshipBody = personId === "person:sunita" ? t("deathSpouseFound") : t("deathFamilyFound");
   const content = complete ? (
-    <CompletionCard title="The family record is up to date." body="The certificate is reusable, pension and nominee claims are submitted, legal-heir consent is recorded, and property and vehicle transfer drafts remain visible."><div className="flex flex-wrap gap-2"><Button onClick={openSunitaEligibility} variant="inverse">See Sunita’s eligibility <ArrowRight aria-hidden className="size-4" /></Button><LinkButton href="/dashboard" variant="secondary">View audit trail</LinkButton></div></CompletionCard>
+    <CompletionCard title={t("deathCompleteTitle")} body={t("deathCompleteBody")}><div className="flex flex-wrap gap-2"><Button onClick={openSunitaEligibility} variant="inverse">{t("deathSeeSunitaEligibility")} <ArrowRight aria-hidden className="size-4" /></Button><LinkButton href="/" variant="secondary">{t("deathViewAuditTrail")}</LinkButton></div></CompletionCard>
   ) : currentStep === 0 ? (
-    <StepCard eyebrow="Verified family records" title={relationshipTitle} body={`${relationshipBody} Confirm the connected record before anything changes.`}><div className="grid gap-4 rounded-[8px] bg-paper-line p-4 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:items-center"><span className="grid size-12 place-items-center rounded-[50%] border border-paper-line bg-paper-shade font-display text-sm font-bold text-ink">{getInitials(rajesh.attrs.name)}</span><div><strong className="block text-ink">{rajesh.attrs.name}</strong><span className="text-xs text-ink-mute">EPS pensioner · Bengaluru</span></div><VerificationBadge verification={rajesh.verification} /></div><Button onClick={identify}>Confirm Rajesh <ArrowRight aria-hidden className="size-4" /></Button></StepCard>
+    <StepCard eyebrow={t("deathVerifiedFamilyRecords")} title={relationshipTitle} body={`${relationshipBody} ${t("deathConfirmBeforeChange")}`}><div className="grid gap-4 rounded-[8px] bg-paper-line p-4 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:items-center"><span className="grid size-12 place-items-center rounded-[50%] border border-paper-line bg-paper-shade font-display text-sm font-bold text-ink">{getInitials(rajesh.attrs.name)}</span><div><strong className="block text-ink">{rajesh.attrs.name}</strong><span className="text-xs text-ink-mute">{t("deathPensionerLocation")}</span></div><VerificationBadge verification={rajesh.verification} /></div><Button onClick={identify}>{t("deathConfirmRajesh")} <ArrowRight aria-hidden className="size-4" /></Button></StepCard>
   ) : currentStep === 1 ? (
-    <StepCard eyebrow="BBMP Births & Deaths" title="Review the registration" body="The form is prefilled from Rajesh’s verified identity and family records. This creates a simulated registration only."><div className="grid gap-3 rounded-[8px] bg-paper-line p-4 text-sm"><span className="flex justify-between gap-3"><span className="text-ink-mute">Name</span><strong>{rajesh.attrs.name}</strong></span><span className="flex justify-between gap-3"><span className="text-ink-mute">Date</span><strong>24 Aug 2026</strong></span><span className="flex justify-between gap-3"><span className="text-ink-mute">Reporter</span><strong>{getPerson(graph, personId)?.attrs.name}</strong></span></div><Button loading={loading} onClick={() => void register()}>Register death <ArrowRight aria-hidden className="size-4" /></Button></StepCard>
+    <StepCard eyebrow={t("deathRegistryAuthority")} title={t("deathReviewRegistration")} body={t("deathReviewRegistrationBody")}><div className="grid gap-3 rounded-[8px] bg-paper-line p-4 text-sm"><span className="flex justify-between gap-3"><span className="text-ink-mute">{t("fieldName")}</span><strong>{rajesh.attrs.name}</strong></span><span className="flex justify-between gap-3"><span className="text-ink-mute">{t("fieldDate")}</span><strong>{formatDate("2026-08-24", language)}</strong></span><span className="flex justify-between gap-3"><span className="text-ink-mute">{t("fieldReporter")}</span><strong>{getPerson(graph, personId)?.attrs.name}</strong></span></div><Button loading={loading} onClick={() => void register()}>{t("deathRegisterAction")} <ArrowRight aria-hidden className="size-4" /></Button></StepCard>
   ) : currentStep === 2 ? (
-    <StepCard eyebrow={application?.attrs.reference} title="Create one reusable certificate" body="The certificate will be stored in Arjun’s document wallet and reused for pension, nominee and widow-pension checks."><div className="flex items-center gap-4 rounded-[8px] bg-green-tint p-4"><FileCheck2 aria-hidden className="size-7 text-green-deep" /><div><strong className="block text-ink">Death certificate</strong><span className="text-xs text-ink-mute">Verified by simulated BBMP response</span></div></div><Button loading={loading} onClick={() => void issueCertificate()}>Issue certificate <ArrowRight aria-hidden className="size-4" /></Button></StepCard>
+    <StepCard eyebrow={application?.attrs.reference} title={t("deathCertificateTitle")} body={t("deathCertificateBody")}><div className="flex items-center gap-4 rounded-[8px] bg-green-tint p-4"><FileCheck2 aria-hidden className="size-7 text-green-deep" /><div><strong className="block text-ink">{t("documentDeathCertificate")}</strong><span className="text-xs text-ink-mute">{t("deathCertificateVerified")}</span></div></div><Button loading={loading} onClick={() => void issueCertificate()}>{t("deathIssueCertificate")} <ArrowRight aria-hidden className="size-4" /></Button></StepCard>
   ) : currentStep === 3 ? (
-    <StepCard eyebrow="EPFO" title="Start Sunita’s pension and nominee claims" body="Rajesh’s EPS pension is ended. The same certificate now supports family pension and the ₹6.1 lakh EPF nominee claim."><div className="grid gap-3 sm:grid-cols-2"><div className="rounded-[8px] bg-paper-line p-4"><Landmark aria-hidden className="mb-5 size-5 text-green-deep" /><strong className="block text-sm">Family pension</strong><span className="text-xs text-ink-mute">≈ ₹4,100/month</span></div><div className="rounded-[8px] bg-paper-line p-4"><HeartHandshake aria-hidden className="mb-5 size-5 text-green-deep" /><strong className="block text-sm">EPF nominee claim</strong><span className="text-xs text-ink-mute">{formatCurrency(rajesh.attrs.epf?.balance ?? 0)}</span></div></div><Button loading={loading} onClick={() => void startClaims()}>Submit both claims <ArrowRight aria-hidden className="size-4" /></Button></StepCard>
+    <StepCard eyebrow="EPFO" title={t("deathClaimsTitle")} body={t("deathClaimsBody")}><div className="grid gap-3 sm:grid-cols-2"><div className="rounded-[8px] bg-paper-line p-4"><Landmark aria-hidden className="mb-5 size-5 text-green-deep" /><strong className="block text-sm">{t("deathFamilyPension")}</strong><span className="text-xs text-ink-mute">≈ {t("monthlyAmount", { amount: "₹4,100" })}</span></div><div className="rounded-[8px] bg-paper-line p-4"><HeartHandshake aria-hidden className="mb-5 size-5 text-green-deep" /><strong className="block text-sm">{t("deathEpfClaim")}</strong><span className="text-xs text-ink-mute">{formatCurrency(rajesh.attrs.epf?.balance ?? 0)}</span></div></div><Button loading={loading} onClick={() => void startClaims()}>{t("deathSubmitClaims")} <ArrowRight aria-hidden className="size-4" /></Button></StepCard>
   ) : currentStep === 4 ? (
-    <StepCard eyebrow="Shared family workflow" title="Collect legal-heir consent" body="Sunita and Arjun are ready. Kavita’s consent arrives asynchronously from Delhi through a simulated relay."><div className="grid gap-2">{["Sunita Sharma", "Arjun Sharma", "Kavita Verma · waiting"].map((name, index) => <div className="flex items-center justify-between rounded-[8px] bg-paper-line px-4 py-3 text-sm" key={name}><span>{name}</span><span className={index < 2 ? "text-green-deep" : "text-brick"}>{index < 2 ? "Ready" : "Pending"}</span></div>)}</div><Button loading={loading} onClick={() => void collectHeirConsent()}><ShieldCheck aria-hidden className="size-4" />Request Kavita’s consent</Button></StepCard>
+    <StepCard eyebrow={t("deathSharedWorkflow")} title={t("deathConsentTitle")} body={t("deathConsentBody")}><div className="grid gap-2">{["Sunita Sharma", "Arjun Sharma", "Kavita Verma"].map((name, index) => <div className="flex items-center justify-between rounded-[8px] bg-paper-line px-4 py-3 text-sm" key={name}><span>{name}</span><span className={index < 2 ? "text-green-deep" : "text-brick"}>{index < 2 ? t("ready") : t("pending")}</span></div>)}</div><Button loading={loading} onClick={() => void collectHeirConsent()}><ShieldCheck aria-hidden className="size-4" />{t("deathRequestConsent")}</Button></StepCard>
   ) : (
-    <StepCard eyebrow="Keep these visible" title="Create the property and vehicle next actions" body="Citizen will not transfer ownership automatically. It creates narrow drafts so the family can complete each succession process separately."><div className="grid gap-3 sm:grid-cols-2">{assets.map((asset) => <div className="flex items-center gap-3 rounded-[8px] bg-paper-line p-4" key={asset.id}>{asset.type === "property" ? <Building2 aria-hidden className="size-5 text-brick" /> : <CarFront aria-hidden className="size-5 text-green-deep" />}<div className="min-w-0"><strong className="block truncate text-sm capitalize">{asset.type === "property" ? asset.attrs.kind : asset.type === "vehicle" ? `${asset.attrs.make} ${asset.attrs.model}` : "Record"}</strong><span className="text-xs text-ink-mute">Succession draft will be created</span></div></div>)}</div><Button onClick={finish}>Create drafts and finish <ArrowRight aria-hidden className="size-4" /></Button></StepCard>
+    <StepCard eyebrow={t("deathKeepVisible")} title={t("deathDownstreamTitle")} body={t("deathDownstreamBody")}><div className="grid gap-3 sm:grid-cols-2">{assets.map((asset) => <div className="flex items-center gap-3 rounded-[8px] bg-paper-line p-4" key={asset.id}>{asset.type === "property" ? <Building2 aria-hidden className="size-5 text-brick" /> : <CarFront aria-hidden className="size-5 text-green-deep" />}<div className="min-w-0"><strong className="block truncate text-sm">{asset.type === "property" ? asset.attrs.authority : asset.type === "vehicle" ? `${asset.attrs.make} ${asset.attrs.model}` : "—"}</strong><span className="text-xs text-ink-mute">{t("deathSuccessionDraft")}</span></div></div>)}</div><Button onClick={finish}>{t("deathCreateDrafts")} <ArrowRight aria-hidden className="size-4" /></Button></StepCard>
   );
 
-  return <ProcedureShell authority="BBMP + EPFO + Citizen consent relay" complete={complete} currentStep={currentStep} description={t("deathWorkflowBody")} steps={steps} title={t("deathWorkflowTitle")}>{error ? <p className="mb-3 rounded-xl bg-brick-tint p-3 text-sm font-semibold text-brick" role="alert">{error}</p> : null}{content}</ProcedureShell>;
+  return <ProcedureShell authority={t("deathAuthority")} complete={complete} currentStep={currentStep} description={t("deathWorkflowBody")} steps={steps} title={t("deathWorkflowTitle")}>{error ? <p className="mb-3 rounded-xl bg-brick-tint p-3 text-sm font-semibold text-brick" role="alert">{error}</p> : null}{content}</ProcedureShell>;
 }

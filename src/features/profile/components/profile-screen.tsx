@@ -14,6 +14,7 @@ import {
 import type { GraphMutation } from "@/features/graph/schema";
 import { useCitizenStore } from "@/features/graph/store";
 import { useI18n } from "@/i18n/use-i18n";
+import { getStatusMessageKey } from "@/i18n/formatters";
 import { formatCurrency, formatDate, maskIdentifier } from "@/lib/format";
 
 function AssetRow({ asset }: { asset: ReturnType<typeof getOwnedAssets>[number] }) {
@@ -71,7 +72,7 @@ function DelegationPanel({ personId }: { personId: string }) {
         },
       },
     ];
-    commit({ actorId: personId, label: "Paperwork delegated to Arjun", procedureId: "delegation", mutations });
+    commit({ actorId: personId, labelKey: "eventPaperworkDelegated", procedureId: "delegation", mutations });
   };
 
   const revoke = () => {
@@ -80,12 +81,12 @@ function DelegationPanel({ personId }: { personId: string }) {
       { type: "patchAttrs", nodeId: delegation.id, attrs: { status: "revoked" } },
       { type: "endEdge", edgeId: "e:arjun-delegateof-sunita", validTo: "2026-08-24" },
     ];
-    commit({ actorId: personId, label: "Paperwork delegation revoked", procedureId: "delegation", mutations });
+    commit({ actorId: personId, labelKey: "eventPaperworkRevoked", procedureId: "delegation", mutations });
   };
 
   return (
     <section className="grid gap-5 rounded-[8px] bg-ink p-6 text-paper">
-      <div className="flex items-start justify-between gap-4"><span className="grid size-11 place-items-center rounded-[4px] bg-paper/10 text-brick"><KeyRound aria-hidden className="size-5" /></span>{delegation ? <StatusPill label={delegation.attrs.status} tone={delegation.attrs.status === "active" ? "success" : "neutral"} /> : null}</div>
+      <div className="flex items-start justify-between gap-4"><span className="grid size-11 place-items-center rounded-[4px] bg-paper/10 text-brick"><KeyRound aria-hidden className="size-5" /></span>{delegation ? <StatusPill label={t(getStatusMessageKey(delegation.attrs.status) ?? "pending")} tone={delegation.attrs.status === "active" ? "success" : "neutral"} /> : null}</div>
       <div className="grid gap-2"><p className="text-[0.68rem] font-bold uppercase tracking-[0.15em] text-paper/50">{t("delegation")}</p><h2 className="font-display text-3xl font-semibold leading-none">{delegation?.attrs.title ?? t("delegatePaperwork")}</h2><p className="text-xs leading-5 text-paper/65">{delegation ? `${delegation.attrs.scopes.join(" + ")} · expires ${formatDate(delegation.attrs.expiresOn)}` : "Choose a narrow scope, a 90-day expiry, and revoke access at any time."}</p></div>
       {canCreate ? <Button className="bg-paper text-ink hover:bg-brick" onClick={createDelegation}>{t("delegatePaperwork")}</Button> : delegation?.attrs.status === "active" && personId === "person:sunita" ? <Button className="border border-canvas/20 text-paper hover:bg-paper/10" onClick={revoke} variant="quiet">{t("revoke")}</Button> : null}
     </section>

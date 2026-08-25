@@ -17,28 +17,39 @@ import {
 import { useCitizenStore } from "@/features/graph/store";
 import { IntentComposer } from "@/features/intent/components/intent-composer";
 import { useI18n } from "@/i18n/use-i18n";
+import { localizeNodeTitle } from "@/i18n/content";
+import { getStatusMessageKey } from "@/i18n/formatters";
 import { daysUntil, formatCurrency } from "@/lib/format";
 import { HomeRecords } from "./home-records";
 
 type Obligation = ReturnType<typeof getObligations>[number];
+type Application = ReturnType<typeof getApplications>[number];
 
 function greetingKey() {
   const hour = new Date().getHours();
   return hour < 12 ? "goodMorning" as const : hour < 17 ? "goodAfternoon" as const : "goodEvening" as const;
 }
 
-function TaskLedgerRow({ index, obligation, task }: { index: number; obligation?: Obligation; task: TaskView }) {
-  const { t } = useI18n();
-  const value = obligation?.attrs.status?.replaceAll("-", " ") ?? task.meta;
+function TaskLedgerRow({ application, index, obligation, task }: { application?: Application; index: number; obligation?: Obligation; task: TaskView }) {
+  const { language, t } = useI18n();
+  const status = obligation?.attrs.status ?? application?.attrs.status;
+  const statusKey = status ? getStatusMessageKey(status) : undefined;
+  const localizedStatus = statusKey ? t(statusKey) : status;
+  const value = obligation?.attrs.dueDate
+    ? t("daysLeft", { count: daysUntil(obligation.attrs.dueDate) })
+    : application && localizedStatus
+      ? t("statusPrefix", { status: localizedStatus })
+      : localizedStatus ?? task.meta;
+  const title = localizeNodeTitle(language, task.id, task.title);
 
   return (
     <div className="grid min-h-16 grid-cols-[minmax(0,3fr)_minmax(0,2fr)] items-center gap-4 border-b border-paper-line py-3 last:border-b-0">
       <div className="min-w-0">
-        <span className="block text-sm font-medium leading-5 text-ink">{String(index + 1).padStart(2, "0")} · {task.title}</span>
+        <span className="block text-sm font-medium leading-5 text-ink">{String(index + 1).padStart(2, "0")} · {title}</span>
         {obligation ? <span className="mt-1 block text-xs leading-4 text-ink-mute">{obligation.attrs.authority}</span> : null}
       </div>
       <div className="min-w-0 text-right">
-        <strong className="block font-display text-sm font-bold capitalize leading-5 tabular-nums text-ink">{value}</strong>
+        <strong className="block font-display text-sm font-bold leading-5 tabular-nums text-ink">{value}</strong>
         <Link className="mt-1 inline-block text-xs underline" href={task.href}>{t("view")}</Link>
       </div>
     </div>
@@ -68,6 +79,7 @@ export function HomeScreen() {
   const obligationsById = new Map(obligations.map((obligation) => [obligation.id, obligation]));
   const documents = getDocuments(graph, personId);
   const applications = getApplications(graph, personId).filter((node) => node.attrs.status !== "completed");
+  const applicationsById = new Map(applications.map((application) => [application.id, application]));
   const expiringDocuments = documents.filter((document) => document.attrs.expiresOn && daysUntil(document.attrs.expiresOn) >= 0 && daysUntil(document.attrs.expiresOn) <= 180);
   const deadlineCount = obligations.filter((node) => Boolean(node.attrs.dueDate)).length;
   const unreadNotices = getNotices(graph, personId).filter((notice) => !notice.read).length;
@@ -83,7 +95,7 @@ export function HomeScreen() {
       <FilePanel label={t("mySnapshot")}><div className="grid grid-cols-2 gap-x-6 lg:grid-cols-4"><SummaryLedgerItem label={t("deadlines")} value={deadlineCount} /><SummaryLedgerItem label={t("expiry")} value={expiringDocuments.length} /><SummaryLedgerItem label={t("pendingApplications")} value={applications.length} /><SummaryLedgerItem label={t("due")} value={formatCurrency(money.payable)} /></div></FilePanel>
       <section className="grid gap-6" id="attention">
         <div className="grid gap-2"><p className="eyebrow">{unreadNotices} {t("unreadNotices").toLowerCase()}</p><h2 className="max-w-4xl font-display text-[clamp(2.5rem,7vw,5.4rem)] font-semibold leading-[0.9] tracking-[-0.05em] text-ink">{t("dashboardHeadline")}</h2><p className="max-w-2xl text-sm leading-6 text-ink-mute sm:text-base">{t("dashboardBody")}</p></div>
-        <FilePanel label={t("thingsToDo")}>{tasks.map((task, index) => <TaskLedgerRow index={index} key={task.id} obligation={obligationsById.get(task.id)} task={task} />)}</FilePanel>
+        <FilePanel label={t("thingsToDo")}>{tasks.map((task, index) => <TaskLedgerRow application={applicationsById.get(task.id)} index={index} key={task.id} obligation={obligationsById.get(task.id)} task={task} />)}</FilePanel>
         <HomeRecords personId={personId} />
       </section>
     </Page>

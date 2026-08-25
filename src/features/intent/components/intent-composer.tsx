@@ -56,7 +56,7 @@ export function IntentComposer() {
   return (
     <section className="grid min-w-0 gap-4">
       <FilePanel className="grid gap-4 bg-paper" label={t("newRequest")}>
-        <div className="flex justify-end"><SimulatedChip authority="Citizen intent assistant" /></div>
+        <div className="flex justify-end"><SimulatedChip authority={t("intentAssistant")} /></div>
         <label>
           <span className="sr-only">{t("needPrompt")}</span>
           <textarea className="min-h-32 w-full resize-none border border-ink/20 bg-paper p-4 font-display text-[1.75rem] font-medium leading-[1.05] text-ink outline-none placeholder:text-ink-mute focus:border-l-2 focus:border-l-green-deep sm:min-h-32 sm:text-[2.35rem]" maxLength={800} onChange={(event) => setText(event.target.value)} onKeyDown={(event) => { if ((event.metaKey || event.ctrlKey) && event.key === "Enter") void submit(); }} placeholder={t("intentPlaceholder")} value={text} />

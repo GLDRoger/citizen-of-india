@@ -5,12 +5,14 @@ import { createJSONStorage, persist } from "zustand/middleware";
 import { applyTransaction, createGraphEvent } from "./mutations";
 import { createSeedGraph } from "./seed";
 import { citizenGraphSchema, type CitizenGraph, type GraphMutation } from "./schema";
+import type { MessageKey } from "@/i18n/messages";
 
 const persistedGraphSchema = citizenGraphSchema.transform((graph) => ({ graph }));
 
 interface CommitInput {
   actorId: string;
-  label: string;
+  labelKey: MessageKey;
+  labelParams?: Record<string, string | number>;
   mutations: GraphMutation[];
   procedureId?: string;
 }

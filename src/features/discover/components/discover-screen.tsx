@@ -10,7 +10,8 @@ import { getEligibility, type EligibilityResult } from "@/features/graph/selecto
 import type { GraphMutation } from "@/features/graph/schema";
 import { useCitizenStore } from "@/features/graph/store";
 import { useI18n } from "@/i18n/use-i18n";
-import { formatEvidence } from "@/lib/format";
+import { localizeNodeTitle, localizeRuleExplanation } from "@/i18n/content";
+import { localizeEvidence } from "@/i18n/formatters";
 
 function tone(status: EligibilityResult["status"]) {
   if (status === "eligible") return "success" as const;
@@ -19,7 +20,7 @@ function tone(status: EligibilityResult["status"]) {
 }
 
 function EligibilityCard({ result, personId }: { result: EligibilityResult; personId: string }) {
-  const { t } = useI18n();
+  const { language, t } = useI18n();
   const graph = useCitizenStore((state) => state.graph);
   const commit = useCitizenStore((state) => state.commit);
   const appId = `app:${result.benefit.id.slice(4)}:${personId.slice(7)}`;
@@ -65,17 +66,17 @@ function EligibilityCard({ result, personId }: { result: EligibilityResult; pers
         },
       },
     ];
-    commit({ actorId: personId, label: `Started ${result.benefit.attrs.name} application`, mutations });
+    commit({ actorId: personId, labelKey: "eventBenefitApplicationStarted", labelParams: { benefitId: result.benefit.id }, mutations });
   };
 
   return (
     <article className="grid min-h-[330px] content-between gap-7 rounded-[8px] border border-paper-line bg-paper-shade p-5 sm:p-6">
       <div className="grid gap-5">
         <div className="flex flex-wrap items-center justify-between gap-3"><StatusPill label={statusLabel} tone={tone(result.status)} /><SimulatedChip authority={result.benefit.attrs.authority} /></div>
-        <div className="grid gap-2"><p className="eyebrow">{result.benefit.attrs.authority}</p><h2 className="font-display text-2xl font-semibold leading-tight tracking-[-0.025em] text-ink">{result.benefit.attrs.name}</h2><p className="text-sm font-bold text-green-deep">{result.benefit.attrs.valuePerYear}</p></div>
-        {result.passedReasons.length ? <ul className="grid gap-2">{result.passedReasons.slice(0, 3).map((reason) => <li className="flex gap-2 text-xs leading-5 text-ink-mute" key={reason}><Check aria-hidden className="mt-0.5 size-3.5 shrink-0 text-green-deep" />{reason}</li>)}</ul> : null}
-        {result.failedReasons.length ? <ul className="grid gap-2">{result.failedReasons.slice(0, 2).map((reason) => <li className="flex gap-2 text-xs leading-5 text-ink-mute" key={reason}><CircleHelp aria-hidden className="mt-0.5 size-3.5 shrink-0 text-ink-mute" />{reason}</li>)}</ul> : null}
-        {result.missingEvidence.length ? <div className="grid gap-2 rounded-[8px] bg-brick-tint p-3"><p className="flex items-center gap-2 text-xs font-bold text-brick"><FileWarning aria-hidden className="size-3.5" />{t("missingEvidence")}</p>{result.missingEvidence.map((evidence) => <span className="text-xs text-brick" key={evidence}>{formatEvidence(evidence)}</span>)}</div> : null}
+        <div className="grid gap-2"><p className="eyebrow">{result.benefit.attrs.authority}</p><h2 className="font-display text-2xl font-semibold leading-tight tracking-[-0.025em] text-ink">{localizeNodeTitle(language, result.benefit.id, result.benefit.attrs.name)}</h2><p className="text-sm font-bold text-green-deep">{result.benefit.attrs.valuePerYear}</p></div>
+        {result.passedReasons.length ? <ul className="grid gap-2">{result.passedReasons.slice(0, 3).map((reason) => <li className="flex gap-2 text-xs leading-5 text-ink-mute" key={reason}><Check aria-hidden className="mt-0.5 size-3.5 shrink-0 text-green-deep" />{localizeRuleExplanation(language, reason)}</li>)}</ul> : null}
+        {result.failedReasons.length ? <ul className="grid gap-2">{result.failedReasons.slice(0, 2).map((reason) => <li className="flex gap-2 text-xs leading-5 text-ink-mute" key={reason}><CircleHelp aria-hidden className="mt-0.5 size-3.5 shrink-0 text-ink-mute" />{localizeRuleExplanation(language, reason)}</li>)}</ul> : null}
+        {result.missingEvidence.length ? <div className="grid gap-2 rounded-[8px] bg-brick-tint p-3"><p className="flex items-center gap-2 text-xs font-bold text-brick"><FileWarning aria-hidden className="size-3.5" />{t("missingEvidence")}</p>{result.missingEvidence.map((evidence) => <span className="text-xs text-brick" key={evidence}>{localizeEvidence(language, evidence)}</span>)}</div> : null}
       </div>
       <Button disabled={Boolean(existing) || result.status === "not-eligible"} onClick={apply} variant={result.status === "eligible" ? "primary" : "secondary"}>
         {existing ? t("pending") : t("apply")} <MoveRight aria-hidden className="size-4" />

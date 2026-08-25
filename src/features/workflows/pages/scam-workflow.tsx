@@ -10,6 +10,7 @@ import type { GraphMutation } from "@/features/graph/schema";
 import { useCitizenStore } from "@/features/graph/store";
 import type { Language } from "@/i18n/messages";
 import { useI18n } from "@/i18n/use-i18n";
+import { getConfidenceMessageKey, getScamVerdictMessageKey } from "@/i18n/formatters";
 import { submitCybercrimeReport } from "@/lib/mockGov";
 import { analyzeScamLocally } from "../lib/scam-fallback";
 import { scamCheckResponseSchema, type ScamCheckResponse } from "../lib/scam-schema";
@@ -40,6 +41,8 @@ export function ScamWorkflow() {
     .find((node) => node.id === reportId);
   const complete = Boolean(report);
   const currentStep = complete ? 3 : analysis ? 2 : 0;
+  const verdictKey = analysis ? getScamVerdictMessageKey(analysis.verdict) : undefined;
+  const confidenceKey = analysis ? getConfidenceMessageKey(analysis.confidence) : undefined;
 
   const analyze = async () => {
     const trimmed = message.trim();
@@ -75,7 +78,7 @@ export function ScamWorkflow() {
         { type: "addNode", node: { id: reportId, type: "application", attrs: { title: "Cybercrime report: suspicious message", authority: response.authority, status: "draft", createdOn: "2026-08-24", relatedTo: seededMessage === message ? "ntc:scam-pan" : undefined, kind: "cybercrime", participants: [personId], reference: response.data.acknowledgement, note: "Draft only. Nothing was submitted to a real portal." }, verification: { source: "Self", state: "self-declared", asOf: "2026-08-24" } } },
         { type: "addEdge", edge: { id: `e:${personId.slice(7)}-subject-cybercrime-draft`, type: "subjectOf", from: personId, to: reportId, attrs: {}, validFrom: "2026-08-24", status: "active", verification: { source: "Self", state: "self-declared", asOf: "2026-08-24" } } },
       ];
-      commit({ actorId: personId, label: "Cybercrime report draft created", procedureId: "scam-check", mutations });
+      commit({ actorId: personId, labelKey: "eventCybercrimeDraftCreated", procedureId: "scam-check", mutations });
     } catch {
       setError("The simulated report service did not respond. No draft was created.");
     } finally {
@@ -88,7 +91,7 @@ export function ScamWorkflow() {
   ) : !analysis ? (
     <StepCard eyebrow="Paste without clicking" title="Check a suspicious message" body="Citizen compares the sender, links, pressure tactics, and interactions already shown in your inbox."><label className="grid gap-2"><span className="text-xs font-bold text-ink">Message text</span><textarea className="min-h-40 resize-y rounded-[8px] border border-paper-line bg-paper p-4 text-sm leading-6 text-ink outline-none focus:border-green-deep focus:ring-4 focus:ring-green-deep/10" maxLength={2000} onChange={(event) => setMessage(event.target.value)} value={message} /></label><p className="flex gap-2 text-xs text-ink-mute"><Link2Off aria-hidden className="size-4 shrink-0 text-brick" />Citizen never opens a pasted link during this check.</p><Button disabled={message.trim().length < 5} loading={loading} onClick={() => void analyze()}><MessageSquareWarning aria-hidden className="size-4" />Analyze message</Button></StepCard>
   ) : (
-    <StepCard eyebrow="Safety result" title={analysis.summary} body="This automated check uses the message text and the interactions already shown in your inbox. Verify through an official channel before acting."><div className="flex flex-wrap items-center gap-2"><StatusPill label={analysis.verdict.replaceAll("-", " ")} tone={analysis.verdict === "suspicious" ? "warning" : "info"} /><StatusPill label={`${analysis.confidence} confidence`} tone="neutral" /><SimulatedChip authority={analysis.authority} /></div><div className="grid gap-2">{analysis.signals.map((signal) => <p className="flex gap-2 text-xs leading-5 text-ink-mute" key={signal}><AlertTriangle aria-hidden className="mt-0.5 size-3.5 shrink-0 text-brick" />{signal}</p>)}</div><div className="grid gap-2 rounded-[8px] bg-green-tint p-4"><strong className="flex items-center gap-2 text-sm text-ink"><ShieldAlert aria-hidden className="size-4 text-green-deep" />Safe next actions</strong>{analysis.nextActions.map((action) => <p className="flex gap-2 text-xs leading-5 text-ink-mute" key={action}><Check aria-hidden className="mt-0.5 size-3.5 shrink-0 text-green-deep" />{action}</p>)}</div><div className="flex flex-col gap-2 sm:flex-row"><Button loading={loading} onClick={() => void startReport()}>Create cybercrime draft</Button><Button onClick={() => setAnalysis(null)} variant="secondary">Check another</Button></div></StepCard>
+    <StepCard eyebrow="Safety result" title={analysis.summary} body="This automated check uses the message text and the interactions already shown in your inbox. Verify through an official channel before acting."><div className="flex flex-wrap items-center gap-2"><StatusPill label={verdictKey ? t(verdictKey) : analysis.verdict} tone={analysis.verdict === "suspicious" ? "warning" : "info"} /><StatusPill label={t("confidenceLabel", { confidence: confidenceKey ? t(confidenceKey) : analysis.confidence })} tone="neutral" /><SimulatedChip authority={analysis.authority} /></div><div className="grid gap-2">{analysis.signals.map((signal) => <p className="flex gap-2 text-xs leading-5 text-ink-mute" key={signal}><AlertTriangle aria-hidden className="mt-0.5 size-3.5 shrink-0 text-brick" />{signal}</p>)}</div><div className="grid gap-2 rounded-[8px] bg-green-tint p-4"><strong className="flex items-center gap-2 text-sm text-ink"><ShieldAlert aria-hidden className="size-4 text-green-deep" />Safe next actions</strong>{analysis.nextActions.map((action) => <p className="flex gap-2 text-xs leading-5 text-ink-mute" key={action}><Check aria-hidden className="mt-0.5 size-3.5 shrink-0 text-green-deep" />{action}</p>)}</div><div className="flex flex-col gap-2 sm:flex-row"><Button loading={loading} onClick={() => void startReport()}>Create cybercrime draft</Button><Button onClick={() => setAnalysis(null)} variant="secondary">Check another</Button></div></StepCard>
   );
 
   return <ProcedureShell authority="Citizen safety analysis + simulated cybercrime portal" complete={complete} currentStep={currentStep} description={t("scamPromise")} steps={steps} title={t("scamService")}>{error ? <p className="mb-3 rounded-xl bg-brick-tint p-3 text-sm font-semibold text-brick" role="alert">{error}</p> : null}{content}</ProcedureShell>;

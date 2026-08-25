@@ -1,0 +1,132 @@
+import type { Language } from "./messages";
+
+interface LocalizedContent {
+  nodeTitles: Record<string, string>;
+  noticeBodies: Record<string, string>;
+  ruleExplanations: Record<string, string>;
+  scamSignals: Record<string, string>;
+}
+
+const hi: LocalizedContent = {
+  nodeTitles: {
+    "obl:gstr3b-sep": "अगस्त का GSTR-3B जमा करें",
+    "obl:echallan-500": "होसूर रोड पर सिग्नल तोड़ने का ट्रैफ़िक ई-चालान",
+    "obl:bbmp-property-tax": "BBMP संपत्ति कर 2026-27 की दूसरी किस्त",
+    "obl:itr-refund": "आयकर रिफ़ंड, आकलन वर्ष 2026-27",
+    "obl:passport-renewal": "वीज़ा के लिए पासपोर्ट में छह महीने से कम समय बचा है",
+    "ntc:itr-refund": "₹12,400 का आयकर रिफ़ंड शुरू हुआ",
+    "ntc:epfo-passbook": "EPF अंशदान खाते में जमा हुआ",
+    "ntc:scam-pan": "PAN बंद होने की नकली चेतावनी",
+    "ntc:echallan": "ई-चालान जारी हुआ",
+    "ben:pmsby": "प्रधानमंत्री सुरक्षा बीमा योजना",
+    "ben:mudra-kishor": "प्रधानमंत्री मुद्रा लोन — किशोर",
+    "ben:eps-family-pension": "EPS-95 पारिवारिक पेंशन",
+    "ben:ka-widow-pension": "कर्नाटक विधवा वेतन",
+    "app:pan-name-correction": "आधार से मिलाने के लिए PAN नाम सुधार",
+    "app:death-rajesh": "मृत्यु पंजीकरण और परिवार के अगले काम",
+    "app:sunita-family-pension": "EPS-95 पारिवारिक पेंशन",
+    "app:sunita-epf-nominee-claim": "राजेश शर्मा का EPF नॉमिनी दावा",
+    "app:rajesh-prop-jpnagar-house-succession": "संपत्ति उत्तराधिकार नामांतरण",
+    "app:rajesh-veh-dzire-succession": "वाहन मालिकाना हक़ हस्तांतरण",
+    "app:marriage-arjun-priya": "अर्जुन और प्रिया का विवाह पंजीकरण",
+    "app:arjun-business-loan": "व्यवसाय लोन आवेदन",
+    "app:cybercrime:arjun": "संदिग्ध संदेश की साइबर अपराध रिपोर्ट",
+  },
+  noticeBodies: {
+    "ntc:itr-refund": "प्रिय करदाता, आकलन वर्ष 2026-27 के लिए ₹12,400 का रिफ़ंड शुरू हो गया है। यह सत्यापित बैंक खाते के अंतिम अंक 0042 में जमा होगा।",
+    "ntc:epfo-passbook": "प्रिय सदस्य, जुलाई 2026 का ₹21,600 अंशदान UAN 101234567890 में जमा हुआ। शेष राशि: ₹3,40,000।",
+    "ntc:echallan": "KA05MJ4821 से 02-08-2026 को होसूर रोड पर सिग्नल तोड़ने के लिए ₹500 का ई-चालान KA05-2026-0812445 जारी हुआ। 01-09-2026 तक भुगतान करें।",
+  },
+  ruleExplanations: {
+    "You are between 18 and 70.": "आपकी उम्र 18 से 70 वर्ष के बीच है।",
+    "You have an active bank account.": "आपका बैंक खाता सक्रिय है।",
+    "Sharma Web Solutions is a proprietorship.": "Sharma Web Solutions एकल स्वामित्व वाला व्यवसाय है।",
+    "Udyam registration is active.": "उद्यम पंजीकरण सक्रिय है।",
+    "The business is at least 2 years old.": "व्यवसाय को कम से कम दो वर्ष हो चुके हैं।",
+    "Latest ITR acknowledgement (ITR-V) is required.": "नवीनतम ITR पावती (ITR-V) चाहिए।",
+    "Payable to the surviving spouse of an EPS pensioner.": "EPS पेंशनर के जीवित जीवनसाथी को यह पेंशन मिल सकती है।",
+    "Rajesh Sharma held an EPS-95 pension.": "राजेश शर्मा को EPS-95 पेंशन मिलती थी।",
+    "Death certificate is required.": "मृत्यु प्रमाणपत्र चाहिए।",
+    "Payable to widowed residents of Karnataka.": "कर्नाटक की विधवा निवासी इस पेंशन के लिए पात्र हो सकती हैं।",
+    "Sunita is a resident of Karnataka.": "सुनीता कर्नाटक की निवासी हैं।",
+    "Household income must be within the limit — needs income declaration.": "परिवार की आय तय सीमा में होनी चाहिए; आय घोषणा अभी चाहिए।",
+  },
+  scamSignals: {
+    "Sender is a personal mobile number, not a registered government header": "भेजने वाला सरकारी SMS हेडर नहीं, निजी मोबाइल नंबर है",
+    "Link domain 'pan-updat.info' is not incometax.gov.in": "लिंक का डोमेन pan-updat.info है, incometax.gov.in नहीं",
+    "Urgency and threat within 24 hours": "24 घंटे की धमकी देकर जल्दबाज़ी कराई जा रही है",
+    "Spelling errors: 'will be block', 'immediatly'": "संदेश में कई वर्तनी और भाषा की गलतियाँ हैं",
+    "The Income Tax Department never blocks PAN by SMS deadline": "आयकर विभाग SMS में समय-सीमा देकर PAN बंद नहीं करता",
+  },
+};
+
+const kn: LocalizedContent = {
+  nodeTitles: {
+    "obl:gstr3b-sep": "ಆಗಸ್ಟ್ ತಿಂಗಳ GSTR-3B ಸಲ್ಲಿಸಿ",
+    "obl:echallan-500": "ಹೊಸೂರು ರಸ್ತೆಯ ಸಿಗ್ನಲ್ ಉಲ್ಲಂಘನೆಗೆ ಸಂಚಾರ ಇ-ದಂಡ",
+    "obl:bbmp-property-tax": "BBMP ಆಸ್ತಿ ತೆರಿಗೆ 2026-27ರ ಎರಡನೇ ಕಂತು",
+    "obl:itr-refund": "ಆದಾಯ ತೆರಿಗೆ ಮರುಪಾವತಿ, ಮೌಲ್ಯಮಾಪನ ವರ್ಷ 2026-27",
+    "obl:passport-renewal": "ವೀಸಾಕ್ಕೆ ಬೇಕಾದ ಆರು ತಿಂಗಳಿಗಿಂತ ಕಡಿಮೆ ಪಾಸ್‌ಪೋರ್ಟ್ ಅವಧಿ ಉಳಿದಿದೆ",
+    "ntc:itr-refund": "₹12,400 ಆದಾಯ ತೆರಿಗೆ ಮರುಪಾವತಿ ಪ್ರಾರಂಭವಾಗಿದೆ",
+    "ntc:epfo-passbook": "EPF ವಂತಿಗೆ ಖಾತೆಗೆ ಜಮೆಯಾಗಿದೆ",
+    "ntc:scam-pan": "PAN ನಿಷ್ಕ್ರಿಯಗೊಳಿಸುವ ನಕಲಿ ಎಚ್ಚರಿಕೆ",
+    "ntc:echallan": "ಇ-ದಂಡ ನೀಡಲಾಗಿದೆ",
+    "ben:pmsby": "ಪ್ರಧಾನಮಂತ್ರಿ ಸುರಕ್ಷಾ ವಿಮಾ ಯೋಜನೆ",
+    "ben:mudra-kishor": "ಪ್ರಧಾನಮಂತ್ರಿ ಮುದ್ರಾ ಸಾಲ — ಕಿಶೋರ್",
+    "ben:eps-family-pension": "EPS-95 ಕುಟುಂಬ ಪಿಂಚಣಿ",
+    "ben:ka-widow-pension": "ಕರ್ನಾಟಕ ವಿಧವಾ ವೇತನ",
+    "app:pan-name-correction": "ಆಧಾರ್‌ಗೆ ಹೊಂದಿಸಲು PAN ಹೆಸರು ತಿದ್ದುಪಡಿ",
+    "app:death-rajesh": "ಮರಣ ನೋಂದಣಿ ಮತ್ತು ಕುಟುಂಬದ ಮುಂದಿನ ಕ್ರಮಗಳು",
+    "app:sunita-family-pension": "EPS-95 ಕುಟುಂಬ ಪಿಂಚಣಿ",
+    "app:sunita-epf-nominee-claim": "ರಾಜೇಶ್ ಶರ್ಮಾ ಅವರ EPF ನಾಮಿನಿ ಹಕ್ಕು",
+    "app:rajesh-prop-jpnagar-house-succession": "ಆಸ್ತಿ ಉತ್ತರಾಧಿಕಾರ ಖಾತಾ ಬದಲಾವಣೆ",
+    "app:rajesh-veh-dzire-succession": "ವಾಹನ ಮಾಲೀಕತ್ವ ವರ್ಗಾವಣೆ",
+    "app:marriage-arjun-priya": "ಅರ್ಜುನ್ ಮತ್ತು ಪ್ರಿಯಾ ಅವರ ವಿವಾಹ ನೋಂದಣಿ",
+    "app:arjun-business-loan": "ವ್ಯವಹಾರ ಸಾಲದ ಅರ್ಜಿ",
+    "app:cybercrime:arjun": "ಅನುಮಾನಾಸ್ಪದ ಸಂದೇಶದ ಸೈಬರ್ ಅಪರಾಧ ವರದಿ",
+  },
+  noticeBodies: {
+    "ntc:itr-refund": "ಮಾನ್ಯ ತೆರಿಗೆದಾರರೇ, ಮೌಲ್ಯಮಾಪನ ವರ್ಷ 2026-27ರ ₹12,400 ಮರುಪಾವತಿ ಪ್ರಾರಂಭವಾಗಿದೆ. ಇದು 0042ರಲ್ಲಿ ಕೊನೆಗೊಳ್ಳುವ ಪರಿಶೀಲಿತ ಬ್ಯಾಂಕ್ ಖಾತೆಗೆ ಜಮೆಯಾಗುತ್ತದೆ.",
+    "ntc:epfo-passbook": "ಮಾನ್ಯ ಸದಸ್ಯರೇ, ಜುಲೈ 2026ರ ₹21,600 ವಂತಿಗೆ UAN 101234567890ಗೆ ಜಮೆಯಾಗಿದೆ. ಉಳಿಕೆ: ₹3,40,000.",
+    "ntc:echallan": "KA05MJ4821 ವಾಹನವು 02-08-2026ರಂದು ಹೊಸೂರು ರಸ್ತೆಯಲ್ಲಿ ಸಿಗ್ನಲ್ ಉಲ್ಲಂಘಿಸಿದ ಕಾರಣ ₹500ರ ಇ-ದಂಡ KA05-2026-0812445 ನೀಡಲಾಗಿದೆ. 01-09-2026ರೊಳಗೆ ಪಾವತಿಸಿ.",
+  },
+  ruleExplanations: {
+    "You are between 18 and 70.": "ನಿಮ್ಮ ವಯಸ್ಸು 18ರಿಂದ 70 ವರ್ಷಗಳ ನಡುವೆ ಇದೆ.",
+    "You have an active bank account.": "ನಿಮ್ಮ ಬ್ಯಾಂಕ್ ಖಾತೆ ಸಕ್ರಿಯವಾಗಿದೆ.",
+    "Sharma Web Solutions is a proprietorship.": "Sharma Web Solutions ಏಕಮಾಲೀಕತ್ವದ ವ್ಯವಹಾರವಾಗಿದೆ.",
+    "Udyam registration is active.": "ಉದ್ಯಮ ನೋಂದಣಿ ಸಕ್ರಿಯವಾಗಿದೆ.",
+    "The business is at least 2 years old.": "ವ್ಯವಹಾರಕ್ಕೆ ಕನಿಷ್ಠ ಎರಡು ವರ್ಷಗಳಾಗಿದೆ.",
+    "Latest ITR acknowledgement (ITR-V) is required.": "ಇತ್ತೀಚಿನ ITR ಸ್ವೀಕೃತಿ (ITR-V) ಬೇಕಾಗಿದೆ.",
+    "Payable to the surviving spouse of an EPS pensioner.": "EPS ಪಿಂಚಣಿದಾರರ ಜೀವಿತ ಸಂಗಾತಿಗೆ ಈ ಪಿಂಚಣಿ ದೊರೆಯಬಹುದು.",
+    "Rajesh Sharma held an EPS-95 pension.": "ರಾಜೇಶ್ ಶರ್ಮಾ EPS-95 ಪಿಂಚಣಿ ಪಡೆಯುತ್ತಿದ್ದರು.",
+    "Death certificate is required.": "ಮರಣ ಪ್ರಮಾಣಪತ್ರ ಬೇಕಾಗಿದೆ.",
+    "Payable to widowed residents of Karnataka.": "ಕರ್ನಾಟಕದ ವಿಧವಾ ನಿವಾಸಿಗಳಿಗೆ ಈ ಪಿಂಚಣಿ ದೊರೆಯಬಹುದು.",
+    "Sunita is a resident of Karnataka.": "ಸುನೀತಾ ಕರ್ನಾಟಕದ ನಿವಾಸಿ.",
+    "Household income must be within the limit — needs income declaration.": "ಕುಟುಂಬದ ಆದಾಯ ನಿಗದಿತ ಮಿತಿಯೊಳಗಿರಬೇಕು; ಆದಾಯ ಘೋಷಣೆ ಇನ್ನೂ ಬೇಕಾಗಿದೆ.",
+  },
+  scamSignals: {
+    "Sender is a personal mobile number, not a registered government header": "ಕಳುಹಿಸಿದವರು ನೋಂದಾಯಿತ ಸರ್ಕಾರಿ SMS ಹೆಡರ್ ಅಲ್ಲ, ವೈಯಕ್ತಿಕ ಮೊಬೈಲ್ ಸಂಖ್ಯೆ",
+    "Link domain 'pan-updat.info' is not incometax.gov.in": "ಲಿಂಕ್‌ನ ಡೊಮೇನ್ pan-updat.info; incometax.gov.in ಅಲ್ಲ",
+    "Urgency and threat within 24 hours": "24 ಗಂಟೆಯ ಬೆದರಿಕೆ ನೀಡಿ ತುರ್ತು ಒತ್ತಡ ಹಾಕಲಾಗಿದೆ",
+    "Spelling errors: 'will be block', 'immediatly'": "ಸಂದೇಶದಲ್ಲಿ ಹಲವು ಕಾಗುಣಿತ ಮತ್ತು ಭಾಷಾ ದೋಷಗಳಿವೆ",
+    "The Income Tax Department never blocks PAN by SMS deadline": "ಆದಾಯ ತೆರಿಗೆ ಇಲಾಖೆ SMS ಗಡುವು ನೀಡಿ PAN ನಿಷ್ಕ್ರಿಯಗೊಳಿಸುವುದಿಲ್ಲ",
+  },
+};
+
+const dictionaries: Partial<Record<Language, LocalizedContent>> = { hi, kn };
+
+export function localizeNodeTitle(language: Language, nodeId: string, fallback: string) {
+  return dictionaries[language]?.nodeTitles[nodeId] ?? fallback;
+}
+
+export function localizeNoticeBody(language: Language, noticeId: string, fallback: string) {
+  return dictionaries[language]?.noticeBodies[noticeId] ?? fallback;
+}
+
+export function localizeRuleExplanation(language: Language, fallback: string) {
+  return dictionaries[language]?.ruleExplanations[fallback] ?? fallback;
+}
+
+export function localizeScamSignal(language: Language, fallback: string) {
+  return dictionaries[language]?.scamSignals[fallback] ?? fallback;
+}
