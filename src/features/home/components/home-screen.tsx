@@ -1,12 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { FilePanel, LedgerRow } from "@/components/ui/file-panel";
+import { FilePanel } from "@/components/ui/file-panel";
 import { Page } from "@/components/ui/page";
 import { useAuthStore } from "@/features/auth/store";
 import {
   getDocuments,
-  getEligibility,
+  getApplications,
   getMoneySummary,
   getNotices,
   getObligations,
@@ -17,7 +17,8 @@ import {
 import { useCitizenStore } from "@/features/graph/store";
 import { IntentComposer } from "@/features/intent/components/intent-composer";
 import { useI18n } from "@/i18n/use-i18n";
-import { formatCurrency } from "@/lib/format";
+import { daysUntil, formatCurrency } from "@/lib/format";
+import { HomeRecords } from "./home-records";
 
 type Obligation = ReturnType<typeof getObligations>[number];
 
@@ -44,6 +45,15 @@ function TaskLedgerRow({ index, obligation, task }: { index: number; obligation?
   );
 }
 
+function SummaryLedgerItem({ label, value }: { label: string; value: string | number }) {
+  return (
+    <div className="grid min-h-24 content-between gap-3 border-b border-paper-line py-4">
+      <span className="eyebrow">{label}</span>
+      <strong className="font-display text-3xl font-bold leading-none tabular-nums text-ink">{value}</strong>
+    </div>
+  );
+}
+
 export function HomeScreen() {
   const { t } = useI18n();
   const personId = useAuthStore((state) => state.personId);
@@ -54,31 +64,28 @@ export function HomeScreen() {
   if (!profile) return null;
 
   const tasks = getThingsToDo(graph, personId);
-  const obligationsById = new Map(getObligations(graph, personId).map((obligation) => [obligation.id, obligation]));
+  const obligations = getObligations(graph, personId).filter((node) => !["paid", "received", "completed"].includes(node.attrs.status ?? ""));
+  const obligationsById = new Map(obligations.map((obligation) => [obligation.id, obligation]));
   const documents = getDocuments(graph, personId);
-  const benefits = getEligibility(graph, personId).filter((result) => result.status !== "not-eligible");
-  const unreadNotices = getNotices(graph, personId).filter((notice) => !notice.read);
+  const applications = getApplications(graph, personId).filter((node) => node.attrs.status !== "completed");
+  const expiringDocuments = documents.filter((document) => document.attrs.expiresOn && daysUntil(document.attrs.expiresOn) >= 0 && daysUntil(document.attrs.expiresOn) <= 180);
+  const deadlineCount = obligations.filter((node) => Boolean(node.attrs.dueDate)).length;
+  const unreadNotices = getNotices(graph, personId).filter((notice) => !notice.read).length;
   const money = getMoneySummary(graph, personId);
 
   return (
     <Page className="grid gap-16 lg:gap-24">
-      <section className="grid content-start gap-7 pt-6 lg:pt-14">
+      <section className="grid min-h-[calc(100svh-9rem)] content-start gap-7 pt-6 lg:min-h-0 lg:pt-14">
         <p className="text-sm text-ink-mute">{t(greetingKey())}, {profile.person.attrs.name.split(" ")[0]}</p>
         <h1 className="max-w-5xl font-display text-[clamp(4rem,11vw,8.4rem)] font-extrabold leading-[0.78] tracking-[-0.05em] text-ink">{t("needPrompt")}</h1>
         <IntentComposer />
       </section>
-      <div className="grid gap-12 lg:grid-cols-2">
-        <FilePanel label={t("mySnapshot")}>
-          <LedgerRow label={t("fullProfile")} value={profile.person.attrs.name} action={<Link className="text-xs underline" href="/you">{t("view")}</Link>} />
-          <LedgerRow label={t("documents")} value={documents.length} action={<Link className="text-xs underline" href="/documents">{t("view")}</Link>} />
-          <LedgerRow label={t("availableBenefits")} value={benefits.length} />
-          <LedgerRow label={t("dueAndRefundable")} value={formatCurrency(money.payable)} />
-          <LedgerRow label={t("unreadNotices")} value={unreadNotices.length} />
-        </FilePanel>
-        <FilePanel label={t("thingsToDo")}>
-          {tasks.map((task, index) => <TaskLedgerRow index={index} key={task.id} obligation={obligationsById.get(task.id)} task={task} />)}
-        </FilePanel>
-      </div>
+      <FilePanel label={t("mySnapshot")}><div className="grid grid-cols-2 gap-x-6 lg:grid-cols-4"><SummaryLedgerItem label={t("deadlines")} value={deadlineCount} /><SummaryLedgerItem label={t("expiry")} value={expiringDocuments.length} /><SummaryLedgerItem label={t("pendingApplications")} value={applications.length} /><SummaryLedgerItem label={t("due")} value={formatCurrency(money.payable)} /></div></FilePanel>
+      <section className="grid gap-6" id="attention">
+        <div className="grid gap-2"><p className="eyebrow">{unreadNotices} {t("unreadNotices").toLowerCase()}</p><h2 className="max-w-4xl font-display text-[clamp(2.5rem,7vw,5.4rem)] font-semibold leading-[0.9] tracking-[-0.05em] text-ink">{t("dashboardHeadline")}</h2><p className="max-w-2xl text-sm leading-6 text-ink-mute sm:text-base">{t("dashboardBody")}</p></div>
+        <FilePanel label={t("thingsToDo")}>{tasks.map((task, index) => <TaskLedgerRow index={index} key={task.id} obligation={obligationsById.get(task.id)} task={task} />)}</FilePanel>
+        <HomeRecords personId={personId} />
+      </section>
     </Page>
   );
 }
