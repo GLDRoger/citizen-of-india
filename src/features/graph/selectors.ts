@@ -122,7 +122,11 @@ export function getNotices(graph: CitizenGraph, personId: string): NoticeView[] 
   const linkByTarget = new Map(links.map((edge) => [edge.to, edge]));
   return graph.nodes
     .filter(
-      (node): node is NoticeNode => node.type === "notice" && linkByTarget.has(node.id),
+      (node): node is NoticeNode =>
+        node.type === "notice" &&
+        node.attrs.legitimacy === "legitimate" &&
+        node.verification.source !== "Self" &&
+        linkByTarget.has(node.id),
     )
     .map((node) => ({ node, read: linkByTarget.get(node.id)?.attrs.read ?? false }))
     .sort((first, second) =>

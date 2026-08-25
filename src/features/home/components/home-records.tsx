@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { AlertTriangle, ArrowRight, Bell, ExternalLink, MessageSquareText } from "lucide-react";
+import { ArrowRight, Bell, ExternalLink, MessageSquareText } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Button, LinkButton } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/feedback";
@@ -9,33 +9,26 @@ import { ListRow } from "@/components/ui/list-row";
 import { SectionHeader } from "@/components/ui/page";
 import { SimulatedChip, StatusPill, VerificationBadge } from "@/components/ui/status";
 import { getActivityEvents, getDocuments, getNotices, type NoticeView } from "@/features/graph/selectors";
+import type { CitizenGraph } from "@/features/graph/schema";
 import { useCitizenStore } from "@/features/graph/store";
 import { createFallbackExplanation } from "@/features/inbox/fallback";
 import { explainResponseSchema, type ExplainResponse } from "@/features/inbox/schema";
 import { useI18n } from "@/i18n/use-i18n";
-import { localizeNodeTitle, localizeNoticeBody, localizeScamSignal } from "@/i18n/content";
+import { localizeNodeTitle, localizeNoticeBody } from "@/i18n/content";
 import { getDocumentKindMessageKey, localizeEventLabel } from "@/i18n/formatters";
 import { formatDate } from "@/lib/format";
 
-function isSuspiciousNotice(notice: NoticeView) {
-  return notice.node.attrs.legitimacy === "scam" || Boolean(notice.node.attrs.scamSignals?.length);
+function getNoticeAuthority(graph: CitizenGraph, notice: NoticeView) {
+  const related = notice.node.attrs.relatedTo
+    ? graph.nodes.find((node) => node.id === notice.node.attrs.relatedTo)
+    : undefined;
+  if (related?.type === "application" || related?.type === "benefit" || related?.type === "document" || related?.type === "obligation") {
+    return related.attrs.authority ?? notice.node.verification.source;
+  }
+  return notice.node.verification.source;
 }
 
-function ScamNoticeDetail({ notice }: { notice: NoticeView }) {
-  const { language, t } = useI18n();
-  const checkHref = `/workflows/scam-check?notice=${encodeURIComponent(notice.node.id)}`;
-
-  return (
-    <article className="grid gap-6 rounded-[8px] border border-brick/25 bg-brick-tint p-5 sm:p-7">
-      <div className="flex flex-wrap items-start justify-between gap-4"><div className="grid gap-2"><StatusPill label={t("suspicious")} tone="warning" /><h3 className="font-display text-3xl font-semibold leading-tight tracking-[-0.035em] text-brick">{t("suspiciousMessageDetected")}</h3></div><SimulatedChip authority={notice.node.verification.source} /></div>
-      <figure className="grid gap-3 rounded-[4px] border border-paper-line bg-paper p-4"><figcaption className="text-[0.68rem] font-bold uppercase tracking-[0.12em] text-ink-mute">{t("originalMessage")} · {notice.node.attrs.sender}</figcaption><blockquote className="text-xs leading-6 text-ink-mute">{notice.node.attrs.body}</blockquote></figure>
-      {notice.node.attrs.scamSignals ? <div className="grid gap-3"><p className="text-xs font-bold text-brick">{t("warningSigns")}</p><ul className="grid gap-2">{notice.node.attrs.scamSignals.map((signal) => <li className="flex gap-2 text-xs leading-5 text-brick" key={signal}><AlertTriangle aria-hidden className="mt-0.5 size-3.5 shrink-0" />{localizeScamSignal(language, signal)}</li>)}</ul></div> : null}
-      <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center"><LinkButton href={checkHref}>{t("runScamCheck")}<ArrowRight aria-hidden className="size-4" /></LinkButton><Link className="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-ink underline decoration-ink/30 underline-offset-4" href={`${checkHref}&mode=report#report-draft`}>{t("reportToCybercrime")}<ArrowRight aria-hidden className="size-3.5" /></Link></div>
-    </article>
-  );
-}
-
-function LegitimateNoticeDetail({ notice }: { notice: NoticeView }) {
+function LegitimateNoticeDetail({ authority, notice }: { authority: string; notice: NoticeView }) {
   const { language, t } = useI18n();
   const [explanation, setExplanation] = useState<ExplainResponse | null>(null);
   const [loading, setLoading] = useState(false);
@@ -60,17 +53,13 @@ function LegitimateNoticeDetail({ notice }: { notice: NoticeView }) {
 
   return (
     <article className="grid gap-6 rounded-[8px] border border-paper-line bg-paper-shade p-5 sm:p-7">
-      <div className="flex flex-wrap items-center justify-between gap-3"><div className="grid gap-1"><p className="eyebrow">{notice.node.attrs.sender}</p><h3 className="font-display text-3xl font-semibold leading-tight tracking-[-0.035em] text-ink">{localizeNodeTitle(language, notice.node.id, notice.node.attrs.subject)}</h3></div><div className="flex flex-wrap gap-2"><VerificationBadge verification={notice.node.verification} /><SimulatedChip authority={notice.node.verification.source} /></div></div>
+      <div className="flex flex-wrap items-center justify-between gap-3"><div className="grid gap-1"><p className="eyebrow">{authority}</p><h3 className="font-display text-3xl font-semibold leading-tight tracking-[-0.035em] text-ink">{localizeNodeTitle(language, notice.node.id, notice.node.attrs.subject)}</h3></div><div className="flex flex-wrap gap-2"><VerificationBadge verification={notice.node.verification} /><SimulatedChip authority={authority} /></div></div>
       <blockquote className="border-y border-paper-line py-5 text-sm leading-7 text-ink-mute">{localizeNoticeBody(language, notice.node.id, notice.node.attrs.body)}</blockquote>
       {explanation ? <div className="grid gap-4 rounded-[8px] bg-green-tint p-5"><div className="flex items-center justify-between gap-3"><p className="eyebrow">{t("explain")}</p><SimulatedChip authority={explanation.authority} /></div><p className="font-display text-xl font-semibold leading-snug text-ink">{explanation.plainLanguage}</p><p className="grid gap-1 text-xs leading-5 text-ink-mute"><strong className="text-ink">{t("whatItMeans")}</strong>{explanation.whatItMeans}</p><p className="grid gap-1 text-xs leading-5 text-ink-mute"><strong className="text-ink">{t("nextAction")}</strong>{explanation.nextAction}</p></div> : null}
       <div className="flex flex-col gap-2 sm:flex-row"><Button loading={loading} onClick={() => void explain()} variant="secondary"><MessageSquareText aria-hidden className="size-4" />{t("explain")}</Button>{notice.node.attrs.relatedTo === "obl:echallan-500" ? <LinkButton href="/workflows/obligations">{t("respond")}<ArrowRight aria-hidden className="size-4" /></LinkButton> : null}</div>
       <details className="border-t border-paper-line pt-4"><summary className="flex min-h-10 items-center justify-between text-xs font-bold text-ink-mute">{t("source")}<ExternalLink aria-hidden className="size-3.5" /></summary><div className="grid gap-1 pb-2 pt-3 text-xs leading-5 text-ink-mute"><span><strong className="text-ink">{t("authority")}:</strong> {notice.node.verification.source}</span><span><strong className="text-ink">{t("checked")}:</strong> {formatDate(notice.node.verification.asOf, language)}</span><span><strong className="text-ink">{t("linkedRecord")}:</strong> {notice.node.attrs.relatedTo ?? "—"}</span></div></details>
     </article>
   );
-}
-
-function NoticeDetail({ notice }: { notice: NoticeView }) {
-  return isSuspiciousNotice(notice) ? <ScamNoticeDetail notice={notice} /> : <LegitimateNoticeDetail notice={notice} />;
 }
 
 function DocumentsRail({ personId }: { personId: string }) {
@@ -122,9 +111,10 @@ export function HomeRecords({ personId }: { personId: string }) {
   return (
     <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_19rem] lg:items-start">
       <section className="grid gap-5">
-        <SectionHeader eyebrow={`${unread} ${t("unreadNotices").toLowerCase()}`} title={t("inbox")} />
-        <div className="border-y border-paper-line">{notices.map((notice) => { const suspicious = isSuspiciousNotice(notice); return <ListRow action={<Button className="min-h-10 px-4" onClick={() => openNotice(notice)} variant="secondary">{t("view")}</Button>} icon={suspicious ? AlertTriangle : Bell} key={notice.node.id} meta={`${notice.node.attrs.sender} · ${formatDate(notice.node.attrs.receivedOn, language)}`} status={<StatusPill label={suspicious ? t("suspicious") : notice.read ? t("done") : t("unread")} tone={suspicious ? "warning" : notice.read ? "neutral" : "info"} />} title={suspicious ? t("suspiciousMessageDetected") : localizeNodeTitle(language, notice.node.id, notice.node.attrs.subject)} />; })}</div>
-        {selected ? <div ref={detailRef}><NoticeDetail key={selected.node.id} notice={selected} /></div> : <EmptyState title={t("noItems")} />}
+        <SectionHeader eyebrow={`${unread} ${t("unreadNotices").toLowerCase()}`} title={t("governmentInbox")} />
+        <div className="border-y border-paper-line">{notices.map((notice) => <ListRow action={<Button className="min-h-10 px-4" onClick={() => openNotice(notice)} variant="secondary">{t("view")}</Button>} icon={Bell} key={notice.node.id} meta={`${getNoticeAuthority(graph, notice)} · ${formatDate(notice.node.attrs.receivedOn, language)}`} status={<StatusPill label={notice.read ? t("done") : t("unread")} tone={notice.read ? "neutral" : "info"} />} title={localizeNodeTitle(language, notice.node.id, notice.node.attrs.subject)} />)}</div>
+        {selected ? <div ref={detailRef}><LegitimateNoticeDetail authority={getNoticeAuthority(graph, selected)} key={selected.node.id} notice={selected} /></div> : <EmptyState title={t("noItems")} />}
+        <Link className="flex min-h-14 items-center justify-between gap-4 border-y border-paper-line py-3 text-sm font-bold text-ink" href="/workflows/scam-check"><span>{t("scamHomeEntry")}</span><ArrowRight aria-hidden className="size-4 shrink-0 text-green-deep" /></Link>
         <section className="grid gap-5"><SectionHeader title={t("recentActivity")} />{events.length ? <ol className="border-y border-paper-line">{events.slice(0, 6).map((event) => <li className="grid grid-cols-[auto_minmax(0,1fr)] gap-4 border-b border-paper-line py-4 last:border-b-0" key={event.id}><span className="mt-1.5 size-2 rounded-[4px] bg-green-deep" /><div><strong className="block text-sm text-ink">{localizeEventLabel(event, language)}</strong><span className="text-xs text-ink-mute">{new Intl.DateTimeFormat(locale, { dateStyle: "medium", timeStyle: "short", hour12: false }).format(new Date(event.occurredAt))}</span></div></li>)}</ol> : <EmptyState title={t("noActivity")} />}</section>
       </section>
       <DocumentsRail personId={personId} />
