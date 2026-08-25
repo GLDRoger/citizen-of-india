@@ -37,6 +37,7 @@ export function MoneyActionWorkflow({ action }: { action: MoneyAction }) {
 
   const propertyTax = getNodeByType(graph, "obl:bbmp-property-tax", "obligation");
   const gstr = getNodeByType(graph, "obl:gstr3b-sep", "obligation");
+  const business = getNodeByType(graph, "biz:sharma-web", "business");
   const propertyComplete = propertyTax?.attrs.status === "paid";
   const gstrComplete = gstr?.attrs.status === "completed";
   const complete = action === "property-tax" ? propertyComplete : action === "gstr3b" ? gstrComplete : false;
@@ -83,7 +84,7 @@ export function MoneyActionWorkflow({ action }: { action: MoneyAction }) {
   ) : action === "gstr3b" ? gstrComplete ? (
     <CompletionCard title={t("gstrFiledTitle")} body={t("gstrFiledBody")}><LinkButton href="/#money" variant="inverse">{t("returnHome")} <ArrowRight aria-hidden className="size-4" /></LinkButton></CompletionCard>
   ) : (
-    <StepCard eyebrow="GSTN" title={t("gstrTitle")} body={t("gstrBody")}><div className="flex items-center gap-3 rounded-[8px] bg-paper-line p-5"><Landmark aria-hidden className="size-5 text-green-deep" /><div><strong className="block text-sm text-ink">Sharma Web Solutions</strong><span className="text-xs text-ink-mute">GSTIN 29AABCS****Z5 · August 2026</span></div></div><Button loading={loading} onClick={() => void fileGstr()}>{t("confirmGstrFiling")} <CheckCircle2 aria-hidden className="size-4" /></Button></StepCard>
+    <StepCard eyebrow="GSTN" title={t("gstrTitle")} body={t("gstrBody")}><div className="flex items-center gap-3 rounded-[8px] bg-paper-line p-5"><Landmark aria-hidden className="size-5 text-green-deep" /><div><strong className="block text-sm text-ink">{business?.attrs.name ?? "Sharma Web Solutions"}</strong><span className="text-xs text-ink-mute">GSTIN {business?.attrs.gstin ?? "—"} · August 2026</span></div></div><Button loading={loading} onClick={() => void fileGstr()}>{t("confirmGstrFiling")} <CheckCircle2 aria-hidden className="size-4" /></Button></StepCard>
   ) : action === "passport-renewal" ? (
     <StepCard eyebrow={t("serviceUnavailable")} title={t("passportScopeTitle")} body={t("passportScopeBody")}><div className="flex gap-3 border-y border-paper-line py-4 text-xs leading-5 text-ink-mute"><FileClock aria-hidden className="size-5 shrink-0" />Passport S98***21 · Passport Seva Kendra, Bengaluru</div><LinkButton href="/documents" variant="secondary">{t("documents")}</LinkButton></StepCard>
   ) : (
