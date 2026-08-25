@@ -51,7 +51,7 @@ function TaskLedgerRow({ application, index, obligation, task }: { application?:
             : t("view");
 
   return (
-    <div className="grid min-h-16 grid-cols-[minmax(0,3fr)_minmax(0,2fr)] items-center gap-4 border-b border-paper-line py-3 last:border-b-0">
+    <div className="grid min-h-16 grid-cols-[minmax(0,3fr)_minmax(0,2fr)] items-center gap-4 border-b border-paper-line py-3 last:border-b-0" id={`task-${task.id}`}>
       <div className="min-w-0">
         <span className="block text-sm font-medium leading-5 text-ink">{String(index + 1).padStart(2, "0")} · {title}</span>
         {obligation ? <span className="mt-1 block text-xs leading-4 text-ink-mute">{obligation.attrs.authority}</span> : null}
