@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { AlertTriangle, ArrowRight, Bell, ExternalLink, MessageSquareText } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button, LinkButton } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/feedback";
 import { ListRow } from "@/components/ui/list-row";
@@ -30,7 +30,7 @@ function ScamNoticeDetail({ notice }: { notice: NoticeView }) {
       <div className="flex flex-wrap items-start justify-between gap-4"><div className="grid gap-2"><StatusPill label={t("suspicious")} tone="warning" /><h3 className="font-display text-3xl font-semibold leading-tight tracking-[-0.035em] text-brick">{t("suspiciousMessageDetected")}</h3></div><SimulatedChip authority={notice.node.verification.source} /></div>
       <figure className="grid gap-3 rounded-[4px] border border-paper-line bg-paper p-4"><figcaption className="text-[0.68rem] font-bold uppercase tracking-[0.12em] text-ink-mute">{t("originalMessage")} · {notice.node.attrs.sender}</figcaption><blockquote className="text-xs leading-6 text-ink-mute">{notice.node.attrs.body}</blockquote></figure>
       {notice.node.attrs.scamSignals ? <div className="grid gap-3"><p className="text-xs font-bold text-brick">{t("warningSigns")}</p><ul className="grid gap-2">{notice.node.attrs.scamSignals.map((signal) => <li className="flex gap-2 text-xs leading-5 text-brick" key={signal}><AlertTriangle aria-hidden className="mt-0.5 size-3.5 shrink-0" />{localizeScamSignal(language, signal)}</li>)}</ul></div> : null}
-      <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center"><LinkButton href={checkHref}>{t("runScamCheck")}<ArrowRight aria-hidden className="size-4" /></LinkButton><a className="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-ink underline decoration-ink/30 underline-offset-4" href="https://www.cybercrime.gov.in/" rel="noreferrer" target="_blank">{t("reportToCybercrime")}<ExternalLink aria-hidden className="size-3.5" /></a></div>
+      <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center"><LinkButton href={checkHref}>{t("runScamCheck")}<ArrowRight aria-hidden className="size-4" /></LinkButton><Link className="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-ink underline decoration-ink/30 underline-offset-4" href={`${checkHref}&mode=report#report-draft`}>{t("reportToCybercrime")}<ArrowRight aria-hidden className="size-3.5" /></Link></div>
     </article>
   );
 }
@@ -99,12 +99,23 @@ export function HomeRecords({ personId }: { personId: string }) {
   const events = getActivityEvents(graph, personId);
   const locale = language === "hi" ? "hi-IN" : language === "kn" ? "kn-IN" : "en-IN";
 
+  const markNoticeRead = (notice: NoticeView) => {
+    if (notice.read) return;
+    const edge = graph.edges.find((candidate) => candidate.type === "subjectOf" && candidate.from === personId && candidate.to === notice.node.id && candidate.status === "active");
+    if (edge) commit({ actorId: personId, labelKey: "eventNoticeRead", labelParams: { noticeId: notice.node.id }, procedureId: "notice-reading", mutations: [{ type: "patchEdgeAttrs", edgeId: edge.id, attrs: { read: true } }] });
+  };
+
+  const firstNoticeId = notices[0]?.node.id;
+  const firstNoticeRead = notices[0]?.read;
+  useEffect(() => {
+    if (!firstNoticeId || firstNoticeRead) return;
+    const edge = graph.edges.find((candidate) => candidate.type === "subjectOf" && candidate.from === personId && candidate.to === firstNoticeId && candidate.status === "active");
+    if (edge) commit({ actorId: personId, labelKey: "eventNoticeRead", labelParams: { noticeId: firstNoticeId }, procedureId: "notice-reading", mutations: [{ type: "patchEdgeAttrs", edgeId: edge.id, attrs: { read: true } }] });
+  }, [commit, firstNoticeId, firstNoticeRead, graph.edges, personId]);
+
   const openNotice = (notice: NoticeView) => {
     setSelectedId(notice.node.id);
-    if (!notice.read) {
-      const edge = graph.edges.find((candidate) => candidate.type === "subjectOf" && candidate.from === personId && candidate.to === notice.node.id && candidate.status === "active");
-      if (edge) commit({ actorId: personId, labelKey: "eventNoticeRead", labelParams: { noticeId: notice.node.id }, procedureId: "notice-reading", mutations: [{ type: "patchEdgeAttrs", edgeId: edge.id, attrs: { read: true } }] });
-    }
+    markNoticeRead(notice);
     window.requestAnimationFrame(() => detailRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" }));
   };
 

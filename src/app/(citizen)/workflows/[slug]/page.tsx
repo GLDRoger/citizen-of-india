@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
+import { PageSkeleton } from "@/components/ui/feedback";
 import { DeathWorkflow } from "@/features/workflows/pages/death-workflow";
 import { LoanWorkflow } from "@/features/workflows/pages/loan-workflow";
 import { MarriageWorkflow } from "@/features/workflows/pages/marriage-workflow";
@@ -39,7 +41,7 @@ export default async function WorkflowPage({ params }: { params: Promise<{ slug:
     case "marriage": return <MarriageWorkflow />;
     case "obligations": return <ObligationsWorkflow />;
     case "loan": return <LoanWorkflow />;
-    case "scam-check": return <ScamWorkflow />;
+    case "scam-check": return <Suspense fallback={<PageSkeleton />}><ScamWorkflow /></Suspense>;
     case "start-business": return <StartBusinessWorkflow />;
     case "property-tax": return <MoneyActionWorkflow action="property-tax" />;
     case "gstr3b": return <MoneyActionWorkflow action="gstr3b" />;
