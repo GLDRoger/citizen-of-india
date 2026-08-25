@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Bell, ChevronDown, Gauge, Info, LogOut, Menu, RotateCcw, UserRound, X } from "lucide-react";
+import { ChevronDown, Gauge, Info, LogOut, Menu, RotateCcw, UserRound, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useAuthStore } from "@/features/auth/store";
 import { seedLogins } from "@/features/graph/seed";
-import { getNotices, getPerson } from "@/features/graph/selectors";
+import { getPerson } from "@/features/graph/selectors";
 import { useCitizenStore } from "@/features/graph/store";
 import { languageLabels, languages } from "@/i18n/messages";
 import { useI18n } from "@/i18n/use-i18n";
@@ -102,16 +102,13 @@ function AccountMenu() {
 export function TopNavigation() {
   const { t } = useI18n();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const graph = useCitizenStore((state) => state.graph);
-  const personId = useAuthStore((state) => state.personId);
   const language = useAuthStore((state) => state.language);
-  const unread = personId ? getNotices(graph, personId).filter((notice) => !notice.read).length : 0;
   return (
     <header className="sticky top-0 z-40 border-b border-paper-line bg-paper/96 backdrop-blur-md">
       <div className="mx-auto flex min-h-16 w-full max-w-[1240px] items-center justify-between gap-3 px-5 sm:px-8 lg:px-10">
         <div className="flex min-w-0 items-baseline gap-2"><Link className="shrink-0 font-display text-xl font-extrabold tracking-[0.04em] text-ink" href="/">{t("brand").toUpperCase()}</Link><span className="hidden whitespace-nowrap text-[0.68rem] text-ink-mute min-[370px]:inline">{t("independentPrototype")}</span></div>
         <DesktopNavigation />
-        <div className="flex shrink-0 items-center gap-1.5"><span className="hidden rounded-[4px] bg-paper-line px-3 py-2 text-[0.65rem] font-extrabold uppercase text-ink-mute sm:inline-flex">{languageLabels[language]}</span><Link aria-label={t("notifications")} className="relative grid size-10 place-items-center rounded-[4px] text-ink-mute transition hover:bg-paper-shade hover:text-ink" href="/dashboard"><Bell aria-hidden className="size-[1.1rem]" />{unread ? <span className="absolute right-1.5 top-1.5 grid min-w-4 place-items-center rounded-[4px] bg-brick px-1 text-[0.52rem] font-black leading-4 text-brick">{unread}</span> : null}</Link><button aria-expanded={mobileOpen} aria-label={mobileOpen ? t("close") : t("openMenu")} className="grid size-10 place-items-center rounded-[4px] text-ink-mute hover:bg-paper-shade md:hidden" onClick={() => setMobileOpen((open) => !open)} type="button">{mobileOpen ? <X aria-hidden className="size-5" /> : <Menu aria-hidden className="size-5" />}</button><AccountMenu /></div>
+        <div className="flex shrink-0 items-center gap-1.5"><span className="hidden rounded-[4px] bg-paper-line px-3 py-2 text-[0.65rem] font-extrabold uppercase text-ink-mute sm:inline-flex">{languageLabels[language]}</span><button aria-expanded={mobileOpen} aria-label={mobileOpen ? t("close") : t("openMenu")} className="grid size-10 place-items-center rounded-[4px] text-ink-mute hover:bg-paper-shade md:hidden" onClick={() => setMobileOpen((open) => !open)} type="button">{mobileOpen ? <X aria-hidden className="size-5" /> : <Menu aria-hidden className="size-5" />}</button><AccountMenu /></div>
       </div>
       {mobileOpen ? <div className="absolute inset-x-0 top-full border-b border-paper-line bg-paper "><MobileNavigation onClose={() => setMobileOpen(false)} /></div> : null}
     </header>
