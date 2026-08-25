@@ -6,14 +6,6 @@ import { usePathname } from "next/navigation";
 import type { MessageKey } from "@/i18n/messages";
 import { useI18n } from "@/i18n/use-i18n";
 
-const routeLabels: Record<string, MessageKey> = {
-  dashboard: "dashboard",
-  discover: "discover",
-  documents: "documents",
-  services: "services",
-  you: "fullProfile",
-};
-
 const workflowLabels: Record<string, MessageKey> = {
   death: "deathService",
   loan: "loanService",
@@ -48,14 +40,15 @@ export function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
 export function RouteBreadcrumbs() {
   const pathname = usePathname();
   const { t } = useI18n();
-  if (pathname === "/") return null;
   const segments = pathname.split("/").filter(Boolean);
   const current = segments.at(-1);
-  const workflow = segments[0] === "workflows" && current ? workflowLabels[current] : undefined;
-  const label = workflow ?? (current ? routeLabels[current] : undefined);
-  if (!label) return null;
-  const items: BreadcrumbItem[] = [{ href: "/", label: t("home") }];
-  if (workflow) items.push({ href: "/services", label: t("services") });
-  items.push({ label: t(label) });
+  if (segments[0] !== "workflows" || !current) return null;
+  const workflow = workflowLabels[current];
+  if (!workflow) return null;
+  const items: BreadcrumbItem[] = [
+    { href: "/", label: t("home") },
+    { href: "/services", label: t("services") },
+    { label: t(workflow) },
+  ];
   return <div className="mx-auto w-full max-w-[1240px] px-5 pt-4 sm:px-8 lg:px-10"><Breadcrumbs items={items} /></div>;
 }
