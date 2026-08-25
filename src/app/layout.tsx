@@ -37,11 +37,11 @@ const kannadaFont = Anek_Kannada({
 
 export const metadata: Metadata = {
   title: {
-    default: "Citizen of India | Life events and public services",
-    template: "%s | Citizen of India",
+    default: "Citizen — independent prototype",
+    template: "%s — Citizen independent prototype",
   },
-  description: "Handle life events, records, benefits, deadlines, and public-service paperwork in plain language.",
-  applicationName: "Citizen of India",
+  description: "An independent prototype using a synthetic family's records and simulated service responses.",
+  applicationName: "Citizen — independent prototype",
   robots: { index: false, follow: false },
 };
 

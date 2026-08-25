@@ -52,7 +52,7 @@
         "maritalStatus": "married",
         "preferredLanguage": "hi",
         "pension": { "scheme": "EPS-95", "monthlyAmount": 8200, "ppoNumber": "PPO-KA-2023-448211" },
-        "epf": { "uan": "100900112233", "balance": 610000 }
+        "epf": { "uan": "XXXXXX2233", "balance": 610000 }
       },
       "verification": { "source": "UIDAI", "state": "verified", "asOf": "2026-02-18" }
     },
@@ -137,7 +137,7 @@
         "employer": "Meridian Tech Pvt Ltd",
         "location": "Bengaluru",
         "designation": "Software Engineer II",
-        "uan": "101234567890",
+        "uan": "XXXXXX7890",
         "epfBalance": 340000,
         "monthlyGross": 145000,
         "since": "2021-07-05"
@@ -152,7 +152,7 @@
         "location": "Bengaluru",
         "designation": "Senior Accountant (retired)",
         "retiredOn": "2023-01-31",
-        "uan": "100900112233"
+        "uan": "XXXXXX2233"
       },
       "verification": { "source": "EPFO", "state": "verified", "asOf": "2023-02-15" }
     },
@@ -458,7 +458,7 @@
       "type": "notice",
       "attrs": {
         "channel": "email",
-        "sender": "intimations@incometax.gov.in",
+        "sender": "ITD-REFUND-DEMO",
         "receivedOn": "2026-08-11",
         "subject": "Refund of ₹12,400 initiated for AY 2026-27",
         "body": "Dear Taxpayer, your refund for AY 2026-27 of INR 12,400 has been initiated and will be credited to your validated bank account ending 0042.",
@@ -475,7 +475,7 @@
         "sender": "EPFOHO",
         "receivedOn": "2026-08-05",
         "subject": "EPF contribution credited",
-        "body": "Dear member, contribution of Rs 21,600 for Jul-2026 credited to UAN 101234567890. Balance: Rs 3,40,000.",
+        "body": "Dear member, contribution of Rs 21,600 for Jul-2026 credited to UAN XXXXXX7890. Balance: Rs 3,40,000.",
         "legitimacy": "legitimate",
         "relatedTo": "emp:arjun-meridian"
       },

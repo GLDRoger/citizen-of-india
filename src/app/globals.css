@@ -98,7 +98,9 @@ summary::-webkit-details-marker {
   text-transform: uppercase;
 }
 
-.stamp { display:inline-block; transform:rotate(-2deg); border:3px double color-mix(in srgb,var(--green-deep) 70%,transparent); padding:.2rem .45rem; color:color-mix(in srgb,var(--green-deep) 75%,transparent); font-family:var(--font-display-latin),sans-serif; font-size:.65rem; font-weight:700; letter-spacing:.14em; line-height:1; text-transform:uppercase; }
+.stamp { display:inline-block; transform:rotate(-2deg); padding:.2rem .45rem; font-family:var(--font-display-latin),sans-serif; font-size:.65rem; font-weight:700; letter-spacing:.14em; line-height:1; text-transform:uppercase; }
+.stamp--verified { border:3px double color-mix(in srgb,var(--green-deep) 70%,transparent); color:color-mix(in srgb,var(--green-deep) 75%,transparent); }
+.stamp--simulated { border:1.5px dashed color-mix(in srgb,var(--ink-mute) 72%,transparent); color:var(--ink-mute); }
 .status-text { display:inline-flex; align-items:center; gap:.4rem; color:var(--ink-mute); font-size:.72rem; font-weight:700; }
 .status-text::before { width:.42rem; height:.42rem; border-radius:50%; background:var(--green-deep); content:""; }
 .status-text--brick::before { background:var(--brick); }

@@ -91,7 +91,7 @@ export function submitPanCorrection(input: { personId: string; correctedName: st
 }
 
 export function submitCybercrimeReport(input: { reporterId: string; message: string }) {
-  return mockResponse(`cyber:${input.reporterId}:${input.message}`, "National Cyber Crime Reporting Portal", {
+  return mockResponse(`cyber:${input.reporterId}:${input.message}`, "Simulated cybercrime desk", {
     acknowledgement: reference("NCRP", `${input.reporterId}:${input.message}`),
     status: "draft-created" as const,
   });
