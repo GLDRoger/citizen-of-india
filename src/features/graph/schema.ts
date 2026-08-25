@@ -319,11 +319,13 @@ export type EligibilityRule = z.infer<typeof eligibilityRuleSchema>;
 
 type PartialUnion<T> = T extends object ? Partial<T> : never;
 export type GraphAttrsPatch = PartialUnion<GraphNode["attrs"]>;
+export type GraphEdgeAttrsPatch = PartialUnion<GraphEdge["attrs"]>;
 
 export type GraphMutation =
   | { type: "addNode"; node: GraphNode }
   | { type: "addEdge"; edge: GraphEdge }
   | { type: "endEdge"; edgeId: string; validTo: string }
+  | { type: "patchEdgeAttrs"; edgeId: string; attrs: GraphEdgeAttrsPatch }
   | {
       type: "patchAttrs";
       nodeId: string;
@@ -335,6 +337,7 @@ const graphMutationRuntimeSchema = z.discriminatedUnion("type", [
   z.object({ type: z.literal("addNode"), node: graphNodeSchema }),
   z.object({ type: z.literal("addEdge"), edge: graphEdgeSchema }),
   z.object({ type: z.literal("endEdge"), edgeId: z.string().startsWith("e:"), validTo: z.iso.date() }),
+  z.object({ type: z.literal("patchEdgeAttrs"), edgeId: z.string().startsWith("e:"), attrs: z.record(z.string(), z.unknown()) }),
   z.object({
     type: z.literal("patchAttrs"),
     nodeId: z.string(),

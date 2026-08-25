@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Button, LinkButton } from "@/components/ui/button";
 import { SimulatedChip } from "@/components/ui/status";
 import { useAuthStore } from "@/features/auth/store";
+import { getNodeByType } from "@/features/graph/selectors";
 import type { GraphMutation } from "@/features/graph/schema";
 import { useCitizenStore } from "@/features/graph/store";
 import { buildIntentContext, classifyIntent } from "@/features/intent/intent-client";
@@ -54,7 +55,8 @@ export function StartBusinessWorkflow() {
     .filter((node) => node.type === "application")
     .find((node) => node.id === applicationId);
   const complete = Boolean(application);
-  const currentStep = complete ? 3 : plan ? 1 : 0;
+  const currentStep = complete ? 2 : plan ? 1 : 0;
+  const existingBusiness = getNodeByType(graph, "biz:sharma-web", "business");
 
   const generatePlan = async () => {
     if (businessType.trim().length < 3 || city.trim().length < 2) return;
@@ -80,7 +82,7 @@ export function StartBusinessWorkflow() {
   const content = complete ? (
     <CompletionCard title="Your first registration draft is ready." body="Citizen kept the plan focused and created one honest draft. No government filing or business registration was submitted."><LinkButton href="/dashboard" variant="inverse">View draft <ArrowRight aria-hidden className="size-4" /></LinkButton></CompletionCard>
   ) : !plan ? (
-    <StepCard eyebrow="Plain-language setup" title="What are you planning to start?" body="A useful plan needs the activity and city first. Entity, licences and schemes come after that."><div className="grid gap-4 sm:grid-cols-2"><label className="grid gap-2"><span className="flex items-center gap-2 text-xs font-bold text-ink"><Store aria-hidden className="size-4 text-green-deep" />Business type</span><input className="h-13 rounded-[8px] border border-paper-line bg-paper px-4 text-sm outline-none focus:border-green-deep focus:ring-4 focus:ring-green-deep/10" maxLength={100} onChange={(event) => setBusinessType(event.target.value)} value={businessType} /></label><label className="grid gap-2"><span className="flex items-center gap-2 text-xs font-bold text-ink"><MapPin aria-hidden className="size-4 text-green-deep" />City</span><input className="h-13 rounded-[8px] border border-paper-line bg-paper px-4 text-sm outline-none focus:border-green-deep focus:ring-4 focus:ring-green-deep/10" maxLength={80} onChange={(event) => setCity(event.target.value)} value={city} /></label></div><Button loading={loading} onClick={() => void generatePlan()}><WandSparkles aria-hidden className="size-4" />Generate action plan</Button></StepCard>
+    <StepCard eyebrow="Plain-language setup" title="What are you planning to start?" body="A useful plan needs the activity and city first. Entity, licences and schemes come after that.">{existingBusiness ? <p className="border-y border-paper-line py-3 text-xs leading-5 text-ink-mute">{t("existingBusinessContext", { business: existingBusiness.attrs.name })}</p> : null}<div className="grid gap-4 sm:grid-cols-2"><label className="grid gap-2"><span className="flex items-center gap-2 text-xs font-bold text-ink"><Store aria-hidden className="size-4 text-green-deep" />Business type</span><input className="h-13 rounded-[8px] border border-paper-line bg-paper px-4 text-sm outline-none focus:border-green-deep focus:ring-4 focus:ring-green-deep/10" maxLength={100} onChange={(event) => setBusinessType(event.target.value)} value={businessType} /></label><label className="grid gap-2"><span className="flex items-center gap-2 text-xs font-bold text-ink"><MapPin aria-hidden className="size-4 text-green-deep" />City</span><input className="h-13 rounded-[8px] border border-paper-line bg-paper px-4 text-sm outline-none focus:border-green-deep focus:ring-4 focus:ring-green-deep/10" maxLength={80} onChange={(event) => setCity(event.target.value)} value={city} /></label></div><Button loading={loading} onClick={() => void generatePlan()}><WandSparkles aria-hidden className="size-4" />Generate action plan</Button></StepCard>
   ) : (
     <StepCard eyebrow={`${businessType} · ${city}`} title="A focused plan, in the right order" body={summary || "Start with the entity and registrations, then confirm local licences, schemes and finance."}><div className="flex items-center gap-2"><SimulatedChip authority="Citizen planning assistant" /></div><div className="grid gap-3 sm:grid-cols-2">{plan.map((item, index) => { const Icon = planIcons[item.kind]; return <article className="grid min-h-44 content-between gap-5 rounded-[8px] bg-paper-line p-4" key={item.title}><div className="flex items-center justify-between"><Icon aria-hidden className="size-5 text-green-deep" /><span className="font-display text-xs font-bold text-ink-mute">{String(index + 1).padStart(2, "0")}</span></div><div><strong className="block text-sm text-ink">{item.title}</strong><p className="mt-1 text-xs leading-5 text-ink-mute">{item.body}</p></div></article>; })}</div><div className="flex flex-col gap-2 sm:flex-row"><Button onClick={startRegistration}>Start first registration <ArrowRight aria-hidden className="size-4" /></Button><Button onClick={() => setPlan(null)} variant="secondary">Change plan</Button></div></StepCard>
   );

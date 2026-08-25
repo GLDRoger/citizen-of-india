@@ -40,7 +40,7 @@ export function ScamWorkflow() {
     .filter((node) => node.type === "application")
     .find((node) => node.id === reportId);
   const complete = Boolean(report);
-  const currentStep = complete ? 3 : analysis ? 2 : 0;
+  const currentStep = complete ? 2 : analysis ? 1 : 0;
   const verdictKey = analysis ? getScamVerdictMessageKey(analysis.verdict) : undefined;
   const confidenceKey = analysis ? getConfidenceMessageKey(analysis.confidence) : undefined;
 

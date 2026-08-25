@@ -1,7 +1,9 @@
 "use client";
 
 import { Check, CircleHelp, FileWarning, MoveRight, Sparkles } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { LinkButton } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/feedback";
 import { Page, PageHeader } from "@/components/ui/page";
 import { SimulatedChip, StatusPill } from "@/components/ui/status";
@@ -21,6 +23,7 @@ function tone(status: EligibilityResult["status"]) {
 
 function EligibilityCard({ result, personId }: { result: EligibilityResult; personId: string }) {
   const { language, t } = useI18n();
+  const router = useRouter();
   const graph = useCitizenStore((state) => state.graph);
   const commit = useCitizenStore((state) => state.commit);
   const appId = `app:${result.benefit.id.slice(4)}:${personId.slice(7)}`;
@@ -67,6 +70,7 @@ function EligibilityCard({ result, personId }: { result: EligibilityResult; pers
       },
     ];
     commit({ actorId: personId, labelKey: "eventBenefitApplicationStarted", labelParams: { benefitId: result.benefit.id }, mutations });
+    router.push("/#money");
   };
 
   return (
@@ -78,9 +82,7 @@ function EligibilityCard({ result, personId }: { result: EligibilityResult; pers
         {result.failedReasons.length ? <ul className="grid gap-2">{result.failedReasons.slice(0, 2).map((reason) => <li className="flex gap-2 text-xs leading-5 text-ink-mute" key={reason}><CircleHelp aria-hidden className="mt-0.5 size-3.5 shrink-0 text-ink-mute" />{localizeRuleExplanation(language, reason)}</li>)}</ul> : null}
         {result.missingEvidence.length ? <div className="grid gap-2 rounded-[8px] bg-brick-tint p-3"><p className="flex items-center gap-2 text-xs font-bold text-brick"><FileWarning aria-hidden className="size-3.5" />{t("missingEvidence")}</p>{result.missingEvidence.map((evidence) => <span className="text-xs text-brick" key={evidence}>{localizeEvidence(language, evidence)}</span>)}</div> : null}
       </div>
-      <Button disabled={Boolean(existing) || result.status === "not-eligible"} onClick={apply} variant={result.status === "eligible" ? "primary" : "secondary"}>
-        {existing ? t("pending") : t("apply")} <MoveRight aria-hidden className="size-4" />
-      </Button>
+      {result.benefit.id === "ben:mudra-kishor" ? <LinkButton href="/workflows/loan" variant="secondary">{t("apply")} <MoveRight aria-hidden className="size-4" /></LinkButton> : <Button disabled={Boolean(existing) || result.status === "not-eligible"} onClick={apply} variant={result.status === "eligible" ? "primary" : "secondary"}>{existing ? t("pending") : t("apply")} <MoveRight aria-hidden className="size-4" /></Button>}
     </article>
   );
 }

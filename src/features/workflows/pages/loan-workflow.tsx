@@ -22,11 +22,16 @@ const stepsByLanguage: Record<Language, ProcedureStep[]> = {
   kn: [{ id: "evidence", title: "ಸಂಪರ್ಕಿತ ಸಾಕ್ಷ್ಯ ಪರಿಶೀಲಿಸಿ", description: "ವ್ಯವಹಾರ, ತೆರಿಗೆ ಮತ್ತು ಬಾಕಿ ದಾಖಲೆಗಳು." }, { id: "compare", title: "ಆಯ್ಕೆಗಳನ್ನು ಹೋಲಿಸಿ", description: "ಮೊತ್ತ, ಅವಧಿ ಮತ್ತು ವ್ಯತ್ಯಾಸಗಳು." }, { id: "decide", title: "ಅಪಾಯ ತಿಳಿಯಿರಿ", description: "ಅರ್ಜಿಗೂ ಮುನ್ನ ಬಾಕಿ ಸಾಕ್ಷ್ಯ ನೋಡಿ." }],
 };
 
-const desiredAmount = 1_200_000;
+const desiredAmount = 400_000;
 const loanOptions = [
-  { id: "mudra", name: "Mudra Kishor", authority: "SIDBI / member bank", amount: "Up to ₹5 lakh", rate: "Bank-set", term: "Up to 5 years", note: "No collateral; latest ITR-V still needed." },
-  { id: "bank", name: "Small business term loan", authority: "Selected member bank", amount: "₹12 lakh", rate: "From 13.5%", term: "5 years", note: "Covers the full request, with a higher cost and stronger income proof." },
+  { id: "mudra", name: "Mudra Kishor", authority: "SIDBI / member bank", annualRate: 10.5, termMonths: 60, note: "Within the ₹5 lakh Kishor cap; no collateral, but the latest ITR-V is still needed." },
+  { id: "bank", name: "Small business term loan", authority: "Selected member bank", annualRate: 13.5, termMonths: 60, note: "Covers the same ₹4 lakh request at a higher illustrative cost and with stronger income proof." },
 ] as const;
+
+function monthlyPayment(principal: number, annualRate: number, months: number) {
+  const monthlyRate = annualRate / 1_200;
+  return Math.round((principal * monthlyRate * (1 + monthlyRate) ** months) / ((1 + monthlyRate) ** months - 1));
+}
 
 export function LoanWorkflow() {
   const { language, t } = useI18n();
@@ -81,17 +86,16 @@ export function LoanWorkflow() {
     return <ProcedureShell authority="Citizen eligibility engine" currentStep={0} description={t("loanWorkflowBody")} procedureId="business-loan" steps={steps} title={t("loanWorkflowTitle")}><StepCard eyebrow={t("noLinkedBusiness")} title={t("switchArjunTitle")} body={t("switchArjunBody")}><Button onClick={() => switchPersona("person:arjun")} variant="secondary">{t("switchArjun")}</Button></StepCard></ProcedureShell>;
   }
 
-  const affordability = Math.max(0, 100 - Math.min(100, Math.round((desiredAmount / business.attrs.turnoverFY25) * 100)));
   const content = complete ? (
     <CompletionCard title={t("loanCompleteTitle")} body={t("loanCompleteBody")}><LinkButton href="/dashboard" variant="inverse">{t("viewApplication")} <ArrowRight aria-hidden className="size-4" /></LinkButton></CompletionCard>
   ) : (
     <div className="grid gap-7">
-      <article className="grid gap-6 rounded-[8px] border border-green-deep/30 bg-green-tint p-6 sm:grid-cols-[minmax(0,1fr)_16rem] sm:items-end sm:p-8">
+      <article className="grid gap-6 rounded-[8px] border border-green-deep/30 bg-green-tint p-6 sm:grid-cols-[minmax(0,1fr)_14rem] sm:items-end sm:p-8">
         <div className="grid gap-4"><div className="flex flex-wrap items-center gap-2"><StatusPill label={t("potentiallyEligible")} tone="warning" /><SimulatedChip authority="SIDBI / member banks" /></div><div className="grid gap-2"><p className="eyebrow">{t("recommendation")}</p><h2 className="font-display text-4xl font-semibold leading-none tracking-[-0.04em] text-ink">{selectedOption.name}</h2><p className="max-w-2xl text-sm leading-6 text-ink-mute">{risk || localRisk}</p></div></div>
-        <div className="grid gap-3"><div className="flex items-end justify-between gap-3"><span className="text-xs font-bold text-ink-mute">{formatCurrency(desiredAmount)}</span><strong className="font-display text-2xl text-ink">{affordability}%</strong></div><div className="h-2 overflow-hidden rounded-[4px] bg-paper-shade"><div className="h-full rounded-[4px] bg-green-deep" style={{ width: `${affordability}%` }} /></div><span className="text-xs text-ink-mute">{business.attrs.name} · {formatCurrency(business.attrs.turnoverFY25)}</span></div>
+        <div className="grid gap-2 border-y border-green-deep/20 py-4"><span className="text-xs text-ink-mute">{t("requestedAmount")}</span><strong className="font-display text-3xl font-bold text-ink">{formatCurrency(desiredAmount)}</strong><span className="text-xs text-ink-mute">{business.attrs.name} · {formatCurrency(business.attrs.turnoverFY25)}</span></div>
       </article>
 
-      <section className="grid gap-4"><h2 className="font-display text-3xl font-semibold tracking-[-0.035em] text-ink">{steps[1].title}</h2><div className="grid gap-4 md:grid-cols-2">{loanOptions.map((option) => <button aria-pressed={selected === option.id} className={`grid min-h-60 content-between gap-8 rounded-[8px] border p-5 text-left transition-colors ${selected === option.id ? "border-green-deep bg-green-tint" : "border-paper-line bg-paper-shade hover:border-green-deep/35"}`} key={option.id} onClick={() => { setSelected(option.id); setRisk(""); }}><div className="flex items-start justify-between gap-3"><Landmark aria-hidden className="size-5 text-green-deep" /><StatusPill label={option.rate} tone={selected === option.id ? "info" : "neutral"} /></div><div className="grid gap-2"><strong className="font-display text-2xl font-semibold leading-tight text-ink">{option.name}</strong><span className="text-sm font-bold text-green-deep">{option.amount} · {option.term}</span><p className="text-xs leading-5 text-ink-mute">{option.note}</p></div></button>)}</div></section>
+      <section className="grid gap-4"><h2 className="font-display text-3xl font-semibold tracking-[-0.035em] text-ink">{steps[1].title}</h2><div className="grid gap-4 md:grid-cols-2">{loanOptions.map((option) => { const emi = monthlyPayment(desiredAmount, option.annualRate, option.termMonths); const interest = (emi * option.termMonths) - desiredAmount; return <button aria-pressed={selected === option.id} className={`grid min-h-72 content-between gap-6 rounded-[8px] border p-5 text-left transition-colors ${selected === option.id ? "border-green-deep bg-green-tint" : "border-paper-line bg-paper-shade hover:border-green-deep/35"}`} key={option.id} onClick={() => { setSelected(option.id); setRisk(""); }}><div className="flex items-start justify-between gap-3"><Landmark aria-hidden className="size-5 text-green-deep" /><StatusPill label={`${option.annualRate}%`} tone={selected === option.id ? "info" : "neutral"} /></div><div className="grid gap-3"><strong className="font-display text-2xl font-semibold leading-tight text-ink">{option.name}</strong><div className="grid grid-cols-2 border-y border-paper-line text-xs"><span className="grid gap-1 border-r border-paper-line py-3 pr-3 text-ink-mute">{t("estimatedEmi")}<b className="font-display text-lg text-ink">{formatCurrency(emi)}</b></span><span className="grid gap-1 py-3 pl-3 text-ink-mute">{t("totalInterest")}<b className="font-display text-lg text-ink">{formatCurrency(interest)}</b></span></div><p className="text-xs leading-5 text-ink-mute">{option.note}</p></div></button>; })}</div></section>
 
       <section className="grid gap-4 md:grid-cols-3">
         <article className="grid content-start gap-4 rounded-[8px] border border-paper-line bg-paper-shade p-5"><ShieldCheck aria-hidden className="size-5 text-green-deep" /><h3 className="font-display text-2xl font-semibold text-ink">{t("whyThisFits")}</h3><div className="grid gap-2">{mudra.passedReasons.slice(0, 3).map((reason) => <p className="flex gap-2 text-xs leading-5 text-ink-mute" key={reason}><Check aria-hidden className="mt-0.5 size-3.5 shrink-0 text-green-deep" />{localizeRuleExplanation(language, reason)}</p>)}</div></article>

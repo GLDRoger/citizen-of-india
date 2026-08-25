@@ -9,7 +9,6 @@ import { FilePanel } from "@/components/ui/file-panel";
 import { useAuthStore } from "@/features/auth/store";
 import { useCitizenStore } from "@/features/graph/store";
 import { useI18n } from "@/i18n/use-i18n";
-import { cn } from "@/lib/cn";
 import { buildIntentContext, classifyIntent } from "../intent-client";
 import type { IntentResponse } from "../schema";
 
@@ -26,7 +25,6 @@ export function IntentComposer() {
   const [text, setText] = useState("");
   const [result, setResult] = useState<IntentResponse | null>(null);
   const [loading, setLoading] = useState(false);
-  const [listening, setListening] = useState(false);
   const resultRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -45,12 +43,8 @@ export function IntentComposer() {
   };
 
   const mockVoice = () => {
-    setListening(true);
-    window.setTimeout(() => {
-      const transcript = language === "kn" ? "ಅಪ್ಪ ತೀರಿಕೊಂಡರು, ಮುಂದೇನು ಮಾಡಬೇಕು?" : language === "hi" ? "पापा की मृत्यु हो गई, अब क्या करना होगा?" : "papa ki death ho gayi, kya karna hoga?";
-      setText(transcript);
-      setListening(false);
-    }, 900);
+    const transcript = language === "kn" ? "ಅಪ್ಪ ತೀರಿಕೊಂಡರು, ಮುಂದೇನು ಮಾಡಬೇಕು?" : language === "hi" ? "पापा की मृत्यु हो गई, अब क्या करना होगा?" : "papa ki death ho gayi, kya karna hoga?";
+    setText(transcript);
   };
   const resultHref = result?.route === "obligations"
     ? /(challan|चालान|ದಂಡ)/iu.test(text) ? "/workflows/obligations" : "/#money"
@@ -65,7 +59,7 @@ export function IntentComposer() {
           <textarea className="min-h-32 w-full resize-none border border-ink/20 bg-paper p-4 font-display text-[1.75rem] font-medium leading-[1.05] text-ink outline-none placeholder:text-ink-mute focus:border-l-2 focus:border-l-green-deep sm:min-h-32 sm:text-[2.35rem]" maxLength={800} onChange={(event) => setText(event.target.value)} onKeyDown={(event) => { if ((event.metaKey || event.ctrlKey) && event.key === "Enter") void submit(); }} placeholder={t("intentPlaceholder")} value={text} />
         </label>
         <div className="flex items-center justify-between gap-3 border-t border-paper-line pt-3">
-          <button className="flex min-h-11 items-center gap-2 rounded-[4px] px-2 text-xs font-bold text-ink-mute transition hover:bg-paper-line hover:text-ink" onClick={mockVoice} type="button"><Mic aria-hidden className={cn("size-4", listening && "animate-pulse text-brick")} />{listening ? t("listening") : t("voiceInput")}</button>
+          <button className="flex min-h-11 items-center gap-2 rounded-[4px] px-2 text-xs font-bold text-ink-mute transition hover:bg-paper-line hover:text-ink" onClick={mockVoice} type="button"><Mic aria-hidden className="size-4" />{t("demoVoice")}</button>
           <Button className="min-h-11 shrink-0 px-4" loading={loading} onClick={() => void submit()}>{t("send")} <Send aria-hidden className="size-4" /></Button>
         </div>
       </FilePanel>

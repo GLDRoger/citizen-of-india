@@ -86,6 +86,10 @@ function mutationAffectsPerson(graph: CitizenGraph, mutation: GraphMutation, per
       const edge = graph.edges.find((candidate) => candidate.id === mutation.edgeId);
       return edge?.from === personId || edge?.to === personId;
     }
+    case "patchEdgeAttrs": {
+      const edge = graph.edges.find((candidate) => candidate.id === mutation.edgeId);
+      return edge?.from === personId || edge?.to === personId;
+    }
     case "patchAttrs": {
       if (mutation.nodeId === personId) return true;
       const application = getNodeByType(graph, mutation.nodeId, "application");

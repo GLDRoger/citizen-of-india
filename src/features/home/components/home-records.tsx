@@ -90,6 +90,7 @@ function DocumentsRail({ personId }: { personId: string }) {
 export function HomeRecords({ personId }: { personId: string }) {
   const { language, t } = useI18n();
   const graph = useCitizenStore((state) => state.graph);
+  const commit = useCitizenStore((state) => state.commit);
   const notices = getNotices(graph, personId);
   const unread = notices.filter((notice) => !notice.read).length;
   const [selectedId, setSelectedId] = useState(notices[0]?.node.id ?? "");
@@ -98,8 +99,12 @@ export function HomeRecords({ personId }: { personId: string }) {
   const events = getActivityEvents(graph, personId);
   const locale = language === "hi" ? "hi-IN" : language === "kn" ? "kn-IN" : "en-IN";
 
-  const openNotice = (id: string) => {
-    setSelectedId(id);
+  const openNotice = (notice: NoticeView) => {
+    setSelectedId(notice.node.id);
+    if (!notice.read) {
+      const edge = graph.edges.find((candidate) => candidate.type === "subjectOf" && candidate.from === personId && candidate.to === notice.node.id && candidate.status === "active");
+      if (edge) commit({ actorId: personId, labelKey: "eventNoticeRead", labelParams: { noticeId: notice.node.id }, procedureId: "notice-reading", mutations: [{ type: "patchEdgeAttrs", edgeId: edge.id, attrs: { read: true } }] });
+    }
     window.requestAnimationFrame(() => detailRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" }));
   };
 
@@ -107,7 +112,7 @@ export function HomeRecords({ personId }: { personId: string }) {
     <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_19rem] lg:items-start">
       <section className="grid gap-5">
         <SectionHeader eyebrow={`${unread} ${t("unreadNotices").toLowerCase()}`} title={t("inbox")} />
-        <div className="border-y border-paper-line">{notices.map((notice) => { const suspicious = isSuspiciousNotice(notice); return <ListRow action={<Button className="min-h-10 px-4" onClick={() => openNotice(notice.node.id)} variant="secondary">{t("view")}</Button>} icon={suspicious ? AlertTriangle : Bell} key={notice.node.id} meta={`${notice.node.attrs.sender} · ${formatDate(notice.node.attrs.receivedOn, language)}`} status={<StatusPill label={suspicious ? t("suspicious") : notice.read ? t("done") : t("unread")} tone={suspicious ? "warning" : notice.read ? "neutral" : "info"} />} title={suspicious ? t("suspiciousMessageDetected") : localizeNodeTitle(language, notice.node.id, notice.node.attrs.subject)} />; })}</div>
+        <div className="border-y border-paper-line">{notices.map((notice) => { const suspicious = isSuspiciousNotice(notice); return <ListRow action={<Button className="min-h-10 px-4" onClick={() => openNotice(notice)} variant="secondary">{t("view")}</Button>} icon={suspicious ? AlertTriangle : Bell} key={notice.node.id} meta={`${notice.node.attrs.sender} · ${formatDate(notice.node.attrs.receivedOn, language)}`} status={<StatusPill label={suspicious ? t("suspicious") : notice.read ? t("done") : t("unread")} tone={suspicious ? "warning" : notice.read ? "neutral" : "info"} />} title={suspicious ? t("suspiciousMessageDetected") : localizeNodeTitle(language, notice.node.id, notice.node.attrs.subject)} />; })}</div>
         {selected ? <div ref={detailRef}><NoticeDetail key={selected.node.id} notice={selected} /></div> : <EmptyState title={t("noItems")} />}
         <section className="grid gap-5"><SectionHeader title={t("recentActivity")} />{events.length ? <ol className="border-y border-paper-line">{events.slice(0, 6).map((event) => <li className="grid grid-cols-[auto_minmax(0,1fr)] gap-4 border-b border-paper-line py-4 last:border-b-0" key={event.id}><span className="mt-1.5 size-2 rounded-[4px] bg-green-deep" /><div><strong className="block text-sm text-ink">{localizeEventLabel(event, language)}</strong><span className="text-xs text-ink-mute">{new Intl.DateTimeFormat(locale, { dateStyle: "medium", timeStyle: "short", hour12: false }).format(new Date(event.occurredAt))}</span></div></li>)}</ol> : <EmptyState title={t("noActivity")} />}</section>
       </section>

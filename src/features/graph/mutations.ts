@@ -53,6 +53,14 @@ export function applyMutation(graph: CitizenGraph, mutation: GraphMutation): Cit
         ),
       };
     }
+    case "patchEdgeAttrs": {
+      const exists = graph.edges.some((edge) => edge.id === mutation.edgeId);
+      if (!exists) throw new Error(`Cannot patch unknown edge ${mutation.edgeId}.`);
+      return {
+        ...graph,
+        edges: graph.edges.map((edge) => edge.id === mutation.edgeId ? graphEdgeSchema.parse({ ...edge, attrs: { ...edge.attrs, ...mutation.attrs } }) : edge),
+      };
+    }
     case "patchAttrs": {
       const exists = graph.nodes.some((node) => node.id === mutation.nodeId);
       if (!exists) {
