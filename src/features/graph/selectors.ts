@@ -315,13 +315,20 @@ export interface TaskView {
 }
 
 export function getThingsToDo(graph: CitizenGraph, personId: string): TaskView[] {
+  const obligationHrefs: Record<string, string> = {
+    "obl:echallan-500": "/workflows/obligations",
+    "obl:bbmp-property-tax": "/workflows/property-tax",
+    "obl:gstr3b-sep": "/workflows/gstr3b",
+    "obl:passport-renewal": "/workflows/passport-renewal",
+    "obl:itr-refund": "/workflows/refund-track",
+  };
   const obligationTasks = getObligations(graph, personId)
     .filter((node) => !["paid", "received", "completed"].includes(node.attrs.status ?? "due"))
     .map((node) => ({
       id: node.id,
       title: node.attrs.title,
       meta: node.attrs.dueDate ? `${daysUntil(node.attrs.dueDate)} days left` : node.attrs.authority,
-      href: node.id === "obl:echallan-500" ? "/workflows/obligations" : "/activity",
+      href: obligationHrefs[node.id] ?? "/#money",
       urgent: node.attrs.dueDate ? daysUntil(node.attrs.dueDate) <= 14 : false,
     }));
   const applicationTasks = getApplications(graph, personId)

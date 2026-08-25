@@ -52,6 +52,9 @@ export function IntentComposer() {
       setListening(false);
     }, 900);
   };
+  const resultHref = result?.route === "obligations"
+    ? /(challan|चालान|ದಂಡ)/iu.test(text) ? "/workflows/obligations" : "/#money"
+    : result ? `/workflows/${result.route}` : "/";
 
   return (
     <section className="grid min-w-0 gap-4">
@@ -85,7 +88,7 @@ export function IntentComposer() {
             </ol>
             {result.clarification ? <p className="text-sm font-bold text-ink">{result.clarification}</p> : null}
           </div>
-          <Link className="inline-flex min-h-12 items-center justify-center gap-2 rounded-[8px] bg-green-deep px-5 text-sm font-bold text-paper transition hover:bg-green-deep" href={`/workflows/${result.route}`}>
+          <Link className="inline-flex min-h-12 items-center justify-center gap-2 rounded-[8px] bg-green-deep px-5 text-sm font-bold text-paper transition hover:bg-green-deep" href={resultHref}>
             {result.route === "service-unavailable" ? t("view") : t("start")} <ArrowRight aria-hidden className="size-4" />
           </Link>
         </article>

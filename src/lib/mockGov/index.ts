@@ -58,6 +58,14 @@ export function processPayment(input: { purpose: string; amount: number; payerId
   });
 }
 
+export function submitGstr3b(input: { businessId: string; period: string }) {
+  return mockResponse(`gstr3b:${input.businessId}:${input.period}`, "GSTN simulated filing desk", {
+    acknowledgement: reference("GST-ARN", `${input.businessId}:${input.period}`),
+    period: input.period,
+    status: "filed" as const,
+  });
+}
+
 export function submitClaim(input: { kind: string; claimantId: string }) {
   return mockResponse(`claim:${input.kind}:${input.claimantId}`, "EPFO", {
     claimReference: reference("EPFO-CLM", `${input.kind}:${input.claimantId}`),

@@ -16,6 +16,9 @@ export function getApplicationHref(application: ApplicationNode) {
       return "/workflows/start-business";
     case "cybercrime":
       return "/workflows/scam-check";
+    case "property-mutation":
+    case "vehicle-transfer":
+      return "/workflows/death#family-briefing";
     default:
       return application.attrs.relatedTo?.startsWith("doc:") ? "/documents" : null;
   }

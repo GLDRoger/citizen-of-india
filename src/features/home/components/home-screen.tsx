@@ -41,6 +41,12 @@ function TaskLedgerRow({ application, index, obligation, task }: { application?:
       ? t("statusPrefix", { status: localizedStatus })
       : localizedStatus ?? task.meta;
   const title = localizeNodeTitle(language, task.id, task.title);
+  const actionLabel = task.id === "obl:echallan-500" ? t("pay")
+    : task.id === "obl:bbmp-property-tax" ? t("payPropertyTax")
+      : task.id === "obl:gstr3b-sep" ? t("fileGstr")
+        : task.id === "obl:passport-renewal" ? t("reviewScope")
+          : task.id === "obl:itr-refund" ? t("trackRefund")
+            : t("view");
 
   return (
     <div className="grid min-h-16 grid-cols-[minmax(0,3fr)_minmax(0,2fr)] items-center gap-4 border-b border-paper-line py-3 last:border-b-0">
@@ -50,7 +56,7 @@ function TaskLedgerRow({ application, index, obligation, task }: { application?:
       </div>
       <div className="min-w-0 text-right">
         <strong className="block font-display text-sm font-bold leading-5 tabular-nums text-ink">{value}</strong>
-        <Link className="mt-1 inline-block text-xs underline" href={task.href}>{t("view")}</Link>
+        <Link className="mt-1 inline-block text-xs underline" href={task.href}>{actionLabel}</Link>
       </div>
     </div>
   );
@@ -93,9 +99,9 @@ export function HomeScreen() {
         <IntentComposer />
       </section>
       <FilePanel label={t("mySnapshot")}><div className="grid grid-cols-2 gap-x-6 lg:grid-cols-4"><SummaryLedgerItem label={t("deadlines")} value={deadlineCount} /><SummaryLedgerItem label={t("expiry")} value={expiringDocuments.length} /><SummaryLedgerItem label={t("pendingApplications")} value={applications.length} /><SummaryLedgerItem label={t("due")} value={formatCurrency(money.payable)} /></div></FilePanel>
-      <section className="grid gap-6" id="attention">
+      <section className="grid gap-6" id="money">
         <div className="grid gap-2"><p className="eyebrow">{unreadNotices} {t("unreadNotices").toLowerCase()}</p><h2 className="max-w-4xl font-display text-[clamp(2.5rem,7vw,5.4rem)] font-semibold leading-[0.9] tracking-[-0.05em] text-ink">{t("dashboardHeadline")}</h2><p className="max-w-2xl text-sm leading-6 text-ink-mute sm:text-base">{t("dashboardBody")}</p></div>
-        <FilePanel label={t("thingsToDo")}>{tasks.map((task, index) => <TaskLedgerRow application={applicationsById.get(task.id)} index={index} key={task.id} obligation={obligationsById.get(task.id)} task={task} />)}</FilePanel>
+        <FilePanel label={t("thingsToDo")}>{tasks.length ? tasks.map((task, index) => <TaskLedgerRow application={applicationsById.get(task.id)} index={index} key={task.id} obligation={obligationsById.get(task.id)} task={task} />) : <p className="border-y border-paper-line py-7 text-sm text-ink-mute">{t("nothingWaiting")}</p>}</FilePanel>
         <HomeRecords personId={personId} />
       </section>
     </Page>

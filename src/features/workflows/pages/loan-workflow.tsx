@@ -78,7 +78,7 @@ export function LoanWorkflow() {
   };
 
   if (!business || !mudra) {
-    return <ProcedureShell authority="Citizen eligibility engine" currentStep={0} description={t("loanWorkflowBody")} steps={steps} title={t("loanWorkflowTitle")}><StepCard eyebrow={t("noLinkedBusiness")} title={t("switchArjunTitle")} body={t("switchArjunBody")}><Button onClick={() => switchPersona("person:arjun")} variant="secondary">{t("switchArjun")}</Button></StepCard></ProcedureShell>;
+    return <ProcedureShell authority="Citizen eligibility engine" currentStep={0} description={t("loanWorkflowBody")} procedureId="business-loan" steps={steps} title={t("loanWorkflowTitle")}><StepCard eyebrow={t("noLinkedBusiness")} title={t("switchArjunTitle")} body={t("switchArjunBody")}><Button onClick={() => switchPersona("person:arjun")} variant="secondary">{t("switchArjun")}</Button></StepCard></ProcedureShell>;
   }
 
   const affordability = Math.max(0, 100 - Math.min(100, Math.round((desiredAmount / business.attrs.turnoverFY25) * 100)));
@@ -101,5 +101,5 @@ export function LoanWorkflow() {
     </div>
   );
 
-  return <ProcedureShell authority="Citizen eligibility engine + simulated member banks" complete={complete} currentStep={complete ? 3 : risk ? 2 : 1} description={t("loanWorkflowBody")} steps={steps} title={t("loanWorkflowTitle")}>{content}</ProcedureShell>;
+  return <ProcedureShell authority="Citizen eligibility engine + simulated member banks" complete={complete} currentStep={complete ? 3 : risk ? 2 : 1} description={t("loanWorkflowBody")} procedureId="business-loan" steps={steps} title={t("loanWorkflowTitle")}>{content}</ProcedureShell>;
 }

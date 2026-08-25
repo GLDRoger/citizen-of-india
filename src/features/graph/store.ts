@@ -20,6 +20,7 @@ interface CommitInput {
 interface CitizenStore {
   graph: CitizenGraph;
   hydrated: boolean;
+  lastEventId?: string;
   commit: (input: CommitInput) => void;
   resetDemo: () => void;
   setHydrated: (hydrated: boolean) => void;
@@ -31,10 +32,11 @@ export const useCitizenStore = create<CitizenStore>()(
       graph: createSeedGraph(),
       hydrated: false,
       commit: (input) =>
-        set((state) => ({
-          graph: applyTransaction(state.graph, createGraphEvent(input)),
-        })),
-      resetDemo: () => set({ graph: createSeedGraph() }),
+        set((state) => {
+          const event = createGraphEvent(input);
+          return { graph: applyTransaction(state.graph, event), lastEventId: event.id };
+        }),
+      resetDemo: () => set({ graph: createSeedGraph(), lastEventId: undefined }),
       setHydrated: (hydrated) => set({ hydrated }),
     }),
     {

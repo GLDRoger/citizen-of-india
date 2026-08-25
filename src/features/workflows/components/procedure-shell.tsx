@@ -8,6 +8,7 @@ import { FilePanel } from "@/components/ui/file-panel";
 import { SimulatedChip, StatusPill } from "@/components/ui/status";
 import { useI18n } from "@/i18n/use-i18n";
 import { StepTimeline } from "./step-timeline";
+import { MutationReceipt } from "./mutation-receipt";
 
 export interface ProcedureStep {
   id: string;
@@ -21,11 +22,12 @@ interface ProcedureShellProps {
   complete?: boolean;
   currentStep: number;
   description: string;
+  procedureId: string;
   steps: ProcedureStep[];
   title: string;
 }
 
-export function ProcedureShell({ title, description, authority, steps, currentStep, children, complete = false }: ProcedureShellProps) {
+export function ProcedureShell({ title, description, authority, steps, currentStep, children, complete = false, procedureId }: ProcedureShellProps) {
   const { t } = useI18n();
   const progress = complete ? 100 : Math.round((Math.min(currentStep, steps.length) / steps.length) * 100);
   return (
@@ -38,6 +40,7 @@ export function ProcedureShell({ title, description, authority, steps, currentSt
         </div>
         <StepTimeline complete={complete} currentStep={currentStep} steps={steps} />
       </header>
+      <MutationReceipt procedureId={procedureId} />
       <section className="min-w-0">{children}</section>
     </Page>
   );

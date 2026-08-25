@@ -14,6 +14,10 @@ const workflowLabels: Record<string, MessageKey> = {
   "scam-check": "scamService",
   "service-unavailable": "serviceUnavailable",
   "start-business": "startBusinessService",
+  "property-tax": "payPropertyTax",
+  gstr3b: "fileGstr",
+  "passport-renewal": "reviewScope",
+  "refund-track": "trackRefund",
 };
 
 interface BreadcrumbItem {

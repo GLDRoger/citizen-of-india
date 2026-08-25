@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { ArrowRight, Building2, CarFront, FileCheck2, HeartHandshake, Landmark, ShieldCheck } from "lucide-react";
 import { useState } from "react";
-import { Button, LinkButton } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { VerificationBadge } from "@/components/ui/status";
 import { useAuthStore } from "@/features/auth/store";
 import { getOwnedAssets, getPerson } from "@/features/graph/selectors";
@@ -13,7 +13,8 @@ import type { Language } from "@/i18n/messages";
 import { useI18n } from "@/i18n/use-i18n";
 import { formatCurrency, formatDate, getInitials, maskIdentifier } from "@/lib/format";
 import { issueDeathCertificate, registerDeath, requestFamilyConsent, submitClaim } from "@/lib/mockGov";
-import { CompletionCard, ProcedureShell, StepCard, type ProcedureStep } from "../components/procedure-shell";
+import { FamilyBriefing } from "../components/family-briefing";
+import { ProcedureShell, StepCard, type ProcedureStep } from "../components/procedure-shell";
 
 const stepsByLanguage: Record<Language, ProcedureStep[]> = {
   en: [
@@ -166,7 +167,7 @@ export function DeathWorkflow() {
   const relationshipTitle = personId === "person:sunita" ? t("deathRelationshipHusband") : personId === "person:arjun" ? t("deathRelationshipFather") : t("deathRelationshipFamily");
   const relationshipBody = personId === "person:sunita" ? t("deathSpouseFound") : t("deathFamilyFound");
   const content = complete ? (
-    <CompletionCard title={t("deathCompleteTitle")} body={t("deathCompleteBody")}><div className="flex flex-wrap gap-2"><Button onClick={openSunitaEligibility} variant="inverse">{t("deathSeeSunitaEligibility")} <ArrowRight aria-hidden className="size-4" /></Button><LinkButton href="/" variant="secondary">{t("deathViewAuditTrail")}</LinkButton></div></CompletionCard>
+    <FamilyBriefing onViewSunita={openSunitaEligibility} />
   ) : currentStep === 0 ? (
     <StepCard eyebrow={t("deathVerifiedFamilyRecords")} title={relationshipTitle} body={`${relationshipBody} ${t("deathConfirmBeforeChange")}`}><div className="grid gap-4 rounded-[8px] bg-paper-line p-4 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:items-center"><span className="grid size-12 place-items-center rounded-[50%] border border-paper-line bg-paper-shade font-display text-sm font-bold text-ink">{getInitials(rajesh.attrs.name)}</span><div><strong className="block text-ink">{rajesh.attrs.name}</strong><span className="text-xs text-ink-mute">{t("deathPensionerLocation")}</span></div><VerificationBadge verification={rajesh.verification} /></div><Button onClick={identify}>{t("deathConfirmRajesh")} <ArrowRight aria-hidden className="size-4" /></Button></StepCard>
   ) : currentStep === 1 ? (
@@ -181,5 +182,5 @@ export function DeathWorkflow() {
     <StepCard eyebrow={t("deathKeepVisible")} title={t("deathDownstreamTitle")} body={t("deathDownstreamBody")}><div className="grid gap-3 sm:grid-cols-2">{assets.map((asset) => <div className="flex items-center gap-3 rounded-[8px] bg-paper-line p-4" key={asset.id}>{asset.type === "property" ? <Building2 aria-hidden className="size-5 text-brick" /> : <CarFront aria-hidden className="size-5 text-green-deep" />}<div className="min-w-0"><strong className="block truncate text-sm">{asset.type === "property" ? asset.attrs.authority : asset.type === "vehicle" ? `${asset.attrs.make} ${asset.attrs.model}` : "—"}</strong><span className="text-xs text-ink-mute">{t("deathSuccessionDraft")}</span></div></div>)}</div><Button onClick={finish}>{t("deathCreateDrafts")} <ArrowRight aria-hidden className="size-4" /></Button></StepCard>
   );
 
-  return <ProcedureShell authority={t("deathAuthority")} complete={complete} currentStep={currentStep} description={t("deathWorkflowBody")} steps={steps} title={t("deathWorkflowTitle")}>{error ? <p className="mb-3 rounded-xl bg-brick-tint p-3 text-sm font-semibold text-brick" role="alert">{error}</p> : null}{content}</ProcedureShell>;
+  return <ProcedureShell authority={t("deathAuthority")} complete={complete} currentStep={currentStep} description={t("deathWorkflowBody")} procedureId="death-rajesh" steps={steps} title={t("deathWorkflowTitle")}>{error ? <p className="mb-3 rounded-xl bg-brick-tint p-3 text-sm font-semibold text-brick" role="alert">{error}</p> : null}{content}</ProcedureShell>;
 }
