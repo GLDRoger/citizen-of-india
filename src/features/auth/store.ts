@@ -11,21 +11,16 @@ const persistedAuthSchema = z.object({
   personId: z.string().nullable(),
   language: z.enum(["en", "hi", "kn"]),
   dataSaver: z.boolean(),
-  consentedPersonIds: z.array(z.string()),
 }).refine(
-  (state) =>
-    (state.personId === null || profileIds.has(state.personId)) &&
-    state.consentedPersonIds.every((personId) => profileIds.has(personId)),
+  (state) => state.personId === null || profileIds.has(state.personId),
 );
 
 interface AuthStore {
   personId: string | null;
   language: Language;
   dataSaver: boolean;
-  consentedPersonIds: string[];
   hydrated: boolean;
-  authenticate: (phone: string, otp: string) => { ok: true; personId: string } | { ok: false; reason: string };
-  giveConsent: () => void;
+  openProfile: (phone: string) => { ok: true; personId: string } | { ok: false; reason: string };
   signOut: () => void;
   switchPersona: (personId: string) => void;
   setLanguage: (language: Language) => void;
@@ -35,31 +30,18 @@ interface AuthStore {
 
 export const useAuthStore = create<AuthStore>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       personId: null,
       language: "en",
       dataSaver: false,
-      consentedPersonIds: [],
       hydrated: false,
-      authenticate: (phone, otp) => {
-        if (!/^\d{6}$/.test(otp)) {
-          return { ok: false, reason: "Enter any 6-digit access code." };
-        }
+      openProfile: (phone) => {
         const login = seedLogins.find((candidate) => candidate.phone === phone);
         if (!login) {
           return { ok: false, reason: "Choose one of the available profiles below." };
         }
         set({ personId: login.personId });
         return { ok: true, personId: login.personId };
-      },
-      giveConsent: () => {
-        const personId = get().personId;
-        if (!personId) return;
-        set((state) => ({
-          consentedPersonIds: state.consentedPersonIds.includes(personId)
-            ? state.consentedPersonIds
-            : [...state.consentedPersonIds, personId],
-        }));
       },
       signOut: () => set({ personId: null }),
       switchPersona: (personId) => {
@@ -73,13 +55,18 @@ export const useAuthStore = create<AuthStore>()(
     }),
     {
       name: "citizen-of-india-auth",
-      version: 1,
+      version: 2,
       storage: createJSONStorage(() => localStorage),
+      migrate: (persistedState) => {
+        const parsed = persistedAuthSchema.safeParse(persistedState);
+        return parsed.success
+          ? parsed.data
+          : { personId: null, language: "en", dataSaver: false };
+      },
       partialize: (state) => ({
         personId: state.personId,
         language: state.language,
         dataSaver: state.dataSaver,
-        consentedPersonIds: state.consentedPersonIds,
       }),
       merge: (persistedState, currentState) => {
         const parsed = persistedAuthSchema.safeParse(persistedState);

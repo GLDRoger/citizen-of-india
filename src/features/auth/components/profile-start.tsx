@@ -1,12 +1,13 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, type ReactNode } from "react";
+import { useEffect } from "react";
 import { PageSkeleton } from "@/components/ui/feedback";
 import { useCitizenStore } from "@/features/graph/store";
 import { useAuthStore } from "../store";
+import { LoginScreen } from "./login-screen";
 
-export function AuthGate({ children }: { children: ReactNode }) {
+export function ProfileStart() {
   const router = useRouter();
   const authHydrated = useAuthStore((state) => state.hydrated);
   const graphHydrated = useCitizenStore((state) => state.hydrated);
@@ -14,9 +15,9 @@ export function AuthGate({ children }: { children: ReactNode }) {
   const hydrated = authHydrated && graphHydrated;
 
   useEffect(() => {
-    if (hydrated && !personId) router.replace("/start");
+    if (hydrated && personId) router.replace("/home");
   }, [hydrated, personId, router]);
 
-  if (!hydrated || !personId) return <PageSkeleton />;
-  return children;
+  if (!hydrated || personId) return <PageSkeleton />;
+  return <LoginScreen />;
 }

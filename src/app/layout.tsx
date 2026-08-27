@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Anek_Devanagari, Anek_Kannada, Anek_Latin, Geist } from "next/font/google";
 import type { ReactNode } from "react";
+import { DocumentLanguage } from "@/i18n/document-language";
 import "./globals.css";
 
 const bodyFont = Geist({
@@ -37,18 +38,18 @@ const kannadaFont = Anek_Kannada({
 
 export const metadata: Metadata = {
   title: {
-    default: "Citizen — independent prototype",
-    template: "%s — Citizen independent prototype",
+    default: "Citizen | Independent prototype",
+    template: "%s | Citizen",
   },
-  description: "An independent prototype using a synthetic family's records and simulated service responses.",
-  applicationName: "Citizen — independent prototype",
+  description: "A public-services prototype with fictional records and demo-only payments, filings and certificates.",
+  applicationName: "Citizen | Independent prototype",
   robots: { index: false, follow: false },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html data-scroll-behavior="smooth" lang="en" className={`${bodyFont.variable} ${displayFont.variable} ${devanagariFont.variable} ${kannadaFont.variable} h-full antialiased`}>
-      <body className="min-h-full">{children}</body>
+      <body className="min-h-full"><DocumentLanguage />{children}</body>
     </html>
   );
 }
