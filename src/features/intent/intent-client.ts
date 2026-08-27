@@ -1,17 +1,26 @@
 import type { CitizenGraph } from "@/features/graph/schema";
 import {
   getApplications,
+  getDocuments,
+  getEligibility,
   getObligations,
   getOwnedAssets,
   getPerson,
   getRelationshipViews,
 } from "@/features/graph/selectors";
+import { getAvailableServices, isBenefitVisibleInDemo } from "@/features/services/availability";
 import { classifyIntentLocally } from "./intent-fallback";
-import { intentResponseSchema, type IntentContext } from "./schema";
+import type { IntentContext, RoutableIntent } from "./schema";
 
 export function buildIntentContext(graph: CitizenGraph, personId: string): IntentContext {
   const person = getPerson(graph, personId);
   if (!person) throw new Error("The active profile is missing from the graph.");
+  const applications = getApplications(graph, personId);
+  const availableWorkflows: RoutableIntent[] = [...getAvailableServices(graph, personId)];
+  if (getDocuments(graph, personId).length) availableWorkflows.push("documents");
+  const hasBenefitJourney = applications.some((application) => application.attrs.kind === "benefit")
+    || getEligibility(graph, personId).some((result) => result.benefit.id !== "ben:mudra-kishor" && isBenefitVisibleInDemo(result.benefit.id));
+  if (hasBenefitJourney) availableWorkflows.push("benefit-application");
   return {
     person: {
       id: person.id,
@@ -29,7 +38,7 @@ export function buildIntentContext(graph: CitizenGraph, personId: string): Inten
       direction: node.attrs.direction,
       status: node.attrs.status,
     })),
-    applications: getApplications(graph, personId).map((node) => ({
+    applications: applications.map((node) => ({
       id: node.id,
       title: node.attrs.title,
       status: node.attrs.status,
@@ -37,19 +46,10 @@ export function buildIntentContext(graph: CitizenGraph, personId: string): Inten
     businesses: getOwnedAssets(graph, personId)
       .filter((node) => node.type === "business")
       .map((node) => ({ id: node.id, name: node.attrs.name, entityType: node.attrs.entityType })),
+    availableWorkflows,
   };
 }
 
-export async function classifyIntent(text: string, context: IntentContext) {
-  try {
-    const response = await fetch("/api/intent", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ text, context }),
-    });
-    if (!response.ok) return classifyIntentLocally(text);
-    return intentResponseSchema.parse(await response.json());
-  } catch {
-    return classifyIntentLocally(text);
-  }
+export function classifyIntent(text: string, context: IntentContext) {
+  return classifyIntentLocally(text, context);
 }

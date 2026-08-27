@@ -1,44 +1,29 @@
-import { z } from "zod";
+import type { ServiceWorkflowSlug } from "@/features/services/availability";
 
-export const workflowSlugSchema = z.enum([
-  "death",
-  "marriage",
-  "obligations",
-  "loan",
-  "scam-check",
-  "start-business",
-  "service-unavailable",
-]);
+export type RoutableIntent = ServiceWorkflowSlug | "benefit-application" | "documents";
+export type WorkflowSlug = RoutableIntent | "service-unavailable";
 
-export const intentContextSchema = z.object({
-  person: z.object({
-    id: z.string().startsWith("person:"),
-    name: z.string().max(120),
-    maritalStatus: z.string().max(40),
-    preferredLanguage: z.string().max(40).optional(),
-  }),
-  relationships: z.array(z.object({ name: z.string().max(120), relationship: z.string().max(40) })).max(8),
-  obligations: z.array(z.object({ id: z.string().max(120), title: z.string().max(300), direction: z.string().max(40), status: z.string().max(40).optional() })).max(12),
-  applications: z.array(z.object({ id: z.string().max(120), title: z.string().max(300), status: z.string().max(40) })).max(10),
-  businesses: z.array(z.object({ id: z.string().max(120), name: z.string().max(200), entityType: z.string().max(80) })).max(4),
-});
+export interface IntentContext {
+  person: {
+    id: string;
+    name: string;
+    maritalStatus: string;
+    preferredLanguage?: string;
+  };
+  relationships: Array<{ name: string; relationship: string }>;
+  obligations: Array<{ id: string; title: string; direction: string; status?: string }>;
+  applications: Array<{ id: string; title: string; status: string }>;
+  businesses: Array<{ id: string; name: string; entityType: string }>;
+  availableWorkflows: RoutableIntent[];
+}
 
-export const intentRequestSchema = z.object({
-  text: z.string().trim().min(3).max(800),
-  context: intentContextSchema,
-});
-
-export const intentResponseSchema = z.object({
-  route: workflowSlugSchema,
-  language: z.enum(["en", "hi", "kn", "hinglish"]),
-  title: z.string().max(300),
-  reply: z.string().max(1_200),
-  steps: z.array(z.string().max(300)).min(1).max(6),
-  clarification: z.string().max(400).nullable(),
-  simulated: z.literal(true),
-  authority: z.string().max(120),
-});
-
-export type WorkflowSlug = z.infer<typeof workflowSlugSchema>;
-export type IntentContext = z.infer<typeof intentContextSchema>;
-export type IntentResponse = z.infer<typeof intentResponseSchema>;
+export interface IntentResponse {
+  route: WorkflowSlug;
+  language: "en" | "hi" | "kn" | "hinglish";
+  title: string;
+  reply: string;
+  steps: string[];
+  clarification: string | null;
+  simulated: true;
+  authority: string;
+}

@@ -1,22 +1,28 @@
 import type { ExplainResponse } from "./schema";
 import type { Language } from "@/i18n/messages";
 
-const explanations: Record<Language, Record<"safe" | "scam", Omit<ExplainResponse, "simulated" | "authority">>> = {
+type Explanation = Omit<ExplainResponse, "simulated" | "authority">;
+
+const explanations: Record<Language, Record<string, Explanation>> = {
   en: {
-    safe: { plainLanguage: "This status update matches a record already connected to your profile.", whatItMeans: "The sender, subject, and linked record are consistent with the interactions shown in Citizen.", nextAction: "Review the linked record. Respond only if Citizen shows a deadline or required action." },
-    scam: { plainLanguage: "This message is trying to frighten you into opening an unsafe link.", whatItMeans: "The sender and domain do not match the tax interactions shown in your inbox.", nextAction: "Do not click or call. Keep the message as evidence and start a cybercrime draft if you shared information." },
+    "ntc:itr-refund": { plainLanguage: "Your ₹12,400 tax refund is on its way.", whatItMeans: "It will go to the bank account ending 0042. It should arrive within four to six weeks.", nextAction: "No action now. Check again after six weeks." },
+    "ntc:epfo-passbook": { plainLanguage: "₹21,600 was added to your EPF account for July.", whatItMeans: "UAN XXXXXX7890 now shows a balance of ₹3,40,000.", nextAction: "Check only if the amount differs from your passbook." },
+    "ntc:echallan": { plainLanguage: "A ₹500 traffic challan was issued for Arjun's Activa.", whatItMeans: "It is for vehicle KA05MJ4821 and is due on 1 September 2026.", nextAction: "Review the challan before paying in the demo." },
   },
   hi: {
-    safe: { plainLanguage: "यह स्थिति अपडेट आपकी प्रोफ़ाइल से जुड़े रिकॉर्ड से मेल खाता है।", whatItMeans: "भेजने वाला, विषय और जुड़ा रिकॉर्ड Citizen में दिख रही जानकारी के अनुरूप हैं।", nextAction: "जुड़ा रिकॉर्ड देखें। केवल तभी जवाब दें जब Citizen कोई समय-सीमा या ज़रूरी काम दिखाए।" },
-    scam: { plainLanguage: "यह संदेश डर दिखाकर आपसे असुरक्षित लिंक खुलवाने की कोशिश कर रहा है।", whatItMeans: "भेजने वाला और डोमेन आपके इनबॉक्स में दिख रही कर-संबंधी जानकारी से मेल नहीं खाते।", nextAction: "लिंक न खोलें और नंबर पर कॉल न करें। संदेश सुरक्षित रखें और जानकारी साझा की हो तो साइबर अपराध रिपोर्ट का ड्राफ्ट बनाएँ।" },
+    "ntc:itr-refund": { plainLanguage: "आपका ₹12,400 का टैक्स रिफ़ंड भेजा जा रहा है।", whatItMeans: "यह 0042 पर समाप्त होने वाले बैंक खाते में आएगा। इसमें चार से छह सप्ताह लग सकते हैं।", nextAction: "अभी कुछ करने की ज़रूरत नहीं है। छह सप्ताह बाद फिर जाँचें।" },
+    "ntc:epfo-passbook": { plainLanguage: "जुलाई के लिए ₹21,600 आपके EPF खाते में जमा हुए।", whatItMeans: "UAN XXXXXX7890 में अब ₹3,40,000 शेष हैं।", nextAction: "पासबुक में राशि अलग हो तभी जाँच करें।" },
+    "ntc:echallan": { plainLanguage: "अर्जुन की Activa पर ₹500 का ट्रैफ़िक चालान जारी हुआ।", whatItMeans: "यह KA05MJ4821 के लिए है और 1 सितंबर 2026 तक भरना है।", nextAction: "डेमो में भुगतान करने से पहले चालान जाँचें।" },
   },
   kn: {
-    safe: { plainLanguage: "ಈ ಸ್ಥಿತಿ ಮಾಹಿತಿ ನಿಮ್ಮ ಪ್ರೊಫೈಲ್‌ಗೆ ಈಗಾಗಲೇ ಸಂಪರ್ಕಿಸಿರುವ ದಾಖಲೆಗೆ ಹೊಂದುತ್ತದೆ.", whatItMeans: "ಕಳುಹಿಸಿದವರು, ವಿಷಯ ಮತ್ತು ಸಂಪರ್ಕಿತ ದಾಖಲೆ Citizen‌ನಲ್ಲಿ ಕಾಣುವ ಮಾಹಿತಿಗೆ ಹೊಂದಿಕೆಯಾಗುತ್ತವೆ.", nextAction: "ಸಂಪರ್ಕಿತ ದಾಖಲೆಯನ್ನು ಪರಿಶೀಲಿಸಿ. Citizen ಗಡುವು ಅಥವಾ ಅಗತ್ಯ ಕ್ರಮ ತೋರಿಸಿದಾಗ ಮಾತ್ರ ಪ್ರತಿಕ್ರಿಯಿಸಿ." },
-    scam: { plainLanguage: "ಈ ಸಂದೇಶ ಭಯ ಹುಟ್ಟಿಸಿ ಅಸುರಕ್ಷಿತ ಲಿಂಕ್ ತೆರೆಯುವಂತೆ ಮಾಡಲು ಪ್ರಯತ್ನಿಸುತ್ತಿದೆ.", whatItMeans: "ಕಳುಹಿಸಿದವರು ಮತ್ತು ಡೊಮೇನ್ ನಿಮ್ಮ ಇನ್‌ಬಾಕ್ಸ್‌ನ ತೆರಿಗೆ ಸಂಬಂಧಿತ ಮಾಹಿತಿಗೆ ಹೊಂದಿಕೆಯಾಗುವುದಿಲ್ಲ.", nextAction: "ಲಿಂಕ್ ತೆರೆಯಬೇಡಿ ಅಥವಾ ಕರೆ ಮಾಡಬೇಡಿ. ಸಂದೇಶವನ್ನು ಸಾಕ್ಷಿಯಾಗಿ ಉಳಿಸಿ; ಮಾಹಿತಿ ಹಂಚಿದ್ದರೆ ಸೈಬರ್ ಅಪರಾಧ ವರದಿಯ ಕರಡು ಸಿದ್ಧಪಡಿಸಿ." },
+    "ntc:itr-refund": { plainLanguage: "ನಿಮ್ಮ ₹12,400 ತೆರಿಗೆ ಮರುಪಾವತಿ ಕಳುಹಿಸಲಾಗುತ್ತಿದೆ.", whatItMeans: "ಇದು 0042ರಲ್ಲಿ ಕೊನೆಗೊಳ್ಳುವ ಬ್ಯಾಂಕ್ ಖಾತೆಗೆ ಬರುತ್ತದೆ. ನಾಲ್ಕರಿಂದ ಆರು ವಾರ ಬೇಕಾಗಬಹುದು.", nextAction: "ಈಗ ಏನೂ ಮಾಡಬೇಕಿಲ್ಲ. ಆರು ವಾರಗಳ ನಂತರ ಮತ್ತೆ ಪರಿಶೀಲಿಸಿ." },
+    "ntc:epfo-passbook": { plainLanguage: "ಜುಲೈಗೆ ₹21,600 ನಿಮ್ಮ EPF ಖಾತೆಗೆ ಜಮೆಯಾಗಿದೆ.", whatItMeans: "UAN XXXXXX7890 ಈಗ ₹3,40,000 ಉಳಿಕೆ ತೋರಿಸುತ್ತದೆ.", nextAction: "ಪಾಸ್‌ಬುಕ್‌ನ ಮೊತ್ತ ಬೇರೆ ಇದ್ದರೆ ಮಾತ್ರ ಪರಿಶೀಲಿಸಿ." },
+    "ntc:echallan": { plainLanguage: "ಅರ್ಜುನ್ ಅವರ Activaಗೆ ₹500 ಸಂಚಾರ ದಂಡ ನೀಡಲಾಗಿದೆ.", whatItMeans: "ಇದು KA05MJ4821 ವಾಹನಕ್ಕೆ ಸೇರಿದ್ದು 1 ಸೆಪ್ಟೆಂಬರ್ 2026ರೊಳಗೆ ಪಾವತಿಸಬೇಕು.", nextAction: "ಡೆಮೊದಲ್ಲಿ ಪಾವತಿಸುವ ಮೊದಲು ದಂಡವನ್ನು ಪರಿಶೀಲಿಸಿ." },
   },
 };
 
-export function createFallbackExplanation(legitimacy: "legitimate" | "scam" | "unknown", language: Language): ExplainResponse {
-  const content = explanations[language][legitimacy === "scam" ? "scam" : "safe"];
-  return { ...content, simulated: true, authority: legitimacy === "scam" ? "Citizen safety analysis" : "Citizen notice explainer" };
+export function createFallbackExplanation(noticeId: string, language: Language): ExplainResponse {
+  const explanation = explanations[language][noticeId];
+  if (!explanation) throw new Error(`No local explanation exists for notice ${noticeId}.`);
+  return { ...explanation, simulated: true, authority: "Notice guide" };
 }
