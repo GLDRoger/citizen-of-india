@@ -10,20 +10,20 @@ Companion to `Citizen of India — Feature Set.md`. This is the spec Codex build
 
 Why Next.js over Vite+React:
 
-- The OpenAI API key cannot live in the browser. Intent classification, workflow generation, notice explanation and scam analysis all call an OpenAI model, so we need one server-side proxy. Next.js route handlers give us that inside the same framework; Vite would need separate serverless functions anyway.
-- Vercel gives the required live public browser link with zero deploy work, plus env-var storage for the key.
+- The App Router gives the prototype a clear page structure while keeping the product frontend-only.
+- Vercel gives the required live public browser link with a small deployment surface.
 - Codex is most fluent in Next.js — fewer review cycles.
 
 Everything else stays client-side:
 
 - **State**: Zustand store holding the Citizen Graph, persisted to `localStorage`. A "Reset demo" control restores the seed.
 - **Simulated APIs**: a `mockGov` service layer — plain async functions with 400–1200 ms latency, believable government-shaped responses, and deterministic outcomes. Every response carries `{ simulated: true, authority: "..." }` so the UI can label mocks (Honesty criterion).
-- **AI routes** (the only server code): `/api/intent` (classify + plan), `/api/explain` (notices, rules, provenance in the citizen's language), `/api/scamcheck`. All proxy the OpenAI Responses API with a small fast model; system prompts include the relevant graph slice as context. Language of the reply mirrors the language of the input — Hindi/Hinglish support falls out of the model, not a translation layer.
-- **i18n**: lightweight homegrown dictionary for static chrome (English + Hindi); all dynamic content comes from the model in the user's language. No i18n framework.
-- **Motion**: Framer Motion, used sparingly and lazy-loaded (design direction wants animated transitions; low-bandwidth story wants a small bundle — completion animations and sheet transitions only).
-- **Auth**: mock OTP login. Three phone numbers map to three logins (any 6-digit OTP accepted): Arjun (primary demo), Priya (marriage partner), Sunita (delegation view). Credentials go in the submission form.
+- **Local planners**: deterministic TypeScript modules classify intents and explain notices. They use only the active profile slice and make no external model call.
+- **i18n**: lightweight homegrown dictionary for English, Hindi and Kannada chrome and generated plan copy. No i18n framework.
+- **Motion**: small CSS transitions with reduced-motion and data-saver fallbacks.
+- **Profile access**: three fictional profiles from `seed.json` open with one tap. Arjun is the primary demo; Priya drives shared marriage consent; Sunita drives delegation and benefits.
 
-Non-goals: real backend, database, tests, service workers. "Offline wallet" means previously opened documents render from the localStorage cache.
+Non-goals: real backend, database, external model calls, tests, service workers. "Offline wallet" means previously opened documents render from the localStorage cache.
 
 ---
 
@@ -95,13 +95,13 @@ UX designer in **Ahmedabad** (inter-state marriage = realistic complexity: domic
 
 - Drives: marriage workflow — invite, consent, document reuse, witness selection, appointment, mock payment, certificate issuance, `spouseOf` mutation.
 
-### Rajesh Sharma — 61, Arjun's father (the death demo)
+### Rajesh Sharma — 61, Arjun's father (deferred seed context)
 Retired accountant from Karnataka State Warehousing Corporation. EPS pension **₹8,200/mo**, EPF balance ₹6.1L with **Sunita as nominee**. Owns the family house (JP Nagar, Bengaluru — BBMP khata) and a Maruti Dzire (KA-01).
 
-- The demo: "papa ki death ho gayi, kya karna hoga?" → death registration → certificate → pension stops / family-pension starts → EPF nominee claim → vehicle & property mutation → legal-heir workflow across Sunita, Arjun, Kavita.
+- This data supports a possible later family-record workflow. It is not part of the current pitch, primary navigation, or judged demo path.
 
 ### Sunita Sharma — 56, mother, third demo login (delegation)
-Homemaker. Nominee on Rajesh's EPF and policy. Post-death, the eligibility engine flips her to **eligible: family pension** and **potentially eligible: widow pension** — the Continuous Eligibility demo moment.
+Homemaker. Nominee on Rajesh's EPF and policy. Those family-record relationships remain in the seed for later use; the current demo does not trigger the deferred death workflow.
 
 - She **delegates** paperwork to Arjun (scope: pension + property, expiry 90 days, revocable) — the delegation demo without a fourth full login.
 
@@ -111,12 +111,11 @@ Married (active `spouseOf` edge since 2019 — shows a pre-existing relationship
 ### Inbox seed (Arjun)
 1. ITR refund initiated — legitimate, links to refund status.
 2. EPFO annual passbook statement — legitimate.
-3. **"Dear customer your PAN card will be block in 24 hrs click http://pan-updat.info"** — the scam-check demo: sender/domain inspection, comparison against his real notice history, warning-sign explanation, cybercrime workflow launch.
-4. RTO e-challan notice — links to the obligation.
+3. RTO e-challan notice — links to the obligation.
 
 ### Benefit seed
 - Arjun: eligible — PM Suraksha Bima; **potentially eligible — Mudra (Kishor) loan** (business vintage + turnover from graph; missing evidence: latest ITR-V).
-- Sunita (post-death only): eligible — EPS family pension; potentially eligible — Karnataka widow pension (missing evidence: death certificate → resolved by completing the death workflow: document reuse across procedures).
+- Sunita: the seed retains family-pension and widow-pension rules for future work, but they are not presented as current demo actions.
 
 ---
 
@@ -124,11 +123,11 @@ Married (active `spouseOf` edge since 2019 — shows a pre-existing relationship
 
 | Tier | Workflow | Cost driver |
 |---|---|---|
-| Deep | Death in family | Procedure chain + graph mutations + legal-heir consent |
 | Deep | Marriage | Second login + consent + certificate + mutation |
-| Medium | Obligations dashboard | Pure selectors over seed — no procedure engine needed |
-| Medium | Business loan decision | Eligibility rules + comparison UI + LLM risk explanation |
-| Cheap | Scam check | One screen + `/api/scamcheck` + seeded inbox |
-| Cheap | Start a business | LLM-generated action plan from graph context + plan cards |
+| Medium | Obligations dashboard | Selectors plus one simulated payment mutation |
+| Medium | Business loan decision | Eligibility rules + comparison UI + local risk explanation |
+| Cheap | Record correction | Compare the seeded PAN mismatch and submit a simulated correction request |
+| Cheap | Start a business | Local action plan from profile context + plan cards |
+| Deferred | Death in family | Kept outside the current pitch and primary navigation |
 
-Six intents, six distinct working experiences — matching the Definition of Done without six deep builds.
+The marriage journey proves the product deeply; the other visible journeys show how the same record-first model extends.

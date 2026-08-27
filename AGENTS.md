@@ -21,21 +21,21 @@ Read before building anything:
 - Mutations: procedures emit `GraphMutation[]` (`addNode` | `addEdge` | `endEdge` | `patchAttrs`) applied by one reducer and appended to `events`. Never write to the graph directly from components. Nothing is ever deleted — end edges with `validTo`/`status: 'ended'`.
 - Derived views (obligations, money, things-to-do, eligibility) are selector functions over the graph, recomputed after every mutation. Benefit eligibility evaluates the `rules` arrays in seed data.
 - Simulated government: `src/lib/mockGov/` — async functions with 400–1200 ms latency and believable, deterministic responses.
-- The only server code: `/api/intent`, `/api/explain`, `/api/scamcheck` route handlers proxying the OpenAI API (`OPENAI_API_KEY` env var, never in client code). Replies mirror the language of the input (English, Hindi, Hinglish, Kannada). Include the relevant graph slice in the prompt context, never the whole graph.
-- Auth: mock OTP. Phones in `seed.json.logins` map to personas; any 6-digit OTP succeeds.
+- Local planners classify intents and explain notices in deterministic TypeScript. Use only the active profile slice. Do not add external model calls or an API key to this frontend prototype.
+- Public entry: `/` is always the project landing page; `/start` is the focused profile picker; `/home` is the authenticated citizen workspace. Phones in `seed.json.logins` identify fictional personas, which open with one tap. Shared-workflow consent remains inside the workflow that needs it.
 
 ## Conventions
 
 - Mobile-first. Design for a 360px phone; desktop is the adaptation.
-- Keep the bundle small: no heavy media, lazy-load Framer Motion, subset fonts. Slow-3G users must never see a blank page — skeletons everywhere.
-- UI copy in plain language — no departmental jargon on default surfaces. Static chrome strings live in one dictionary module (en/kn/hi); dynamic content comes from the model.
+- Keep the bundle small: no heavy media, subset fonts, and CSS motion only where it clarifies state. Slow-3G users must never see a blank page — skeletons everywhere.
+- UI copy in plain language — no departmental jargon on default surfaces. Static chrome and local planner copy live in the en/kn/hi dictionaries; record content comes from `seed.json`.
 - ≤500 lines per file. Extract components when JSX nesting passes 3 levels or variants pile up.
 - No test suite. Verify with `npm run build` and `npx eslint .` before declaring done, and state which demo paths you exercised by hand.
-- Follow the design direction in the feature doc: huge typography, generous space, few choices per screen, navy/ivory foundation, teal/green actions, saffron sparingly.
+- Follow the current design language: huge typography, generous space, few choices per screen, paper and indigo for identity, deep green actions, and saffron only on the brand mark and file tab.
 
 ## Build order
 
-Tiered in `docs/Design — Stack, Graph, Seed.md`: death workflow and marriage workflow deep; obligations dashboard and business-loan decision medium; scam check and start-a-business cheap. Home + giant intent input first — every workflow is reached through it.
+Tiered in `docs/Design — Stack, Graph, Seed.md`: marriage is the deep flagship; obligations and the business-loan decision are medium; record correction and start-a-business are cheap. Death stays deferred and outside the current pitch. Home + giant intent input comes first — every visible journey is reached through it.
 
 <!-- BEGIN:nextjs-agent-rules -->
 

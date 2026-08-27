@@ -18,10 +18,10 @@ These features define Citizen. The prototype should feel broken without them.
 ### Identity
 - Synthetic Aadhaar authentication
 - PAN linking
-- OTP login
+- One-tap fictional profile access
 - Citizen profile
 - Verified-data indicators
-- Consent screen
+- Workflow-scoped consent
 
 ### Citizen Graph
 - Person node
@@ -91,11 +91,11 @@ These features define Citizen. The prototype should feel broken without them.
 - Rule explanation
 
 ### Language & Inclusion
-- Intent input understands any Indian language, including romanized Hinglish (“papa ki death ho gayi, kya karna hoga?”) and Kannada (“ಅಪ್ಪ ತೀರಿಕೊಂಡರು, ಮುಂದೇನು ಮಾಡಬೇಕು?”)
+- Intent input understands the demo's supported English, Hindi, Hinglish and Kannada phrases through a deterministic local planner
 - UI language toggle: English + Kannada + Hindi at minimum; Tamil, Telugu, Marathi as stretch
-- Replies, action plans and clarification questions come back in the language the citizen used
-- “Explain in my language” on every notice, requirement and eligibility rule
-- Voice entry in Indian languages (UI + transcription mock)
+- Intent replies mirror supported English, Hindi, Hinglish or Kannada requests; the rest of the interface follows the selected English, Hindi or Kannada language
+- “Explain in plain language” on notices, requirements and eligibility rules
+- Voice entry is represented by an honest, fixed transcription mock
 - Plain-language mode: no legal or departmental jargon anywhere in the default experience
 
 ### Low-Bandwidth & Access
@@ -111,16 +111,10 @@ These features define Citizen. The prototype should feel broken without them.
 
 # P0 Demo Workflows
 
-### Death in family
-- Report death
-- Identify deceased relative
-- Update family graph
-- Death registration
-- Death certificate
-- EPFO/pension check
-- Nominee actions
-- Legal-heir workflow
-- Property/succession overview
+### Public landing and entry
+- `/` always explains the problem, product reasoning, current build, flagship journey and future safety model
+- **Start the demo** opens the dedicated `/start` sample-profile picker
+- Opening a profile continues to `/home`, the signed-in Home and unified dashboard
 
 ### Marriage registration
 - Invite partner
@@ -149,13 +143,13 @@ These features define Citizen. The prototype should feel broken without them.
 - Risk explanation
 - Start application
 
-### Scam check
-- Paste suspicious message
-- Sender/domain inspection
-- Compare against known interactions
-- Explain warning signs
-- Mark likely legitimate/suspicious
-- Launch cybercrime workflow
+### Record correction
+- Detect the PAN name mismatch from connected records
+- Compare the conflicting names and source authorities
+- Reuse the connected Aadhaar and PAN records
+- Show exactly what the request will and will not change
+- Submit a simulated correction request
+- Keep the existing PAN value until the simulated authority responds
 
 ### Start a business
 - Business intent capture
@@ -243,6 +237,10 @@ These features define Citizen. The prototype should feel broken without them.
 - Expiry
 - Revoke
 
+### Deferred work
+
+The death-in-family workflow remains implemented for later review but is excluded from the current pitch, suggestions, navigation and judged demo path.
+
 ---
 
 # P1 Service Areas
@@ -319,7 +317,6 @@ These features define Citizen. The prototype should feel broken without them.
 
 ### Safety
 - Crime reporting
-- Cybercrime
 - Financial fraud
 - Lost property
 - Missing person
@@ -337,7 +334,6 @@ Examples:
 - “Your passport expires in six months.”
 - “You became eligible for this scheme.”
 - “Your company crossed a compliance threshold.”
-- “Your father’s death creates three unfinished procedures.”
 - “Your employer appears to have missed two PF deposits.”
 
 ### Government Timeline
@@ -359,7 +355,7 @@ A high-level view of:
 - expiring credentials;
 - benefits left unclaimed.
 
-### Personal Government Inbox AI
+### Plain-language Government Inbox
 Turns notices into plain language and suggested actions.
 
 ### Universal Government Wallet
@@ -456,16 +452,16 @@ Citizen should feel nothing like a legacy government portal.
 - Natural-language labels
 - Minimal form exposure
 - Animated state transitions
-- Soft, human illustrations
-- Restrained Indian visual references
-- Navy/ivory foundation
-- Teal/green actions
-- Saffron used sparingly
+- The connected citizen file as the main visual object
+- Indian context through the Anek type family, multilingual script, file geometry and a compact arch mark
+- Clean paper and indigo identity
+- Deep green actions
+- Saffron limited to the brand mark and file tab
 - Clear progress
 - No walls of instructions
 - No visible department complexity unless requested
 
-The interface should feel closer to a premium consumer product than an administrative portal.
+The interface should feel like a contemporary Indian consumer product rather than an administrative portal.
 
 ---
 
@@ -475,8 +471,8 @@ The prototype is done when:
 
 - the entire home experience is functional;
 - the synthetic Citizen Graph is populated;
-- at least six intents route into distinct experiences;
-- death and marriage workflows can be completed end-to-end;
+- at least five visible intents route into distinct experiences;
+- the marriage workflow can be completed end-to-end;
 - shared citizen workflows work;
 - documents are reused automatically;
 - at least one eligibility engine experience works;

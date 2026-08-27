@@ -9,28 +9,27 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). Use any available sample profile:
+Open [http://localhost:3000](http://localhost:3000) to read the project overview, then choose **Start the demo** to open a sample profile:
 
-- Arjun Sharma: `9800000001`
-- Priya Patel: `9800000002`
-- Sunita Sharma: `9800000003`
+- Arjun Sharma: main citizen journey
+- Priya Patel: partner-consent journey
+- Sunita Sharma: delegated-access journey
 
-Any six-digit access code succeeds. Every guided flow remains usable without an API key through deterministic local fallbacks.
+No access code or API key is required. Intent routing and notice explanations run deterministically in the browser.
 
-To enable model-assisted intent routing, notice explanations, and scam checks, set:
+The public landing page always lives at `/`. Profile selection lives at `/start`; after selection, the signed-in Home and dashboard open at `/home`.
 
-```bash
-OPENAI_API_KEY=your_key
-OPENAI_MODEL=gpt-5.4-mini # optional
-```
+## Hackathon fit
+
+Citizen was built with Codex as a meaningful part of product design, implementation and verification. The [Builder Brief](https://buildwhatmovesindia.com/brief) accepts a prototype built with Codex or powered by an OpenAI model, so the submitted app does not need a paid runtime model or an exposed API key.
 
 ## Architecture
 
-- **Next.js App Router** for pages and three validated model proxy routes
+- **Next.js App Router** for the browser application
 - **Zustand** for the persisted Citizen Graph and local profile-access state
-- **Zod** for seed, mutation, request, and model-response validation
+- **Zod** for seed and mutation validation
 - **Tailwind CSS** for the mobile-first design system
-- **OpenAI Responses API** for bounded, structured assistance with deterministic fallbacks
+- **Local planners** for multilingual intent routing and notice explanations
 
 `src/data/seed.json` is the sole source of sample profile data. Components never mutate the graph directly: workflow procedures emit typed mutations through `src/features/graph/mutations.ts`, and selector functions derive every citizen-facing view from the graph.
 

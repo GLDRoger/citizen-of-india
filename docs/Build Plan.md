@@ -14,24 +14,25 @@ Rules of the plan:
 
 | # | Vertical | Contents |
 |---|----------|----------|
-| V1 | Design system + app shell | Tokens (navy/ivory, teal/green actions, saffron sparingly), huge type scale, six-tab nav (Home · You · Activity · Inbox · Documents · Discover), mobile-first layout, EN/HI/KN dictionary module, "simulated" chip component, `/about` page skeleton |
+| V0 | Public landing + entry | Explain the problem, reasoning, working journey, current boundaries and final vision; **Start the demo** opens the one-tap profile picker at `/start` |
+| V1 | Design system + app shell | Paper, indigo identity, deep green actions and saffron file tabs; huge type; four-item nav (Home · Journeys · You · Discover); mobile-first layout; EN/HI/KN dictionary; simulated indicators; `/about` |
 | V2 | Graph store | Zustand store, seed hydration, localStorage persistence, `GraphMutation` reducer + event log, selectors module, Reset Demo |
-| V3 | Mock auth | OTP screen (any 6 digits), three personas from `seed.json.logins`, persona switch, consent screen |
+| V3 | Sample profiles | One-tap access to three fictional personas from `seed.json.logins`, plus persona switching |
 | V4 | mockGov layer | Service scaffolding, 400–1200 ms latency, deterministic responses, `{ simulated, authority }` on everything |
 | V5 | Home | Citizen snapshot, Things to do, Money (due/receivable), pending applications, recommended actions — all selectors, no hardcoded data |
 
-**Checkpoint:** log in as all three personas on a phone; Home reflects the seed exactly.
+**Checkpoint:** landing → Start the demo → open all three personas at `/home` on a phone; Home reflects the seed exactly.
 
 ## Day 1 — Mon Aug 25 · Intelligence + flagship vertical
 
 | # | Vertical | Contents |
 |---|----------|----------|
-| V6 | Universal Intent | `/api/intent` route (OpenAI, graph-slice context, replies in input language), giant input, suggested intents, clarification questions, routing |
+| V6 | Universal Intent | Local graph-aware classification, giant input, profile-specific suggestions, clarification questions, routing |
 | V7 | Procedure engine primitives | Procedure definition shape, step types (prefill form, consent, evidence, mock payment, mock appointment, mock submit), procedure timeline UI, completion animation, graph-mutation confirmation sheet |
-| V8–V9 | **Death vertical** (two passes) | Report death → identify Rajesh → death registration → certificate issued (reusable document node) → pension stop / EPS family-pension start → EPF nominee claim → vehicle & property overview → legal-heir consent (Kavita async-simulated) |
-| V10 | Eligibility + Discover | Rule evaluator over benefit `rules`, eligible / potentially / not-eligible cards with explanations and missing evidence, **Sunita's pensions flip when the death mutation lands**, Apply button |
+| V8–V9 | **Home + persona hardening** (two passes) | Unified attention surface, profile-specific suggestions, strict ownership boundaries, compact inbox and record ledgers |
+| V10 | Eligibility + Discover | Rule evaluator over benefit `rules`, eligible / potentially / not-eligible cards with explanations and missing evidence, Apply button |
 
-**Checkpoint:** "papa ki death ho gayi, kya karna hoga?" → complete journey → Sunita's Discover shows family pension eligible. In English and Hinglish.
+**Checkpoint:** "What payments are due?" → the active profile's tasks and money only. Repeat with Priya and Sunita to prove isolation.
 
 ## Day 2 — Tue Aug 26 · Second deep vertical + breadth, dual lane
 
@@ -39,7 +40,7 @@ Rules of the plan:
 | # | Vertical | Contents |
 |---|----------|----------|
 | V11–V12 | **Marriage vertical** (two passes) | Arjun invites Priya → Priya logs in, consents → identity verification → document reuse from both wallets → witness selection → mock appointment + payment → certificate → `spouseOf` mutation, visible on both graphs |
-| V13 | Inbox + scam check | Inbox rows from seed notices, `/api/explain` (plain language, user's language), respond/view-source, paste-a-message scam check via `/api/scamcheck`, seeded scam SMS analysis, cybercrime workflow launch |
+| V13 | Inbox | Inbox rows from seed notices, local plain-language explanations, respond and view-source actions |
 
 **Lane B (terra, separate worktree):**
 | # | Vertical | Contents |
@@ -47,14 +48,14 @@ Rules of the plan:
 | V14 | Documents + provenance | Wallet from seed docs, expiry/verification states, search, "Why?" provenance drawer, PAN name-mismatch reconciliation flow (completes the seeded draft application) |
 | V15 | Obligations dashboard | Unified deadline view in Activity, money due/receivable, challan mock payment mutating the graph, expiring-document nudges |
 
-**Checkpoint:** six intents route to distinct working experiences; marriage completes end-to-end across two logins.
+**Checkpoint:** visible intents route to working, profile-supported experiences; marriage completes end-to-end across two profiles.
 
 ## Day 3 — Wed Aug 27 · Remaining verticals + hardening
 
 | # | Vertical | Contents |
 |---|----------|----------|
-| V16 | Business loan decision | Reads business/tax/obligation state, Mudra eligibility off rules, loan comparison, LLM risk explanation, start application |
-| V17 | Start a business | Intent capture (location/type), LLM-generated action plan from graph context, registrations/licences/schemes as plan cards |
+| V16 | Business loan decision | Reads business/tax/obligation state, Mudra eligibility off rules, loan comparison, local risk explanation, start application |
+| V17 | Start a business | Intent capture (location/type), local action plan from graph context, registrations/licences/schemes as plan cards |
 | V18 | You page + delegation | Citizen Graph in human terms (relationship/property/business cards), Sunita delegates pension+property scope to Arjun (expiry, revoke) |
 | V19 | Language + low-bandwidth pass | Complete KN/HI chrome dictionary, Kannada/Hindi journey QA, bundle audit, skeleton coverage, throttled-3G run, touch targets |
 | V20 | Honesty pass | Simulated-label sweep, `/about` real-vs-mocked complete, reset-demo polish, independent-prototype labeling |
@@ -65,7 +66,7 @@ Rules of the plan:
 
 - **Morning:** overnight fixes verified; bugs only, no new surface.
 - **12:00 PM — feature freeze.** Anything unfinished routes to an honest "prototype scope" card.
-- **Afternoon:** 2-minute video — minute 1: citizen demo (Hinglish death intent → journey → eligibility flip); minute 2: how Codex built it (broker logs on screen, architecture in three sentences). 250-word summary. Mock credentials block.
+- **Afternoon:** 2-minute video — minute 1: citizen demo (marriage intent → partner consent → shared certificate and relationship update); minute 2: how Codex built it (broker logs on screen, architecture in three sentences). 250-word summary. Sample-profile instructions.
 - **~4:00 PM:** final production deploy; link tested in incognito and on a phone (no access prompts).
 - **By 6:00 PM:** submitted. Two hours of buffer stays untouched.
 
@@ -77,9 +78,9 @@ Rules of the plan:
 2. Delegation: seeded static delegation instead of the create/revoke flow.
 3. You page: relationship cards without any visual graph.
 4. Start a business: plan cards only, no follow-through into applications.
-5. Scam check: seeded SMS analysis only, no free-paste input.
+5. Record correction: keep the source comparison and submitted state; cut only the extended explanation.
 
-Never cut: death vertical, marriage vertical, universal intent, eligibility flip, simulated labeling, the checkpoint runs, the Day 4 buffer.
+Never cut: marriage vertical, universal intent, persona boundaries, simulated labeling, the checkpoint runs, the Day 4 buffer.
 
 ## Stretch (only if a day ends ahead)
 
