@@ -1,21 +1,18 @@
 "use client";
 
 import { AlertTriangle, CheckCircle2, ChevronDown, Download, Search, ShieldCheck } from "lucide-react";
-import Link from "next/link";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Button, LinkButton } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/feedback";
-import { ContrastLine, Page, PageHeader } from "@/components/ui/page";
-import { SimulatedChip, VerificationBadge } from "@/components/ui/status";
+import { Page, PageHeader } from "@/components/ui/page";
+import { VerificationBadge } from "@/components/ui/status";
 import { useAuthStore } from "@/features/auth/store";
 import { getDocuments, getPerson } from "@/features/graph/selectors";
-import type { GraphMutation } from "@/features/graph/schema";
 import { useCitizenStore } from "@/features/graph/store";
 import { useI18n } from "@/i18n/use-i18n";
 import { getDocumentKindMessageKey } from "@/i18n/formatters";
 import { cn } from "@/lib/cn";
 import { formatDate, maskIdentifier } from "@/lib/format";
-import { submitPanCorrection } from "@/lib/mockGov";
 
 function DocumentCard({ document, personId }: { document: ReturnType<typeof getDocuments>[number]; personId: string }) {
   const { language, t } = useI18n();
@@ -23,9 +20,6 @@ function DocumentCard({ document, personId }: { document: ReturnType<typeof getD
   const commit = useCitizenStore((state) => state.commit);
   const graph = useCitizenStore((state) => state.graph);
   const person = getPerson(graph, personId);
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
 
   const download = () => {
     if (document.attrs.downloaded) return;
@@ -35,35 +29,6 @@ function DocumentCard({ document, personId }: { document: ReturnType<typeof getD
       labelParams: { documentKind: document.attrs.kind },
       mutations: [{ type: "patchAttrs", nodeId: document.id, attrs: { downloaded: true } }],
     });
-  };
-
-  const reconcile = async () => {
-    if (!person) return;
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await submitPanCorrection({ personId, correctedName: person.attrs.name });
-      const mutations: GraphMutation[] = [
-        {
-          type: "patchAttrs",
-          nodeId: document.id,
-          attrs: { holderName: person.attrs.name },
-          verification: { source: "NSDL", state: "verified", asOf: "2026-08-24", note: "PAN name now matches the connected Aadhaar record." },
-        },
-        {
-          type: "patchAttrs",
-          nodeId: "app:pan-name-correction",
-          attrs: { status: "completed", reference: response.data.acknowledgement, note: "PAN name correction completed in the simulated service." },
-          verification: { source: "NSDL", state: "verified", asOf: "2026-08-24" },
-        },
-      ];
-      commit({ actorId: personId, labelKey: "eventPanMismatchResolved", procedureId: "pan-reconciliation", mutations });
-      setMessage(t("panCorrectionSaved", { reference: response.data.acknowledgement }));
-    } catch {
-      setError(t("documentCorrectionError"));
-    } finally {
-      setLoading(false);
-    }
   };
 
   return (
@@ -78,15 +43,12 @@ function DocumentCard({ document, personId }: { document: ReturnType<typeof getD
         {document.attrs.expiresOn ? <span>{t("expiry")} {formatDate(document.attrs.expiresOn, language)}</span> : null}
         {document.attrs.downloaded ? <span className="flex items-center gap-1.5 font-bold text-green-deep"><CheckCircle2 aria-hidden className="size-3.5" />{t("storedOnDevice")}</span> : null}
       </div>
-      {document.verification.state === "mismatch" ? <ContrastLine>{t("contrastPanMismatch")}</ContrastLine> : null}
-      {document.verification.state === "mismatch" && person ? <div className="grid gap-2 border-y border-brick/25 bg-brick-tint px-3 py-3 text-xs leading-5 text-brick"><p className="flex gap-2"><AlertTriangle aria-hidden className="mt-0.5 size-3.5 shrink-0" />{t("panMismatchExplanation", { aadhaarName: person.attrs.name, panName: document.attrs.holderName })}</p><Link className="ml-5 font-bold underline underline-offset-4" href="/#task-app:pan-name-correction">{t("viewCorrectionDraft")}</Link></div> : null}
-      {message ? <p className="flex items-center gap-2 text-xs font-bold text-green-deep"><CheckCircle2 aria-hidden className="size-4" />{message} <SimulatedChip authority="Protean eGov (PAN)" /></p> : null}
-      {error ? <p className="rounded-xl bg-brick-tint p-3 text-xs font-bold text-brick" role="alert">{error}</p> : null}
+      {document.verification.state === "mismatch" && person ? <div className="grid gap-2 rounded-[4px] bg-brick-tint px-3 py-3 text-xs leading-5 text-brick"><p className="flex gap-2"><AlertTriangle aria-hidden className="mt-0.5 size-3.5 shrink-0" />{t("panMismatchExplanation", { aadhaarName: person.attrs.name, panName: document.attrs.holderName })}</p></div> : null}
       <div className="mt-auto grid gap-2">
-        {document.verification.state === "mismatch" ? <Button loading={loading} onClick={() => void reconcile()}><ShieldCheck aria-hidden className="size-4" />{t("resolveMismatch")}</Button> : null}
+        {document.verification.state === "mismatch" ? <LinkButton href="/workflows/record-correction"><ShieldCheck aria-hidden className="size-4" />{t("resolveMismatch")}</LinkButton> : null}
         {!document.attrs.downloaded ? <Button onClick={download} variant="secondary"><Download aria-hidden className="size-4" />{t("saveOffline")}</Button> : null}
-        <details className="border-t border-paper-line pt-2">
-          <summary className="flex min-h-9 items-center justify-between text-xs font-bold text-ink-mute"><span>{t("why")}</span><ChevronDown aria-hidden className="size-4 text-green-deep" /></summary>
+        <details className="group border-t border-paper-line pt-2">
+          <summary className="flex min-h-9 items-center justify-between text-xs font-bold text-ink-mute"><span>{t("why")}</span><ChevronDown aria-hidden className="size-4 text-green-deep transition-transform group-open:rotate-180" /></summary>
           <div className="grid gap-1 pb-2 text-xs leading-5 text-ink-mute"><span>{t("documentSource", { source: document.verification.source })}</span><span>{t("documentCheckedOn", { date: formatDate(document.verification.asOf, language) })}</span><span>{t("documentUseReason")}</span></div>
         </details>
       </div>
@@ -109,11 +71,12 @@ export function DocumentsScreen() {
   );
 
   return (
-    <Page className="grid gap-8">
+    <Page className="grid gap-6">
       <PageHeader eyebrow={t("documentCount", { count: documents.length })} title={t("documents")} description={t("documentsPageBody")} />
       <label className="relative block max-w-xl">
+        <span className="sr-only">{t("searchDocuments")}</span>
         <Search aria-hidden className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-ink-mute" />
-        <input className="h-13 w-full rounded-[8px] border border-paper-line bg-paper-shade pl-11 pr-4 text-sm outline-none transition focus:border-green-deep focus:ring-4 focus:ring-green-deep/10" onChange={(event) => setQuery(event.target.value)} placeholder={t("searchDocuments")} type="search" value={query} />
+        <input className="h-13 w-full rounded-[8px] border border-paper-line bg-paper-shade pl-11 pr-4 text-sm outline-none transition focus:border-indigo-deep focus:ring-4 focus:ring-indigo-tint" onChange={(event) => setQuery(event.target.value)} placeholder={t("searchDocuments")} type="search" value={query} />
       </label>
       {visible.length ? (
         <div className={cn("grid gap-4 sm:grid-cols-2 xl:grid-cols-3", visible.length === 1 && "max-w-md")}>

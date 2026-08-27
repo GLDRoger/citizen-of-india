@@ -26,9 +26,7 @@ export function PageSkeleton() {
 export function EmptyState({ title, body }: { title: string; body?: string }) {
   return (
     <div className="grid justify-items-start gap-3 border-y border-paper-line py-8">
-      <span className="grid size-10 place-items-center rounded-[4px] bg-paper-line text-ink-mute">
-        <Inbox aria-hidden className="size-5" />
-      </span>
+      <Inbox aria-hidden className="size-5 text-ink-mute" />
       <div className="grid gap-1">
         <h3 className="font-display text-xl font-semibold text-ink">{title}</h3>
         {body ? <p className="max-w-md text-sm leading-6 text-ink-mute">{body}</p> : null}
@@ -41,9 +39,7 @@ export function ErrorState({ reset }: { reset?: () => void }) {
   const { t } = useI18n();
   return (
     <div className="mx-auto grid min-h-[60vh] max-w-lg place-content-center justify-items-start gap-4 px-5">
-      <span className="grid size-12 place-items-center rounded-[4px] bg-brick-tint text-brick">
-        <AlertTriangle aria-hidden className="size-6" />
-      </span>
+      <AlertTriangle aria-hidden className="size-6 text-brick" />
       <h1 className="font-display text-3xl font-semibold text-ink">{t("somethingWrong")}</h1>
       {reset ? <Button onClick={reset}>{t("tryAgain")}</Button> : null}
     </div>

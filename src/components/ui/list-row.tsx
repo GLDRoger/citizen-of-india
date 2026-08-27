@@ -1,9 +1,7 @@
-import type { LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
 
 interface ListRowProps {
   action?: ReactNode;
-  icon: LucideIcon;
   meta: string;
   status?: ReactNode;
   title: string;

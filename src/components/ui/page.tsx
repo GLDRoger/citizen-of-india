@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
 export function Page({ children, className }: { children: ReactNode; className?: string }) {
-  return <div className={cn("page-enter mx-auto min-w-0 w-full max-w-[1240px] grid-cols-[minmax(0,1fr)] px-5 pb-16 pt-5 sm:px-8 lg:px-10 lg:pb-20 lg:pt-8", className)}>{children}</div>;
+  return <div className={cn("page-enter mx-auto min-w-0 w-full max-w-[1180px] grid-cols-[minmax(0,1fr)] px-5 pb-14 pt-6 sm:px-8 lg:px-10 lg:pb-16 lg:pt-8", className)}>{children}</div>;
 }
 
 export function PageHeader({
@@ -17,13 +17,13 @@ export function PageHeader({
   action?: ReactNode;
 }) {
   return (
-    <header className="grid gap-5 border-b border-paper-line pb-7 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
+    <header className="grid gap-4 border-b border-paper-line pb-6 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
       <div className="grid gap-2">
         {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
-        <h1 className="font-display text-[clamp(2.65rem,7vw,5.6rem)] font-semibold leading-[0.9] tracking-[-0.05em] text-ink">{title}</h1>
+        <h1 className="max-w-4xl font-display text-[clamp(2.4rem,5vw,4.35rem)] font-semibold leading-[0.96] tracking-[-0.04em] text-ink">{title}</h1>
         {description ? <p className="max-w-2xl text-sm leading-6 text-ink-mute sm:text-base">{description}</p> : null}
       </div>
-      {action}
+      {action ? <div className="justify-self-start sm:justify-self-end">{action}</div> : null}
     </header>
   );
 }
@@ -41,17 +41,13 @@ export function SectionHeader({
     <div className="flex items-end justify-between gap-4">
       <div className="grid gap-1">
         {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
-        <h2 className="font-display text-2xl font-semibold leading-tight tracking-[-0.025em] text-ink sm:text-3xl">{title}</h2>
+        <h2 className="font-display text-[1.65rem] font-semibold leading-tight tracking-[-0.02em] text-ink sm:text-3xl">{title}</h2>
       </div>
       {action}
     </div>
   );
 }
 
-export function Rule({ className }: { className?: string }) {
-  return <div aria-hidden className={cn("h-px bg-line", className)} />;
-}
-
 export function ContrastLine({ children, className }: { children: ReactNode; className?: string }) {
-  return <p className={cn("flex max-w-3xl items-start gap-3 text-xs leading-5 text-ink-mute", className)}><span aria-hidden className="mt-2.5 h-px w-7 shrink-0 bg-ink/25" /><span>{children}</span></p>;
+  return <p className={cn("max-w-3xl text-xs leading-5 text-ink-mute", className)}>{children}</p>;
 }

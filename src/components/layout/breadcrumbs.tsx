@@ -7,11 +7,12 @@ import type { MessageKey } from "@/i18n/messages";
 import { useI18n } from "@/i18n/use-i18n";
 
 const workflowLabels: Record<string, MessageKey> = {
-  death: "deathService",
+  "benefit-application": "benefitReviewTitle",
+  epfo: "epfoService",
   loan: "loanService",
   marriage: "marriageService",
   obligations: "obligationsService",
-  "scam-check": "scamService",
+  "record-correction": "recordCorrectionService",
   "service-unavailable": "serviceUnavailable",
   "start-business": "startBusinessService",
   "property-tax": "payPropertyTax",
@@ -29,11 +30,11 @@ export function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
   const { t } = useI18n();
   return (
     <nav aria-label={t("breadcrumbs")}>
-      <ol className="flex min-w-0 items-center gap-1.5 overflow-x-auto py-1 text-[0.7rem] font-bold text-ink-mute [scrollbar-width:none] sm:text-xs">
+      <ol className="flex min-w-0 flex-wrap items-center gap-x-1.5 gap-y-2 py-1 text-xs font-bold text-ink-mute">
         {items.map((item, index) => (
-          <li className="flex shrink-0 items-center gap-1.5" key={`${item.label}:${item.href ?? index}`}>
-            {index > 0 ? <ChevronRight aria-hidden className="size-3 text-line" /> : null}
-            {item.href ? <Link className="transition hover:text-green-deep" href={item.href}>{item.label}</Link> : <span aria-current="page" className="text-ink-mute">{item.label}</span>}
+          <li className="flex min-w-0 items-center gap-1.5" key={`${item.label}:${item.href ?? index}`}>
+            {index > 0 ? <ChevronRight aria-hidden className="size-3 text-paper-line" /> : null}
+            {item.href ? <Link className="transition hover:text-indigo-deep" href={item.href}>{item.label}</Link> : <span aria-current="page" className="min-w-0 text-ink-mute [overflow-wrap:anywhere]">{item.label}</span>}
           </li>
         ))}
       </ol>
@@ -50,9 +51,9 @@ export function RouteBreadcrumbs() {
   const workflow = workflowLabels[current];
   if (!workflow) return null;
   const items: BreadcrumbItem[] = [
-    { href: "/", label: t("home") },
+    { href: "/home", label: t("home") },
     { href: "/services", label: t("services") },
     { label: t(workflow) },
   ];
-  return <div className="mx-auto w-full max-w-[1240px] px-5 pt-4 sm:px-8 lg:px-10"><Breadcrumbs items={items} /></div>;
+  return <div className="mx-auto w-full max-w-[1180px] px-5 pt-4 sm:px-8 lg:px-10"><Breadcrumbs items={items} /></div>;
 }

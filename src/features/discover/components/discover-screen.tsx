@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, CircleHelp, FileWarning, MoveRight, Sparkles } from "lucide-react";
+import { Check, CircleHelp, FileWarning, MoveRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { LinkButton } from "@/components/ui/button";
@@ -11,6 +11,7 @@ import { useAuthStore } from "@/features/auth/store";
 import { getEligibility, type EligibilityResult } from "@/features/graph/selectors";
 import type { GraphMutation } from "@/features/graph/schema";
 import { useCitizenStore } from "@/features/graph/store";
+import { isBenefitVisibleInDemo } from "@/features/services/availability";
 import { useI18n } from "@/i18n/use-i18n";
 import { localizeNodeTitle, localizeRuleExplanation } from "@/i18n/content";
 import { localizeEvidence } from "@/i18n/formatters";
@@ -44,7 +45,7 @@ function EligibilityCard({ result, personId }: { result: EligibilityResult; pers
           id: appId,
           type: "application",
           attrs: {
-            title: `Application for ${result.benefit.attrs.name}`,
+            title: result.benefit.attrs.name,
             authority: result.benefit.attrs.authority,
             status: "draft",
             createdOn: "2026-08-24",
@@ -69,12 +70,12 @@ function EligibilityCard({ result, personId }: { result: EligibilityResult; pers
         },
       },
     ];
-    commit({ actorId: personId, labelKey: "eventBenefitApplicationStarted", labelParams: { benefitId: result.benefit.id }, mutations });
-    router.push("/#money");
+    commit({ actorId: personId, labelKey: "eventBenefitApplicationStarted", labelParams: { benefitId: result.benefit.id, benefitName: result.benefit.attrs.name }, mutations });
+    router.push("/workflows/benefit-application");
   };
 
   return (
-    <article className="grid min-h-[330px] content-between gap-7 rounded-[8px] border border-paper-line bg-paper-shade p-5 sm:p-6">
+    <article className="grid min-h-[290px] content-between gap-6 rounded-[8px] border border-paper-line bg-paper-shade p-5 sm:p-6">
       <div className="grid gap-5">
         <div className="flex flex-wrap items-center justify-between gap-3"><StatusPill label={statusLabel} tone={tone(result.status)} /><SimulatedChip authority={result.benefit.attrs.authority} /></div>
         <div className="grid gap-2"><p className="eyebrow">{result.benefit.attrs.authority}</p><h2 className="font-display text-2xl font-semibold leading-tight tracking-[-0.025em] text-ink">{localizeNodeTitle(language, result.benefit.id, result.benefit.attrs.name)}</h2><p className="text-sm font-bold text-green-deep">{result.benefit.attrs.valuePerYear}</p></div>
@@ -83,7 +84,7 @@ function EligibilityCard({ result, personId }: { result: EligibilityResult; pers
         {result.failedReasons.length ? <ul className="grid gap-2">{result.failedReasons.slice(0, 2).map((reason) => <li className="flex gap-2 text-xs leading-5 text-ink-mute" key={reason}><CircleHelp aria-hidden className="mt-0.5 size-3.5 shrink-0 text-ink-mute" />{localizeRuleExplanation(language, reason)}</li>)}</ul> : null}
         {result.missingEvidence.length ? <div className="grid gap-2 rounded-[8px] bg-brick-tint p-3"><p className="flex items-center gap-2 text-xs font-bold text-brick"><FileWarning aria-hidden className="size-3.5" />{t("missingEvidence")}</p>{result.missingEvidence.map((evidence) => <span className="text-xs text-brick" key={evidence}>{localizeEvidence(language, evidence)}</span>)}</div> : null}
       </div>
-      {result.benefit.id === "ben:mudra-kishor" ? <LinkButton href="/workflows/loan" variant="secondary">{t("apply")} <MoveRight aria-hidden className="size-4" /></LinkButton> : <Button disabled={Boolean(existing) || result.status === "not-eligible"} onClick={apply} variant={result.status === "eligible" ? "primary" : "secondary"}>{existing ? t("pending") : t("apply")} <MoveRight aria-hidden className="size-4" /></Button>}
+      {result.benefit.id === "ben:mudra-kishor" ? <LinkButton href="/workflows/loan" variant="secondary">{t("loanService")} <MoveRight aria-hidden className="size-4" /></LinkButton> : existing ? <LinkButton href="/workflows/benefit-application">{t("continueDraft")} <MoveRight aria-hidden className="size-4" /></LinkButton> : <Button disabled={result.status === "not-eligible"} onClick={apply} variant={result.status === "eligible" ? "primary" : "secondary"}>{t("apply")} <MoveRight aria-hidden className="size-4" /></Button>}
     </article>
   );
 }
@@ -93,12 +94,12 @@ export function DiscoverScreen() {
   const personId = useAuthStore((state) => state.personId);
   const graph = useCitizenStore((state) => state.graph);
   if (!personId) return null;
-  const results = getEligibility(graph, personId);
+  const results = getEligibility(graph, personId).filter((result) => isBenefitVisibleInDemo(result.benefit.id));
 
   return (
-    <Page className="grid gap-8">
-      <PageHeader eyebrow={t("discover")} title={t("eligibility")} description={t("eligibilityRechecks")} action={<div className="flex items-center gap-2 text-xs font-bold text-green-deep"><Sparkles aria-hidden className="size-4" /> Continuous eligibility</div>} />
-      {results.length ? <div className="grid gap-4 md:grid-cols-2">{results.map((result) => <EligibilityCard key={result.benefit.id} personId={personId} result={result} />)}</div> : <EmptyState title="No linked schemes yet" body="Citizen will show benefits here as your connected records change." />}
+    <Page className="grid gap-6">
+      <PageHeader title={t("eligibility")} description={t("eligibilityRechecks")} />
+      {results.length ? <div className="grid gap-4 md:grid-cols-2">{results.map((result) => <EligibilityCard key={result.benefit.id} personId={personId} result={result} />)}</div> : <EmptyState title={t("noLinkedSchemes")} body={t("noLinkedSchemesBody")} />}
     </Page>
   );
 }
