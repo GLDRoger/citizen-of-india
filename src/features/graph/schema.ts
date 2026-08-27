@@ -3,6 +3,7 @@ import { z } from "zod";
 export const verificationSourceSchema = z.enum([
   "UIDAI",
   "NSDL",
+  "IncomeTax",
   "EPFO",
   "RTO",
   "MCA",
@@ -239,9 +240,10 @@ const noticeNodeSchema = z.object({
     receivedOn: z.iso.date(),
     subject: z.string(),
     body: z.string(),
-    legitimacy: z.enum(["legitimate", "scam", "unknown"]),
+    amount: z.number().nonnegative().optional(),
+    period: z.string().optional(),
+    legitimacy: z.enum(["legitimate", "unknown"]),
     relatedTo: z.string().optional(),
-    scamSignals: z.array(z.string()).optional(),
   }),
   verification: verificationSchema,
 });

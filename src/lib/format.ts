@@ -12,12 +12,34 @@ const dateFormatters: Record<Language, Intl.DateTimeFormat> = {
   kn: new Intl.DateTimeFormat("kn-IN", { day: "numeric", month: "short", year: "numeric", timeZone: "Asia/Kolkata" }),
 };
 
+const monthYearFormatters: Record<Language, Intl.DateTimeFormat> = {
+  en: new Intl.DateTimeFormat("en-IN", { month: "long", year: "numeric", timeZone: "Asia/Kolkata" }),
+  hi: new Intl.DateTimeFormat("hi-IN", { month: "long", year: "numeric", timeZone: "Asia/Kolkata" }),
+  kn: new Intl.DateTimeFormat("kn-IN", { month: "long", year: "numeric", timeZone: "Asia/Kolkata" }),
+};
+
+const timeFormatters: Record<Language, Intl.DateTimeFormat> = {
+  en: new Intl.DateTimeFormat("en-IN", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "Asia/Kolkata" }),
+  hi: new Intl.DateTimeFormat("hi-IN", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "Asia/Kolkata" }),
+  kn: new Intl.DateTimeFormat("kn-IN", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "Asia/Kolkata" }),
+};
+
 export function formatCurrency(value: number) {
   return currencyFormatter.format(value);
 }
 
 export function formatDate(value: string, language: Language = "en") {
-  return dateFormatters[language].format(new Date(`${value.slice(0, 10)}T00:00:00+05:30`));
+  const parts = dateFormatters[language].formatToParts(new Date(`${value.slice(0, 10)}T00:00:00+05:30`));
+  const part = (type: Intl.DateTimeFormatPartTypes) => parts.find((candidate) => candidate.type === type)?.value ?? "";
+  return [part("day"), part("month"), part("year")].filter(Boolean).join(" ");
+}
+
+export function formatDateTime(value: string, language: Language = "en") {
+  return `${formatDate(value, language)}, ${timeFormatters[language].format(new Date(value))}`;
+}
+
+export function formatMonthYear(value: string, language: Language = "en") {
+  return monthYearFormatters[language].format(new Date(`${value.slice(0, 7)}-01T00:00:00+05:30`));
 }
 
 export function getInitials(name: string) {

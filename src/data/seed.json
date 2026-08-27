@@ -1,7 +1,7 @@
 {
   "meta": {
     "seedVersion": 1,
-    "disclaimer": "Independent service preview. All people and records are fictional, and all authority responses are simulated.",
+    "disclaimer": "Independent demo. All people and records are fictional. Government replies are simulated.",
     "seedDate": "2026-08-24"
   },
   "logins": [
@@ -401,7 +401,7 @@
       "id": "obl:echallan-500",
       "type": "obligation",
       "attrs": {
-        "title": "Traffic e-challan — signal jump, Hosur Road",
+        "title": "₹500 traffic challan for Hosur Road",
         "authority": "Bengaluru Traffic Police",
         "direction": "payable",
         "amount": 500,
@@ -416,13 +416,13 @@
       "id": "obl:bbmp-property-tax",
       "type": "obligation",
       "attrs": {
-        "title": "BBMP property tax FY 2026-27 (second half)",
+        "title": "BBMP property tax due 31 October 2026",
         "authority": "BBMP",
         "direction": "payable",
         "amount": 9840,
         "dueDate": "2026-10-31",
         "relatedTo": "prop:jpnagar-house",
-        "note": "Property is in Rajesh Sharma's name; Arjun usually pays."
+        "note": "Arjun usually pays this for Rajesh's property."
       },
       "verification": { "source": "Municipal", "state": "verified", "asOf": "2026-08-01" }
     },
@@ -430,26 +430,26 @@
       "id": "obl:itr-refund",
       "type": "obligation",
       "attrs": {
-        "title": "Income tax refund AY 2026-27",
+        "title": "Income tax refund: ₹12,400",
         "authority": "Income Tax Department",
         "direction": "receivable",
         "amount": 12400,
         "status": "processing",
         "initiatedOn": "2026-08-11",
-        "note": "Refund initiated; expected within 4–6 weeks."
+        "note": "Started. Expected in four to six weeks."
       },
-      "verification": { "source": "NSDL", "state": "verified", "asOf": "2026-08-11" }
+      "verification": { "source": "IncomeTax", "state": "verified", "asOf": "2026-08-11" }
     },
     {
       "id": "obl:passport-renewal",
       "type": "obligation",
       "attrs": {
-        "title": "Passport expires in under 6 months of buffer for visas",
+        "title": "Renew passport before your next trip",
         "authority": "Ministry of External Affairs",
         "direction": "action",
         "dueDate": "2027-01-19",
         "relatedTo": "doc:arjun-passport",
-        "note": "Many countries require 6 months validity — renew by mid-2026 travel plans."
+        "note": "The passport expires on 19 January 2027. Some trips need six months of validity."
       },
       "verification": { "source": "Self", "state": "verified", "asOf": "2026-08-01" }
     },
@@ -465,7 +465,7 @@
         "legitimacy": "legitimate",
         "relatedTo": "obl:itr-refund"
       },
-      "verification": { "source": "NSDL", "state": "verified", "asOf": "2026-08-11" }
+      "verification": { "source": "IncomeTax", "state": "verified", "asOf": "2026-08-11" }
     },
     {
       "id": "ntc:epfo-passbook",
@@ -476,30 +476,12 @@
         "receivedOn": "2026-08-05",
         "subject": "EPF contribution credited",
         "body": "Dear member, contribution of Rs 21,600 for Jul-2026 credited to UAN XXXXXX7890. Balance: Rs 3,40,000.",
+        "amount": 21600,
+        "period": "2026-07",
         "legitimacy": "legitimate",
         "relatedTo": "emp:arjun-meridian"
       },
       "verification": { "source": "EPFO", "state": "verified", "asOf": "2026-08-05" }
-    },
-    {
-      "id": "ntc:scam-pan",
-      "type": "notice",
-      "attrs": {
-        "channel": "sms",
-        "sender": "+91 79 8834 1102",
-        "receivedOn": "2026-08-22",
-        "subject": "PAN card block warning",
-        "body": "Dear customer your PAN card will be block in 24 hrs. Update KYC immediatly click http://pan-updat.info/verify or call 7988341102.",
-        "legitimacy": "scam",
-        "scamSignals": [
-          "Sender is a personal mobile number, not a registered government header",
-          "Link domain 'pan-updat.info' is not incometax.gov.in",
-          "Urgency and threat within 24 hours",
-          "Spelling errors: 'will be block', 'immediatly'",
-          "The Income Tax Department never blocks PAN by SMS deadline"
-        ]
-      },
-      "verification": { "source": "Self", "state": "pending", "asOf": "2026-08-22" }
     },
     {
       "id": "ntc:echallan",
@@ -523,8 +505,9 @@
         "authority": "NSDL",
         "status": "draft",
         "createdOn": "2026-08-15",
+        "kind": "record-correction",
         "relatedTo": "doc:arjun-pan",
-        "note": "Started from the record-mismatch prompt; not yet submitted."
+        "note": "Saved as a draft."
       },
       "verification": { "source": "Self", "state": "self-declared", "asOf": "2026-08-15" }
     }
@@ -568,17 +551,16 @@
     {"id":"e:arjun-subject-gstr","type":"subjectOf","from":"person:arjun","to":"obl:gstr3b-sep","attrs":{},"validFrom":"2026-08-20","status":"active","verification":{"source":"Self","state":"verified","asOf":"2026-08-20"}},
     {"id":"e:arjun-subject-challan","type":"subjectOf","from":"person:arjun","to":"obl:echallan-500","attrs":{},"validFrom":"2026-08-02","status":"active","verification":{"source":"RTO","state":"verified","asOf":"2026-08-02"}},
     {"id":"e:arjun-subject-proptax","type":"subjectOf","from":"person:arjun","to":"obl:bbmp-property-tax","attrs":{"role":"payer-on-behalf"},"validFrom":"2026-08-01","status":"active","verification":{"source":"Municipal","state":"verified","asOf":"2026-08-01"}},
-    {"id":"e:arjun-subject-refund","type":"subjectOf","from":"person:arjun","to":"obl:itr-refund","attrs":{},"validFrom":"2026-08-11","status":"active","verification":{"source":"NSDL","state":"verified","asOf":"2026-08-11"}},
+    {"id":"e:arjun-subject-refund","type":"subjectOf","from":"person:arjun","to":"obl:itr-refund","attrs":{},"validFrom":"2026-08-11","status":"active","verification":{"source":"IncomeTax","state":"verified","asOf":"2026-08-11"}},
     {"id":"e:arjun-subject-passport","type":"subjectOf","from":"person:arjun","to":"obl:passport-renewal","attrs":{},"validFrom":"2026-08-01","status":"active","verification":{"source":"Self","state":"verified","asOf":"2026-08-01"}},
-    {"id":"e:arjun-subject-ntc1","type":"subjectOf","from":"person:arjun","to":"ntc:itr-refund","attrs":{"read":false},"validFrom":"2026-08-11","status":"active","verification":{"source":"NSDL","state":"verified","asOf":"2026-08-11"}},
+    {"id":"e:arjun-subject-ntc1","type":"subjectOf","from":"person:arjun","to":"ntc:itr-refund","attrs":{"read":false},"validFrom":"2026-08-11","status":"active","verification":{"source":"IncomeTax","state":"verified","asOf":"2026-08-11"}},
     {"id":"e:arjun-subject-ntc2","type":"subjectOf","from":"person:arjun","to":"ntc:epfo-passbook","attrs":{"read":true},"validFrom":"2026-08-05","status":"active","verification":{"source":"EPFO","state":"verified","asOf":"2026-08-05"}},
-    {"id":"e:arjun-subject-ntc3","type":"subjectOf","from":"person:arjun","to":"ntc:scam-pan","attrs":{"read":false},"validFrom":"2026-08-22","status":"active","verification":{"source":"Self","state":"pending","asOf":"2026-08-22"}},
     {"id":"e:arjun-subject-ntc4","type":"subjectOf","from":"person:arjun","to":"ntc:echallan","attrs":{"read":true},"validFrom":"2026-08-02","status":"active","verification":{"source":"RTO","state":"verified","asOf":"2026-08-02"}},
     {"id":"e:arjun-subject-app1","type":"subjectOf","from":"person:arjun","to":"app:pan-name-correction","attrs":{},"validFrom":"2026-08-15","status":"active","verification":{"source":"Self","state":"self-declared","asOf":"2026-08-15"}},
     {"id":"e:arjun-subject-pmsby","type":"subjectOf","from":"person:arjun","to":"ben:pmsby","attrs":{"eligibility":"eligible"},"validFrom":"2026-08-01","status":"active","verification":{"source":"Self","state":"verified","asOf":"2026-08-01"}},
     {"id":"e:arjun-subject-mudra","type":"subjectOf","from":"person:arjun","to":"ben:mudra-kishor","attrs":{"eligibility":"potentially-eligible"},"validFrom":"2026-08-01","status":"active","verification":{"source":"Self","state":"verified","asOf":"2026-08-01"}},
-    {"id":"e:sunita-subject-fampension","type":"subjectOf","from":"person:sunita","to":"ben:eps-family-pension","attrs":{"eligibility":"not-eligible","note":"Recomputed automatically when the Citizen Graph changes."},"validFrom":"2026-08-01","status":"active","verification":{"source":"EPFO","state":"verified","asOf":"2026-08-01"}},
-    {"id":"e:sunita-subject-widowpension","type":"subjectOf","from":"person:sunita","to":"ben:ka-widow-pension","attrs":{"eligibility":"not-eligible","note":"Recomputed automatically when the Citizen Graph changes."},"validFrom":"2026-08-01","status":"active","verification":{"source":"Self","state":"verified","asOf":"2026-08-01"}}
+    {"id":"e:sunita-subject-fampension","type":"subjectOf","from":"person:sunita","to":"ben:eps-family-pension","attrs":{"eligibility":"not-eligible","note":"Eligibility updates when the profile records change."},"validFrom":"2026-08-01","status":"active","verification":{"source":"EPFO","state":"verified","asOf":"2026-08-01"}},
+    {"id":"e:sunita-subject-widowpension","type":"subjectOf","from":"person:sunita","to":"ben:ka-widow-pension","attrs":{"eligibility":"not-eligible","note":"Eligibility updates when the profile records change."},"validFrom":"2026-08-01","status":"active","verification":{"source":"Self","state":"verified","asOf":"2026-08-01"}}
   ],
   "events": []
 }

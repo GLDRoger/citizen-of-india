@@ -41,8 +41,9 @@ export const useCitizenStore = create<CitizenStore>()(
     }),
     {
       name: "citizen-of-india-graph",
-      version: 1,
+      version: 3,
       storage: createJSONStorage(() => localStorage),
+      migrate: () => ({ graph: createSeedGraph() }),
       partialize: (state) => ({ graph: state.graph }),
       merge: (persistedState, currentState) => {
         const parsed = persistedGraphSchema.safeParse(

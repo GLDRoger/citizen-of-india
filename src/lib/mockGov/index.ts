@@ -74,6 +74,21 @@ export function submitClaim(input: { kind: string; claimantId: string }) {
   });
 }
 
+export function registerEpfoGrievance(input: { employmentId: string; issue: string; memberId: string }) {
+  return mockResponse(`epfo-grievance:${input.employmentId}:${input.issue}:${input.memberId}`, "EPFO", {
+    grievanceReference: reference("EPFO-GRV", `${input.memberId}:${input.issue}`),
+    status: "registered" as const,
+    expectedResponseDays: 15,
+  });
+}
+
+export function submitBenefitApplication(input: { benefitId: string; applicantId: string }) {
+  return mockResponse(`benefit:${input.benefitId}:${input.applicantId}`, "UMANG scheme application desk", {
+    applicationReference: reference("SCH", `${input.benefitId}:${input.applicantId}`),
+    status: "submitted" as const,
+  });
+}
+
 export function submitMarriageRegistration(input: { applicantId: string; partnerId: string }) {
   return mockResponse(`marriage:${input.applicantId}:${input.partnerId}`, "Kaveri Online Services", {
     applicationReference: reference("KAV-MRG", `${input.applicantId}:${input.partnerId}`),
@@ -87,12 +102,5 @@ export function submitPanCorrection(input: { personId: string; correctedName: st
     acknowledgement: reference("PAN-CR", input.personId),
     correctedName: input.correctedName,
     status: "submitted" as const,
-  });
-}
-
-export function submitCybercrimeReport(input: { reporterId: string; message: string }) {
-  return mockResponse(`cyber:${input.reporterId}:${input.message}`, "Simulated cybercrime desk", {
-    acknowledgement: reference("NCRP", `${input.reporterId}:${input.message}`),
-    status: "draft-created" as const,
   });
 }

@@ -6,20 +6,17 @@ export function getApplicationHref(application: ApplicationNode) {
   switch (application.attrs.kind) {
     case "marriage":
       return "/workflows/marriage";
-    case "death":
-      return "/workflows/death";
     case "benefit":
-      return "/discover";
+      return "/workflows/benefit-application";
     case "business-loan":
       return "/workflows/loan";
     case "business-registration":
       return "/workflows/start-business";
-    case "cybercrime":
-      return "/workflows/scam-check";
-    case "property-mutation":
-    case "vehicle-transfer":
-      return "/workflows/death#family-briefing";
+    case "record-correction":
+      return "/workflows/record-correction";
+    case "epfo-grievance":
+      return "/workflows/epfo";
     default:
-      return application.attrs.relatedTo?.startsWith("doc:") ? "/documents" : null;
+      return application.attrs.relatedTo?.startsWith("doc:") ? "/workflows/record-correction" : null;
   }
 }

@@ -1,4 +1,5 @@
 import { daysUntil } from "@/lib/format";
+import type { MessageKey } from "@/i18n/messages";
 import type {
   CitizenGraph,
   EligibilityRule,
@@ -317,7 +318,10 @@ export function getEligibility(graph: CitizenGraph, personId: string): Eligibili
 export interface TaskView {
   id: string;
   title: string;
+  titleKey?: MessageKey;
+  documentKind?: string;
   meta: string;
+  metaKey?: MessageKey;
   href: string;
   urgent: boolean;
 }
@@ -336,7 +340,7 @@ export function getThingsToDo(graph: CitizenGraph, personId: string): TaskView[]
       id: node.id,
       title: node.attrs.title,
       meta: node.attrs.dueDate ? `${daysUntil(node.attrs.dueDate)} days left` : node.attrs.authority,
-      href: obligationHrefs[node.id] ?? "/#money",
+      href: obligationHrefs[node.id] ?? "/home#attention",
       urgent: node.attrs.dueDate ? daysUntil(node.attrs.dueDate) <= 14 : false,
     }));
   const applicationTasks = getApplications(graph, personId)
@@ -348,7 +352,10 @@ export function getThingsToDo(graph: CitizenGraph, personId: string): TaskView[]
         node.attrs.status === "partner-consent-pending" && personId === "person:priya"
           ? "Your consent is needed"
           : `Status: ${node.attrs.status.replaceAll("-", " ")}`,
-      href: getApplicationHref(node) ?? "/activity",
+      metaKey: node.attrs.status === "partner-consent-pending" && personId === "person:priya"
+        ? "consentNeeded"
+        : undefined,
+      href: getApplicationHref(node) ?? "/home#attention",
       urgent: node.attrs.status === "partner-consent-pending" && personId === "person:priya",
     }));
   const mismatchTasks = getDocuments(graph, personId)
@@ -356,8 +363,11 @@ export function getThingsToDo(graph: CitizenGraph, personId: string): TaskView[]
     .map((node) => ({
       id: node.id,
       title: `${node.attrs.kind.toUpperCase()} record needs attention`,
-      meta: node.verification.note ?? "Record mismatch",
-      href: "/documents",
+      titleKey: "recordNeedsAttention",
+      documentKind: node.attrs.kind,
+      meta: "Record mismatch",
+      metaKey: "recordMismatch",
+      href: "/workflows/record-correction",
       urgent: false,
     }));
   return [...applicationTasks, ...obligationTasks, ...mismatchTasks].slice(0, 6);
