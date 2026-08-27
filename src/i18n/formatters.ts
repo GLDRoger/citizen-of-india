@@ -31,16 +31,11 @@ const documentKindKeys: Record<string, MessageKey> = {
   "vehicle-rc": "documentVehicleRc",
 };
 
-const scamVerdictKeys: Record<string, MessageKey> = {
-  "likely-legitimate": "statusLikelyLegitimate",
-  suspicious: "suspicious",
-  unclear: "statusUnclear",
-};
-
-const confidenceKeys: Record<string, MessageKey> = {
-  high: "confidenceHigh",
-  medium: "confidenceMedium",
-  low: "confidenceLow",
+const relationshipKeys: Record<string, MessageKey> = {
+  child: "relationshipChild",
+  "historical spouse": "relationshipHistoricalSpouse",
+  parent: "relationshipParent",
+  spouse: "relationshipSpouse",
 };
 
 export function getStatusMessageKey(status: string) {
@@ -51,12 +46,8 @@ export function getDocumentKindMessageKey(kind: string) {
   return documentKindKeys[kind];
 }
 
-export function getScamVerdictMessageKey(verdict: string) {
-  return scamVerdictKeys[verdict];
-}
-
-export function getConfidenceMessageKey(confidence: string) {
-  return confidenceKeys[confidence];
+export function getRelationshipMessageKey(relationship: string) {
+  return relationshipKeys[relationship];
 }
 
 export function localizeEvidence(language: Language, evidence: string) {
@@ -74,7 +65,7 @@ export function localizeEventLabel(event: GraphEvent, language: Language) {
     params.document = key ? getMessage(language, key) : params.documentKind;
   }
   if (event.labelKey === "eventBenefitApplicationStarted" && typeof params.benefitId === "string") {
-    params.benefit = localizeNodeTitle(language, params.benefitId, params.benefitId);
+    params.benefit = localizeNodeTitle(language, params.benefitId, typeof params.benefitName === "string" ? params.benefitName : params.benefitId);
   }
   return getMessage(language, event.labelKey, params);
 }

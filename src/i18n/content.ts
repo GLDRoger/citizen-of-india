@@ -4,7 +4,6 @@ interface LocalizedContent {
   nodeTitles: Record<string, string>;
   noticeBodies: Record<string, string>;
   ruleExplanations: Record<string, string>;
-  scamSignals: Record<string, string>;
 }
 
 const hi: LocalizedContent = {
@@ -16,7 +15,6 @@ const hi: LocalizedContent = {
     "obl:passport-renewal": "वीज़ा के लिए पासपोर्ट में छह महीने से कम समय बचा है",
     "ntc:itr-refund": "₹12,400 का आयकर रिफ़ंड शुरू हुआ",
     "ntc:epfo-passbook": "EPF अंशदान खाते में जमा हुआ",
-    "ntc:scam-pan": "PAN बंद होने की नकली चेतावनी",
     "ntc:echallan": "ई-चालान जारी हुआ",
     "ntc:kavita-consent-received": "कविता की कानूनी वारिस सहमति मिली",
     "ben:pmsby": "प्रधानमंत्री सुरक्षा बीमा योजना",
@@ -31,7 +29,6 @@ const hi: LocalizedContent = {
     "app:rajesh-veh-dzire-succession": "वाहन मालिकाना हक़ हस्तांतरण",
     "app:marriage-arjun-priya": "अर्जुन और प्रिया का विवाह पंजीकरण",
     "app:arjun-business-loan": "व्यवसाय लोन आवेदन",
-    "app:cybercrime:arjun": "संदिग्ध संदेश की साइबर अपराध रिपोर्ट",
   },
   noticeBodies: {
     "ntc:itr-refund": "प्रिय करदाता, आकलन वर्ष 2026-27 के लिए ₹12,400 का रिफ़ंड शुरू हो गया है। यह सत्यापित बैंक खाते के अंतिम अंक 0042 में जमा होगा।",
@@ -53,13 +50,6 @@ const hi: LocalizedContent = {
     "Sunita is a resident of Karnataka.": "सुनीता कर्नाटक की निवासी हैं।",
     "Household income must be within the limit — needs income declaration.": "परिवार की आय तय सीमा में होनी चाहिए; आय घोषणा अभी चाहिए।",
   },
-  scamSignals: {
-    "Sender is a personal mobile number, not a registered government header": "भेजने वाला सरकारी SMS हेडर नहीं, निजी मोबाइल नंबर है",
-    "Link domain 'pan-updat.info' is not incometax.gov.in": "लिंक का डोमेन pan-updat.info है, incometax.gov.in नहीं",
-    "Urgency and threat within 24 hours": "24 घंटे की धमकी देकर जल्दबाज़ी कराई जा रही है",
-    "Spelling errors: 'will be block', 'immediatly'": "संदेश में कई वर्तनी और भाषा की गलतियाँ हैं",
-    "The Income Tax Department never blocks PAN by SMS deadline": "आयकर विभाग SMS में समय-सीमा देकर PAN बंद नहीं करता",
-  },
 };
 
 const kn: LocalizedContent = {
@@ -71,7 +61,6 @@ const kn: LocalizedContent = {
     "obl:passport-renewal": "ವೀಸಾಕ್ಕೆ ಬೇಕಾದ ಆರು ತಿಂಗಳಿಗಿಂತ ಕಡಿಮೆ ಪಾಸ್‌ಪೋರ್ಟ್ ಅವಧಿ ಉಳಿದಿದೆ",
     "ntc:itr-refund": "₹12,400 ಆದಾಯ ತೆರಿಗೆ ಮರುಪಾವತಿ ಪ್ರಾರಂಭವಾಗಿದೆ",
     "ntc:epfo-passbook": "EPF ವಂತಿಗೆ ಖಾತೆಗೆ ಜಮೆಯಾಗಿದೆ",
-    "ntc:scam-pan": "PAN ನಿಷ್ಕ್ರಿಯಗೊಳಿಸುವ ನಕಲಿ ಎಚ್ಚರಿಕೆ",
     "ntc:echallan": "ಇ-ದಂಡ ನೀಡಲಾಗಿದೆ",
     "ntc:kavita-consent-received": "ಕವಿತಾ ಅವರ ಕಾನೂನು ವಾರಸುದಾರರ ಒಪ್ಪಿಗೆ ದೊರೆತಿದೆ",
     "ben:pmsby": "ಪ್ರಧಾನಮಂತ್ರಿ ಸುರಕ್ಷಾ ವಿಮಾ ಯೋಜನೆ",
@@ -86,7 +75,6 @@ const kn: LocalizedContent = {
     "app:rajesh-veh-dzire-succession": "ವಾಹನ ಮಾಲೀಕತ್ವ ವರ್ಗಾವಣೆ",
     "app:marriage-arjun-priya": "ಅರ್ಜುನ್ ಮತ್ತು ಪ್ರಿಯಾ ಅವರ ವಿವಾಹ ನೋಂದಣಿ",
     "app:arjun-business-loan": "ವ್ಯವಹಾರ ಸಾಲದ ಅರ್ಜಿ",
-    "app:cybercrime:arjun": "ಅನುಮಾನಾಸ್ಪದ ಸಂದೇಶದ ಸೈಬರ್ ಅಪರಾಧ ವರದಿ",
   },
   noticeBodies: {
     "ntc:itr-refund": "ಮಾನ್ಯ ತೆರಿಗೆದಾರರೇ, ಮೌಲ್ಯಮಾಪನ ವರ್ಷ 2026-27ರ ₹12,400 ಮರುಪಾವತಿ ಪ್ರಾರಂಭವಾಗಿದೆ. ಇದು 0042ರಲ್ಲಿ ಕೊನೆಗೊಳ್ಳುವ ಪರಿಶೀಲಿತ ಬ್ಯಾಂಕ್ ಖಾತೆಗೆ ಜಮೆಯಾಗುತ್ತದೆ.",
@@ -108,13 +96,6 @@ const kn: LocalizedContent = {
     "Sunita is a resident of Karnataka.": "ಸುನೀತಾ ಕರ್ನಾಟಕದ ನಿವಾಸಿ.",
     "Household income must be within the limit — needs income declaration.": "ಕುಟುಂಬದ ಆದಾಯ ನಿಗದಿತ ಮಿತಿಯೊಳಗಿರಬೇಕು; ಆದಾಯ ಘೋಷಣೆ ಇನ್ನೂ ಬೇಕಾಗಿದೆ.",
   },
-  scamSignals: {
-    "Sender is a personal mobile number, not a registered government header": "ಕಳುಹಿಸಿದವರು ನೋಂದಾಯಿತ ಸರ್ಕಾರಿ SMS ಹೆಡರ್ ಅಲ್ಲ, ವೈಯಕ್ತಿಕ ಮೊಬೈಲ್ ಸಂಖ್ಯೆ",
-    "Link domain 'pan-updat.info' is not incometax.gov.in": "ಲಿಂಕ್‌ನ ಡೊಮೇನ್ pan-updat.info; incometax.gov.in ಅಲ್ಲ",
-    "Urgency and threat within 24 hours": "24 ಗಂಟೆಯ ಬೆದರಿಕೆ ನೀಡಿ ತುರ್ತು ಒತ್ತಡ ಹಾಕಲಾಗಿದೆ",
-    "Spelling errors: 'will be block', 'immediatly'": "ಸಂದೇಶದಲ್ಲಿ ಹಲವು ಕಾಗುಣಿತ ಮತ್ತು ಭಾಷಾ ದೋಷಗಳಿವೆ",
-    "The Income Tax Department never blocks PAN by SMS deadline": "ಆದಾಯ ತೆರಿಗೆ ಇಲಾಖೆ SMS ಗಡುವು ನೀಡಿ PAN ನಿಷ್ಕ್ರಿಯಗೊಳಿಸುವುದಿಲ್ಲ",
-  },
 };
 
 const dictionaries: Partial<Record<Language, LocalizedContent>> = { hi, kn };
@@ -129,8 +110,4 @@ export function localizeNoticeBody(language: Language, noticeId: string, fallbac
 
 export function localizeRuleExplanation(language: Language, fallback: string) {
   return dictionaries[language]?.ruleExplanations[fallback] ?? fallback;
-}
-
-export function localizeScamSignal(language: Language, fallback: string) {
-  return dictionaries[language]?.scamSignals[fallback] ?? fallback;
 }
