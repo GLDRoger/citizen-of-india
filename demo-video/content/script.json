@@ -1,0 +1,137 @@
+[
+  {
+    "id": "problem",
+    "startFrame": 0,
+    "durationInFrames": 300,
+    "endPaddingInFrames": 6,
+    "maximumTempo": 1.3,
+    "direction": "Open with genuine curiosity at about 145 words per minute. Keep the pauses short, then make the two closing sentences crisp. Stop immediately after 'No starting over.' Do not answer the questions or add a concluding phrase.",
+    "narration": "What if public-service websites just worked? What if you could get the job done on your first attempt? No portal hunt. No starting over.",
+    "captions": [
+      "What if public-service websites just worked?",
+      "What if you could get the job done on your first attempt?",
+      "No portal hunt. No starting over."
+    ]
+  },
+  {
+    "id": "graph",
+    "startFrame": 300,
+    "durationInFrames": 300,
+    "endPaddingInFrames": 6,
+    "maximumTempo": 1.2,
+    "direction": "Tell this as a candid personal discovery at a steady conversational pace. Let 'That was the clue' turn the confession into the product insight.",
+    "narration": "I entered this hackathon without knowing UMANG existed. That was the clue: useful services can still disappear behind department names.",
+    "captions": [
+      "I entered this hackathon without knowing UMANG existed.",
+      "That was the clue:",
+      "useful services can still disappear behind department names."
+    ]
+  },
+  {
+    "id": "home",
+    "startFrame": 600,
+    "durationInFrames": 300,
+    "endPaddingInFrames": 6,
+    "maximumTempo": 1.3,
+    "direction": "Introduce 'personal public-service gazette' clearly, then make the three questions feel immediately useful rather than conceptual.",
+    "narration": "Citizen is a personal public-service gazette: one record showing what changed, what applies to Arjun, and what he should do next.",
+    "captions": [
+      "Citizen is a personal public-service gazette:",
+      "one record showing what changed, what applies to Arjun,",
+      "and what he should do next."
+    ]
+  },
+  {
+    "id": "intent",
+    "startFrame": 900,
+    "durationInFrames": 300,
+    "direction": "Keep this simple and conversational. Quote the request naturally, then land 'right service' with quiet assurance.",
+    "narration": "He asks, 'Check my E P F O passbook.' Citizen uses Arjun's connected records and opens the right service.",
+    "captions": [
+      "He asks, “Check my EPFO passbook.”",
+      "Citizen uses Arjun's connected records",
+      "and opens the right service."
+    ]
+  },
+  {
+    "id": "epfo",
+    "startFrame": 1200,
+    "durationInFrames": 420,
+    "maximumTempo": 1.3,
+    "direction": "Use clear product-demo momentum. Make the final Submitted status sound like a concrete result, not a slogan.",
+    "narration": "His U A N, employer, balance, and latest contribution are already together. He reports July's missing payment, gets a grievance reference, and Home shows the task as Submitted.",
+    "captions": [
+      "His UAN, employer, balance, and latest contribution are already together.",
+      "He reports July's missing payment and gets a grievance reference.",
+      "Home shows the task as Submitted."
+    ]
+  },
+  {
+    "id": "boundary",
+    "startFrame": 1620,
+    "durationInFrames": 360,
+    "direction": "Turn serious and candid. Deliver the forty-day constraint plainly, without cynicism, and let 'cannot clear it' land firmly.",
+    "narration": "But if a claim waits forty days on an officer, a database, a policy, or staff capacity, prettier screens cannot clear it.",
+    "captions": [
+      "But if a claim waits forty days on an officer,",
+      "a database, a policy, or staff capacity,",
+      "prettier screens cannot clear it."
+    ]
+  },
+  {
+    "id": "architecture",
+    "startFrame": 1980,
+    "durationInFrames": 300,
+    "endPaddingInFrames": 6,
+    "maximumTempo": 1.3,
+    "direction": "Rebuild momentum at a steady 145 words per minute. 'We did the homework' should feel earned. Emphasize the four plain things held by the graph.",
+    "narration": "We did the homework, then built the system behind the screen: one Citizen Graph holds his records, relationships, payments, and outcomes.",
+    "captions": [
+      "We did the homework, then built the system behind the screen:",
+      "one Citizen Graph holds his records, relationships,",
+      "payments, and outcomes."
+    ]
+  },
+  {
+    "id": "mutations",
+    "startFrame": 2280,
+    "durationInFrames": 420,
+    "direction": "Precise and assured. Emphasize the user-visible consequence: Money, receipt, and history change together without duplicate records.",
+    "narration": "Every action writes to that one graph. So a payment updates Money, saves the receipt, and joins Arjun's history, with no disconnected copies drifting apart.",
+    "captions": [
+      "Every action writes to that one graph.",
+      "A payment updates Money, saves the receipt,",
+      "and joins Arjun's history, with no disconnected copies drifting apart."
+    ]
+  },
+  {
+    "id": "safety",
+    "startFrame": 2700,
+    "durationInFrames": 360,
+    "endPaddingInFrames": 6,
+    "maximumTempo": 1.3,
+    "direction": "Calm, candid, and trustworthy at roughly 145 words per minute. Give the last sentence only a very short pause beforehand and a firm finish.",
+    "narration": "We stay honest. The guide reads only your own records, and every government response is simulated. Citizen shows status and next steps. It cannot invent processing capacity.",
+    "captions": [
+      "We stay honest. The guide reads only your own records,",
+      "and every government response is simulated.",
+      "Citizen shows status and next steps.",
+      "It cannot invent processing capacity."
+    ]
+  },
+  {
+    "id": "reach",
+    "startFrame": 3060,
+    "durationInFrames": 540,
+    "endPaddingInFrames": 90,
+    "maximumTempo": 1.3,
+    "direction": "Open the tone up for the hopeful payoff at roughly 150 words per minute. Keep the consent and language lines flowing, then give the tagline a clean cadence before the end card.",
+    "narration": "One graph keeps Records, Services, and Benefits in sync. Shared work asks for consent first, and access can be revoked anytime. It works in English, Hindi, and Kannada. Citizen: public services, in one place.",
+    "captions": [
+      "One graph keeps Records, Services, and Benefits in sync.",
+      "Shared work asks for consent first, and access can be revoked anytime.",
+      "It works in English, Hindi, and Kannada.",
+      "Citizen: public services, in one place."
+    ]
+  }
+]

@@ -1,0 +1,41 @@
+{
+  "name": "demo-video",
+  "version": "1.0.0",
+  "description": "Two-minute Citizen hackathon demo video",
+  "repository": "https://github.com/GLDRoger/citizen-of-india",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@remotion/cli": "4.0.518",
+    "@remotion/fonts": "4.0.518",
+    "@remotion/mac-cursors": "4.0.518",
+    "@remotion/media": "4.0.518",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.518",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@remotion/eslint-config-flat": "4.0.518",
+    "@types/react": "19.2.7",
+    "@types/web": "0.0.166",
+    "eslint": "9.19.0",
+    "playwright": "1.62.1",
+    "prettier": "3.8.1",
+    "typescript": "5.9.3"
+  },
+  "scripts": {
+    "capture": "node scripts/capture-app.mjs",
+    "dev": "remotion studio",
+    "build": "remotion bundle",
+    "music": "node scripts/prepare-music.mjs",
+    "voiceover": "node scripts/generate-voiceover.mjs",
+    "audio": "npm run music && npm run voiceover",
+    "upgrade": "remotion upgrade",
+    "lint": "eslint src scripts && tsc",
+    "render": "node scripts/render-final.mjs"
+  },
+  "sideEffects": [
+    "*.css"
+  ]
+}

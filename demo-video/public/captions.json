@@ -1,0 +1,258 @@
+[
+  {
+    "text": "What if public-service websites just worked?",
+    "startMs": 220,
+    "endMs": 2670,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "What if you could get the job done on your first attempt?",
+    "startMs": 2670,
+    "endMs": 7570,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "No portal hunt. No starting over.",
+    "startMs": 7570,
+    "endMs": 10020,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": false
+  },
+  {
+    "text": "I entered this hackathon without knowing UMANG existed.",
+    "startMs": 10220,
+    "endMs": 14140,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "That was the clue:",
+    "startMs": 14140,
+    "endMs": 16100,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "useful services can still disappear behind department names.",
+    "startMs": 16100,
+    "endMs": 20020,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": false
+  },
+  {
+    "text": "Citizen is a personal public-service gazette:",
+    "startMs": 20220,
+    "endMs": 23020,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "one record showing what changed, what applies to Arjun,",
+    "startMs": 23020,
+    "endMs": 27220,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "and what he should do next.",
+    "startMs": 27220,
+    "endMs": 30020,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": false
+  },
+  {
+    "text": "He asks, “Check my EPFO passbook.”",
+    "startMs": 30220,
+    "endMs": 33708,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "Citizen uses Arjun's connected records",
+    "startMs": 33708,
+    "endMs": 36614,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "and opens the right service.",
+    "startMs": 36614,
+    "endMs": 39520,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": false
+  },
+  {
+    "text": "His UAN, employer, balance, and latest contribution are already together.",
+    "startMs": 40220,
+    "endMs": 45335,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "He reports July's missing payment and gets a grievance reference.",
+    "startMs": 45335,
+    "endMs": 50451,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "Home shows the task as Submitted.",
+    "startMs": 50451,
+    "endMs": 53520,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": false
+  },
+  {
+    "text": "But if a claim waits forty days on an officer,",
+    "startMs": 54220,
+    "endMs": 59356,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "a database, a policy, or staff capacity,",
+    "startMs": 59356,
+    "endMs": 62952,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "prettier screens cannot clear it.",
+    "startMs": 62952,
+    "endMs": 65520,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": false
+  },
+  {
+    "text": "We did the homework, then built the system behind the screen:",
+    "startMs": 66220,
+    "endMs": 71353,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "one Citizen Graph holds his records, relationships,",
+    "startMs": 71353,
+    "endMs": 74620,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "payments, and outcomes.",
+    "startMs": 74620,
+    "endMs": 76020,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": false
+  },
+  {
+    "text": "Every action writes to that one graph.",
+    "startMs": 76220,
+    "endMs": 80099,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "A payment updates Money, saves the receipt,",
+    "startMs": 80099,
+    "endMs": 83978,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "and joins Arjun's history, with no disconnected copies drifting apart.",
+    "startMs": 83978,
+    "endMs": 89520,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": false
+  },
+  {
+    "text": "We stay honest. The guide reads only your own records,",
+    "startMs": 90220,
+    "endMs": 94590,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "and every government response is simulated.",
+    "startMs": 94590,
+    "endMs": 97213,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "Citizen shows status and next steps.",
+    "startMs": 97213,
+    "endMs": 99835,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "It cannot invent processing capacity.",
+    "startMs": 99835,
+    "endMs": 102020,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": false
+  },
+  {
+    "text": "One graph keeps Records, Services, and Benefits in sync.",
+    "startMs": 102220,
+    "endMs": 106191,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "Shared work asks for consent first, and access can be revoked anytime.",
+    "startMs": 106191,
+    "endMs": 111485,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "It works in English, Hindi, and Kannada.",
+    "startMs": 111485,
+    "endMs": 114573,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "Citizen: public services, in one place.",
+    "startMs": 114573,
+    "endMs": 117220,
+    "timestampMs": null,
+    "confidence": 1,
+    "pageBreakAfter": false
+  }
+]

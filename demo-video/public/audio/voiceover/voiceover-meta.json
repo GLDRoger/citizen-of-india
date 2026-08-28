@@ -1,0 +1,19 @@
+{
+  "provider": "Google Gemini API",
+  "model": "gemini-3.1-flash-tts-preview",
+  "voice": "Sulafat",
+  "language": "en-IN",
+  "generatedAt": "2026-08-28T14:02:21.328Z",
+  "sceneIds": [
+    "problem",
+    "graph",
+    "home",
+    "intent",
+    "epfo",
+    "boundary",
+    "architecture",
+    "mutations",
+    "safety",
+    "reach"
+  ]
+}
