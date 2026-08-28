@@ -12,22 +12,34 @@ export const en = {
   serviceCategoryBusiness: "Business",
   propertyTaxServicePromise: "Pay BBMP property tax and save the receipt.",
   gstrServicePromise: "File the August GST return for Sharma Web Solutions.",
-  passportServicePromise: "Check the expiry, documents and next Passport Seva step.",
-  refundServicePromise: "See the refund amount, bank account and expected date.",
-  deathPromise: "Register the death, receive the certificate and begin pension, nominee and legal-heir work.",
-  marriagePromise: "Register a marriage with separate consent from both people.",
-  obligationsPromise: "Review a ₹500 Bengaluru traffic challan and pay it in the demo.",
-  loanPromise: "Compare monthly payments, total interest and missing documents.",
-  recordCorrectionPromise: "Compare PAN and Aadhaar before sending a correction request.",
-  startBusinessPromise: "See the registrations and licences for your business and city.",
+  passportServicePromise:
+    "Check the expiry, documents and next Passport Seva step.",
+  refundServicePromise:
+    "See the refund amount, bank account and expected date.",
+  deathPromise:
+    "Register the death, receive the certificate and begin pension, nominee and legal-heir work.",
+  marriagePromise:
+    "Register a marriage with separate consent from both people.",
+  obligationsPromise:
+    "Review a ₹500 Bengaluru traffic challan and pay it in the demo.",
+  loanPromise:
+    "Compare monthly payments, total interest and missing documents.",
+  recordCorrectionPromise:
+    "Compare PAN and Aadhaar before sending a correction request.",
+  startBusinessPromise:
+    "See the registrations and licences for your business and city.",
   epfoPromise: "Check your passbook, latest contribution and grievance status.",
-  digilockerPromise: "Open issued documents, keep them in this demo and review their source.",
-  existingBusinessContext: "We will treat this as a new activity for {business}.",
+  digilockerPromise:
+    "Open issued documents, keep them in this demo and review their source.",
+  existingBusinessContext:
+    "We will treat this as a new activity for {business}.",
   whatItMeans: "What it means",
   nextAction: "Next action",
   governmentInbox: "Notices",
-  contrastDeathBriefing: "Today: four offices and no shared record. Here: one family file, with pension eligibility already updated.",
-  contrastFamilyPension: "This became eligible the moment the death was recorded. Today a widow must find and apply for this herself.",
+  contrastDeathBriefing:
+    "Today: four offices and no shared record. Here: one family file, with pension eligibility already updated.",
+  contrastFamilyPension:
+    "This became eligible the moment the death was recorded. Today a widow must find and apply for this herself.",
   contrastMarriageInvite: "Priya can use documents already in her profile.",
   contrastPanMismatch: "The PAN name does not match Aadhaar.",
   checked: "Checked",
@@ -69,7 +81,8 @@ export const en = {
   language: "Language",
   dataSaver: "Use less data",
   loginTitle: "Choose a profile",
-  loginBody: "Arjun shows the full demo. Priya shows consent. Sunita shows shared access.",
+  loginBody:
+    "Arjun shows the full demo. Priya shows consent. Sunita shows shared access.",
   chooseProfile: "Choose a profile",
   goodMorning: "Good morning",
   goodAfternoon: "Good afternoon",
@@ -131,25 +144,29 @@ export const en = {
   storedOnDevice: "Saved in this demo",
   saveOffline: "Save in this demo",
   documentCount: "{count} records",
-  documentsPageBody: "Issued documents from DigiLocker and receipts created in this demo.",
+  documentsPageBody:
+    "Issued documents from DigiLocker and receipts created in this demo.",
   documentIssued: "Issued {date}",
   documentSource: "Source: {source}",
   documentCheckedOn: "Checked: {date}",
   documentUseReason: "Shared only with services that need it.",
   noMatchingDocuments: "No matching documents",
   documentsSearchHelp: "Try a document type, holder name or masked number.",
-  panMismatchExplanation: "Name on this PAN ('{panName}') differs from Aadhaar ('{aadhaarName}').",
+  panMismatchExplanation:
+    "Name on this PAN ('{panName}') differs from Aadhaar ('{aadhaarName}').",
   resolveMismatch: "Fix name mismatch",
   recordCorrectionEyebrow: "PAN name correction",
   recordCorrectionReviewTitle: "Check both names",
   recordCorrectionReviewBody: "PAN and Aadhaar show different names.",
   citizenRecord: "Aadhaar",
   recordCorrectionUses: "Uses only the PAN and Aadhaar shown here.",
-  recordCorrectionLeaves: "The PAN name will not change until the request is approved.",
+  recordCorrectionLeaves:
+    "The PAN name will not change until the request is approved.",
   recordCorrectionSubmit: "Send correction request",
   recordCorrectionError: "The request could not be sent. Nothing changed.",
   recordCorrectionCompleteTitle: "Correction request sent",
-  recordCorrectionCompleteBody: "Reference {reference}. The current PAN name stays visible while the request is reviewed.",
+  recordCorrectionCompleteBody:
+    "Reference {reference}. The current PAN name stays visible while the request is reviewed.",
   recordCorrectionUnavailableTitle: "There is no name mismatch to correct.",
   recordCorrectionUnavailableBody: "This profile has no PAN name mismatch.",
   recordCorrectionAuthority: "Protean eGov (PAN) · simulated",
@@ -174,7 +191,8 @@ export const en = {
   marriageWorkflowBody: "Apply together. Consent separately.",
   marriageServiceError: "The request could not be completed. Nothing changed.",
   marriageCompleteTitle: "Marriage registered",
-  marriageCompleteBody: "The certificate is in both profiles. Arjun and Priya now appear as spouses.",
+  marriageCompleteBody:
+    "The certificate is in both profiles. Arjun and Priya now appear as spouses.",
   marriageViewRelationship: "View family record",
   marriageOpenCertificate: "Open certificate",
   marriageSharedEyebrow: "Invitation",
@@ -186,7 +204,8 @@ export const en = {
   marriageConsentEyebrow: "Consent required",
   marriageConsentQuestion: "Priya, do you consent?",
   marriageWaitingPriya: "Waiting for Priya",
-  marriageConsentBody: "Arjun is asking to use the records below for this registration.",
+  marriageConsentBody:
+    "Arjun is asking to use the records below for this registration.",
   marriageIdentityVerification: "Confirm Priya's identity",
   marriageVerifiedDocumentsOnly: "Use verified identity documents",
   marriageSpouseAfterSubmission: "Add Arjun as spouse after registration",
@@ -194,23 +213,27 @@ export const en = {
   marriageSwitchPriya: "Switch to Priya",
   marriageRecordsEyebrow: "Documents and witnesses",
   marriageRecordsTitle: "Choose witnesses",
-  marriageRecordsBody: "{count} verified identity documents are ready. Choose at least one witness.",
+  marriageRecordsBody:
+    "{count} verified identity documents are ready. Choose at least one witness.",
   marriageWitnesses: "Witnesses",
   marriageUseDocuments: "Continue with these records",
   marriageAppointmentTitle: "Book the appointment",
-  marriageAppointmentBody: "{count} witnesses selected. Registration fee: ₹500.",
+  marriageAppointmentBody:
+    "{count} witnesses selected. Registration fee: ₹500.",
   marriageAppointmentSlot: "{date} · 11:30",
   marriageRegistrar: "Sub-Registrar, Jayanagar",
   marriageRegistrationFee: "₹500 registration fee",
   marriageBookAndPay: "Book and pay",
   marriageConfirmTitle: "Register the marriage",
-  marriageConfirmBody: "Appointment booked for {date}. Both profiles will receive the same certificate.",
+  marriageConfirmBody:
+    "Appointment booked for {date}. Both profiles will receive the same certificate.",
   marriageSpouseRelationship: "After registration",
   marriageRegisterAction: "Register marriage",
   startDefaultBusiness: "home-style food service",
   startPlanningAuthority: "Business plan",
   startCompleteTitle: "Draft saved",
-  startCompleteBody: "No registration was submitted. Your complete plan is saved below and under Needs your attention.",
+  startCompleteBody:
+    "No registration was submitted. Your complete plan is saved below and under Needs your attention.",
   startViewDraft: "View draft",
   startSetupEyebrow: "Business details",
   startSetupTitle: "What are you planning to start?",
@@ -233,7 +256,8 @@ export const en = {
   startTradePlanTitle: "Check the local trade licence",
   startTradePlanBody: "Check the licence needed for this activity in {city}.",
   startGstPlanTitle: "Check tax and support",
-  startGstPlanBody: "Check GST, sector licences, schemes and a business bank account.",
+  startGstPlanBody:
+    "Check GST, sector licences, schemes and a business bank account.",
   startSupportPlanTitle: "Check business schemes",
   startSupportPlanBody: "Review support after the business details are final.",
   startMoneyPlanTitle: "Open a business bank account",
@@ -300,7 +324,8 @@ export const en = {
   eventBusinessPlanStarted: "New business registration plan started",
   eventMarriageInviteSent: "Priya invited to a shared marriage application",
   eventMarriageConsentReceived: "Priya consented to the marriage registration",
-  eventMarriageDocumentsAdded: "Verified identity documents and witnesses added to the marriage application",
+  eventMarriageDocumentsAdded:
+    "Verified identity documents and witnesses added to the marriage application",
   eventMarriageAppointmentBooked: "Marriage appointment booked and fee paid",
   eventMarriageRegistered: "Marriage registered and spouse relationship added",
   eventBenefitApplicationStarted: "{benefit} application started",
@@ -320,27 +345,32 @@ export const en = {
   deathRelationshipFamily: "Is this your family member?",
   deathSpouseFound: "Citizen found one verified spouse relationship.",
   deathFamilyFound: "Citizen found a verified family relationship.",
-  deathConfirmBeforeChange: "Confirm the connected record before anything changes.",
+  deathConfirmBeforeChange:
+    "Confirm the connected record before anything changes.",
   deathPensionerLocation: "EPS pensioner · Bengaluru",
   deathConfirmRajesh: "Confirm Rajesh",
   deathReviewRegistration: "Review the registration",
-  deathReviewRegistrationBody: "The form is prefilled from Rajesh's verified identity and family records. This creates a simulated registration only.",
+  deathReviewRegistrationBody:
+    "The form is prefilled from Rajesh's verified identity and family records. This creates a simulated registration only.",
   fieldName: "Name",
   fieldDate: "Date",
   fieldReporter: "Reporter",
   deathRegisterAction: "Register death",
   deathCertificateTitle: "Create one reusable certificate",
-  deathCertificateBody: "The certificate will be stored in Arjun's document wallet and reused for pension, nominee and widow-pension checks.",
+  deathCertificateBody:
+    "The certificate will be stored in Arjun's document wallet and reused for pension, nominee and widow-pension checks.",
   deathCertificateVerified: "Verified by the simulated BBMP response",
   deathIssueCertificate: "Issue certificate",
   deathClaimsTitle: "Start Sunita's pension and nominee claims",
-  deathClaimsBody: "Rajesh's EPS pension has ended. The same certificate now supports Sunita's family pension and the EPF nominee claim.",
+  deathClaimsBody:
+    "Rajesh's EPS pension has ended. The same certificate now supports Sunita's family pension and the EPF nominee claim.",
   deathFamilyPension: "Family pension",
   deathEpfClaim: "EPF nominee claim",
   deathSubmitClaims: "Submit both claims",
   deathSharedWorkflow: "Shared family workflow",
   deathConsentTitle: "Collect legal-heir consent",
-  deathConsentBody: "Sunita and Arjun are ready. Request Kavita's consent and the simulated relay will record her response.",
+  deathConsentBody:
+    "Sunita and Arjun are ready. Request Kavita's consent and the simulated relay will record her response.",
   ready: "Ready",
   waiting: "Waiting",
   deathRequestConsent: "Request Kavita's consent",
@@ -348,7 +378,8 @@ export const en = {
   processCarry: "Carry with you",
   processTime: "Expected time",
   deathRegistrationOffice: "BBMP zonal Births & Deaths office",
-  deathRegistrationCarry: "Reporter ID · hospital or cremation record · deceased person's ID",
+  deathRegistrationCarry:
+    "Reporter ID · hospital or cremation record · deceased person's ID",
   deathRegistrationTime: "Usually 1–3 working days after verification",
   deathCertificateOffice: "BBMP certificate desk",
   deathCertificateCarry: "Registration reference · reporter ID",
@@ -357,18 +388,22 @@ export const en = {
   deathClaimsCarry: "Death certificate · PPO/UAN · nominee bank proof",
   deathClaimsTime: "About 20 days after a complete claim",
   consentNoticeTitle: "Kavita's legal-heir consent received",
-  consentNoticeBody: "The simulated consent relay recorded Kavita Verma's approval for the Rajesh Sharma legal-heir workflow.",
+  consentNoticeBody:
+    "The simulated consent relay recorded Kavita Verma's approval for the Rajesh Sharma legal-heir workflow.",
   eventNoticeRead: "Notice marked read",
   deathKeepVisible: "Keep these visible",
   deathDownstreamTitle: "Create the property and vehicle next actions",
-  deathDownstreamBody: "Citizen will not transfer ownership automatically. It creates narrow drafts so the family can complete each succession process separately.",
+  deathDownstreamBody:
+    "Citizen will not transfer ownership automatically. It creates narrow drafts so the family can complete each succession process separately.",
   deathSuccessionDraft: "A succession draft will be created",
   deathCreateDrafts: "Create drafts and finish",
   deathCompleteTitle: "The family record is up to date.",
-  deathCompleteBody: "The certificate is reusable, pension and nominee claims are submitted, legal-heir consent is recorded, and property and vehicle transfer drafts remain visible.",
+  deathCompleteBody:
+    "The certificate is reusable, pension and nominee claims are submitted, legal-heir consent is recorded, and property and vehicle transfer drafts remain visible.",
   deathSeeSunitaEligibility: "See Sunita's eligibility",
   deathViewAuditTrail: "View audit trail",
-  deathServiceError: "The simulated service did not respond. Your records were not changed.",
+  deathServiceError:
+    "The simulated service did not respond. Your records were not changed.",
   changeRecorded: "Saved",
   recordsUpdated: "{count} updates",
   mutationRajeshDeceased: "Rajesh marked deceased",
@@ -408,10 +443,12 @@ export const en = {
   mutationFieldWitnesses: "witnesses",
   familyBriefing: "Family briefing",
   familyBriefingTitle: "What changed for the family",
-  familyBriefingBody: "Eligibility and succession actions, calculated from the updated family record.",
+  familyBriefingBody:
+    "Eligibility and succession actions, calculated from the updated family record.",
   familyPensionEligible: "Sunita's EPS family pension",
   widowPensionBlocked: "Widow pension needs one more record",
-  blockedByIncomeDeclaration: "Blocked until the household income declaration is added.",
+  blockedByIncomeDeclaration:
+    "Blocked until the household income declaration is added.",
   successionNextActions: "Succession next actions",
   propertySuccession: "BBMP khata transfer",
   vehicleSuccession: "Vehicle ownership transfer",
@@ -420,8 +457,10 @@ export const en = {
   propertyTimeline: "About 30–45 days after family documents are accepted",
   vehicleTimeline: "About 14–30 days after the RTO application is accepted",
   propertyDocuments: "Death certificate · legal-heir consent · khata extract",
-  vehicleDocuments: "Death certificate · RC · legal-heir consent · insurance copy",
-  noOwnershipChanged: "This is a draft next action. No ownership changed automatically.",
+  vehicleDocuments:
+    "Death certificate · RC · legal-heir consent · insurance copy",
+  noOwnershipChanged:
+    "This is a draft next action. No ownership changed automatically.",
   viewAsSunita: "View as Sunita",
   eventPropertyTaxPaid: "BBMP property tax paid",
   eventGstrFiled: "GSTR-3B filing recorded",
@@ -436,10 +475,12 @@ export const en = {
   propertyAmountDue: "Amount due",
   confirmPropertyTaxPayment: "Pay property tax in demo",
   propertyTaxPaidTitle: "Property tax paid",
-  propertyTaxPaidBody: "The amount is removed from Money. The receipt is in Documents.",
+  propertyTaxPaidBody:
+    "The amount is removed from Money. The receipt is in Documents.",
   gstrTitle: "August GST return",
   gstrBody: "Demo filing only. No GST portal is contacted.",
-  gstrConfirmDeclaration: "I reviewed the business, GSTIN and filing period shown above.",
+  gstrConfirmDeclaration:
+    "I reviewed the business, GSTIN and filing period shown above.",
   confirmGstrFiling: "File GST return in demo",
   gstrFiledTitle: "GST return filed",
   gstrFiledBody: "The deadline is cleared and the acknowledgement is saved.",
@@ -452,17 +493,20 @@ export const en = {
   passportDemoLimit: "Appointment booking is not available in this demo.",
   viewPassport: "View passport",
   epfoWorkflowTitle: "Check EPFO records",
-  epfoWorkflowBody: "Check your passbook and fix a contribution problem, all in one place.",
+  epfoWorkflowBody:
+    "Check your passbook and fix a contribution problem, all in one place.",
   epfoAuthority: "Employee Provident Fund Organisation",
   epfoPassbookLabel: "Member passbook",
   epfoPassbookTitle: "Your EPF account",
-  epfoPassbookBody: "The UAN, employer and balance come from this profile's connected employment record.",
+  epfoPassbookBody:
+    "The UAN, employer and balance come from this profile's connected employment record.",
   epfoBalance: "Passbook balance",
   epfoLatestContribution: "Latest contribution",
   epfoEmployer: "Employer",
   epfoReviewContribution: "Review latest contribution",
   epfoContributionTitle: "Review the latest contribution",
-  epfoContributionBody: "EPFO marked this contribution as credited. Choose whether it matches your records.",
+  epfoContributionBody:
+    "EPFO marked this contribution as credited. Choose whether it matches your records.",
   epfoContributionMatches: "It matches my records",
   epfoReportIssue: "Report a problem",
   epfoIssueLabel: "What is wrong?",
@@ -471,22 +515,31 @@ export const en = {
   epfoIssueEmployer: "The employer is wrong",
   epfoSubmitGrievance: "Register EPFO grievance",
   epfoGrievanceCompleteTitle: "EPFO grievance registered",
-  epfoGrievanceCompleteBody: "Reference {reference}. In this demo, EPFO responds within 15 days.",
+  epfoGrievanceCompleteBody:
+    "Reference {reference}. In this demo, EPFO responds within 15 days.",
   epfoReference: "Grievance reference",
-  epfoServiceError: "The grievance could not be registered. Your records did not change.",
+  epfoServiceError:
+    "The grievance could not be registered. Your records did not change.",
   epfoNoActionTitle: "Contribution checked",
-  epfoNoActionBody: "The contribution matches your records. No grievance was created.",
-  epfoUnavailableBody: "This profile has no connected EPFO passbook and contribution notice.",
+  epfoNoActionBody:
+    "The contribution matches your records. No grievance was created.",
+  epfoUnavailableBody:
+    "This profile has no connected EPFO passbook and contribution notice.",
   benefitReviewTitle: "Review the scheme application",
-  benefitReviewBody: "Check the cover, yearly premium and eligibility before submitting this simulated application.",
-  benefitConsent: "I understand this is a simulated application and no bank account will be charged.",
+  benefitReviewBody:
+    "Check the cover, yearly premium and eligibility before submitting this simulated application.",
+  benefitConsent:
+    "I understand this is a simulated application and no bank account will be charged.",
   benefitSubmit: "Submit demo application",
   benefitCompleteTitle: "Application submitted",
-  benefitCompleteBody: "Reference {reference}. The application now appears on Home.",
+  benefitCompleteBody:
+    "Reference {reference}. The application now appears on Home.",
   benefitReference: "Application reference",
-  benefitApplicationError: "The application could not be submitted. The draft is still saved.",
+  benefitApplicationError:
+    "The application could not be submitted. The draft is still saved.",
   benefitDraftMissingTitle: "No benefit draft to continue",
-  benefitDraftMissingBody: "Start an eligible scheme application from Benefits.",
+  benefitDraftMissingBody:
+    "Start an eligible scheme application from Benefits.",
   refundTrackTitle: "Your refund is being processed",
   refundTrackBody: "{amount} was started on {date}. No action is needed yet.",
   refundStarted: "Started {date}",
@@ -497,33 +550,47 @@ export const en = {
   consentNeeded: "Your consent is needed",
   recordNeedsAttention: "{document} record needs attention",
   recordMismatch: "Details do not match your other records",
-  independentNotice: "Not affiliated with the Government of India or any state authority.",
+  independentNotice:
+    "Not affiliated with the Government of India or any state authority.",
   aboutEyebrow: "The idea",
   aboutTitle: "A better interface",
   aboutTitleAccent: "is not enough.",
-  aboutBody: "What if public services worked on the first try? Citizen's answer is one connected record per person that every service reads and updates.",
+  aboutBody:
+    "What if public services worked on the first try? Citizen's answer is one connected record per person that every service reads and updates.",
   aboutReturn: "Return to Citizen",
   aboutGuideEyebrow: "How to use Citizen",
   aboutGuideTitle: "Four screens. One way in.",
-  aboutGuideBody: "Home, Records, Services and Benefits all run on the same connected record. The request guide on Home takes you straight into any of them.",
+  aboutGuideBody:
+    "Home, Records, Services and Benefits all run on the same connected record. The request guide on Home takes you straight into any of them.",
   aboutHomeTitle: "Home",
-  aboutHomeBody: "A daily digest of tasks, deadlines, money due, refunds, notices, documents and recent activity. It brings the few things that need attention to the top.",
-  aboutHomeOutcome: "See what changed and what needs action before searching for a service.",
+  aboutHomeBody:
+    "A daily digest of tasks, deadlines, money due, refunds, notices, documents and recent activity. It brings the few things that need attention to the top.",
+  aboutHomeOutcome:
+    "See what changed and what needs action before searching for a service.",
   aboutRecordsTitle: "My records",
-  aboutRecordsBody: "Your documents, family, work, businesses, property, vehicles and history with government, in one connected record.",
-  aboutRecordsOutcome: "Correct or reuse a record instead of entering the same facts again.",
+  aboutRecordsBody:
+    "Your documents, family, work, businesses, property, vehicles and history with government, in one connected record.",
+  aboutRecordsOutcome:
+    "Correct or reuse a record instead of entering the same facts again.",
   aboutServicesTitle: "Services",
-  aboutServicesBody: "Everything this demo can do for the profile you are using, from EPFO and PAN correction to payments and filings.",
-  aboutServicesOutcome: "Know what is possible, what is available now and where to begin.",
+  aboutServicesBody:
+    "Everything this demo can do for the profile you are using, from EPFO and PAN correction to payments and filings.",
+  aboutServicesOutcome:
+    "Know what is possible, what is available now and where to begin.",
   aboutBenefitsTitle: "Benefits",
-  aboutBenefitsBody: "Eligibility is checked against facts already on your record: age, bank account, residence, business type and documents. Loan comparisons show your dues and pending refunds right beside the numbers.",
-  aboutBenefitsOutcome: "See suitable schemes and loans at a glance, with missing evidence explained.",
+  aboutBenefitsBody:
+    "Eligibility is checked against facts already on your record: age, bank account, residence, business type and documents. Loan comparisons show your dues and pending refunds right beside the numbers.",
+  aboutBenefitsOutcome:
+    "See suitable schemes and loans at a glance, with missing evidence explained.",
   aboutAskTitle: "Request guide",
-  aboutAskBody: "On Home, describe what you need in your own words. The guide reads only your own records and takes you to the right screen.",
-  aboutAskOutcome: "Begin with the situation, not a department name or portal menu.",
+  aboutAskBody:
+    "On Home, describe what you need in your own words. The guide reads only your own records and takes you to the right screen.",
+  aboutAskOutcome:
+    "Begin with the situation, not a department name or portal menu.",
   graphMapEyebrow: "The Citizen Graph",
   graphMapTitle: "One citizen. Every connected fact.",
-  graphMapBody: "This is Arjun's record shown as a graph. Identity sits at the centre. Family, work, assets, documents and government history connect around it.",
+  graphMapBody:
+    "This is Arjun's record shown as a graph. Identity sits at the centre. Family, work, assets, documents and government history connect around it.",
   graphMapCenterLabel: "Citizen record",
   graphMapCenterMeta: "{count} active connections",
   graphMapFamily: "Family",
@@ -538,24 +605,30 @@ export const en = {
   graphMapObligations: "Obligations",
   graphMapNotices: "Notices",
   graphMapIdentityTitle: "Identity arrives with evidence.",
-  graphMapIdentityBody: "One address and seven documents. Later services reuse them instead of asking again.",
+  graphMapIdentityBody:
+    "One address and seven documents. Later services reuse them instead of asking again.",
   graphMapLifeTitle: "The record expands into a life.",
-  graphMapLifeBody: "Family, employment, business, vehicle and property relationships give each fact context.",
+  graphMapLifeBody:
+    "Family, employment, business, vehicle and property relationships give each fact context.",
   graphMapServiceTitle: "Services read the same context.",
-  graphMapServiceBody: "Benefits, applications, payments and notices reuse the same details.",
+  graphMapServiceBody:
+    "Benefits, applications, payments and notices reuse the same details.",
   graphMapResultTitle: "Every result lands back in your record.",
-  graphMapResultBody: "A payment removes a due amount, creates a receipt and joins the same history that Home shows.",
+  graphMapResultBody:
+    "A payment removes a due amount, creates a receipt and joins the same history that Home shows.",
   graphMapSource: "Arjun's record · {nodes} groups · {connections} links",
   graphMapScrollCue: "Scroll to build the graph",
   graphMapCompleteCue: "Graph built",
   graphVisualTitle: "Choose a problem. Watch the graph respond.",
-  graphVisualBody: "This is the Citizen Graph working. Your details are entered once. The right service uses them. Every screen that needs the result gets it.",
+  graphVisualBody:
+    "This is the Citizen Graph working. Your details are entered once. The right service uses them. Every screen that needs the result gets it.",
   graphVisualScenarioLabel: "Choose a Citizen Graph example",
   graphVisualSituation: "Situation",
   graphVisualEvidence: "Connected evidence",
   graphVisualRecord: "Citizen record",
   graphVisualPersonName: "Arjun Sharma",
-  graphVisualRecordBody: "Identity, relationships, work, assets, obligations and permissions stay connected.",
+  graphVisualRecordBody:
+    "Identity, relationships, work, assets, obligations and permissions stay connected.",
   graphVisualAction: "Service action",
   graphVisualResults: "Graph updates",
   graphVisualEpfoLabel: "EPFO contribution",
@@ -587,9 +660,11 @@ export const en = {
   graphVisualChallanResultThree: "Activity records the payment",
   boundaryKicker: "Where design stops",
   boundaryMetric: "Day 40",
-  boundaryMetricBody: "A claim can still be pending behind a beautiful status screen.",
+  boundaryMetricBody:
+    "A claim can still be pending behind a beautiful status screen.",
   boundaryTitle: "A better screen cannot clear a backlog.",
-  boundaryBody: "If the cause is a queue of officers, a policy, limited staff or a department database, a redesign cannot fix it. So Citizen sticks to what a record can do.",
+  boundaryBody:
+    "If the cause is a queue of officers, a policy, limited staff or a department database, a redesign cannot fix it. So Citizen sticks to what a record can do.",
   boundaryCannotTitle: "An interface cannot",
   boundaryCannotOne: "Change policy or eligibility rules",
   boundaryCannotTwo: "Add officers or processing capacity",
@@ -602,24 +677,35 @@ export const en = {
   boundaryCanFour: "Return receipts, permissions and history to one record",
   aboutProofEyebrow: "Working proof",
   aboutProofTitle: "One record. Four working demos.",
-  aboutProofBody: "These four demos all work on the same record. Each one reads it, acts on it and shows the result everywhere else in Citizen.",
-  aboutProofEpfo: "Review an EPFO passbook, inspect a contribution and register a grievance.",
-  aboutProofDocuments: "Reuse DigiLocker documents to compare PAN and Aadhaar before a correction.",
-  aboutProofMoney: "Pay a challan or property tax, file GSTR-3B and keep the resulting receipt or acknowledgement.",
-  aboutProofConsent: "Complete a shared registration across Arjun and Priya; grant or revoke Sunita’s family access.",
+  aboutProofBody:
+    "These four demos all work on the same record. Each one reads it, acts on it and shows the result everywhere else in Citizen.",
+  aboutProofEpfo:
+    "Review an EPFO passbook, inspect a contribution and register a grievance.",
+  aboutProofDocuments:
+    "Reuse DigiLocker documents to compare PAN and Aadhaar before a correction.",
+  aboutProofMoney:
+    "Pay a challan or property tax, file GSTR-3B and keep the resulting receipt or acknowledgement.",
+  aboutProofConsent:
+    "Complete a shared registration across Arjun and Priya; grant or revoke Sunita’s family access.",
   aboutWhyEyebrow: "Why this matters",
   aboutWhyTitle: "The record comes first.",
-  aboutWhyBody: "Most redesigns tidy up the same department menu. Citizen puts the person and their record first, and every service reads from it.",
+  aboutWhyBody:
+    "Most redesigns tidy up the same department menu. Citizen puts the person and their record first, and every service reads from it.",
   aboutWhyCitizenTitle: "Person first",
-  aboutWhyCitizenBody: "It starts with what changed in your life: a marriage, a death in the family, a new business.",
+  aboutWhyCitizenBody:
+    "It starts with what changed in your life: a marriage, a death in the family, a new business.",
   aboutWhyGraphTitle: "Nothing asked twice",
-  aboutWhyGraphBody: "Eligibility, warnings and next steps come from the records you already have. No screen asks you to repeat them.",
+  aboutWhyGraphBody:
+    "Eligibility, warnings and next steps come from the records you already have. No screen asks you to repeat them.",
   aboutWhyProofTitle: "Working demos",
-  aboutWhyProofBody: "Every demo changes records, creates receipts and adds history. Nothing here is a dead-end mock page.",
+  aboutWhyProofBody:
+    "Every demo changes records, creates receipts and adds history. Nothing here is a dead-end mock page.",
   aboutClosingTitle: "Start with the person.",
-  aboutClosingBody: "Open Citizen, pick a profile and ask what that person needs. The record gives the context. The service gives the next step.",
+  aboutClosingBody:
+    "Open Citizen, pick a profile and ask what that person needs. The record gives the context. The service gives the next step.",
   aboutClosingAction: "Open Citizen",
-  aboutBoundary: "Independent prototype with fictional profiles, browser-only progress and simulated service responses.",
+  aboutBoundary:
+    "Independent prototype with fictional profiles, browser-only progress and simulated service responses.",
   profileAccessNotice: "Fictional data. Changes stay in this browser.",
   openSampleProfile: "Open profile",
   serviceJourneyAuthority: "Working demo",
@@ -631,12 +717,14 @@ export const en = {
   suggestBusiness: "Start a business",
   suggestDocuments: "View my documents",
   suggestProfile: "Review my profile",
-  homeContext: "Ask about {name}'s payments, notices, documents, benefits or applications.",
+  homeContext:
+    "Ask about {name}'s payments, notices, documents, benefits or applications.",
   homeGraphKicker: "Why this Home is different",
   homeGraphTitle: "Built from your own records.",
   homeGraphAction: "See the Citizen Graph",
   homeGraphEvidence: "Connected evidence",
-  homeGraphEvidenceValue: "Documents {documents} · Family links {relationships}",
+  homeGraphEvidenceValue:
+    "Documents {documents} · Family links {relationships}",
   homeGraphRecord: "Citizen record",
   homeGraphNow: "What needs attention",
   homeGraphNowValue: "Actions {tasks} · Unread {unread}",
@@ -647,20 +735,29 @@ export const en = {
   profileScopeBody: "Return home and choose another profile.",
   loanProfileScopeBody: "This profile has no business records to compare.",
   obligationsProfileScopeBody: "This profile has no vehicle or challan.",
-  moneyProfileScopeBody: "This profile has no matching payment, filing, passport or refund.",
+  moneyProfileScopeBody:
+    "This profile has no matching payment, filing, passport or refund.",
   moneyServiceError: "The request could not be completed. Nothing changed.",
   loanMudraName: "Mudra Kishor",
-  loanMudraNote: "Lowest monthly cost. Retrieve the ITR-V acknowledgement from the return already filed.",
+  loanMudraNote:
+    "Lowest monthly cost. Retrieve the ITR-V acknowledgement from the return already filed.",
   loanBankName: "Small business term loan",
-  loanBankNote: "₹606 more each month and ₹36,360 more interest over five years. The bank may ask for stronger income proof.",
-  loanEvidenceNeeded: "Your return is filed. Retrieve {evidence} for the lender; this is not another tax filing.",
+  loanBankNote:
+    "₹606 more each month and ₹36,360 more interest over five years. The bank may ask for stronger income proof.",
+  loanEvidenceNeeded:
+    "Your return is filed. Retrieve {evidence} for the lender; this is not another tax filing.",
   loanEvidenceReady: "The required evidence is present.",
-  loanRiskDecisionMudra: "Decision: wait for the ITR-V, then choose the lower-cost Mudra option.",
-  loanRiskDecisionBank: "Decision: do not choose this option unless the bank requires it; it costs more and may need stronger income proof.",
-  loanRefundCaution: "{due} is due across {count} separate bills. The {refund} refund is a different record still processing, so Citizen does not net them.",
+  loanRiskDecisionMudra:
+    "Decision: wait for the ITR-V, then choose the lower-cost Mudra option.",
+  loanRiskDecisionBank:
+    "Decision: do not choose this option unless the bank requires it; it costs more and may need stronger income proof.",
+  loanRefundCaution:
+    "{due} is due across {count} separate bills. The {refund} refund is a different record still processing, so Citizen does not net them.",
   loanRiskSummary: "{option} has the lowest monthly cost. {evidence}",
-  loanItrClarification: "Your income-tax return was already filed; that is why the refund exists. The missing ITR-V is the acknowledgement copy the lender needs, not a second tax filing.",
-  loanRiskVerdict: "{decision} {option} costs about {emi} a month. Keep {due} available for current bills. Treat the {refund} refund as unavailable until it reaches your bank.",
+  loanItrClarification:
+    "Your income-tax return was already filed; that is why the refund exists. The missing ITR-V is the acknowledgement copy the lender needs, not a second tax filing.",
+  loanRiskVerdict:
+    "{decision} {option} costs about {emi} a month. Keep {due} available for current bills. Treat the {refund} refund as unavailable until it reaches your bank.",
   challanPaidTitle: "Challan paid",
   challanPaidBody: "₹500 is removed from Money. The receipt is in Documents.",
   openReceipt: "Open receipt",
@@ -677,15 +774,19 @@ export const en = {
   total: "Total",
   noPaymentDetails: "No payment gateway will open.",
   confirmSimulatedPayment: "Pay in demo",
-  challanPaymentError: "The payment could not be completed. The challan is still unpaid.",
+  challanPaymentError:
+    "The payment could not be completed. The challan is still unpaid.",
   fyTurnover: "{amount} FY25 turnover",
   delegationSetupTitle: "Share linked family paperwork with Arjun",
-  delegationSetupBody: "Let Arjun view Rajesh's pension and JP Nagar property records until {date}. Ownership does not change, and Sunita can revoke access at any time.",
+  delegationSetupBody:
+    "Let Arjun view Rajesh's pension and JP Nagar property records until {date}. Ownership does not change, and Sunita can revoke access at any time.",
   delegationGrantAction: "Share with Arjun",
   delegationActiveTitle: "Linked family paperwork",
-  delegationActiveBody: "Arjun can view the linked pension and property records until {date}. Ownership is unchanged.",
+  delegationActiveBody:
+    "Arjun can view the linked pension and property records until {date}. Ownership is unchanged.",
   delegationEndedTitle: "Family paperwork access ended",
-  delegationEndedBody: "Arjun can no longer view the linked pension or family-property records.",
+  delegationEndedBody:
+    "Arjun can no longer view the linked pension or family-property records.",
   profileSummary: "{age} years · {place} · {count} documents",
   profileSummaryOne: "{age} years · {place} · 1 document",
   addressPending: "Address pending",
@@ -709,11 +810,39 @@ export const en = {
   landingJourneyNav: "Try it",
   landingVisionNav: "Sharing",
   landingStart: "Open demo",
+  landingWatchDemo: "Watch demo",
+  landingWatchDemoTitle: "Citizen demo",
+  landingSourceCode: "GitHub",
+  landingMusicCreditPrefix: "Music",
   landingHeroTitle: "What if public services worked the first time?",
-  landingHeroBody: "Your verified documents stay connected. Services open with your details already filled in. Every result returns to the same record. No form starts from zero.",
-  landingBeyondKicker: "Built for the Build What Moves India hackathon by Varun Mayya.",
+  landingHeroBody:
+    "Your verified documents stay connected. Services open with your details already filled in. Every result returns to the same record. No form starts from zero.",
+  landingOriginKicker: "How this started",
+  landingOriginTitle: "A service can exist and still be invisible.",
+  landingOriginBodyOne:
+    "Before this hackathon, I did not know UMANG existed. That became our starting point.",
+  landingOriginBodyTwo:
+    "UMANG already brings many government services into one gateway. But people still have to recognize a scheme name, know which department owns it and work out whether it matters to them.",
+  landingOriginDefinition:
+    "Citizen imagines the next layer: a personal public-service gazette built around one connected citizen record.",
+  landingOriginChangedTitle: "What changed?",
+  landingOriginChangedBody:
+    "Notices, payments, applications and document updates.",
+  landingOriginAppliesTitle: "What applies to me?",
+  landingOriginAppliesBody:
+    "Relevant obligations, benefits and services, with the reason shown.",
+  landingOriginNextTitle: "What should I do next?",
+  landingOriginNextBody:
+    "The right action, using records already connected to you.",
+  landingOriginNote:
+    "A personal public-service gazette is a private brief for one person, not an official government publication.",
+  landingOriginDisclaimer:
+    "Independent prototype. Not affiliated with or endorsed by UMANG, EPFO, DigiLocker or any government authority. All service responses are simulated.",
+  landingBeyondKicker:
+    "Built for the Build What Moves India hackathon by Varun Mayya.",
   landingBeyondTitle: "The obvious fixes only go so far.",
-  landingBeyondBody: "Cleaner screens, chat boxes and dashboards each help a little. None of them fixes the real problem: every service still starts from zero.",
+  landingBeyondBody:
+    "Cleaner screens, chat boxes and dashboards each help a little. None of them fixes the real problem: every service still starts from zero.",
   landingSurfaceOneTitle: "Simpler interface",
   landingSurfaceOneBody: "Makes one screen easier",
   landingSurfaceTwoTitle: "Ask in your own words",
@@ -722,18 +851,26 @@ export const en = {
   landingSurfaceThreeBody: "Summarises tasks that already exist",
   landingSystemKicker: "What holds it together",
   landingSystemTitle: "Citizen Graph",
-  landingSystemBody: "Your documents, records and permissions follow you from one service to the next. Each service picks up where the last one ended.",
+  landingSystemBody:
+    "Your documents, records and permissions follow you from one service to the next. Each service picks up where the last one ended.",
   landingHackathonLink: "Visit the Build What Moves India hackathon",
   landingProjectTitle: "Now watch it work.",
-  landingProjectBody: "Each demo below works on the same record. Change one thing and every screen shows the result.",
-  landingCurrentOne: "A missing EPFO contribution becomes a grievance. Home shows it as Submitted.",
-  landingCurrentTwo: "A PAN mismatch reuses Aadhaar evidence instead of asking for it again.",
-  landingCurrentThree: "A paid challan leaves Money and creates a receipt in Documents.",
-  landingCurrentFour: "Sharing needs consent, and family access can be removed anytime.",
-  landingBoundary: "All people and records are fictional. Government responses are simulated.",
+  landingProjectBody:
+    "Each demo below works on the same record. Change one thing and every screen shows the result.",
+  landingCurrentOne:
+    "A missing EPFO contribution becomes a grievance. Home shows it as Submitted.",
+  landingCurrentTwo:
+    "A PAN mismatch reuses Aadhaar evidence instead of asking for it again.",
+  landingCurrentThree:
+    "A paid challan leaves Money and creates a receipt in Documents.",
+  landingCurrentFour:
+    "Sharing needs consent, and family access can be removed anytime.",
+  landingBoundary:
+    "All people and records are fictional. Government responses are simulated.",
   landingServiceStatus: "How Citizen works",
   landingVisionTitle: "You control what gets shared.",
-  landingVisionBody: "You decide who sees what, and for what purpose. Consent stays visible and you can take it back anytime.",
+  landingVisionBody:
+    "You decide who sees what, and for what purpose. Consent stays visible and you can take it back anytime.",
   landingVisionOne: "Ask before sharing records",
   landingVisionTwo: "Use approved government connections",
   landingVisionThree: "Show who accessed what",
@@ -742,8 +879,8 @@ export const en = {
   landingClosingBody: "All data is fictional.",
   startBack: "Back to the project",
   startTitle: "Choose a profile",
-  startBody: "Use Arjun for the full demo. Priya shows consent. Sunita shows shared access.",
+  startBody:
+    "Use Arjun for the full demo. Priya shows consent. Sunita shows shared access.",
 } as const;
-
 
 export type MessageKey = keyof typeof en;

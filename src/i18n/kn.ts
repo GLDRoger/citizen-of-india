@@ -16,20 +16,26 @@ export const kn: Record<MessageKey, string> = {
   gstrServicePromise: "Sharma Web Solutionsನ ಆಗಸ್ಟ್ GST ರಿಟರ್ನ್ ಸಲ್ಲಿಸಿ.",
   passportServicePromise: "ಅವಧಿ, ದಾಖಲೆ ಮತ್ತು ಮುಂದಿನ Passport Seva ಕ್ರಮ ನೋಡಿ.",
   refundServicePromise: "ಮರುಪಾವತಿ ಮೊತ್ತ, ಬ್ಯಾಂಕ್ ಖಾತೆ ಮತ್ತು ಬರುವ ದಿನ ನೋಡಿ.",
-  deathPromise: "ಮರಣ ನೋಂದಣಿ, ಪ್ರಮಾಣಪತ್ರ, ಪಿಂಚಣಿ, ನಾಮಿನಿ ಮತ್ತು ಕಾನೂನು ವಾರಸುದಾರರ ಕೆಲಸ ಪ್ರಾರಂಭಿಸಿ.",
+  deathPromise:
+    "ಮರಣ ನೋಂದಣಿ, ಪ್ರಮಾಣಪತ್ರ, ಪಿಂಚಣಿ, ನಾಮಿನಿ ಮತ್ತು ಕಾನೂನು ವಾರಸುದಾರರ ಕೆಲಸ ಪ್ರಾರಂಭಿಸಿ.",
   marriagePromise: "ಇಬ್ಬರ ಪ್ರತ್ಯೇಕ ಒಪ್ಪಿಗೆಯೊಂದಿಗೆ ವಿವಾಹ ನೋಂದಾಯಿಸಿ.",
   obligationsPromise: "₹500 Bengaluru ಸಂಚಾರ ದಂಡ ಪರಿಶೀಲಿಸಿ ಡೆಮೊದಲ್ಲಿ ಪಾವತಿಸಿ.",
   loanPromise: "ತಿಂಗಳ ಕಂತು, ಒಟ್ಟು ಬಡ್ಡಿ ಮತ್ತು ಬಾಕಿ ದಾಖಲೆ ಹೋಲಿಸಿ.",
   recordCorrectionPromise: "ತಿದ್ದುಪಡಿ ವಿನಂತಿಗೂ ಮೊದಲು PAN ಮತ್ತು ಆಧಾರ್ ಹೋಲಿಸಿ.",
-  startBusinessPromise: "ನಿಮ್ಮ ವ್ಯವಹಾರ ಮತ್ತು ನಗರಕ್ಕೆ ಬೇಕಾದ ನೋಂದಣಿ ಮತ್ತು ಪರವಾನಗಿ ನೋಡಿ.",
+  startBusinessPromise:
+    "ನಿಮ್ಮ ವ್ಯವಹಾರ ಮತ್ತು ನಗರಕ್ಕೆ ಬೇಕಾದ ನೋಂದಣಿ ಮತ್ತು ಪರವಾನಗಿ ನೋಡಿ.",
   epfoPromise: "ಪಾಸ್‌ಬುಕ್, ಇತ್ತೀಚಿನ ವಂತಿಗೆ ಮತ್ತು ದೂರಿನ ಸ್ಥಿತಿ ನೋಡಿ.",
-  digilockerPromise: "ನೀಡಿದ ದಾಖಲೆ ತೆರೆಯಿರಿ, ಈ ಡೆಮೊದಲ್ಲಿ ಉಳಿಸಿ ಮತ್ತು ಅದರ ಮೂಲ ನೋಡಿ.",
-  existingBusinessContext: "ಇದನ್ನು {business}ನ ಹೊಸ ಚಟುವಟಿಕೆ ಎಂದು ಪರಿಗಣಿಸಲಾಗುತ್ತದೆ.",
+  digilockerPromise:
+    "ನೀಡಿದ ದಾಖಲೆ ತೆರೆಯಿರಿ, ಈ ಡೆಮೊದಲ್ಲಿ ಉಳಿಸಿ ಮತ್ತು ಅದರ ಮೂಲ ನೋಡಿ.",
+  existingBusinessContext:
+    "ಇದನ್ನು {business}ನ ಹೊಸ ಚಟುವಟಿಕೆ ಎಂದು ಪರಿಗಣಿಸಲಾಗುತ್ತದೆ.",
   whatItMeans: "ಇದರ ಅರ್ಥ",
   nextAction: "ಮುಂದಿನ ಕ್ರಮ",
   governmentInbox: "ಸೂಚನೆಗಳು",
-  contrastDeathBriefing: "ಇಂದು: ನಾಲ್ಕು ಕಚೇರಿಗಳು, ಹಂಚಿಕೊಂಡ ದಾಖಲೆ ಇಲ್ಲ. ಇಲ್ಲಿ: ಒಂದೇ ಕುಟುಂಬದ ಕಡತ, ಪಿಂಚಣಿ ಅರ್ಹತೆ ಈಗಾಗಲೇ ನವೀಕರಿಸಲಾಗಿದೆ.",
-  contrastFamilyPension: "ಮರಣ ದಾಖಲಿಸಿದ ಕ್ಷಣವೇ ಈ ಅರ್ಹತೆ ಬಂದಿದೆ. ಇಂದು ವಿಧವೆ ಇದನ್ನು ಸ್ವತಃ ಹುಡುಕಿ ಅರ್ಜಿ ಸಲ್ಲಿಸಬೇಕು.",
+  contrastDeathBriefing:
+    "ಇಂದು: ನಾಲ್ಕು ಕಚೇರಿಗಳು, ಹಂಚಿಕೊಂಡ ದಾಖಲೆ ಇಲ್ಲ. ಇಲ್ಲಿ: ಒಂದೇ ಕುಟುಂಬದ ಕಡತ, ಪಿಂಚಣಿ ಅರ್ಹತೆ ಈಗಾಗಲೇ ನವೀಕರಿಸಲಾಗಿದೆ.",
+  contrastFamilyPension:
+    "ಮರಣ ದಾಖಲಿಸಿದ ಕ್ಷಣವೇ ಈ ಅರ್ಹತೆ ಬಂದಿದೆ. ಇಂದು ವಿಧವೆ ಇದನ್ನು ಸ್ವತಃ ಹುಡುಕಿ ಅರ್ಜಿ ಸಲ್ಲಿಸಬೇಕು.",
   contrastMarriageInvite: "ಪ್ರಿಯಾ ತಮ್ಮ ಪ್ರೊಫೈಲ್‌ನಲ್ಲಿರುವ ದಾಖಲೆಗಳನ್ನು ಬಳಸಬಹುದು.",
   contrastPanMismatch: "PAN ಹೆಸರು ಆಧಾರ್‌ಗೆ ಹೊಂದುವುದಿಲ್ಲ.",
   checked: "ಪರಿಶೀಲಿಸಿದ ದಿನ",
@@ -71,7 +77,8 @@ export const kn: Record<MessageKey, string> = {
   language: "ಭಾಷೆ",
   dataSaver: "ಕಡಿಮೆ ಡೇಟಾ ಬಳಸಿ",
   loginTitle: "ಪ್ರೊಫೈಲ್ ಆರಿಸಿ",
-  loginBody: "ಪೂರ್ಣ ಡೆಮೊ ಅರ್ಜುನ್‌ನಲ್ಲಿ ಇದೆ. ಪ್ರಿಯಾ ಒಪ್ಪಿಗೆ ಮತ್ತು ಸುನೀತಾ ಹಂಚಿದ ಪ್ರವೇಶ ತೋರಿಸುತ್ತಾರೆ.",
+  loginBody:
+    "ಪೂರ್ಣ ಡೆಮೊ ಅರ್ಜುನ್‌ನಲ್ಲಿ ಇದೆ. ಪ್ರಿಯಾ ಒಪ್ಪಿಗೆ ಮತ್ತು ಸುನೀತಾ ಹಂಚಿದ ಪ್ರವೇಶ ತೋರಿಸುತ್ತಾರೆ.",
   chooseProfile: "ಪ್ರೊಫೈಲ್ ಆರಿಸಿ",
   goodMorning: "ಶುಭೋದಯ",
   goodAfternoon: "ನಮಸ್ಕಾರ",
@@ -133,14 +140,17 @@ export const kn: Record<MessageKey, string> = {
   storedOnDevice: "ಈ ಡೆಮೊದಲ್ಲಿ ಉಳಿಸಲಾಗಿದೆ",
   saveOffline: "ಈ ಡೆಮೊದಲ್ಲಿ ಉಳಿಸಿ",
   documentCount: "{count} ದಾಖಲೆಗಳು",
-  documentsPageBody: "DigiLocker ನೀಡಿದ ದಾಖಲೆಗಳು ಮತ್ತು ಈ ಡೆಮೊದಲ್ಲಿ ಸೃಷ್ಟಿಯಾದ ರಸೀದಿಗಳು.",
+  documentsPageBody:
+    "DigiLocker ನೀಡಿದ ದಾಖಲೆಗಳು ಮತ್ತು ಈ ಡೆಮೊದಲ್ಲಿ ಸೃಷ್ಟಿಯಾದ ರಸೀದಿಗಳು.",
   documentIssued: "ನೀಡಿದ ದಿನ: {date}",
   documentSource: "ಮೂಲ: {source}",
   documentCheckedOn: "ಪರಿಶೀಲಿಸಿದ ದಿನ: {date}",
   documentUseReason: "ಬೇಕಾದ ಸೇವೆಗೆ ಮಾತ್ರ ಬಳಸಲಾಗುತ್ತದೆ.",
   noMatchingDocuments: "ಹೊಂದುವ ದಾಖಲೆಗಳಿಲ್ಲ",
-  documentsSearchHelp: "ದಾಖಲೆಯ ವಿಧ, ದಾಖಲೆದಾರರ ಹೆಸರು ಅಥವಾ ಮರೆಮಾಡಿದ ಸಂಖ್ಯೆಯನ್ನು ಹುಡುಕಿ.",
-  panMismatchExplanation: "ಈ PANನ ಹೆಸರು ('{panName}') ಆಧಾರ್‌ನ ಹೆಸರಿಗಿಂತ ('{aadhaarName}') ಭಿನ್ನವಾಗಿದೆ.",
+  documentsSearchHelp:
+    "ದಾಖಲೆಯ ವಿಧ, ದಾಖಲೆದಾರರ ಹೆಸರು ಅಥವಾ ಮರೆಮಾಡಿದ ಸಂಖ್ಯೆಯನ್ನು ಹುಡುಕಿ.",
+  panMismatchExplanation:
+    "ಈ PANನ ಹೆಸರು ('{panName}') ಆಧಾರ್‌ನ ಹೆಸರಿಗಿಂತ ('{aadhaarName}') ಭಿನ್ನವಾಗಿದೆ.",
   resolveMismatch: "ಹೆಸರಿನ ವ್ಯತ್ಯಾಸ ಸರಿಪಡಿಸಿ",
   recordCorrectionEyebrow: "PAN ಹೆಸರು ತಿದ್ದುಪಡಿ",
   recordCorrectionReviewTitle: "ಎರಡೂ ಹೆಸರು ಪರಿಶೀಲಿಸಿ",
@@ -151,7 +161,8 @@ export const kn: Record<MessageKey, string> = {
   recordCorrectionSubmit: "ತಿದ್ದುಪಡಿ ವಿನಂತಿ ಕಳುಹಿಸಿ",
   recordCorrectionError: "ವಿನಂತಿ ಕಳುಹಿಸಲು ಆಗಲಿಲ್ಲ. ಏನೂ ಬದಲಾಗಿಲ್ಲ.",
   recordCorrectionCompleteTitle: "ತಿದ್ದುಪಡಿ ವಿನಂತಿ ಕಳುಹಿಸಲಾಗಿದೆ",
-  recordCorrectionCompleteBody: "ಉಲ್ಲೇಖ {reference}. ಪರಿಶೀಲನೆ ಮುಗಿಯುವವರೆಗೆ ಈಗಿನ PAN ಹೆಸರು ಕಾಣುತ್ತದೆ.",
+  recordCorrectionCompleteBody:
+    "ಉಲ್ಲೇಖ {reference}. ಪರಿಶೀಲನೆ ಮುಗಿಯುವವರೆಗೆ ಈಗಿನ PAN ಹೆಸರು ಕಾಣುತ್ತದೆ.",
   recordCorrectionUnavailableTitle: "ತಿದ್ದುಪಡಿ ಮಾಡಲು ಹೆಸರಿನ ವ್ಯತ್ಯಾಸ ಇಲ್ಲ.",
   recordCorrectionUnavailableBody: "ಈ ಪ್ರೊಫೈಲ್‌ನಲ್ಲಿ PAN ಹೆಸರಿನ ವ್ಯತ್ಯಾಸ ಇಲ್ಲ.",
   recordCorrectionAuthority: "Protean eGov (PAN) · ಅನುಕರಿಸಲಾಗಿದೆ",
@@ -176,7 +187,8 @@ export const kn: Record<MessageKey, string> = {
   marriageWorkflowBody: "ಒಟ್ಟಿಗೆ ಅರ್ಜಿ ಸಲ್ಲಿಸಿ. ಪ್ರತ್ಯೇಕ ಒಪ್ಪಿಗೆ ನೀಡಿ.",
   marriageServiceError: "ವಿನಂತಿ ಪೂರ್ಣವಾಗಲಿಲ್ಲ. ಏನೂ ಬದಲಾಗಿಲ್ಲ.",
   marriageCompleteTitle: "ವಿವಾಹ ನೋಂದಾಯಿಸಲಾಗಿದೆ",
-  marriageCompleteBody: "ಪ್ರಮಾಣಪತ್ರ ಎರಡೂ ಪ್ರೊಫೈಲ್‌ಗಳಲ್ಲಿ ಇದೆ. ಅರ್ಜುನ್ ಮತ್ತು ಪ್ರಿಯಾ ಈಗ ಸಂಗಾತಿಗಳಾಗಿ ಕಾಣುತ್ತಾರೆ.",
+  marriageCompleteBody:
+    "ಪ್ರಮಾಣಪತ್ರ ಎರಡೂ ಪ್ರೊಫೈಲ್‌ಗಳಲ್ಲಿ ಇದೆ. ಅರ್ಜುನ್ ಮತ್ತು ಪ್ರಿಯಾ ಈಗ ಸಂಗಾತಿಗಳಾಗಿ ಕಾಣುತ್ತಾರೆ.",
   marriageViewRelationship: "ಕುಟುಂಬದ ದಾಖಲೆ ನೋಡಿ",
   marriageOpenCertificate: "ಪ್ರಮಾಣಪತ್ರ ತೆರೆಯಿರಿ",
   marriageSharedEyebrow: "ಆಹ್ವಾನ",
@@ -191,28 +203,33 @@ export const kn: Record<MessageKey, string> = {
   marriageConsentBody: "ಅರ್ಜುನ್ ಈ ನೋಂದಣಿಗೆ ಕೆಳಗಿನ ದಾಖಲೆ ಬಳಸಲು ಕೇಳುತ್ತಿದ್ದಾರೆ.",
   marriageIdentityVerification: "ಪ್ರಿಯಾ ಅವರ ಗುರುತು ಖಚಿತಪಡಿಸಿ",
   marriageVerifiedDocumentsOnly: "ಪರಿಶೀಲಿತ ಗುರುತಿನ ದಾಖಲೆ ಬಳಸಿ",
-  marriageSpouseAfterSubmission: "ನೋಂದಣಿಯ ನಂತರ ಅರ್ಜುನ್ ಅವರನ್ನು ಸಂಗಾತಿಯಾಗಿ ಸೇರಿಸಿ",
+  marriageSpouseAfterSubmission:
+    "ನೋಂದಣಿಯ ನಂತರ ಅರ್ಜುನ್ ಅವರನ್ನು ಸಂಗಾತಿಯಾಗಿ ಸೇರಿಸಿ",
   marriageIConsent: "ನಾನು ಒಪ್ಪುತ್ತೇನೆ",
   marriageSwitchPriya: "ಪ್ರಿಯಾ ಅವರಿಗೆ ಬದಲಿಸಿ",
   marriageRecordsEyebrow: "ದಾಖಲೆ ಮತ್ತು ಸಾಕ್ಷಿಗಳು",
   marriageRecordsTitle: "ಸಾಕ್ಷಿಗಳನ್ನು ಆರಿಸಿ",
-  marriageRecordsBody: "{count} ಪರಿಶೀಲಿತ ಗುರುತಿನ ದಾಖಲೆಗಳು ಸಿದ್ಧವಾಗಿವೆ. ಕನಿಷ್ಠ ಒಬ್ಬ ಸಾಕ್ಷಿಯನ್ನು ಆರಿಸಿ.",
+  marriageRecordsBody:
+    "{count} ಪರಿಶೀಲಿತ ಗುರುತಿನ ದಾಖಲೆಗಳು ಸಿದ್ಧವಾಗಿವೆ. ಕನಿಷ್ಠ ಒಬ್ಬ ಸಾಕ್ಷಿಯನ್ನು ಆರಿಸಿ.",
   marriageWitnesses: "ಸಾಕ್ಷಿಗಳು",
   marriageUseDocuments: "ಈ ದಾಖಲೆಗಳೊಂದಿಗೆ ಮುಂದುವರಿಸಿ",
   marriageAppointmentTitle: "ಭೇಟಿ ನಿಗದಿಪಡಿಸಿ",
-  marriageAppointmentBody: "{count} ಸಾಕ್ಷಿಗಳನ್ನು ಆರಿಸಲಾಗಿದೆ. ನೋಂದಣಿ ಶುಲ್ಕ: ₹500.",
+  marriageAppointmentBody:
+    "{count} ಸಾಕ್ಷಿಗಳನ್ನು ಆರಿಸಲಾಗಿದೆ. ನೋಂದಣಿ ಶುಲ್ಕ: ₹500.",
   marriageAppointmentSlot: "{date} · 11:30",
   marriageRegistrar: "ಉಪ-ನೋಂದಣಾಧಿಕಾರಿ, ಜಯನಗರ",
   marriageRegistrationFee: "₹500 ನೋಂದಣಿ ಶುಲ್ಕ",
   marriageBookAndPay: "ಭೇಟಿ ನಿಗದಿಪಡಿಸಿ ಪಾವತಿಸಿ",
   marriageConfirmTitle: "ವಿವಾಹ ನೋಂದಾಯಿಸಿ",
-  marriageConfirmBody: "ಭೇಟಿ {date}ಕ್ಕೆ ನಿಗದಿಯಾಗಿದೆ. ಎರಡೂ ಪ್ರೊಫೈಲ್‌ಗಳಿಗೆ ಒಂದೇ ಪ್ರಮಾಣಪತ್ರ ಸಿಗುತ್ತದೆ.",
+  marriageConfirmBody:
+    "ಭೇಟಿ {date}ಕ್ಕೆ ನಿಗದಿಯಾಗಿದೆ. ಎರಡೂ ಪ್ರೊಫೈಲ್‌ಗಳಿಗೆ ಒಂದೇ ಪ್ರಮಾಣಪತ್ರ ಸಿಗುತ್ತದೆ.",
   marriageSpouseRelationship: "ನೋಂದಣಿಯ ನಂತರ",
   marriageRegisterAction: "ವಿವಾಹ ನೋಂದಾಯಿಸಿ",
   startDefaultBusiness: "ಮನೆಮಾದರಿಯ ಆಹಾರ ಸೇವೆ",
   startPlanningAuthority: "ವ್ಯವಹಾರ ಯೋಜನೆ",
   startCompleteTitle: "ಕರಡು ಉಳಿಸಲಾಗಿದೆ",
-  startCompleteBody: "ಯಾವುದೇ ನೋಂದಣಿ ಸಲ್ಲಿಸಲಾಗಿಲ್ಲ. ಸಂಪೂರ್ಣ ಯೋಜನೆ ಕೆಳಗೆ ಮತ್ತು 'ಇವುಗಳಿಗೆ ಗಮನ ನೀಡಿ' ವಿಭಾಗದಲ್ಲಿ ಉಳಿಸಲಾಗಿದೆ.",
+  startCompleteBody:
+    "ಯಾವುದೇ ನೋಂದಣಿ ಸಲ್ಲಿಸಲಾಗಿಲ್ಲ. ಸಂಪೂರ್ಣ ಯೋಜನೆ ಕೆಳಗೆ ಮತ್ತು 'ಇವುಗಳಿಗೆ ಗಮನ ನೀಡಿ' ವಿಭಾಗದಲ್ಲಿ ಉಳಿಸಲಾಗಿದೆ.",
   startViewDraft: "ಕರಡು ನೋಡಿ",
   startSetupEyebrow: "ವ್ಯವಹಾರ ವಿವರ",
   startSetupTitle: "ನೀವು ಏನು ಪ್ರಾರಂಭಿಸಲು ಯೋಜಿಸಿದ್ದೀರಿ?",
@@ -221,11 +238,13 @@ export const kn: Record<MessageKey, string> = {
   startCity: "ನಗರ",
   startGeneratePlan: "ನನ್ನ ಯೋಜನೆ ತೋರಿಸಿ",
   startPlanTitle: "ನಿಮ್ಮ ಕ್ರಮ ಯೋಜನೆ",
-  startPlanBody: "ಮೊದಲು ನೋಂದಣಿ ಮಾಡಿ, ನಂತರ ಸ್ಥಳೀಯ ಪರವಾನಗಿ ಮತ್ತು ತೆರಿಗೆ ಪರಿಶೀಲಿಸಿ.",
+  startPlanBody:
+    "ಮೊದಲು ನೋಂದಣಿ ಮಾಡಿ, ನಂತರ ಸ್ಥಳೀಯ ಪರವಾನಗಿ ಮತ್ತು ತೆರಿಗೆ ಪರಿಶೀಲಿಸಿ.",
   startFirstRegistration: "ಮೊದಲ ಕ್ರಮ ಉಳಿಸಿ",
   startChangePlan: "ವಿವರ ಬದಲಿಸಿ",
   startExistingPlanTitle: "{business} ಬಳಸಿ",
-  startExistingPlanBody: "ಈ ವ್ಯವಹಾರಕ್ಕೆ {activity} ಅನ್ನು ಹೊಸ ಚಟುವಟಿಕೆಯಾಗಿ ಸೇರಿಸಿ.",
+  startExistingPlanBody:
+    "ಈ ವ್ಯವಹಾರಕ್ಕೆ {activity} ಅನ್ನು ಹೊಸ ಚಟುವಟಿಕೆಯಾಗಿ ಸೇರಿಸಿ.",
   startFreshPlanTitle: "ಏಕಮಾಲೀಕರಾಗಿ ಆರಂಭಿಸಿ",
   startFreshPlanBody: "{city}ದಲ್ಲಿ ಸಣ್ಣ ವ್ಯವಹಾರಕ್ಕೆ ಈ ಸರಳ ವಿಧಾನ ಬಳಸಿ.",
   startUdyamPlanTitle: "Udyam ನವೀಕರಿಸಿ",
@@ -235,7 +254,8 @@ export const kn: Record<MessageKey, string> = {
   startTradePlanTitle: "ಸ್ಥಳೀಯ ವ್ಯಾಪಾರ ಪರವಾನಗಿ ಪರಿಶೀಲಿಸಿ",
   startTradePlanBody: "{city}ದಲ್ಲಿ ಈ ಚಟುವಟಿಕೆಗೆ ಬೇಕಾದ ಪರವಾನಗಿ ಪರಿಶೀಲಿಸಿ.",
   startGstPlanTitle: "ತೆರಿಗೆ ಮತ್ತು ಸಹಾಯ ಪರಿಶೀಲಿಸಿ",
-  startGstPlanBody: "GST, ವಲಯ ಪರವಾನಗಿ, ಯೋಜನೆ ಮತ್ತು ವ್ಯವಹಾರ ಬ್ಯಾಂಕ್ ಖಾತೆ ಪರಿಶೀಲಿಸಿ.",
+  startGstPlanBody:
+    "GST, ವಲಯ ಪರವಾನಗಿ, ಯೋಜನೆ ಮತ್ತು ವ್ಯವಹಾರ ಬ್ಯಾಂಕ್ ಖಾತೆ ಪರಿಶೀಲಿಸಿ.",
   startSupportPlanTitle: "ವ್ಯವಹಾರ ಯೋಜನೆ ಪರಿಶೀಲಿಸಿ",
   startSupportPlanBody: "ವ್ಯವಹಾರ ವಿವರ ಅಂತಿಮವಾದ ನಂತರ ಸಹಾಯ ನೋಡಿ.",
   startMoneyPlanTitle: "ವ್ಯವಹಾರ ಬ್ಯಾಂಕ್ ಖಾತೆ ತೆರೆಯಿರಿ",
@@ -255,7 +275,8 @@ export const kn: Record<MessageKey, string> = {
   noLinkedBusiness: "ಸಂಪರ್ಕಿತ ವ್ಯವಹಾರ ಇಲ್ಲ",
   switchArjun: "ಅರ್ಜುನ್‌ಗೆ ಬದಲಿಸಿ",
   loanCompleteTitle: "ಸಾಲದ ಕರಡು ಉಳಿಸಲಾಗಿದೆ",
-  loanCompleteBody: "ಕರಡು Citizenನಲ್ಲಿ ಉಳಿಸಲಾಗಿದೆ. ಬ್ಯಾಂಕ್‌ಗೆ ಇನ್ನೂ ಏನನ್ನೂ ಕಳುಹಿಸಿಲ್ಲ.",
+  loanCompleteBody:
+    "ಕರಡು Citizenನಲ್ಲಿ ಉಳಿಸಲಾಗಿದೆ. ಬ್ಯಾಂಕ್‌ಗೆ ಇನ್ನೂ ಏನನ್ನೂ ಕಳುಹಿಸಿಲ್ಲ.",
   viewApplication: "ಉಳಿಸಿದ ಕರಡು ನೋಡಿ",
   noActivity: "ಮುಗಿದ ಕೆಲಸಗಳು ಇಲ್ಲಿ ಕಾಣಿಸುತ್ತವೆ.",
   daysLeft: "{count} ದಿನ ಬಾಕಿ",
@@ -295,15 +316,18 @@ export const kn: Record<MessageKey, string> = {
   eventRajeshConfirmed: "ಮರಣ ನೋಂದಣಿಗೆ ರಾಜೇಶ್ ಅವರನ್ನು ಖಚಿತಪಡಿಸಲಾಗಿದೆ",
   eventDeathRegistered: "ಅನುಕರಿಸಿದ BBMP ಸೇವೆಯಲ್ಲಿ ಮರಣ ನೋಂದಣಿಯಾಗಿದೆ",
   eventDeathCertificateSaved: "ಮರಣ ಪ್ರಮಾಣಪತ್ರ ನೀಡಿ ಉಳಿಸಲಾಗಿದೆ",
-  eventDeathClaimsSubmitted: "ಕುಟುಂಬ ಪಿಂಚಣಿ ಮತ್ತು EPF ನಾಮಿನಿ ಹಕ್ಕುಗಳನ್ನು ಸಲ್ಲಿಸಲಾಗಿದೆ",
+  eventDeathClaimsSubmitted:
+    "ಕುಟುಂಬ ಪಿಂಚಣಿ ಮತ್ತು EPF ನಾಮಿನಿ ಹಕ್ಕುಗಳನ್ನು ಸಲ್ಲಿಸಲಾಗಿದೆ",
   eventHeirConsentReceived: "ಮೂವರು ಕಾನೂನು ವಾರಸುದಾರರ ಒಪ್ಪಿಗೆ ದೊರೆತಿದೆ",
   eventDeathJourneyCompleted: "ಮರಣ ನೋಂದಣಿ ಮತ್ತು ಕುಟುಂಬದ ಹಕ್ಕುಗಳು ಪೂರ್ಣಗೊಂಡಿವೆ",
   eventLoanApplicationStarted: "{option} ಅರ್ಜಿ ಪ್ರಾರಂಭವಾಗಿದೆ",
   eventBusinessPlanStarted: "ಹೊಸ ವ್ಯವಹಾರ ನೋಂದಣಿ ಯೋಜನೆ ಪ್ರಾರಂಭವಾಗಿದೆ",
   eventMarriageInviteSent: "ಜಂಟಿ ವಿವಾಹ ಅರ್ಜಿಗೆ ಪ್ರಿಯಾ ಅವರನ್ನು ಆಹ್ವಾನಿಸಲಾಗಿದೆ",
   eventMarriageConsentReceived: "ವಿವಾಹ ನೋಂದಣಿಗೆ ಪ್ರಿಯಾ ಒಪ್ಪಿಗೆ ನೀಡಿದ್ದಾರೆ",
-  eventMarriageDocumentsAdded: "ಪರಿಶೀಲಿತ ಗುರುತು ದಾಖಲೆಗಳು ಮತ್ತು ಸಾಕ್ಷಿಗಳನ್ನು ವಿವಾಹ ಅರ್ಜಿಗೆ ಸೇರಿಸಲಾಗಿದೆ",
-  eventMarriageAppointmentBooked: "ವಿವಾಹ ನೋಂದಣಿ ಭೇಟಿ ನಿಗದಿಯಾಗಿ ಶುಲ್ಕ ಪಾವತಿಸಲಾಗಿದೆ",
+  eventMarriageDocumentsAdded:
+    "ಪರಿಶೀಲಿತ ಗುರುತು ದಾಖಲೆಗಳು ಮತ್ತು ಸಾಕ್ಷಿಗಳನ್ನು ವಿವಾಹ ಅರ್ಜಿಗೆ ಸೇರಿಸಲಾಗಿದೆ",
+  eventMarriageAppointmentBooked:
+    "ವಿವಾಹ ನೋಂದಣಿ ಭೇಟಿ ನಿಗದಿಯಾಗಿ ಶುಲ್ಕ ಪಾವತಿಸಲಾಗಿದೆ",
   eventMarriageRegistered: "ವಿವಾಹ ನೋಂದಣಿಯಾಗಿ ಸಂಗಾತಿ ಸಂಬಂಧ ಸೇರಿಸಲಾಗಿದೆ",
   eventBenefitApplicationStarted: "{benefit} ಅರ್ಜಿ ಪ್ರಾರಂಭವಾಗಿದೆ",
   eventBenefitApplicationSubmitted: "ಸೌಲಭ್ಯ ಅರ್ಜಿ ಸಲ್ಲಿಸಲಾಗಿದೆ",
@@ -322,27 +346,32 @@ export const kn: Record<MessageKey, string> = {
   deathRelationshipFamily: "ಇವರು ನಿಮ್ಮ ಕುಟುಂಬದ ಸದಸ್ಯರೇ?",
   deathSpouseFound: "Citizen ಒಂದು ಪರಿಶೀಲಿತ ದಾಂಪತ್ಯ ಸಂಬಂಧವನ್ನು ಕಂಡಿದೆ.",
   deathFamilyFound: "Citizen ಒಂದು ಪರಿಶೀಲಿತ ಕುಟುಂಬ ಸಂಬಂಧವನ್ನು ಕಂಡಿದೆ.",
-  deathConfirmBeforeChange: "ಯಾವುದೇ ಬದಲಾವಣೆಗೆ ಮೊದಲು ಸಂಪರ್ಕಿತ ದಾಖಲೆಯನ್ನು ಖಚಿತಪಡಿಸಿ.",
+  deathConfirmBeforeChange:
+    "ಯಾವುದೇ ಬದಲಾವಣೆಗೆ ಮೊದಲು ಸಂಪರ್ಕಿತ ದಾಖಲೆಯನ್ನು ಖಚಿತಪಡಿಸಿ.",
   deathPensionerLocation: "EPS ಪಿಂಚಣಿದಾರ · ಬೆಂಗಳೂರು",
   deathConfirmRajesh: "ರಾಜೇಶ್ ಅವರನ್ನು ಖಚಿತಪಡಿಸಿ",
   deathReviewRegistration: "ನೋಂದಣಿಯನ್ನು ಪರಿಶೀಲಿಸಿ",
-  deathReviewRegistrationBody: "ರಾಜೇಶ್ ಅವರ ಪರಿಶೀಲಿತ ಗುರುತು ಮತ್ತು ಕುಟುಂಬ ದಾಖಲೆಗಳಿಂದ ಅರ್ಜಿ ತುಂಬಲಾಗಿದೆ. ಇದು ಅನುಕರಿಸಿದ ನೋಂದಣಿಯನ್ನು ಮಾತ್ರ ರಚಿಸುತ್ತದೆ.",
+  deathReviewRegistrationBody:
+    "ರಾಜೇಶ್ ಅವರ ಪರಿಶೀಲಿತ ಗುರುತು ಮತ್ತು ಕುಟುಂಬ ದಾಖಲೆಗಳಿಂದ ಅರ್ಜಿ ತುಂಬಲಾಗಿದೆ. ಇದು ಅನುಕರಿಸಿದ ನೋಂದಣಿಯನ್ನು ಮಾತ್ರ ರಚಿಸುತ್ತದೆ.",
   fieldName: "ಹೆಸರು",
   fieldDate: "ದಿನಾಂಕ",
   fieldReporter: "ಮಾಹಿತಿ ನೀಡುವವರು",
   deathRegisterAction: "ಮರಣ ನೋಂದಣಿ ಮಾಡಿ",
   deathCertificateTitle: "ಮರುಬಳಕೆ ಮಾಡಬಹುದಾದ ಒಂದು ಪ್ರಮಾಣಪತ್ರ ರಚಿಸಿ",
-  deathCertificateBody: "ಪ್ರಮಾಣಪತ್ರವನ್ನು ಅರ್ಜುನ್ ಅವರ ದಾಖಲೆಗಳಲ್ಲಿ ಉಳಿಸಿ, ಪಿಂಚಣಿ, ನಾಮಿನಿ ಮತ್ತು ವಿಧವಾ ಪಿಂಚಣಿ ಪರಿಶೀಲನೆಗೆ ಮರುಬಳಕೆ ಮಾಡಲಾಗುತ್ತದೆ.",
+  deathCertificateBody:
+    "ಪ್ರಮಾಣಪತ್ರವನ್ನು ಅರ್ಜುನ್ ಅವರ ದಾಖಲೆಗಳಲ್ಲಿ ಉಳಿಸಿ, ಪಿಂಚಣಿ, ನಾಮಿನಿ ಮತ್ತು ವಿಧವಾ ಪಿಂಚಣಿ ಪರಿಶೀಲನೆಗೆ ಮರುಬಳಕೆ ಮಾಡಲಾಗುತ್ತದೆ.",
   deathCertificateVerified: "ಅನುಕರಿಸಿದ BBMP ಪ್ರತಿಕ್ರಿಯೆಯಿಂದ ಪರಿಶೀಲಿಸಲಾಗಿದೆ",
   deathIssueCertificate: "ಪ್ರಮಾಣಪತ್ರ ನೀಡಿ",
   deathClaimsTitle: "ಸುನೀತಾ ಅವರ ಪಿಂಚಣಿ ಮತ್ತು ನಾಮಿನಿ ಹಕ್ಕು ಪ್ರಾರಂಭಿಸಿ",
-  deathClaimsBody: "ರಾಜೇಶ್ ಅವರ EPS ಪಿಂಚಣಿ ಮುಕ್ತಾಯವಾಗಿದೆ. ಇದೇ ಪ್ರಮಾಣಪತ್ರವು ಕುಟುಂಬ ಪಿಂಚಣಿ ಮತ್ತು EPF ನಾಮಿನಿ ಹಕ್ಕಿಗೆ ಆಧಾರವಾಗುತ್ತದೆ.",
+  deathClaimsBody:
+    "ರಾಜೇಶ್ ಅವರ EPS ಪಿಂಚಣಿ ಮುಕ್ತಾಯವಾಗಿದೆ. ಇದೇ ಪ್ರಮಾಣಪತ್ರವು ಕುಟುಂಬ ಪಿಂಚಣಿ ಮತ್ತು EPF ನಾಮಿನಿ ಹಕ್ಕಿಗೆ ಆಧಾರವಾಗುತ್ತದೆ.",
   deathFamilyPension: "ಕುಟುಂಬ ಪಿಂಚಣಿ",
   deathEpfClaim: "EPF ನಾಮಿನಿ ಹಕ್ಕು",
   deathSubmitClaims: "ಎರಡೂ ಹಕ್ಕುಗಳನ್ನು ಸಲ್ಲಿಸಿ",
   deathSharedWorkflow: "ಕುಟುಂಬದ ಜಂಟಿ ಕ್ರಮ",
   deathConsentTitle: "ಕಾನೂನು ವಾರಸುದಾರರ ಒಪ್ಪಿಗೆ ಪಡೆಯಿರಿ",
-  deathConsentBody: "ಸುನೀತಾ ಮತ್ತು ಅರ್ಜುನ್ ಸಿದ್ಧರಾಗಿದ್ದಾರೆ. ಕವಿತಾ ಅವರ ಒಪ್ಪಿಗೆ ಕೇಳಿ; ಅನುಕರಿಸಿದ ಸಂಪರ್ಕವು ಅವರ ಉತ್ತರವನ್ನು ದಾಖಲಿಸುತ್ತದೆ.",
+  deathConsentBody:
+    "ಸುನೀತಾ ಮತ್ತು ಅರ್ಜುನ್ ಸಿದ್ಧರಾಗಿದ್ದಾರೆ. ಕವಿತಾ ಅವರ ಒಪ್ಪಿಗೆ ಕೇಳಿ; ಅನುಕರಿಸಿದ ಸಂಪರ್ಕವು ಅವರ ಉತ್ತರವನ್ನು ದಾಖಲಿಸುತ್ತದೆ.",
   ready: "ಸಿದ್ಧ",
   waiting: "ಕಾಯುತ್ತಿದೆ",
   deathRequestConsent: "ಕವಿತಾ ಅವರ ಒಪ್ಪಿಗೆ ಕೇಳಿ",
@@ -350,7 +379,8 @@ export const kn: Record<MessageKey, string> = {
   processCarry: "ತೆಗೆದುಕೊಂಡು ಹೋಗಿ",
   processTime: "ನಿರೀಕ್ಷಿತ ಅವಧಿ",
   deathRegistrationOffice: "BBMP ವಲಯ ಜನನ-ಮರಣ ಕಚೇರಿ",
-  deathRegistrationCarry: "ಮಾಹಿತಿ ನೀಡುವವರ ID · ಆಸ್ಪತ್ರೆ ಅಥವಾ ಅಂತ್ಯಕ್ರಿಯೆ ದಾಖಲೆ · ಮೃತರ ID",
+  deathRegistrationCarry:
+    "ಮಾಹಿತಿ ನೀಡುವವರ ID · ಆಸ್ಪತ್ರೆ ಅಥವಾ ಅಂತ್ಯಕ್ರಿಯೆ ದಾಖಲೆ · ಮೃತರ ID",
   deathRegistrationTime: "ಪರಿಶೀಲನೆಯ ನಂತರ ಸಾಮಾನ್ಯವಾಗಿ 1–3 ಕೆಲಸದ ದಿನಗಳು",
   deathCertificateOffice: "BBMP ಪ್ರಮಾಣಪತ್ರ ಕೌಂಟರ್",
   deathCertificateCarry: "ನೋಂದಣಿ ಉಲ್ಲೇಖ · ಮಾಹಿತಿ ನೀಡುವವರ ID",
@@ -359,18 +389,22 @@ export const kn: Record<MessageKey, string> = {
   deathClaimsCarry: "ಮರಣ ಪ್ರಮಾಣಪತ್ರ · PPO/UAN · ನಾಮಿನಿ ಬ್ಯಾಂಕ್ ಪುರಾವೆ",
   deathClaimsTime: "ಪೂರ್ಣ ಹಕ್ಕು ಸಲ್ಲಿಸಿದ ಸುಮಾರು 20 ದಿನಗಳ ನಂತರ",
   consentNoticeTitle: "ಕವಿತಾ ಅವರ ಕಾನೂನು ವಾರಸುದಾರರ ಒಪ್ಪಿಗೆ ದೊರೆತಿದೆ",
-  consentNoticeBody: "ಅನುಕರಿಸಿದ ಒಪ್ಪಿಗೆ ಸಂಪರ್ಕವು ರಾಜೇಶ್ ಶರ್ಮಾ ಅವರ ಕಾನೂನು ವಾರಸುದಾರರ ಕ್ರಮಕ್ಕೆ ಕವಿತಾ ವರ್ಮಾ ಅವರ ಅನುಮೋದನೆಯನ್ನು ದಾಖಲಿಸಿದೆ.",
+  consentNoticeBody:
+    "ಅನುಕರಿಸಿದ ಒಪ್ಪಿಗೆ ಸಂಪರ್ಕವು ರಾಜೇಶ್ ಶರ್ಮಾ ಅವರ ಕಾನೂನು ವಾರಸುದಾರರ ಕ್ರಮಕ್ಕೆ ಕವಿತಾ ವರ್ಮಾ ಅವರ ಅನುಮೋದನೆಯನ್ನು ದಾಖಲಿಸಿದೆ.",
   eventNoticeRead: "ಸಂದೇಶವನ್ನು ಓದಲಾಗಿದೆ ಎಂದು ದಾಖಲಿಸಲಾಗಿದೆ",
   deathKeepVisible: "ಈ ಕೆಲಸಗಳನ್ನು ಕಾಣುವಂತೆ ಇಡಿ",
   deathDownstreamTitle: "ಆಸ್ತಿ ಮತ್ತು ವಾಹನದ ಮುಂದಿನ ಕ್ರಮಗಳನ್ನು ರಚಿಸಿ",
-  deathDownstreamBody: "Citizen ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಮಾಲೀಕತ್ವ ವರ್ಗಾಯಿಸುವುದಿಲ್ಲ. ಕುಟುಂಬವು ಪ್ರತಿ ಉತ್ತರಾಧಿಕಾರ ಪ್ರಕ್ರಿಯೆಯನ್ನು ಪ್ರತ್ಯೇಕವಾಗಿ ಪೂರ್ಣಗೊಳಿಸಲು ಸೀಮಿತ ಕರಡುಗಳನ್ನು ರಚಿಸುತ್ತದೆ.",
+  deathDownstreamBody:
+    "Citizen ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಮಾಲೀಕತ್ವ ವರ್ಗಾಯಿಸುವುದಿಲ್ಲ. ಕುಟುಂಬವು ಪ್ರತಿ ಉತ್ತರಾಧಿಕಾರ ಪ್ರಕ್ರಿಯೆಯನ್ನು ಪ್ರತ್ಯೇಕವಾಗಿ ಪೂರ್ಣಗೊಳಿಸಲು ಸೀಮಿತ ಕರಡುಗಳನ್ನು ರಚಿಸುತ್ತದೆ.",
   deathSuccessionDraft: "ಉತ್ತರಾಧಿಕಾರ ಕರಡು ರಚಿಸಲಾಗುತ್ತದೆ",
   deathCreateDrafts: "ಕರಡುಗಳನ್ನು ರಚಿಸಿ ಪೂರ್ಣಗೊಳಿಸಿ",
   deathCompleteTitle: "ಕುಟುಂಬದ ದಾಖಲೆ ಈಗ ನವೀಕೃತವಾಗಿದೆ.",
-  deathCompleteBody: "ಪ್ರಮಾಣಪತ್ರವನ್ನು ಮರುಬಳಕೆ ಮಾಡಬಹುದು, ಪಿಂಚಣಿ ಮತ್ತು ನಾಮಿನಿ ಹಕ್ಕುಗಳು ಸಲ್ಲಿಕೆಯಾಗಿವೆ, ಕಾನೂನು ವಾರಸುದಾರರ ಒಪ್ಪಿಗೆ ದಾಖಲಾಗಿದೆ ಮತ್ತು ಆಸ್ತಿ ಹಾಗೂ ವಾಹನ ವರ್ಗಾವಣೆ ಕರಡುಗಳು ಕಾಣಿಸುತ್ತವೆ.",
+  deathCompleteBody:
+    "ಪ್ರಮಾಣಪತ್ರವನ್ನು ಮರುಬಳಕೆ ಮಾಡಬಹುದು, ಪಿಂಚಣಿ ಮತ್ತು ನಾಮಿನಿ ಹಕ್ಕುಗಳು ಸಲ್ಲಿಕೆಯಾಗಿವೆ, ಕಾನೂನು ವಾರಸುದಾರರ ಒಪ್ಪಿಗೆ ದಾಖಲಾಗಿದೆ ಮತ್ತು ಆಸ್ತಿ ಹಾಗೂ ವಾಹನ ವರ್ಗಾವಣೆ ಕರಡುಗಳು ಕಾಣಿಸುತ್ತವೆ.",
   deathSeeSunitaEligibility: "ಸುನೀತಾ ಅವರ ಅರ್ಹತೆ ನೋಡಿ",
   deathViewAuditTrail: "ಕ್ರಮಗಳ ಇತಿಹಾಸ ನೋಡಿ",
-  deathServiceError: "ಅನುಕರಿಸಿದ ಸೇವೆ ಪ್ರತಿಕ್ರಿಯಿಸಲಿಲ್ಲ. ನಿಮ್ಮ ದಾಖಲೆಗಳು ಬದಲಾಗಿಲ್ಲ.",
+  deathServiceError:
+    "ಅನುಕರಿಸಿದ ಸೇವೆ ಪ್ರತಿಕ್ರಿಯಿಸಲಿಲ್ಲ. ನಿಮ್ಮ ದಾಖಲೆಗಳು ಬದಲಾಗಿಲ್ಲ.",
   changeRecorded: "ಉಳಿಸಲಾಗಿದೆ",
   recordsUpdated: "{count} ನವೀಕರಣಗಳು",
   mutationRajeshDeceased: "ರಾಜೇಶ್ ಅವರನ್ನು ಮೃತರೆಂದು ದಾಖಲಿಸಲಾಗಿದೆ",
@@ -410,10 +444,12 @@ export const kn: Record<MessageKey, string> = {
   mutationFieldWitnesses: "ಸಾಕ್ಷಿಗಳು",
   familyBriefing: "ಕುಟುಂಬದ ಮಾಹಿತಿ",
   familyBriefingTitle: "ಕುಟುಂಬಕ್ಕೆ ಏನು ಬದಲಾಗಿದೆ",
-  familyBriefingBody: "ನವೀಕರಿಸಿದ ಕುಟುಂಬ ದಾಖಲೆಯಿಂದ ಲೆಕ್ಕಿಸಿದ ಅರ್ಹತೆ ಮತ್ತು ಉತ್ತರಾಧಿಕಾರದ ಮುಂದಿನ ಕ್ರಮಗಳು.",
+  familyBriefingBody:
+    "ನವೀಕರಿಸಿದ ಕುಟುಂಬ ದಾಖಲೆಯಿಂದ ಲೆಕ್ಕಿಸಿದ ಅರ್ಹತೆ ಮತ್ತು ಉತ್ತರಾಧಿಕಾರದ ಮುಂದಿನ ಕ್ರಮಗಳು.",
   familyPensionEligible: "ಸುನೀತಾ ಅವರ EPS ಕುಟುಂಬ ಪಿಂಚಣಿ",
   widowPensionBlocked: "ವಿಧವಾ ಪಿಂಚಣಿಗೆ ಇನ್ನೊಂದು ದಾಖಲೆ ಬೇಕು",
-  blockedByIncomeDeclaration: "ಕುಟುಂಬದ ಆದಾಯ ಘೋಷಣೆ ಸೇರಿಸುವವರೆಗೆ ಅರ್ಜಿ ತಡೆಹಿಡಿಯಲಾಗಿದೆ.",
+  blockedByIncomeDeclaration:
+    "ಕುಟುಂಬದ ಆದಾಯ ಘೋಷಣೆ ಸೇರಿಸುವವರೆಗೆ ಅರ್ಜಿ ತಡೆಹಿಡಿಯಲಾಗಿದೆ.",
   successionNextActions: "ಉತ್ತರಾಧಿಕಾರದ ಮುಂದಿನ ಕ್ರಮಗಳು",
   propertySuccession: "BBMP ಖಾತಾ ವರ್ಗಾವಣೆ",
   vehicleSuccession: "ವಾಹನ ಮಾಲೀಕತ್ವ ವರ್ಗಾವಣೆ",
@@ -422,8 +458,10 @@ export const kn: Record<MessageKey, string> = {
   propertyTimeline: "ಕುಟುಂಬದ ದಾಖಲೆಗಳು ಅಂಗೀಕಾರವಾದ ನಂತರ ಸುಮಾರು 30–45 ದಿನಗಳು",
   vehicleTimeline: "RTO ಅರ್ಜಿ ಅಂಗೀಕಾರವಾದ ನಂತರ ಸುಮಾರು 14–30 ದಿನಗಳು",
   propertyDocuments: "ಮರಣ ಪ್ರಮಾಣಪತ್ರ · ಕಾನೂನು ವಾರಸುದಾರರ ಒಪ್ಪಿಗೆ · ಖಾತಾ ಪ್ರತಿ",
-  vehicleDocuments: "ಮರಣ ಪ್ರಮಾಣಪತ್ರ · RC · ಕಾನೂನು ವಾರಸುದಾರರ ಒಪ್ಪಿಗೆ · ವಿಮೆ ಪ್ರತಿ",
-  noOwnershipChanged: "ಇದು ಮುಂದಿನ ಕ್ರಮದ ಕರಡು ಮಾತ್ರ. ಮಾಲೀಕತ್ವ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಬದಲಾಗಿಲ್ಲ.",
+  vehicleDocuments:
+    "ಮರಣ ಪ್ರಮಾಣಪತ್ರ · RC · ಕಾನೂನು ವಾರಸುದಾರರ ಒಪ್ಪಿಗೆ · ವಿಮೆ ಪ್ರತಿ",
+  noOwnershipChanged:
+    "ಇದು ಮುಂದಿನ ಕ್ರಮದ ಕರಡು ಮಾತ್ರ. ಮಾಲೀಕತ್ವ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಬದಲಾಗಿಲ್ಲ.",
   viewAsSunita: "ಸುನೀತಾ ಆಗಿ ನೋಡಿ",
   eventPropertyTaxPaid: "BBMP ಆಸ್ತಿ ತೆರಿಗೆ ಪಾವತಿಸಲಾಗಿದೆ",
   eventGstrFiled: "GSTR-3B ಸಲ್ಲಿಕೆ ದಾಖಲಾಗಿದೆ",
@@ -438,10 +476,12 @@ export const kn: Record<MessageKey, string> = {
   propertyAmountDue: "ಬಾಕಿ ಮೊತ್ತ",
   confirmPropertyTaxPayment: "ಡೆಮೊದಲ್ಲಿ ಆಸ್ತಿ ತೆರಿಗೆ ಪಾವತಿಸಿ",
   propertyTaxPaidTitle: "ಆಸ್ತಿ ತೆರಿಗೆ ಪಾವತಿಸಲಾಗಿದೆ",
-  propertyTaxPaidBody: "ಮೊತ್ತವನ್ನು ಹಣದಿಂದ ತೆಗೆದುಹಾಕಲಾಗಿದೆ. ರಸೀದಿ ದಾಖಲೆಗಳಲ್ಲಿ ಇದೆ.",
+  propertyTaxPaidBody:
+    "ಮೊತ್ತವನ್ನು ಹಣದಿಂದ ತೆಗೆದುಹಾಕಲಾಗಿದೆ. ರಸೀದಿ ದಾಖಲೆಗಳಲ್ಲಿ ಇದೆ.",
   gstrTitle: "ಆಗಸ್ಟ್ GST ರಿಟರ್ನ್",
   gstrBody: "ಡೆಮೊ ಸಲ್ಲಿಕೆ ಮಾತ್ರ. GST ಪೋರ್ಟಲ್ ಸಂಪರ್ಕಿಸುವುದಿಲ್ಲ.",
-  gstrConfirmDeclaration: "ಮೇಲೆ ತೋರಿಸಿದ ವ್ಯವಹಾರ, GSTIN ಮತ್ತು ಸಲ್ಲಿಕೆ ಅವಧಿಯನ್ನು ಪರಿಶೀಲಿಸಿದ್ದೇನೆ.",
+  gstrConfirmDeclaration:
+    "ಮೇಲೆ ತೋರಿಸಿದ ವ್ಯವಹಾರ, GSTIN ಮತ್ತು ಸಲ್ಲಿಕೆ ಅವಧಿಯನ್ನು ಪರಿಶೀಲಿಸಿದ್ದೇನೆ.",
   confirmGstrFiling: "ಡೆಮೊದಲ್ಲಿ GST ರಿಟರ್ನ್ ಸಲ್ಲಿಸಿ",
   gstrFiledTitle: "GST ರಿಟರ್ನ್ ಸಲ್ಲಿಸಲಾಗಿದೆ",
   gstrFiledBody: "ಗಡುವು ಪೂರ್ಣಗೊಂಡಿದೆ ಮತ್ತು ಸ್ವೀಕೃತಿ ಉಳಿಸಲಾಗಿದೆ.",
@@ -450,21 +490,25 @@ export const kn: Record<MessageKey, string> = {
   passportScopeBody: "ನಿಮ್ಮ ಪಾಸ್‌ಪೋರ್ಟ್ 19 ಜನವರಿ 2027ರಂದು ಮುಗಿಯುತ್ತದೆ.",
   passportStepOne: "ಹೆಸರು ಮತ್ತು ವಿಳಾಸ ಪರಿಶೀಲಿಸಿ",
   passportStepTwo: "Passport Seva ಭೇಟಿ ಆರಿಸಿ",
-  passportStepThree: "ಈಗಿನ ಪಾಸ್‌ಪೋರ್ಟ್ ಮತ್ತು ಅಗತ್ಯ ದಾಖಲೆಗಳನ್ನು ತೆಗೆದುಕೊಂಡು ಹೋಗಿ",
+  passportStepThree:
+    "ಈಗಿನ ಪಾಸ್‌ಪೋರ್ಟ್ ಮತ್ತು ಅಗತ್ಯ ದಾಖಲೆಗಳನ್ನು ತೆಗೆದುಕೊಂಡು ಹೋಗಿ",
   passportDemoLimit: "ಈ ಡೆಮೊದಲ್ಲಿ ಭೇಟಿ ನಿಗದಿಪಡಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ.",
   viewPassport: "ಪಾಸ್‌ಪೋರ್ಟ್ ನೋಡಿ",
   epfoWorkflowTitle: "EPFO ದಾಖಲೆ ಪರಿಶೀಲಿಸಿ",
-  epfoWorkflowBody: "ಪಾಸ್‌ಬುಕ್ ನೋಡಿ ಮತ್ತು ವಂತಿಗೆ ಸಮಸ್ಯೆಯನ್ನು ಒಂದೇ ಕಡೆ ಬಗೆಹರಿಸಿ.",
+  epfoWorkflowBody:
+    "ಪಾಸ್‌ಬುಕ್ ನೋಡಿ ಮತ್ತು ವಂತಿಗೆ ಸಮಸ್ಯೆಯನ್ನು ಒಂದೇ ಕಡೆ ಬಗೆಹರಿಸಿ.",
   epfoAuthority: "ಉದ್ಯೋಗಿಗಳ ಭವಿಷ್ಯ ನಿಧಿ ಸಂಸ್ಥೆ",
   epfoPassbookLabel: "ಸದಸ್ಯರ ಪಾಸ್‌ಬುಕ್",
   epfoPassbookTitle: "ನಿಮ್ಮ EPF ಖಾತೆ",
-  epfoPassbookBody: "UAN, ಉದ್ಯೋಗದಾತ ಮತ್ತು ಬಾಕಿ ಈ ಪ್ರೊಫೈಲ್‌ನ ಸಂಪರ್ಕಿತ ಉದ್ಯೋಗ ದಾಖಲೆಯಿಂದ ಬರುತ್ತವೆ.",
+  epfoPassbookBody:
+    "UAN, ಉದ್ಯೋಗದಾತ ಮತ್ತು ಬಾಕಿ ಈ ಪ್ರೊಫೈಲ್‌ನ ಸಂಪರ್ಕಿತ ಉದ್ಯೋಗ ದಾಖಲೆಯಿಂದ ಬರುತ್ತವೆ.",
   epfoBalance: "ಪಾಸ್‌ಬುಕ್ ಬಾಕಿ",
   epfoLatestContribution: "ಇತ್ತೀಚಿನ ವಂತಿಗೆ",
   epfoEmployer: "ಉದ್ಯೋಗದಾತ",
   epfoReviewContribution: "ಇತ್ತೀಚಿನ ವಂತಿಗೆ ಪರಿಶೀಲಿಸಿ",
   epfoContributionTitle: "ಇತ್ತೀಚಿನ ವಂತಿಗೆ ಪರಿಶೀಲಿಸಿ",
-  epfoContributionBody: "EPFO ಈ ವಂತಿಗೆ ಜಮೆಯಾಗಿದೆ ಎಂದು ಗುರುತಿಸಿದೆ. ಇದು ನಿಮ್ಮ ದಾಖಲೆಗೆ ಹೊಂದುತ್ತದೆಯೇ ಎಂದು ಆರಿಸಿ.",
+  epfoContributionBody:
+    "EPFO ಈ ವಂತಿಗೆ ಜಮೆಯಾಗಿದೆ ಎಂದು ಗುರುತಿಸಿದೆ. ಇದು ನಿಮ್ಮ ದಾಖಲೆಗೆ ಹೊಂದುತ್ತದೆಯೇ ಎಂದು ಆರಿಸಿ.",
   epfoContributionMatches: "ಇದು ನನ್ನ ದಾಖಲೆಗೆ ಹೊಂದುತ್ತದೆ",
   epfoReportIssue: "ಸಮಸ್ಯೆ ದಾಖಲಿಸಿ",
   epfoIssueLabel: "ಏನು ತಪ್ಪಾಗಿದೆ?",
@@ -473,15 +517,19 @@ export const kn: Record<MessageKey, string> = {
   epfoIssueEmployer: "ಉದ್ಯೋಗದಾತ ತಪ್ಪಾಗಿದೆ",
   epfoSubmitGrievance: "EPFO ದೂರು ದಾಖಲಿಸಿ",
   epfoGrievanceCompleteTitle: "EPFO ದೂರು ದಾಖಲಾಗಿದೆ",
-  epfoGrievanceCompleteBody: "ಉಲ್ಲೇಖ {reference}. ಈ ಡೆಮೊದಲ್ಲಿ EPFO 15 ದಿನಗಳಲ್ಲಿ ಉತ್ತರಿಸುತ್ತದೆ.",
+  epfoGrievanceCompleteBody:
+    "ಉಲ್ಲೇಖ {reference}. ಈ ಡೆಮೊದಲ್ಲಿ EPFO 15 ದಿನಗಳಲ್ಲಿ ಉತ್ತರಿಸುತ್ತದೆ.",
   epfoReference: "ದೂರು ಉಲ್ಲೇಖ",
   epfoServiceError: "ದೂರು ದಾಖಲಾಗಲಿಲ್ಲ. ನಿಮ್ಮ ದಾಖಲೆ ಬದಲಾಗಿಲ್ಲ.",
   epfoNoActionTitle: "ವಂತಿಗೆ ಪರಿಶೀಲಿಸಲಾಗಿದೆ",
   epfoNoActionBody: "ವಂತಿಗೆ ನಿಮ್ಮ ದಾಖಲೆಗೆ ಹೊಂದುತ್ತದೆ. ಯಾವುದೇ ದೂರು ದಾಖಲಾಗಿಲ್ಲ.",
-  epfoUnavailableBody: "ಈ ಪ್ರೊಫೈಲ್‌ಗೆ EPFO ಪಾಸ್‌ಬುಕ್ ಮತ್ತು ವಂತಿಗೆ ಸೂಚನೆ ಸಂಪರ್ಕಗೊಂಡಿಲ್ಲ.",
+  epfoUnavailableBody:
+    "ಈ ಪ್ರೊಫೈಲ್‌ಗೆ EPFO ಪಾಸ್‌ಬುಕ್ ಮತ್ತು ವಂತಿಗೆ ಸೂಚನೆ ಸಂಪರ್ಕಗೊಂಡಿಲ್ಲ.",
   benefitReviewTitle: "ಯೋಜನೆ ಅರ್ಜಿಯನ್ನು ಪರಿಶೀಲಿಸಿ",
-  benefitReviewBody: "ಅನುಕರಿತ ಅರ್ಜಿ ಸಲ್ಲಿಸುವ ಮೊದಲು ರಕ್ಷಣೆ, ವಾರ್ಷಿಕ ಪ್ರೀಮಿಯಂ ಮತ್ತು ಅರ್ಹತೆ ನೋಡಿ.",
-  benefitConsent: "ಇದು ಅನುಕರಿತ ಅರ್ಜಿ ಮತ್ತು ಯಾವುದೇ ಬ್ಯಾಂಕ್ ಖಾತೆಯಿಂದ ಹಣ ಕಡಿತವಾಗುವುದಿಲ್ಲ ಎಂದು ನಾನು ಅರ್ಥಮಾಡಿಕೊಂಡಿದ್ದೇನೆ.",
+  benefitReviewBody:
+    "ಅನುಕರಿತ ಅರ್ಜಿ ಸಲ್ಲಿಸುವ ಮೊದಲು ರಕ್ಷಣೆ, ವಾರ್ಷಿಕ ಪ್ರೀಮಿಯಂ ಮತ್ತು ಅರ್ಹತೆ ನೋಡಿ.",
+  benefitConsent:
+    "ಇದು ಅನುಕರಿತ ಅರ್ಜಿ ಮತ್ತು ಯಾವುದೇ ಬ್ಯಾಂಕ್ ಖಾತೆಯಿಂದ ಹಣ ಕಡಿತವಾಗುವುದಿಲ್ಲ ಎಂದು ನಾನು ಅರ್ಥಮಾಡಿಕೊಂಡಿದ್ದೇನೆ.",
   benefitSubmit: "ಡೆಮೊ ಅರ್ಜಿ ಸಲ್ಲಿಸಿ",
   benefitCompleteTitle: "ಅರ್ಜಿ ಸಲ್ಲಿಸಲಾಗಿದೆ",
   benefitCompleteBody: "ಉಲ್ಲೇಖ {reference}. ಅರ್ಜಿ ಈಗ ಮುಖಪುಟದಲ್ಲಿ ಕಾಣುತ್ತದೆ.",
@@ -490,7 +538,8 @@ export const kn: Record<MessageKey, string> = {
   benefitDraftMissingTitle: "ಮುಂದುವರಿಸಲು ಸೌಲಭ್ಯ ಕರಡು ಇಲ್ಲ",
   benefitDraftMissingBody: "ಸೌಲಭ್ಯಗಳ ಪುಟದಿಂದ ಅರ್ಹ ಯೋಜನೆ ಅರ್ಜಿ ಪ್ರಾರಂಭಿಸಿ.",
   refundTrackTitle: "ನಿಮ್ಮ ಮರುಪಾವತಿ ಪ್ರಕ್ರಿಯೆಯಲ್ಲಿದೆ",
-  refundTrackBody: "{amount} ಮರುಪಾವತಿ {date}ರಂದು ಪ್ರಾರಂಭವಾಗಿದೆ. ಈಗ ಏನೂ ಮಾಡಬೇಕಿಲ್ಲ.",
+  refundTrackBody:
+    "{amount} ಮರುಪಾವತಿ {date}ರಂದು ಪ್ರಾರಂಭವಾಗಿದೆ. ಈಗ ಏನೂ ಮಾಡಬೇಕಿಲ್ಲ.",
   refundStarted: "{date}ರಂದು ಪ್ರಾರಂಭವಾಗಿದೆ",
   refundExpected: "ನಾಲ್ಕರಿಂದ ಆರು ವಾರಗಳಲ್ಲಿ ಬರುವ ನಿರೀಕ್ಷೆ",
   refundAccount: "0042ರಲ್ಲಿ ಕೊನೆಗೊಳ್ಳುವ ಬ್ಯಾಂಕ್ ಖಾತೆ",
@@ -499,33 +548,46 @@ export const kn: Record<MessageKey, string> = {
   consentNeeded: "ನಿಮ್ಮ ಒಪ್ಪಿಗೆ ಬೇಕಾಗಿದೆ",
   recordNeedsAttention: "{document} ದಾಖಲೆಗೆ ಗಮನ ಬೇಕು",
   recordMismatch: "ಮಾಹಿತಿ ನಿಮ್ಮ ಇತರ ದಾಖಲೆಗಳಿಗೆ ಹೊಂದಿಕೆಯಾಗುವುದಿಲ್ಲ",
-  independentNotice: "ಭಾರತ ಸರ್ಕಾರ ಅಥವಾ ಯಾವುದೇ ರಾಜ್ಯ ಪ್ರಾಧಿಕಾರದೊಂದಿಗೆ ಸಂಬಂಧ ಹೊಂದಿಲ್ಲ.",
+  independentNotice:
+    "ಭಾರತ ಸರ್ಕಾರ ಅಥವಾ ಯಾವುದೇ ರಾಜ್ಯ ಪ್ರಾಧಿಕಾರದೊಂದಿಗೆ ಸಂಬಂಧ ಹೊಂದಿಲ್ಲ.",
   aboutEyebrow: "ಮೂಲ ಕಲ್ಪನೆ",
   aboutTitle: "ಉತ್ತಮ ಇಂಟರ್ಫೇಸ್",
   aboutTitleAccent: "ಮಾತ್ರ ಸಾಕಾಗುವುದಿಲ್ಲ.",
-  aboutBody: "ಸಾರ್ವಜನಿಕ ಸೇವೆಗಳು ಮೊದಲ ಪ್ರಯತ್ನದಲ್ಲೇ ಕೆಲಸ ಮಾಡಿದರೆ? Citizen ಉತ್ತರ: ಪ್ರತಿ ವ್ಯಕ್ತಿಗೂ ಒಂದು ಸಂಪರ್ಕಿತ ದಾಖಲೆ, ಅದನ್ನು ಪ್ರತಿ ಸೇವೆಯೂ ಓದುತ್ತದೆ ಮತ್ತು ಅಪ್‌ಡೇಟ್ ಮಾಡುತ್ತದೆ.",
+  aboutBody:
+    "ಸಾರ್ವಜನಿಕ ಸೇವೆಗಳು ಮೊದಲ ಪ್ರಯತ್ನದಲ್ಲೇ ಕೆಲಸ ಮಾಡಿದರೆ? Citizen ಉತ್ತರ: ಪ್ರತಿ ವ್ಯಕ್ತಿಗೂ ಒಂದು ಸಂಪರ್ಕಿತ ದಾಖಲೆ, ಅದನ್ನು ಪ್ರತಿ ಸೇವೆಯೂ ಓದುತ್ತದೆ ಮತ್ತು ಅಪ್‌ಡೇಟ್ ಮಾಡುತ್ತದೆ.",
   aboutReturn: "Citizenಗೆ ಮರಳಿ",
   aboutGuideEyebrow: "Citizen ಬಳಸುವ ವಿಧಾನ",
   aboutGuideTitle: "ನಾಲ್ಕು ಪರದೆಗಳು. ಒಳಬರಲು ಒಂದೇ ದಾರಿ.",
-  aboutGuideBody: "ಮುಖಪುಟ, ನನ್ನ ದಾಖಲೆಗಳು, ಸೇವೆಗಳು ಮತ್ತು ಸೌಲಭ್ಯಗಳೆಲ್ಲವೂ ಅದೇ ಸಂಪರ್ಕಿತ ದಾಖಲೆಯ ಮೇಲೆ ಚಲಿಸುತ್ತವೆ. ಮುಖಪುಟದ ವಿನಂತಿ ಮಾರ್ಗದರ್ಶಿ ನಿಮ್ಮನ್ನು ಯಾವುದೇ ಪರದೆಗೆ ನೇರವಾಗಿ ಕರೆದೊಯ್ಯುತ್ತದೆ.",
+  aboutGuideBody:
+    "ಮುಖಪುಟ, ನನ್ನ ದಾಖಲೆಗಳು, ಸೇವೆಗಳು ಮತ್ತು ಸೌಲಭ್ಯಗಳೆಲ್ಲವೂ ಅದೇ ಸಂಪರ್ಕಿತ ದಾಖಲೆಯ ಮೇಲೆ ಚಲಿಸುತ್ತವೆ. ಮುಖಪುಟದ ವಿನಂತಿ ಮಾರ್ಗದರ್ಶಿ ನಿಮ್ಮನ್ನು ಯಾವುದೇ ಪರದೆಗೆ ನೇರವಾಗಿ ಕರೆದೊಯ್ಯುತ್ತದೆ.",
   aboutHomeTitle: "ಮುಖಪುಟ",
-  aboutHomeBody: "ಕೆಲಸ, ಗಡುವು, ಬಾಕಿ ಹಣ, ಮರುಪಾವತಿ, ಸೂಚನೆ, ದಾಖಲೆ ಮತ್ತು ಇತ್ತೀಚಿನ ಚಟುವಟಿಕೆಯ ದಿನನಿತ್ಯದ ಸಾರಾಂಶ. ಗಮನ ಬೇಕಾದ ವಿಷಯಗಳು ಮೇಲ್ಭಾಗದಲ್ಲಿ ಕಾಣುತ್ತವೆ.",
-  aboutHomeOutcome: "ಸೇವೆ ಹುಡುಕುವ ಮೊದಲು ಏನು ಬದಲಾಗಿದೆ ಮತ್ತು ಯಾವುದಕ್ಕೆ ಕ್ರಮ ಬೇಕು ಎಂದು ನೋಡಿ.",
+  aboutHomeBody:
+    "ಕೆಲಸ, ಗಡುವು, ಬಾಕಿ ಹಣ, ಮರುಪಾವತಿ, ಸೂಚನೆ, ದಾಖಲೆ ಮತ್ತು ಇತ್ತೀಚಿನ ಚಟುವಟಿಕೆಯ ದಿನನಿತ್ಯದ ಸಾರಾಂಶ. ಗಮನ ಬೇಕಾದ ವಿಷಯಗಳು ಮೇಲ್ಭಾಗದಲ್ಲಿ ಕಾಣುತ್ತವೆ.",
+  aboutHomeOutcome:
+    "ಸೇವೆ ಹುಡುಕುವ ಮೊದಲು ಏನು ಬದಲಾಗಿದೆ ಮತ್ತು ಯಾವುದಕ್ಕೆ ಕ್ರಮ ಬೇಕು ಎಂದು ನೋಡಿ.",
   aboutRecordsTitle: "ನನ್ನ ದಾಖಲೆಗಳು",
-  aboutRecordsBody: "ನಿಮ್ಮ ದಾಖಲೆಗಳು, ಕುಟುಂಬ, ಕೆಲಸ, ವ್ಯವಹಾರ, ಆಸ್ತಿ, ವಾಹನ ಮತ್ತು ಸರ್ಕಾರದೊಂದಿಗಿನ ವ್ಯವಹಾರ, ಎಲ್ಲವೂ ಒಂದೇ ಸಂಪರ್ಕಿತ ದಾಖಲೆಯಲ್ಲಿ.",
-  aboutRecordsOutcome: "ಅದೇ ಮಾಹಿತಿಯನ್ನು ಮತ್ತೆ ತುಂಬುವ ಬದಲು ದಾಖಲೆಯನ್ನು ತಿದ್ದಿ ಅಥವಾ ಮರುಬಳಸಿ.",
+  aboutRecordsBody:
+    "ನಿಮ್ಮ ದಾಖಲೆಗಳು, ಕುಟುಂಬ, ಕೆಲಸ, ವ್ಯವಹಾರ, ಆಸ್ತಿ, ವಾಹನ ಮತ್ತು ಸರ್ಕಾರದೊಂದಿಗಿನ ವ್ಯವಹಾರ, ಎಲ್ಲವೂ ಒಂದೇ ಸಂಪರ್ಕಿತ ದಾಖಲೆಯಲ್ಲಿ.",
+  aboutRecordsOutcome:
+    "ಅದೇ ಮಾಹಿತಿಯನ್ನು ಮತ್ತೆ ತುಂಬುವ ಬದಲು ದಾಖಲೆಯನ್ನು ತಿದ್ದಿ ಅಥವಾ ಮರುಬಳಸಿ.",
   aboutServicesTitle: "ಸೇವೆಗಳು",
-  aboutServicesBody: "ನೀವು ಬಳಸುತ್ತಿರುವ ಪ್ರೊಫೈಲ್‌ಗೆ ಈ ಡೆಮೊ ಏನೆಲ್ಲ ಮಾಡಬಲ್ಲದು: EPFO ಮತ್ತು PAN ತಿದ್ದುಪಡಿಯಿಂದ ಪಾವತಿ ಮತ್ತು ಸಲ್ಲಿಕೆಯವರೆಗೆ.",
-  aboutServicesOutcome: "ಏನು ಸಾಧ್ಯ, ಈಗ ಏನು ಲಭ್ಯ ಮತ್ತು ಎಲ್ಲಿ ಆರಂಭಿಸಬೇಕು ಎಂದು ತಿಳಿಯಿರಿ.",
+  aboutServicesBody:
+    "ನೀವು ಬಳಸುತ್ತಿರುವ ಪ್ರೊಫೈಲ್‌ಗೆ ಈ ಡೆಮೊ ಏನೆಲ್ಲ ಮಾಡಬಲ್ಲದು: EPFO ಮತ್ತು PAN ತಿದ್ದುಪಡಿಯಿಂದ ಪಾವತಿ ಮತ್ತು ಸಲ್ಲಿಕೆಯವರೆಗೆ.",
+  aboutServicesOutcome:
+    "ಏನು ಸಾಧ್ಯ, ಈಗ ಏನು ಲಭ್ಯ ಮತ್ತು ಎಲ್ಲಿ ಆರಂಭಿಸಬೇಕು ಎಂದು ತಿಳಿಯಿರಿ.",
   aboutBenefitsTitle: "ಸೌಲಭ್ಯಗಳು",
-  aboutBenefitsBody: "ಅರ್ಹತೆ ನಿಮ್ಮ ದಾಖಲೆಯಲ್ಲಿರುವ ಮಾಹಿತಿಯಿಂದ ಪರಿಶೀಲನೆಯಾಗುತ್ತದೆ: ವಯಸ್ಸು, ಬ್ಯಾಂಕ್ ಖಾತೆ, ವಾಸಸ್ಥಳ, ವ್ಯವಹಾರದ ವಿಧ ಮತ್ತು ದಾಖಲೆಗಳು. ಸಾಲ ಹೋಲಿಕೆಯಲ್ಲಿ ನಿಮ್ಮ ಬಾಕಿ ಮತ್ತು ನಿಂತಿರುವ ಮರುಪಾವತಿ ಸೇರಿ ಕಾಣುತ್ತವೆ.",
-  aboutBenefitsOutcome: "ಸೂಕ್ತ ಯೋಜನೆ ಮತ್ತು ಸಾಲವನ್ನು, ಬಾಕಿ ಸಾಕ್ಷ್ಯ ಸಹಿತ, ಒಂದೇ ನೋಟದಲ್ಲಿ ನೋಡಿ.",
+  aboutBenefitsBody:
+    "ಅರ್ಹತೆ ನಿಮ್ಮ ದಾಖಲೆಯಲ್ಲಿರುವ ಮಾಹಿತಿಯಿಂದ ಪರಿಶೀಲನೆಯಾಗುತ್ತದೆ: ವಯಸ್ಸು, ಬ್ಯಾಂಕ್ ಖಾತೆ, ವಾಸಸ್ಥಳ, ವ್ಯವಹಾರದ ವಿಧ ಮತ್ತು ದಾಖಲೆಗಳು. ಸಾಲ ಹೋಲಿಕೆಯಲ್ಲಿ ನಿಮ್ಮ ಬಾಕಿ ಮತ್ತು ನಿಂತಿರುವ ಮರುಪಾವತಿ ಸೇರಿ ಕಾಣುತ್ತವೆ.",
+  aboutBenefitsOutcome:
+    "ಸೂಕ್ತ ಯೋಜನೆ ಮತ್ತು ಸಾಲವನ್ನು, ಬಾಕಿ ಸಾಕ್ಷ್ಯ ಸಹಿತ, ಒಂದೇ ನೋಟದಲ್ಲಿ ನೋಡಿ.",
   aboutAskTitle: "ವಿನಂತಿ ಮಾರ್ಗದರ್ಶಿ",
-  aboutAskBody: "ಮುಖಪುಟದಲ್ಲಿ ನಿಮಗೆ ಏನು ಬೇಕು ಎಂದು ತಿಳಿಸಿ. ಮಾರ್ಗದರ್ಶಿ ಕೇವಲ ನಿಮ್ಮ ದಾಖಲೆಗಳನ್ನು ಓದುತ್ತದೆ ಮತ್ತು ಸರಿಯಾದ ಪರದೆಗೆ ಕರೆದೊಯ್ಯುತ್ತದೆ.",
+  aboutAskBody:
+    "ಮುಖಪುಟದಲ್ಲಿ ನಿಮಗೆ ಏನು ಬೇಕು ಎಂದು ತಿಳಿಸಿ. ಮಾರ್ಗದರ್ಶಿ ಕೇವಲ ನಿಮ್ಮ ದಾಖಲೆಗಳನ್ನು ಓದುತ್ತದೆ ಮತ್ತು ಸರಿಯಾದ ಪರದೆಗೆ ಕರೆದೊಯ್ಯುತ್ತದೆ.",
   aboutAskOutcome: "ಇಲಾಖೆ ಅಥವಾ ಪೋರ್ಟಲ್ ಮೆನು ಬದಲು ನಿಮ್ಮ ಪರಿಸ್ಥಿತಿಯಿಂದ ಆರಂಭಿಸಿ.",
   graphMapEyebrow: "Citizen Graph",
   graphMapTitle: "ಒಬ್ಬ ನಾಗರಿಕ. ಪ್ರತಿಯೊಂದು ಸಂಪರ್ಕಿತ ಮಾಹಿತಿ.",
-  graphMapBody: "ಇದು ಅರ್ಜುನ್ ಅವರ ದಾಖಲೆಯ ಗ್ರಾಫ್. ಗುರುತು ಮಧ್ಯದಲ್ಲಿದೆ. ಕುಟುಂಬ, ಉದ್ಯೋಗ, ಆಸ್ತಿ, ದಾಖಲೆ ಮತ್ತು ಸರ್ಕಾರಿ ಇತಿಹಾಸ ಅದರ ಸುತ್ತ ಸಂಪರ್ಕಿತವಾಗಿವೆ.",
+  graphMapBody:
+    "ಇದು ಅರ್ಜುನ್ ಅವರ ದಾಖಲೆಯ ಗ್ರಾಫ್. ಗುರುತು ಮಧ್ಯದಲ್ಲಿದೆ. ಕುಟುಂಬ, ಉದ್ಯೋಗ, ಆಸ್ತಿ, ದಾಖಲೆ ಮತ್ತು ಸರ್ಕಾರಿ ಇತಿಹಾಸ ಅದರ ಸುತ್ತ ಸಂಪರ್ಕಿತವಾಗಿವೆ.",
   graphMapCenterLabel: "ನಾಗರಿಕ ದಾಖಲೆ",
   graphMapCenterMeta: "{count} ಸಕ್ರಿಯ ಕೊಂಡಿಗಳು",
   graphMapFamily: "ಕುಟುಂಬ",
@@ -540,24 +602,31 @@ export const kn: Record<MessageKey, string> = {
   graphMapObligations: "ಬಾಕಿಗಳು",
   graphMapNotices: "ಸೂಚನೆಗಳು",
   graphMapIdentityTitle: "ಗುರುತು ಸಾಕ್ಷ್ಯದೊಂದಿಗೆ ಬರುತ್ತದೆ.",
-  graphMapIdentityBody: "ಒಂದು ವಿಳಾಸ ಮತ್ತು ಏಳು ದಾಖಲೆಗಳು. ಮುಂದಿನ ಸೇವೆಗಳು ಇವನ್ನು ಮತ್ತೆ ಕೇಳದೆ ಬಳಸುತ್ತವೆ.",
+  graphMapIdentityBody:
+    "ಒಂದು ವಿಳಾಸ ಮತ್ತು ಏಳು ದಾಖಲೆಗಳು. ಮುಂದಿನ ಸೇವೆಗಳು ಇವನ್ನು ಮತ್ತೆ ಕೇಳದೆ ಬಳಸುತ್ತವೆ.",
   graphMapLifeTitle: "ದಾಖಲೆ ಒಂದು ಸಂಪೂರ್ಣ ಜೀವನವಾಗಿ ವಿಸ್ತರಿಸುತ್ತದೆ.",
-  graphMapLifeBody: "ಕುಟುಂಬ, ಉದ್ಯೋಗ, ವ್ಯವಹಾರ, ವಾಹನ ಮತ್ತು ಆಸ್ತಿಯ ಸಂಬಂಧ ಪ್ರತಿಯೊಂದು ಮಾಹಿತಿಗೆ ಸಂದರ್ಭ ನೀಡುತ್ತದೆ.",
+  graphMapLifeBody:
+    "ಕುಟುಂಬ, ಉದ್ಯೋಗ, ವ್ಯವಹಾರ, ವಾಹನ ಮತ್ತು ಆಸ್ತಿಯ ಸಂಬಂಧ ಪ್ರತಿಯೊಂದು ಮಾಹಿತಿಗೆ ಸಂದರ್ಭ ನೀಡುತ್ತದೆ.",
   graphMapServiceTitle: "ಸೇವೆಗಳು ಇದೇ ಸಂದರ್ಭವನ್ನು ಓದುತ್ತವೆ.",
-  graphMapServiceBody: "ಸೌಲಭ್ಯ, ಅರ್ಜಿ, ಪಾವತಿ ಮತ್ತು ಸೂಚನೆಗಳು ಅದೇ ವಿವರಗಳನ್ನು ಮರುಬಳಸುತ್ತವೆ.",
+  graphMapServiceBody:
+    "ಸೌಲಭ್ಯ, ಅರ್ಜಿ, ಪಾವತಿ ಮತ್ತು ಸೂಚನೆಗಳು ಅದೇ ವಿವರಗಳನ್ನು ಮರುಬಳಸುತ್ತವೆ.",
   graphMapResultTitle: "ಪ್ರತಿ ಫಲಿತಾಂಶವೂ ನಿಮ್ಮ ದಾಖಲೆಗೆ ದಾಖಲಾಗುತ್ತದೆ.",
-  graphMapResultBody: "ಪಾವತಿ ಬಾಕಿಯನ್ನು ತೆಗೆದು, ರಸೀದಿ ರಚಿಸಿ, ಮುಖಪುಟ ತೋರಿಸುವ ಅದೇ ಇತಿಹಾಸಕ್ಕೆ ಸೇರುತ್ತದೆ.",
-  graphMapSource: "ಅರ್ಜುನ್ ಅವರ ದಾಖಲೆ · {nodes} ಗುಂಪುಗಳು · {connections} ಕೊಂಡಿಗಳು",
+  graphMapResultBody:
+    "ಪಾವತಿ ಬಾಕಿಯನ್ನು ತೆಗೆದು, ರಸೀದಿ ರಚಿಸಿ, ಮುಖಪುಟ ತೋರಿಸುವ ಅದೇ ಇತಿಹಾಸಕ್ಕೆ ಸೇರುತ್ತದೆ.",
+  graphMapSource:
+    "ಅರ್ಜುನ್ ಅವರ ದಾಖಲೆ · {nodes} ಗುಂಪುಗಳು · {connections} ಕೊಂಡಿಗಳು",
   graphMapScrollCue: "ಗ್ರಾಫ್ ಜೋಡಣೆಯಾಗುವುದನ್ನು ನೋಡಲು ಸ್ಕ್ರೋಲ್ ಮಾಡಿ",
   graphMapCompleteCue: "ಗ್ರಾಫ್ ಜೋಡಣೆಯಾಗಿದೆ",
   graphVisualTitle: "ಸಮಸ್ಯೆ ಆರಿಸಿ. ಗ್ರಾಫ್ ಹೇಗೆ ಪ್ರತಿಕ್ರಿಯಿಸುತ್ತದೆ ನೋಡಿ.",
-  graphVisualBody: "ಇದು ಕೆಲಸ ಮಾಡುತ್ತಿರುವ Citizen Graph. ನಿಮ್ಮ ಮಾಹಿತಿ ಒಮ್ಮೆಯೇ ತುಂಬಲ್ಪಡುತ್ತದೆ. ಸರಿಯಾದ ಸೇವೆ ಅದನ್ನು ಬಳಸುತ್ತದೆ. ಫಲಿತಾಂಶ ಬೇಕಾದ ಪ್ರತಿ ಪರದೆಗೂ ಅದು ತಲುಪುತ್ತದೆ.",
+  graphVisualBody:
+    "ಇದು ಕೆಲಸ ಮಾಡುತ್ತಿರುವ Citizen Graph. ನಿಮ್ಮ ಮಾಹಿತಿ ಒಮ್ಮೆಯೇ ತುಂಬಲ್ಪಡುತ್ತದೆ. ಸರಿಯಾದ ಸೇವೆ ಅದನ್ನು ಬಳಸುತ್ತದೆ. ಫಲಿತಾಂಶ ಬೇಕಾದ ಪ್ರತಿ ಪರದೆಗೂ ಅದು ತಲುಪುತ್ತದೆ.",
   graphVisualScenarioLabel: "Citizen Graph ಉದಾಹರಣೆ ಆರಿಸಿ",
   graphVisualSituation: "ಪರಿಸ್ಥಿತಿ",
   graphVisualEvidence: "ಸಂಪರ್ಕಿತ ಸಾಕ್ಷ್ಯ",
   graphVisualRecord: "ನಾಗರಿಕ ದಾಖಲೆ",
   graphVisualPersonName: "ಅರ್ಜುನ್ ಶರ್ಮಾ",
-  graphVisualRecordBody: "ಗುರುತು, ಸಂಬಂಧ, ಉದ್ಯೋಗ, ಆಸ್ತಿ, ಬಾಕಿ ಮತ್ತು ಅನುಮತಿಗಳು ಸಂಪರ್ಕಿತವಾಗಿರುತ್ತವೆ.",
+  graphVisualRecordBody:
+    "ಗುರುತು, ಸಂಬಂಧ, ಉದ್ಯೋಗ, ಆಸ್ತಿ, ಬಾಕಿ ಮತ್ತು ಅನುಮತಿಗಳು ಸಂಪರ್ಕಿತವಾಗಿರುತ್ತವೆ.",
   graphVisualAction: "ಸೇವೆಯ ಕ್ರಮ",
   graphVisualResults: "ಗ್ರಾಫ್ ಬದಲಾವಣೆಗಳು",
   graphVisualEpfoLabel: "EPFO ವಂತಿಗೆ",
@@ -591,7 +660,8 @@ export const kn: Record<MessageKey, string> = {
   boundaryMetric: "40ನೇ ದಿನ",
   boundaryMetricBody: "ಚೆಂದದ ಸ್ಥಿತಿ ಪರದೆಯ ಹಿಂದೆಯೂ ಅರ್ಜಿ ಬಾಕಿ ಇರಬಹುದು.",
   boundaryTitle: "ಉತ್ತಮ ಪರದೆ ಬಾಕಿ ಕೆಲಸದ ಸಾಲನ್ನು ತೆರವುಗೊಳಿಸಲಾರದು.",
-  boundaryBody: "ಕಾರಣ ಅಧಿಕಾರಿಗಳ ಸಾಲು, ಯಾವುದೋ ನೀತಿ, ಕಡಿಮೆ ಸಿಬ್ಬಂದಿ ಅಥವಾ ಇಲಾಖೆಯ ಡೇಟಾಬೇಸ್ ಆಗಿದ್ದರೆ, ಹೊಸ ವಿನ್ಯಾಸ ಅದನ್ನು ಸರಿಪಡಿಸಲಾರದು. ಆದ್ದರಿಂದ Citizen ಒಂದು ದಾಖಲೆ ಮಾಡಬಲ್ಲ ಕೆಲಸವನ್ನೇ ಮಾಡುತ್ತದೆ.",
+  boundaryBody:
+    "ಕಾರಣ ಅಧಿಕಾರಿಗಳ ಸಾಲು, ಯಾವುದೋ ನೀತಿ, ಕಡಿಮೆ ಸಿಬ್ಬಂದಿ ಅಥವಾ ಇಲಾಖೆಯ ಡೇಟಾಬೇಸ್ ಆಗಿದ್ದರೆ, ಹೊಸ ವಿನ್ಯಾಸ ಅದನ್ನು ಸರಿಪಡಿಸಲಾರದು. ಆದ್ದರಿಂದ Citizen ಒಂದು ದಾಖಲೆ ಮಾಡಬಲ್ಲ ಕೆಲಸವನ್ನೇ ಮಾಡುತ್ತದೆ.",
   boundaryCannotTitle: "ಇಂಟರ್ಫೇಸ್ ಮಾಡಲಾಗದುದು",
   boundaryCannotOne: "ನೀತಿ ಅಥವಾ ಅರ್ಹತಾ ನಿಯಮ ಬದಲಿಸುವುದು",
   boundaryCannotTwo: "ಅಧಿಕಾರಿ ಅಥವಾ ಪ್ರಕ್ರಿಯೆ ಸಾಮರ್ಥ್ಯ ಹೆಚ್ಚಿಸುವುದು",
@@ -604,24 +674,34 @@ export const kn: Record<MessageKey, string> = {
   boundaryCanFour: "ರಸೀದಿ, ಅನುಮತಿ ಮತ್ತು ಇತಿಹಾಸವನ್ನು ಒಂದೇ ದಾಖಲೆಗೆ ಮರಳಿಸುವುದು",
   aboutProofEyebrow: "ಕೆಲಸ ಮಾಡುವ ಸಾಕ್ಷ್ಯ",
   aboutProofTitle: "ಒಂದು ದಾಖಲೆ. ನಾಲ್ಕು ಕೆಲಸ ಮಾಡುವ ಡೆಮೊ.",
-  aboutProofBody: "ಈ ನಾಲ್ಕು ಡೆಮೊಗಳು ಅದೇ ದಾಖಲೆಯ ಮೇಲೆ ಕೆಲಸ ಮಾಡುತ್ತವೆ. ಪ್ರತಿಯೊಂದೂ ದಾಖಲೆ ಓದುತ್ತದೆ, ಅದರ ಮೇಲೆ ಕ್ರಮ ತೆಗೆದುಕೊಳ್ಳುತ್ತದೆ ಮತ್ತು ಫಲಿತಾಂಶವನ್ನು Citizenನ ಉಳಿದ ಭಾಗಗಳಲ್ಲಿ ತೋರಿಸುತ್ತದೆ.",
+  aboutProofBody:
+    "ಈ ನಾಲ್ಕು ಡೆಮೊಗಳು ಅದೇ ದಾಖಲೆಯ ಮೇಲೆ ಕೆಲಸ ಮಾಡುತ್ತವೆ. ಪ್ರತಿಯೊಂದೂ ದಾಖಲೆ ಓದುತ್ತದೆ, ಅದರ ಮೇಲೆ ಕ್ರಮ ತೆಗೆದುಕೊಳ್ಳುತ್ತದೆ ಮತ್ತು ಫಲಿತಾಂಶವನ್ನು Citizenನ ಉಳಿದ ಭಾಗಗಳಲ್ಲಿ ತೋರಿಸುತ್ತದೆ.",
   aboutProofEpfo: "EPFO ಪಾಸ್‌ಬುಕ್ ಮತ್ತು ವಂತಿಗೆ ನೋಡಿ, ನಂತರ ದೂರು ದಾಖಲಿಸಿ.",
-  aboutProofDocuments: "PAN ಮತ್ತು ಆಧಾರ್ ಹೋಲಿಸಿ ತಿದ್ದುಪಡಿಗೂ ಮೊದಲು DigiLocker ದಾಖಲೆಗಳನ್ನು ಮರುಬಳಸಿ.",
-  aboutProofMoney: "ದಂಡ ಅಥವಾ ಆಸ್ತಿ ತೆರಿಗೆ ಪಾವತಿಸಿ, GSTR-3B ಸಲ್ಲಿಸಿ ಮತ್ತು ರಸೀದಿ ಅಥವಾ ಸ್ವೀಕೃತಿ ಉಳಿಸಿ.",
-  aboutProofConsent: "ಅರ್ಜುನ್ ಮತ್ತು ಪ್ರಿಯಾ ನಡುವೆ ಹಂಚಿದ ನೋಂದಣಿ ಪೂರ್ಣಗೊಳಿಸಿ; ಸುನೀತಾ ಅವರ ಕುಟುಂಬದ ಪ್ರವೇಶ ನೀಡಿ ಅಥವಾ ಹಿಂಪಡೆಯಿರಿ.",
+  aboutProofDocuments:
+    "PAN ಮತ್ತು ಆಧಾರ್ ಹೋಲಿಸಿ ತಿದ್ದುಪಡಿಗೂ ಮೊದಲು DigiLocker ದಾಖಲೆಗಳನ್ನು ಮರುಬಳಸಿ.",
+  aboutProofMoney:
+    "ದಂಡ ಅಥವಾ ಆಸ್ತಿ ತೆರಿಗೆ ಪಾವತಿಸಿ, GSTR-3B ಸಲ್ಲಿಸಿ ಮತ್ತು ರಸೀದಿ ಅಥವಾ ಸ್ವೀಕೃತಿ ಉಳಿಸಿ.",
+  aboutProofConsent:
+    "ಅರ್ಜುನ್ ಮತ್ತು ಪ್ರಿಯಾ ನಡುವೆ ಹಂಚಿದ ನೋಂದಣಿ ಪೂರ್ಣಗೊಳಿಸಿ; ಸುನೀತಾ ಅವರ ಕುಟುಂಬದ ಪ್ರವೇಶ ನೀಡಿ ಅಥವಾ ಹಿಂಪಡೆಯಿರಿ.",
   aboutWhyEyebrow: "ಇದು ಏಕೆ ಮುಖ್ಯ",
   aboutWhyTitle: "ದಾಖಲೆ ಮೊದಲು.",
-  aboutWhyBody: "ಬಹುತೇಕ ಮರುವಿನ್ಯಾಸಗಳು ಅದೇ ಇಲಾಖೆ ಪಟ್ಟಿ ಅಲಂಕರಿಸುತ್ತವೆ. Citizen ವ್ಯಕ್ತಿ ಮತ್ತು ಅವರ ದಾಖಲೆಯನ್ನು ಮೊದಲಿಡುತ್ತದೆ, ಮತ್ತು ಪ್ರತಿ ಸೇವೆಯೂ ಅದರಿಂದ ಓದುತ್ತದೆ.",
+  aboutWhyBody:
+    "ಬಹುತೇಕ ಮರುವಿನ್ಯಾಸಗಳು ಅದೇ ಇಲಾಖೆ ಪಟ್ಟಿ ಅಲಂಕರಿಸುತ್ತವೆ. Citizen ವ್ಯಕ್ತಿ ಮತ್ತು ಅವರ ದಾಖಲೆಯನ್ನು ಮೊದಲಿಡುತ್ತದೆ, ಮತ್ತು ಪ್ರತಿ ಸೇವೆಯೂ ಅದರಿಂದ ಓದುತ್ತದೆ.",
   aboutWhyCitizenTitle: "ಮೊದಲು ವ್ಯಕ್ತಿ",
-  aboutWhyCitizenBody: "ಆರಂಭ ನಿಮ್ಮ ಬದುಕಿನ ಬದಲಾವಣೆಯಿಂದ: ಮದುವೆ, ಮನೆಯಲ್ಲಿ ಮರಣ, ಅಥವಾ ಹೊಸ ವ್ಯವಹಾರ.",
+  aboutWhyCitizenBody:
+    "ಆರಂಭ ನಿಮ್ಮ ಬದುಕಿನ ಬದಲಾವಣೆಯಿಂದ: ಮದುವೆ, ಮನೆಯಲ್ಲಿ ಮರಣ, ಅಥವಾ ಹೊಸ ವ್ಯವಹಾರ.",
   aboutWhyGraphTitle: "ಮತ್ತೆ ಕೇಳುವಿಲ್ಲ",
-  aboutWhyGraphBody: "ಅರ್ಹತೆ, ಎಚ್ಚರಿಕೆ ಮತ್ತು ಮುಂದಿನ ಕ್ರಮ ನಿಮ್ಮ ಈಗಿರುವ ದಾಖಲೆಗಳಿಂದಲೇ ಬರುತ್ತವೆ. ಯಾವ ಪರದೆಯೂ ಅದನ್ನು ಮತ್ತೆ ಕೇಳುವುದಿಲ್ಲ.",
+  aboutWhyGraphBody:
+    "ಅರ್ಹತೆ, ಎಚ್ಚರಿಕೆ ಮತ್ತು ಮುಂದಿನ ಕ್ರಮ ನಿಮ್ಮ ಈಗಿರುವ ದಾಖಲೆಗಳಿಂದಲೇ ಬರುತ್ತವೆ. ಯಾವ ಪರದೆಯೂ ಅದನ್ನು ಮತ್ತೆ ಕೇಳುವುದಿಲ್ಲ.",
   aboutWhyProofTitle: "ಕೆಲಸ ಮಾಡುವ ಡೆಮೊಗಳು",
-  aboutWhyProofBody: "ಪ್ರತಿ ಡೆಮೊ ದಾಖಲೆ ಬದಲಿಸುತ್ತದೆ, ರಸೀದಿ ಸೃಷ್ಟಿಸುತ್ತದೆ ಮತ್ತು ಇತಿಹಾಸ ಸೇರಿಸುತ್ತದೆ. ಇಲ್ಲಿ ಯಾವುದೂ ಅಪೂರ್ಣ ಮಾದರಿ ಅಲ್ಲ.",
+  aboutWhyProofBody:
+    "ಪ್ರತಿ ಡೆಮೊ ದಾಖಲೆ ಬದಲಿಸುತ್ತದೆ, ರಸೀದಿ ಸೃಷ್ಟಿಸುತ್ತದೆ ಮತ್ತು ಇತಿಹಾಸ ಸೇರಿಸುತ್ತದೆ. ಇಲ್ಲಿ ಯಾವುದೂ ಅಪೂರ್ಣ ಮಾದರಿ ಅಲ್ಲ.",
   aboutClosingTitle: "ವ್ಯಕ್ತಿಯಿಂದ ಆರಂಭಿಸಿ.",
-  aboutClosingBody: "Citizen ತೆರೆಯಿರಿ, ಒಂದು ಪ್ರೊಫೈಲ್ ಆರಿಸಿ ಮತ್ತು ಆ ವ್ಯಕ್ತಿಗೆ ಏನು ಬೇಕು ಎಂದು ಕೇಳಿ. ದಾಖಲೆ ಸಂದರ್ಭ ಕೊಡುತ್ತದೆ. ಸೇವೆ ಮುಂದಿನ ಹಂತ ತೋರಿಸುತ್ತದೆ.",
+  aboutClosingBody:
+    "Citizen ತೆರೆಯಿರಿ, ಒಂದು ಪ್ರೊಫೈಲ್ ಆರಿಸಿ ಮತ್ತು ಆ ವ್ಯಕ್ತಿಗೆ ಏನು ಬೇಕು ಎಂದು ಕೇಳಿ. ದಾಖಲೆ ಸಂದರ್ಭ ಕೊಡುತ್ತದೆ. ಸೇವೆ ಮುಂದಿನ ಹಂತ ತೋರಿಸುತ್ತದೆ.",
   aboutClosingAction: "Citizen ತೆರೆಯಿರಿ",
-  aboutBoundary: "ಕಾಲ್ಪನಿಕ ಪ್ರೊಫೈಲ್, ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಉಳಿಯುವ ಪ್ರಗತಿ ಮತ್ತು ಅನುಕರಿತ ಸೇವಾ ಪ್ರತಿಕ್ರಿಯೆಗಳಿರುವ ಸ್ವತಂತ್ರ ಮಾದರಿ.",
+  aboutBoundary:
+    "ಕಾಲ್ಪನಿಕ ಪ್ರೊಫೈಲ್, ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಉಳಿಯುವ ಪ್ರಗತಿ ಮತ್ತು ಅನುಕರಿತ ಸೇವಾ ಪ್ರತಿಕ್ರಿಯೆಗಳಿರುವ ಸ್ವತಂತ್ರ ಮಾದರಿ.",
   profileAccessNotice: "ಕಾಲ್ಪನಿಕ ಡೇಟಾ. ಬದಲಾವಣೆಗಳು ಈ ಬ್ರೌಸರ್‌ನಲ್ಲೇ ಉಳಿಯುತ್ತವೆ.",
   openSampleProfile: "ಪ್ರೊಫೈಲ್ ತೆರೆಯಿರಿ",
   serviceJourneyAuthority: "ಕೆಲಸ ಮಾಡುವ ಡೆಮೊ",
@@ -638,7 +718,8 @@ export const kn: Record<MessageKey, string> = {
   homeGraphTitle: "ಇದು ನಿಮ್ಮ ದಾಖಲೆಗಳಿಂದ ರೂಪಿಸಲಾಗಿದೆ.",
   homeGraphAction: "Citizen Graph ನೋಡಿ",
   homeGraphEvidence: "ಸಂಪರ್ಕಿತ ಸಾಕ್ಷ್ಯ",
-  homeGraphEvidenceValue: "ದಾಖಲೆಗಳು {documents} · ಕುಟುಂಬ ಸಂಬಂಧಗಳು {relationships}",
+  homeGraphEvidenceValue:
+    "ದಾಖಲೆಗಳು {documents} · ಕುಟುಂಬ ಸಂಬಂಧಗಳು {relationships}",
   homeGraphRecord: "ನಾಗರಿಕ ದಾಖಲೆ",
   homeGraphNow: "ಗಮನ ಬೇಕಾದುದು",
   homeGraphNowValue: "ಕೆಲಸಗಳು {tasks} · ಓದದ ನವೀಕರಣಗಳು {unread}",
@@ -649,20 +730,29 @@ export const kn: Record<MessageKey, string> = {
   profileScopeBody: "ಮುಖಪುಟಕ್ಕೆ ಮರಳಿ ಬೇರೆ ಪ್ರೊಫೈಲ್ ಆರಿಸಿ.",
   loanProfileScopeBody: "ಈ ಪ್ರೊಫೈಲ್‌ನಲ್ಲಿ ಹೋಲಿಸಲು ವ್ಯವಹಾರ ದಾಖಲೆ ಇಲ್ಲ.",
   obligationsProfileScopeBody: "ಈ ಪ್ರೊಫೈಲ್‌ನಲ್ಲಿ ವಾಹನ ಅಥವಾ ದಂಡ ಇಲ್ಲ.",
-  moneyProfileScopeBody: "ಈ ಪ್ರೊಫೈಲ್‌ನಲ್ಲಿ ಹೊಂದುವ ಪಾವತಿ, ಸಲ್ಲಿಕೆ, ಪಾಸ್‌ಪೋರ್ಟ್ ಅಥವಾ ಮರುಪಾವತಿ ಇಲ್ಲ.",
+  moneyProfileScopeBody:
+    "ಈ ಪ್ರೊಫೈಲ್‌ನಲ್ಲಿ ಹೊಂದುವ ಪಾವತಿ, ಸಲ್ಲಿಕೆ, ಪಾಸ್‌ಪೋರ್ಟ್ ಅಥವಾ ಮರುಪಾವತಿ ಇಲ್ಲ.",
   moneyServiceError: "ವಿನಂತಿ ಪೂರ್ಣವಾಗಲಿಲ್ಲ. ಏನೂ ಬದಲಾಗಿಲ್ಲ.",
   loanMudraName: "ಮುದ್ರಾ ಕಿಶೋರ್",
-  loanMudraNote: "ಅತಿ ಕಡಿಮೆ ತಿಂಗಳ ಕಂತು. ಈಗಾಗಲೇ ಸಲ್ಲಿಸಿದ ರಿಟರ್ನಿನ ITR-V ಸ್ವೀಕೃತಿ ಪಡೆಯಿರಿ.",
+  loanMudraNote:
+    "ಅತಿ ಕಡಿಮೆ ತಿಂಗಳ ಕಂತು. ಈಗಾಗಲೇ ಸಲ್ಲಿಸಿದ ರಿಟರ್ನಿನ ITR-V ಸ್ವೀಕೃತಿ ಪಡೆಯಿರಿ.",
   loanBankName: "ಸಣ್ಣ ವ್ಯವಹಾರ ಅವಧಿ ಸಾಲ",
-  loanBankNote: "ತಿಂಗಳಿಗೆ ₹606 ಮತ್ತು ಐದು ವರ್ಷಗಳಲ್ಲಿ ₹36,360 ಹೆಚ್ಚು ಬಡ್ಡಿ. ಬ್ಯಾಂಕ್ ಹೆಚ್ಚು ಆದಾಯ ಸಾಕ್ಷ್ಯ ಕೇಳಬಹುದು.",
-  loanEvidenceNeeded: "ನಿಮ್ಮ ರಿಟರ್ನ್ ಸಲ್ಲಿಸಲಾಗಿದೆ. ಸಾಲದಾತರಿಗೆ {evidence} ಪಡೆಯಿರಿ; ಮತ್ತೊಂದು ತೆರಿಗೆ ರಿಟರ್ನ್ ಸಲ್ಲಿಸಬೇಕಿಲ್ಲ.",
+  loanBankNote:
+    "ತಿಂಗಳಿಗೆ ₹606 ಮತ್ತು ಐದು ವರ್ಷಗಳಲ್ಲಿ ₹36,360 ಹೆಚ್ಚು ಬಡ್ಡಿ. ಬ್ಯಾಂಕ್ ಹೆಚ್ಚು ಆದಾಯ ಸಾಕ್ಷ್ಯ ಕೇಳಬಹುದು.",
+  loanEvidenceNeeded:
+    "ನಿಮ್ಮ ರಿಟರ್ನ್ ಸಲ್ಲಿಸಲಾಗಿದೆ. ಸಾಲದಾತರಿಗೆ {evidence} ಪಡೆಯಿರಿ; ಮತ್ತೊಂದು ತೆರಿಗೆ ರಿಟರ್ನ್ ಸಲ್ಲಿಸಬೇಕಿಲ್ಲ.",
   loanEvidenceReady: "ಅಗತ್ಯ ಸಾಕ್ಷ್ಯ ಲಭ್ಯವಿದೆ.",
-  loanRiskDecisionMudra: "ನಿರ್ಧಾರ: ಮೊದಲು ITR-V ಪಡೆಯಿರಿ, ನಂತರ ಕಡಿಮೆ ವೆಚ್ಚದ ಮುದ್ರಾ ಆಯ್ಕೆಯನ್ನು ಆರಿಸಿ.",
-  loanRiskDecisionBank: "ನಿರ್ಧಾರ: ಬ್ಯಾಂಕ್ ಕೇಳದಿದ್ದರೆ ಈ ಆಯ್ಕೆಯನ್ನು ಆರಿಸಬೇಡಿ; ಇದು ಹೆಚ್ಚು ವೆಚ್ಚವಾಗುತ್ತದೆ ಮತ್ತು ಬಲವಾದ ಆದಾಯ ಸಾಕ್ಷ್ಯ ಬೇಕಾಗಬಹುದು.",
-  loanRefundCaution: "{count} ಪ್ರತ್ಯೇಕ ಬಿಲ್‌ಗಳಲ್ಲಿ {due} ಪಾವತಿಸಬೇಕು. {refund} ಮರುಪಾವತಿ ಬೇರೆ ದಾಖಲೆಯಾಗಿ ಇನ್ನೂ ಪ್ರಕ್ರಿಯೆಯಲ್ಲಿದೆ; Citizen ಅವನ್ನು ಪರಸ್ಪರ ಕಡಿತಗೊಳಿಸುವುದಿಲ್ಲ.",
+  loanRiskDecisionMudra:
+    "ನಿರ್ಧಾರ: ಮೊದಲು ITR-V ಪಡೆಯಿರಿ, ನಂತರ ಕಡಿಮೆ ವೆಚ್ಚದ ಮುದ್ರಾ ಆಯ್ಕೆಯನ್ನು ಆರಿಸಿ.",
+  loanRiskDecisionBank:
+    "ನಿರ್ಧಾರ: ಬ್ಯಾಂಕ್ ಕೇಳದಿದ್ದರೆ ಈ ಆಯ್ಕೆಯನ್ನು ಆರಿಸಬೇಡಿ; ಇದು ಹೆಚ್ಚು ವೆಚ್ಚವಾಗುತ್ತದೆ ಮತ್ತು ಬಲವಾದ ಆದಾಯ ಸಾಕ್ಷ್ಯ ಬೇಕಾಗಬಹುದು.",
+  loanRefundCaution:
+    "{count} ಪ್ರತ್ಯೇಕ ಬಿಲ್‌ಗಳಲ್ಲಿ {due} ಪಾವತಿಸಬೇಕು. {refund} ಮರುಪಾವತಿ ಬೇರೆ ದಾಖಲೆಯಾಗಿ ಇನ್ನೂ ಪ್ರಕ್ರಿಯೆಯಲ್ಲಿದೆ; Citizen ಅವನ್ನು ಪರಸ್ಪರ ಕಡಿತಗೊಳಿಸುವುದಿಲ್ಲ.",
   loanRiskSummary: "{option}ಗೆ ಅತಿ ಕಡಿಮೆ ತಿಂಗಳ ವೆಚ್ಚ ಇದೆ. {evidence}",
-  loanItrClarification: "ನಿಮ್ಮ ಆದಾಯ ತೆರಿಗೆ ರಿಟರ್ನ್ ಈಗಾಗಲೇ ಸಲ್ಲಿಕೆಯಾಗಿದೆ; ಅದರಿಂದಲೇ ಮರುಪಾವತಿ ಬಂದಿದೆ. ಬಾಕಿ ITR-V ಸಾಲದಾತರಿಗೆ ಬೇಕಾದ ಅದೇ ರಿಟರ್ನಿನ ಸ್ವೀಕೃತಿ, ಮತ್ತೊಂದು ತೆರಿಗೆ ಸಲ್ಲಿಕೆ ಅಲ್ಲ.",
-  loanRiskVerdict: "{decision} {option}ಗೆ ತಿಂಗಳಿಗೆ ಸುಮಾರು {emi} ವೆಚ್ಚವಾಗುತ್ತದೆ. ಈಗಿನ ಬಿಲ್‌ಗಳಿಗೆ {due} ಲಭ್ಯವಿಡಿ. {refund} ಮರುಪಾವತಿ ಬ್ಯಾಂಕ್‌ಗೆ ಬರುವವರೆಗೆ ಲಭ್ಯವಿಲ್ಲವೆಂದು ಪರಿಗಣಿಸಿ.",
+  loanItrClarification:
+    "ನಿಮ್ಮ ಆದಾಯ ತೆರಿಗೆ ರಿಟರ್ನ್ ಈಗಾಗಲೇ ಸಲ್ಲಿಕೆಯಾಗಿದೆ; ಅದರಿಂದಲೇ ಮರುಪಾವತಿ ಬಂದಿದೆ. ಬಾಕಿ ITR-V ಸಾಲದಾತರಿಗೆ ಬೇಕಾದ ಅದೇ ರಿಟರ್ನಿನ ಸ್ವೀಕೃತಿ, ಮತ್ತೊಂದು ತೆರಿಗೆ ಸಲ್ಲಿಕೆ ಅಲ್ಲ.",
+  loanRiskVerdict:
+    "{decision} {option}ಗೆ ತಿಂಗಳಿಗೆ ಸುಮಾರು {emi} ವೆಚ್ಚವಾಗುತ್ತದೆ. ಈಗಿನ ಬಿಲ್‌ಗಳಿಗೆ {due} ಲಭ್ಯವಿಡಿ. {refund} ಮರುಪಾವತಿ ಬ್ಯಾಂಕ್‌ಗೆ ಬರುವವರೆಗೆ ಲಭ್ಯವಿಲ್ಲವೆಂದು ಪರಿಗಣಿಸಿ.",
   challanPaidTitle: "ದಂಡ ಪಾವತಿಸಲಾಗಿದೆ",
   challanPaidBody: "₹500 ಹಣದಿಂದ ತೆಗೆದುಹಾಕಲಾಗಿದೆ. ರಸೀದಿ ದಾಖಲೆಗಳಲ್ಲಿ ಇದೆ.",
   openReceipt: "ರಸೀದಿ ತೆರೆಯಿರಿ",
@@ -682,12 +772,15 @@ export const kn: Record<MessageKey, string> = {
   challanPaymentError: "ಪಾವತಿ ಪೂರ್ಣವಾಗಲಿಲ್ಲ. ದಂಡ ಇನ್ನೂ ಬಾಕಿ ಇದೆ.",
   fyTurnover: "FY25 ವಹಿವಾಟು {amount}",
   delegationSetupTitle: "ಕುಟುಂಬಕ್ಕೆ ಸೇರಿದ ದಾಖಲೆಗಳನ್ನು ಅರ್ಜುನ್ ಜೊತೆ ಹಂಚಿ",
-  delegationSetupBody: "{date}ರವರೆಗೆ ರಾಜೇಶ್ ಅವರ ಪಿಂಚಣಿ ಮತ್ತು ಜೆ.ಪಿ. ನಗರ ಆಸ್ತಿ ದಾಖಲೆಗಳನ್ನು ಅರ್ಜುನ್ ನೋಡಲು ಅನುಮತಿಸಿ. ಮಾಲೀಕತ್ವ ಬದಲಾಗುವುದಿಲ್ಲ; ಸುನೀತಾ ಯಾವಾಗ ಬೇಕಾದರೂ ಪ್ರವೇಶ ಹಿಂಪಡೆಯಬಹುದು.",
+  delegationSetupBody:
+    "{date}ರವರೆಗೆ ರಾಜೇಶ್ ಅವರ ಪಿಂಚಣಿ ಮತ್ತು ಜೆ.ಪಿ. ನಗರ ಆಸ್ತಿ ದಾಖಲೆಗಳನ್ನು ಅರ್ಜುನ್ ನೋಡಲು ಅನುಮತಿಸಿ. ಮಾಲೀಕತ್ವ ಬದಲಾಗುವುದಿಲ್ಲ; ಸುನೀತಾ ಯಾವಾಗ ಬೇಕಾದರೂ ಪ್ರವೇಶ ಹಿಂಪಡೆಯಬಹುದು.",
   delegationGrantAction: "ಅರ್ಜುನ್ ಜೊತೆ ಹಂಚಿಕೊಳ್ಳಿ",
   delegationActiveTitle: "ಕುಟುಂಬಕ್ಕೆ ಸೇರಿದ ದಾಖಲೆಗಳು",
-  delegationActiveBody: "ಅರ್ಜುನ್ {date}ರವರೆಗೆ ಸಂಬಂಧಿತ ಪಿಂಚಣಿ ಮತ್ತು ಆಸ್ತಿ ದಾಖಲೆಗಳನ್ನು ನೋಡಬಹುದು. ಮಾಲೀಕತ್ವ ಬದಲಾಗಿಲ್ಲ.",
+  delegationActiveBody:
+    "ಅರ್ಜುನ್ {date}ರವರೆಗೆ ಸಂಬಂಧಿತ ಪಿಂಚಣಿ ಮತ್ತು ಆಸ್ತಿ ದಾಖಲೆಗಳನ್ನು ನೋಡಬಹುದು. ಮಾಲೀಕತ್ವ ಬದಲಾಗಿಲ್ಲ.",
   delegationEndedTitle: "ಕುಟುಂಬ ದಾಖಲೆಗಳ ಪ್ರವೇಶ ಮುಗಿದಿದೆ",
-  delegationEndedBody: "ಅರ್ಜುನ್ ಈಗ ಸಂಬಂಧಿತ ಪಿಂಚಣಿ ಅಥವಾ ಕುಟುಂಬದ ಆಸ್ತಿ ದಾಖಲೆಗಳನ್ನು ನೋಡಲು ಸಾಧ್ಯವಿಲ್ಲ.",
+  delegationEndedBody:
+    "ಅರ್ಜುನ್ ಈಗ ಸಂಬಂಧಿತ ಪಿಂಚಣಿ ಅಥವಾ ಕುಟುಂಬದ ಆಸ್ತಿ ದಾಖಲೆಗಳನ್ನು ನೋಡಲು ಸಾಧ್ಯವಿಲ್ಲ.",
   profileSummary: "{age} ವರ್ಷ · {place} · {count} ದಾಖಲೆಗಳು",
   profileSummaryOne: "{age} ವರ್ಷ · {place} · 1 ದಾಖಲೆ",
   addressPending: "ವಿಳಾಸ ಬಾಕಿ",
@@ -711,11 +804,38 @@ export const kn: Record<MessageKey, string> = {
   landingJourneyNav: "ಪ್ರಯತ್ನಿಸಿ",
   landingVisionNav: "ಹಂಚಿಕೆ",
   landingStart: "ಡೆಮೊ ತೆರೆಯಿರಿ",
+  landingWatchDemo: "ವೀಡಿಯೊ ನೋಡಿ",
+  landingWatchDemoTitle: "Citizen ಡೆಮೊ",
+  landingSourceCode: "GitHub",
+  landingMusicCreditPrefix: "ಸಂಗೀತ",
   landingHeroTitle: "ಸಾರ್ವಜನಿಕ ಸೇವೆಗಳು ಮೊದಲ ಪ್ರಯತ್ನದಲ್ಲೇ ಕೆಲಸ ಮಾಡಿದರೆ?",
-  landingHeroBody: "ನಿಮ್ಮ ಪರಿಶೀಲಿತ ದಾಖಲೆಗಳು ಸಂಪರ್ಕಿತವಾಗಿರುತ್ತವೆ. ಸೇವೆಗಳು ನಿಮ್ಮ ವಿವರಗಳೊಂದಿಗೆ ತೆರೆದುಕೊಳ್ಳುತ್ತವೆ. ಪ್ರತಿ ಫಲಿತಾಂಶವೂ ಅದೇ ದಾಖಲೆಗೆ ಮರಳುತ್ತದೆ. ಯಾವ ಫಾರ್ಮ್ ಶೂನ್ಯದಿಂದ ಆರಂಭವಾಗುವುದಿಲ್ಲ.",
-  landingBeyondKicker: "Varun Mayya ಅವರ Build What Moves India ಹ್ಯಾಕಥಾನ್‌ಗಾಗಿ ನಿರ್ಮಿಸಲಾಗಿದೆ.",
+  landingHeroBody:
+    "ನಿಮ್ಮ ಪರಿಶೀಲಿತ ದಾಖಲೆಗಳು ಸಂಪರ್ಕಿತವಾಗಿರುತ್ತವೆ. ಸೇವೆಗಳು ನಿಮ್ಮ ವಿವರಗಳೊಂದಿಗೆ ತೆರೆದುಕೊಳ್ಳುತ್ತವೆ. ಪ್ರತಿ ಫಲಿತಾಂಶವೂ ಅದೇ ದಾಖಲೆಗೆ ಮರಳುತ್ತದೆ. ಯಾವ ಫಾರ್ಮ್ ಶೂನ್ಯದಿಂದ ಆರಂಭವಾಗುವುದಿಲ್ಲ.",
+  landingOriginKicker: "ಈ ಆಲೋಚನೆ ಹೇಗೆ ಆರಂಭವಾಯಿತು",
+  landingOriginTitle: "ಸೇವೆ ಇದ್ದರೂ ಅದು ಜನರಿಗೆ ಕಾಣದೇ ಇರಬಹುದು.",
+  landingOriginBodyOne:
+    "ಈ ಹ್ಯಾಕಥಾನ್‌ಗೂ ಮೊದಲು UMANG ಇದೆ ಎಂಬುದೇ ನನಗೆ ತಿಳಿದಿರಲಿಲ್ಲ. ಅದೇ ನಮ್ಮ ಆರಂಭದ ಸುಳಿವು ಆಯಿತು.",
+  landingOriginBodyTwo:
+    "UMANG ಅನೇಕ ಸರ್ಕಾರಿ ಸೇವೆಗಳನ್ನು ಒಂದೇ ಸ್ಥಳಕ್ಕೆ ತರುತ್ತದೆ. ಆದರೂ ಜನರು ಯೋಜನೆಯ ಹೆಸರು ಗುರುತಿಸಿ, ಇಲಾಖೆಯನ್ನು ಹುಡುಕಿ, ಅದು ತಮಗೆ ಅನ್ವಯಿಸುತ್ತದೆಯೇ ಎಂದು ತಿಳಿಯಬೇಕು.",
+  landingOriginDefinition:
+    "Citizen ಮುಂದಿನ ಹಂತವನ್ನು ಕಲ್ಪಿಸುತ್ತದೆ: ಸಂಪರ್ಕಿತ ನಾಗರಿಕ ದಾಖಲೆಯ ಆಧಾರದ ಮೇಲಿನ ವೈಯಕ್ತಿಕ ಸಾರ್ವಜನಿಕ-ಸೇವಾ ಗಜೆಟ್.",
+  landingOriginChangedTitle: "ಏನು ಬದಲಾಯಿತು?",
+  landingOriginChangedBody:
+    "ಸೂಚನೆಗಳು, ಪಾವತಿಗಳು, ಅರ್ಜಿಗಳು ಮತ್ತು ದಾಖಲೆಗಳ ನವೀಕರಣಗಳು.",
+  landingOriginAppliesTitle: "ನನಗೆ ಏನು ಅನ್ವಯಿಸುತ್ತದೆ?",
+  landingOriginAppliesBody:
+    "ಕಾರಣದೊಂದಿಗೆ ಸಂಬಂಧಿತ ಬಾಧ್ಯತೆಗಳು, ಸೌಲಭ್ಯಗಳು ಮತ್ತು ಸೇವೆಗಳು.",
+  landingOriginNextTitle: "ಮುಂದೆ ನಾನು ಏನು ಮಾಡಬೇಕು?",
+  landingOriginNextBody: "ಈಗಾಗಲೇ ಸಂಪರ್ಕಿತ ದಾಖಲೆಗಳನ್ನು ಬಳಸಿ ಸರಿಯಾದ ಮುಂದಿನ ಕ್ರಮ.",
+  landingOriginNote:
+    "ವೈಯಕ್ತಿಕ ಸಾರ್ವಜನಿಕ-ಸೇವಾ ಗಜೆಟ್ ಒಬ್ಬ ವ್ಯಕ್ತಿಯ ಖಾಸಗಿ ಸಂಕ್ಷಿಪ್ತ ಮಾಹಿತಿ; ಅದು ಅಧಿಕೃತ ಸರ್ಕಾರಿ ಪ್ರಕಟಣೆ ಅಲ್ಲ.",
+  landingOriginDisclaimer:
+    "ಸ್ವತಂತ್ರ ಪ್ರೋಟೋಟೈಪ್. UMANG, EPFO, DigiLocker ಅಥವಾ ಯಾವುದೇ ಸರ್ಕಾರಿ ಪ್ರಾಧಿಕಾರದೊಂದಿಗೆ ಸಂಬಂಧ ಅಥವಾ ಅನುಮೋದನೆ ಇಲ್ಲ. ಎಲ್ಲಾ ಸೇವಾ ಪ್ರತಿಕ್ರಿಯೆಗಳು ಅನುಕರಿಸಲ್ಪಟ್ಟಿವೆ.",
+  landingBeyondKicker:
+    "Varun Mayya ಅವರ Build What Moves India ಹ್ಯಾಕಥಾನ್‌ಗಾಗಿ ನಿರ್ಮಿಸಲಾಗಿದೆ.",
   landingBeyondTitle: "ಸ್ಪಷ್ಟ ಸುಧಾರಣೆಗಳು ಇಷ್ಟಕ್ಷೆ ಸಾಧಿಸಬಲ್ಲವು.",
-  landingBeyondBody: "ಸ್ವಚ್ಛ ಪರದೆ, ಚಾಟ್ ಮತ್ತು ಡ್ಯಾಶ್‌ಬೋರ್ಡ್ ಎಲ್ಲವೂ ಸ್ವಲ್ಪ ನೆರವಾಗುತ್ತವೆ. ಯಾವುದೂ ನಿಜವಾದ ಸಮಸ್ಯೆ ಬಗೆಹರಿಸುವುದಿಲ್ಲ: ಪ್ರತಿ ಸೇವೆಯೂ ಮತ್ತೆ ಶೂನ್ಯದಿಂದ ಆರಂಭವಾಗುತ್ತದೆ.",
+  landingBeyondBody:
+    "ಸ್ವಚ್ಛ ಪರದೆ, ಚಾಟ್ ಮತ್ತು ಡ್ಯಾಶ್‌ಬೋರ್ಡ್ ಎಲ್ಲವೂ ಸ್ವಲ್ಪ ನೆರವಾಗುತ್ತವೆ. ಯಾವುದೂ ನಿಜವಾದ ಸಮಸ್ಯೆ ಬಗೆಹರಿಸುವುದಿಲ್ಲ: ಪ್ರತಿ ಸೇವೆಯೂ ಮತ್ತೆ ಶೂನ್ಯದಿಂದ ಆರಂಭವಾಗುತ್ತದೆ.",
   landingSurfaceOneTitle: "ಸರಳ ಇಂಟರ್ಫೇಸ್",
   landingSurfaceOneBody: "ಒಂದು ಪರದೆಯನ್ನು ಸುಲಭಗೊಳಿಸುತ್ತದೆ",
   landingSurfaceTwoTitle: "ನಿಮ್ಮ ಮಾತಿನಲ್ಲೇ ಕೇಳಿ",
@@ -724,18 +844,26 @@ export const kn: Record<MessageKey, string> = {
   landingSurfaceThreeBody: "ಈಗಿರುವ ಕೆಲಸಗಳ ಸಾರಾಂಶ ತೋರಿಸುತ್ತದೆ",
   landingSystemKicker: "ಎಲ್ಲವನ್ನೂ ಜೋಡಿಸಿ ಇಡುವ ಭಾಗ",
   landingSystemTitle: "Citizen Graph",
-  landingSystemBody: "ನಿಮ್ಮ ದಾಖಲೆ, ಮಾಹಿತಿ ಮತ್ತು ಅನುಮತಿಗಳು ಒಂದು ಸೇವೆಯಿಂದ ಇನ್ನೊಂದಕ್ಕೆ ನಿಮ್ಮ ಜೊತೆಯಲ್ಲೇ ಇರುತ್ತವೆ. ಮುಂದಿನ ಸೇವೆ ಹಿಂದಿನದು ನಿಂತಲ್ಲೇ ಆರಂಭಿಸುತ್ತದೆ.",
+  landingSystemBody:
+    "ನಿಮ್ಮ ದಾಖಲೆ, ಮಾಹಿತಿ ಮತ್ತು ಅನುಮತಿಗಳು ಒಂದು ಸೇವೆಯಿಂದ ಇನ್ನೊಂದಕ್ಕೆ ನಿಮ್ಮ ಜೊತೆಯಲ್ಲೇ ಇರುತ್ತವೆ. ಮುಂದಿನ ಸೇವೆ ಹಿಂದಿನದು ನಿಂತಲ್ಲೇ ಆರಂಭಿಸುತ್ತದೆ.",
   landingHackathonLink: "Build What Moves India ಹ್ಯಾಕಥಾನ್ ನೋಡಿ",
   landingProjectTitle: "ಈಗ ಇದನ್ನು ಕೆಲಸ ಮಾಡುವುದನ್ನು ನೋಡಿ.",
-  landingProjectBody: "ಕೆಳಗಿನ ಪ್ರತಿ ಡೆಮೊ ಅದೇ ದಾಖಲೆಯ ಮೇಲೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ. ಒಂದು ವಿಷಯ ಬದಲಿಸಿ, ಪ್ರತಿ ಪರದೆಯಲ್ಲೂ ಫಲಿತಾಂಶ ಕಾಣುತ್ತದೆ.",
-  landingCurrentOne: "ಕಾಣದ EPFO ವಂತಿಗೆ ದೂರಾಗುತ್ತದೆ ಮತ್ತು ಮುಖಪುಟದಲ್ಲಿ ಕೆಲಸ ಸಲ್ಲಿಸಿದಂತೆ ಕಾಣುತ್ತದೆ.",
-  landingCurrentTwo: "PAN ವಿವರ ಹೊಂದಿಕೆಯಾಗದಾಗ ಈಗಿರುವ ಆಧಾರ್ ಸಾಕ್ಷ್ಯ ಮತ್ತೆ ಬಳಕೆಯಾಗುತ್ತದೆ.",
-  landingCurrentThree: "ದಂಡ ಪಾವತಿಸಿದಾಗ ಮೊತ್ತ ಬಾಕಿ ಪಟ್ಟಿಯಿಂದ ಹೊರಹೋಗಿ ದಾಖಲೆಗಳಲ್ಲಿ ರಸೀದಿ ಕಾಣುತ್ತದೆ.",
-  landingCurrentFour: "ಹಂಚಲು ಮೊದಲು ಒಪ್ಪಿಗೆ ಬೇಕು, ಮತ್ತು ಕುಟುಂಬದ ಪ್ರವೇಶವನ್ನು ಯಾವಾಗ ಬೇಕಾದರೂ ತೆಗೆಯಬಹುದು.",
-  landingBoundary: "ಎಲ್ಲ ಜನರು ಮತ್ತು ದಾಖಲೆಗಳು ಕಾಲ್ಪನಿಕ. ಸರ್ಕಾರಿ ಪ್ರತಿಕ್ರಿಯೆಗಳು ಅನುಕರಿಸಲಾಗಿದೆ.",
+  landingProjectBody:
+    "ಕೆಳಗಿನ ಪ್ರತಿ ಡೆಮೊ ಅದೇ ದಾಖಲೆಯ ಮೇಲೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ. ಒಂದು ವಿಷಯ ಬದಲಿಸಿ, ಪ್ರತಿ ಪರದೆಯಲ್ಲೂ ಫಲಿತಾಂಶ ಕಾಣುತ್ತದೆ.",
+  landingCurrentOne:
+    "ಕಾಣದ EPFO ವಂತಿಗೆ ದೂರಾಗುತ್ತದೆ ಮತ್ತು ಮುಖಪುಟದಲ್ಲಿ ಕೆಲಸ ಸಲ್ಲಿಸಿದಂತೆ ಕಾಣುತ್ತದೆ.",
+  landingCurrentTwo:
+    "PAN ವಿವರ ಹೊಂದಿಕೆಯಾಗದಾಗ ಈಗಿರುವ ಆಧಾರ್ ಸಾಕ್ಷ್ಯ ಮತ್ತೆ ಬಳಕೆಯಾಗುತ್ತದೆ.",
+  landingCurrentThree:
+    "ದಂಡ ಪಾವತಿಸಿದಾಗ ಮೊತ್ತ ಬಾಕಿ ಪಟ್ಟಿಯಿಂದ ಹೊರಹೋಗಿ ದಾಖಲೆಗಳಲ್ಲಿ ರಸೀದಿ ಕಾಣುತ್ತದೆ.",
+  landingCurrentFour:
+    "ಹಂಚಲು ಮೊದಲು ಒಪ್ಪಿಗೆ ಬೇಕು, ಮತ್ತು ಕುಟುಂಬದ ಪ್ರವೇಶವನ್ನು ಯಾವಾಗ ಬೇಕಾದರೂ ತೆಗೆಯಬಹುದು.",
+  landingBoundary:
+    "ಎಲ್ಲ ಜನರು ಮತ್ತು ದಾಖಲೆಗಳು ಕಾಲ್ಪನಿಕ. ಸರ್ಕಾರಿ ಪ್ರತಿಕ್ರಿಯೆಗಳು ಅನುಕರಿಸಲಾಗಿದೆ.",
   landingServiceStatus: "Citizen ಹೇಗೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ",
   landingVisionTitle: "ಏನು ಹಂಚಬೇಕು ಎಂದು ನೀವೇ ನಿರ್ಧರಿಸಿ.",
-  landingVisionBody: "ಯಾರು ಏನನ್ನು ನೋಡಬಹುದು, ಯಾವ ಉದ್ದೇಶಕ್ಕೆ ಎಂದು ನೀವೇ ತೀರ್ಮಾನಿಸುತ್ತೀರಿ. ಒಪ್ಪಿಗೆ ಸ್ಪಷ್ಟವಾಗಿ ಕಾಣುತ್ತದೆ ಮತ್ತು ನೀವು ಯಾವಾಗ ಬೇಕಾದರೂ ಅದನ್ನು ಹಿಂಪಡೆಯಬಹುದು.",
+  landingVisionBody:
+    "ಯಾರು ಏನನ್ನು ನೋಡಬಹುದು, ಯಾವ ಉದ್ದೇಶಕ್ಕೆ ಎಂದು ನೀವೇ ತೀರ್ಮಾನಿಸುತ್ತೀರಿ. ಒಪ್ಪಿಗೆ ಸ್ಪಷ್ಟವಾಗಿ ಕಾಣುತ್ತದೆ ಮತ್ತು ನೀವು ಯಾವಾಗ ಬೇಕಾದರೂ ಅದನ್ನು ಹಿಂಪಡೆಯಬಹುದು.",
   landingVisionOne: "ದಾಖಲೆ ಹಂಚುವ ಮೊದಲು ಕೇಳಿ",
   landingVisionTwo: "ಅನುಮೋದಿತ ಸರ್ಕಾರಿ ಸಂಪರ್ಕ ಬಳಸಿ",
   landingVisionThree: "ಯಾರು ಏನು ನೋಡಿದರು ತೋರಿಸಿ",
@@ -744,5 +872,6 @@ export const kn: Record<MessageKey, string> = {
   landingClosingBody: "ಎಲ್ಲ ಡೇಟಾ ಕಾಲ್ಪನಿಕ.",
   startBack: "ಯೋಜನೆಗೆ ಮರಳಿ",
   startTitle: "ಪ್ರೊಫೈಲ್ ಆರಿಸಿ",
-  startBody: "ಪೂರ್ಣ ಡೆಮೊ ಅರ್ಜುನ್‌ನಲ್ಲಿ ಇದೆ. ಪ್ರಿಯಾ ಒಪ್ಪಿಗೆ ಮತ್ತು ಸುನೀತಾ ಹಂಚಿದ ಪ್ರವೇಶ ತೋರಿಸುತ್ತಾರೆ.",
+  startBody:
+    "ಪೂರ್ಣ ಡೆಮೊ ಅರ್ಜುನ್‌ನಲ್ಲಿ ಇದೆ. ಪ್ರಿಯಾ ಒಪ್ಪಿಗೆ ಮತ್ತು ಸುನೀತಾ ಹಂಚಿದ ಪ್ರವೇಶ ತೋರಿಸುತ್ತಾರೆ.",
 };

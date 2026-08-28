@@ -16,21 +16,27 @@ export const hi: Record<MessageKey, string> = {
   gstrServicePromise: "Sharma Web Solutions का अगस्त GST रिटर्न जमा करें।",
   passportServicePromise: "समाप्ति, दस्तावेज़ और अगला Passport Seva कदम देखें।",
   refundServicePromise: "रिफ़ंड राशि, बैंक खाता और आने का समय देखें।",
-  deathPromise: "मृत्यु पंजीकरण, प्रमाणपत्र, पेंशन, नॉमिनी और कानूनी वारिस के काम एक साथ शुरू करें।",
+  deathPromise:
+    "मृत्यु पंजीकरण, प्रमाणपत्र, पेंशन, नॉमिनी और कानूनी वारिस के काम एक साथ शुरू करें।",
   marriagePromise: "दोनों लोगों की अलग सहमति के साथ विवाह दर्ज करें।",
-  obligationsPromise: "₹500 का Bengaluru ट्रैफ़िक चालान जाँचें और डेमो में भरें।",
+  obligationsPromise:
+    "₹500 का Bengaluru ट्रैफ़िक चालान जाँचें और डेमो में भरें।",
   loanPromise: "मासिक किस्त, कुल ब्याज और बाकी दस्तावेज़ मिलाएँ।",
   recordCorrectionPromise: "सुधार अनुरोध भेजने से पहले PAN और आधार मिलाएँ।",
   startBusinessPromise: "अपने व्यवसाय और शहर के लिए पंजीकरण और लाइसेंस देखें।",
   epfoPromise: "पासबुक, नवीनतम अंशदान और शिकायत की स्थिति जाँचें।",
-  digilockerPromise: "जारी दस्तावेज़ खोलें, उन्हें इस डेमो में रखें और उनका स्रोत देखें।",
+  digilockerPromise:
+    "जारी दस्तावेज़ खोलें, उन्हें इस डेमो में रखें और उनका स्रोत देखें।",
   existingBusinessContext: "इसे {business} की नई गतिविधि माना जाएगा।",
   whatItMeans: "इसका मतलब",
   nextAction: "अगला कदम",
   governmentInbox: "सूचनाएँ",
-  contrastDeathBriefing: "आज: चार दफ़्तर और कोई साझा रिकॉर्ड नहीं। यहाँ: एक पारिवारिक फ़ाइल, जिसमें पेंशन की पात्रता पहले ही अपडेट है।",
-  contrastFamilyPension: "मृत्यु दर्ज होते ही यह पात्र हो गई। आज विधवा को इसे खुद खोजना और आवेदन करना पड़ता है।",
-  contrastMarriageInvite: "प्रिया अपनी प्रोफ़ाइल के दस्तावेज़ इस्तेमाल कर सकती हैं।",
+  contrastDeathBriefing:
+    "आज: चार दफ़्तर और कोई साझा रिकॉर्ड नहीं। यहाँ: एक पारिवारिक फ़ाइल, जिसमें पेंशन की पात्रता पहले ही अपडेट है।",
+  contrastFamilyPension:
+    "मृत्यु दर्ज होते ही यह पात्र हो गई। आज विधवा को इसे खुद खोजना और आवेदन करना पड़ता है।",
+  contrastMarriageInvite:
+    "प्रिया अपनी प्रोफ़ाइल के दस्तावेज़ इस्तेमाल कर सकती हैं।",
   contrastPanMismatch: "PAN का नाम आधार से नहीं मिलता।",
   checked: "जाँच की तारीख",
   linkedRecord: "संबंधित काम",
@@ -71,7 +77,8 @@ export const hi: Record<MessageKey, string> = {
   language: "भाषा",
   dataSaver: "कम डेटा इस्तेमाल करें",
   loginTitle: "प्रोफ़ाइल चुनें",
-  loginBody: "पूरा डेमो अर्जुन में है। प्रिया सहमति और सुनीता साझा पहुँच दिखाती हैं।",
+  loginBody:
+    "पूरा डेमो अर्जुन में है। प्रिया सहमति और सुनीता साझा पहुँच दिखाती हैं।",
   chooseProfile: "प्रोफ़ाइल चुनें",
   goodMorning: "सुप्रभात",
   goodAfternoon: "नमस्ते",
@@ -139,8 +146,10 @@ export const hi: Record<MessageKey, string> = {
   documentCheckedOn: "जाँचा गया: {date}",
   documentUseReason: "केवल ज़रूरत वाली सेवा में इस्तेमाल होगा।",
   noMatchingDocuments: "कोई मिलता हुआ दस्तावेज़ नहीं",
-  documentsSearchHelp: "दस्तावेज़ का प्रकार, धारक का नाम या छिपा हुआ नंबर खोजें।",
-  panMismatchExplanation: "इस PAN पर नाम ('{panName}') आधार के नाम ('{aadhaarName}') से अलग है।",
+  documentsSearchHelp:
+    "दस्तावेज़ का प्रकार, धारक का नाम या छिपा हुआ नंबर खोजें।",
+  panMismatchExplanation:
+    "इस PAN पर नाम ('{panName}') आधार के नाम ('{aadhaarName}') से अलग है।",
   resolveMismatch: "नाम की गलती ठीक करें",
   recordCorrectionEyebrow: "PAN नाम सुधार",
   recordCorrectionReviewTitle: "दोनों नाम जाँचें",
@@ -151,9 +160,11 @@ export const hi: Record<MessageKey, string> = {
   recordCorrectionSubmit: "सुधार अनुरोध भेजें",
   recordCorrectionError: "अनुरोध नहीं भेजा जा सका। कुछ नहीं बदला।",
   recordCorrectionCompleteTitle: "सुधार अनुरोध भेजा गया",
-  recordCorrectionCompleteBody: "संदर्भ {reference}। जाँच पूरी होने तक PAN पर मौजूदा नाम दिखेगा।",
+  recordCorrectionCompleteBody:
+    "संदर्भ {reference}। जाँच पूरी होने तक PAN पर मौजूदा नाम दिखेगा।",
   recordCorrectionUnavailableTitle: "सुधारने के लिए नाम का कोई अंतर नहीं है।",
-  recordCorrectionUnavailableBody: "इस प्रोफ़ाइल में PAN नाम का कोई अंतर नहीं है।",
+  recordCorrectionUnavailableBody:
+    "इस प्रोफ़ाइल में PAN नाम का कोई अंतर नहीं है।",
   recordCorrectionAuthority: "Protean eGov (PAN) · सिम्युलेटेड",
   viewDocuments: "दस्तावेज़ देखें",
   expiry: "समाप्ति",
@@ -176,7 +187,8 @@ export const hi: Record<MessageKey, string> = {
   marriageWorkflowBody: "साथ आवेदन करें। अलग सहमति दें।",
   marriageServiceError: "अनुरोध पूरा नहीं हुआ। कुछ नहीं बदला।",
   marriageCompleteTitle: "विवाह पंजीकृत हुआ",
-  marriageCompleteBody: "प्रमाणपत्र दोनों प्रोफ़ाइल में है। अर्जुन और प्रिया अब जीवनसाथी के रूप में दिखते हैं।",
+  marriageCompleteBody:
+    "प्रमाणपत्र दोनों प्रोफ़ाइल में है। अर्जुन और प्रिया अब जीवनसाथी के रूप में दिखते हैं।",
   marriageViewRelationship: "परिवार का रिकॉर्ड देखें",
   marriageOpenCertificate: "प्रमाणपत्र खोलें",
   marriageSharedEyebrow: "आमंत्रण",
@@ -188,7 +200,8 @@ export const hi: Record<MessageKey, string> = {
   marriageConsentEyebrow: "सहमति ज़रूरी है",
   marriageConsentQuestion: "प्रिया, क्या आप सहमत हैं?",
   marriageWaitingPriya: "प्रिया की सहमति बाकी है",
-  marriageConsentBody: "अर्जुन इस पंजीकरण के लिए नीचे दिए रिकॉर्ड इस्तेमाल करना चाहते हैं।",
+  marriageConsentBody:
+    "अर्जुन इस पंजीकरण के लिए नीचे दिए रिकॉर्ड इस्तेमाल करना चाहते हैं।",
   marriageIdentityVerification: "प्रिया की पहचान की पुष्टि",
   marriageVerifiedDocumentsOnly: "सत्यापित पहचान दस्तावेज़ इस्तेमाल करें",
   marriageSpouseAfterSubmission: "पंजीकरण के बाद अर्जुन को जीवनसाथी जोड़ें",
@@ -196,7 +209,8 @@ export const hi: Record<MessageKey, string> = {
   marriageSwitchPriya: "प्रिया पर जाएँ",
   marriageRecordsEyebrow: "दस्तावेज़ और गवाह",
   marriageRecordsTitle: "गवाह चुनें",
-  marriageRecordsBody: "{count} सत्यापित पहचान दस्तावेज़ तैयार हैं। कम से कम एक गवाह चुनें।",
+  marriageRecordsBody:
+    "{count} सत्यापित पहचान दस्तावेज़ तैयार हैं। कम से कम एक गवाह चुनें।",
   marriageWitnesses: "गवाह",
   marriageUseDocuments: "इन रिकॉर्ड के साथ आगे बढ़ें",
   marriageAppointmentTitle: "अपॉइंटमेंट बुक करें",
@@ -206,13 +220,15 @@ export const hi: Record<MessageKey, string> = {
   marriageRegistrationFee: "₹500 पंजीकरण शुल्क",
   marriageBookAndPay: "बुक करें और भुगतान करें",
   marriageConfirmTitle: "विवाह पंजीकृत करें",
-  marriageConfirmBody: "अपॉइंटमेंट {date} के लिए बुक है। दोनों प्रोफ़ाइल को वही प्रमाणपत्र मिलेगा।",
+  marriageConfirmBody:
+    "अपॉइंटमेंट {date} के लिए बुक है। दोनों प्रोफ़ाइल को वही प्रमाणपत्र मिलेगा।",
   marriageSpouseRelationship: "पंजीकरण के बाद",
   marriageRegisterAction: "विवाह पंजीकृत करें",
   startDefaultBusiness: "घर का बना भोजन बेचने का व्यवसाय",
   startPlanningAuthority: "व्यवसाय योजना",
   startCompleteTitle: "ड्राफ्ट सहेजा गया",
-  startCompleteBody: "कोई पंजीकरण जमा नहीं हुआ। पूरी योजना नीचे और 'इन कामों पर ध्यान दें' में सहेजी गई है।",
+  startCompleteBody:
+    "कोई पंजीकरण जमा नहीं हुआ। पूरी योजना नीचे और 'इन कामों पर ध्यान दें' में सहेजी गई है।",
   startViewDraft: "ड्राफ्ट देखें",
   startSetupEyebrow: "व्यवसाय की जानकारी",
   startSetupTitle: "आप क्या शुरू करना चाहते हैं?",
@@ -225,9 +241,11 @@ export const hi: Record<MessageKey, string> = {
   startFirstRegistration: "पहला कदम सहेजें",
   startChangePlan: "जानकारी बदलें",
   startExistingPlanTitle: "{business} इस्तेमाल करें",
-  startExistingPlanBody: "इस व्यवसाय में {activity} नई गतिविधि के रूप में जोड़ें।",
+  startExistingPlanBody:
+    "इस व्यवसाय में {activity} नई गतिविधि के रूप में जोड़ें।",
   startFreshPlanTitle: "एकल स्वामी के रूप में शुरू करें",
-  startFreshPlanBody: "{city} में छोटे व्यवसाय के लिए यह सरल तरीका इस्तेमाल करें।",
+  startFreshPlanBody:
+    "{city} में छोटे व्यवसाय के लिए यह सरल तरीका इस्तेमाल करें।",
   startUdyamPlanTitle: "Udyam अपडेट करें",
   startUdyamPlanBody: "व्यवसाय पंजीकरण में {activity} जोड़ें।",
   startRegisterUdyamPlanTitle: "Udyam पर पंजीकरण करें",
@@ -235,7 +253,8 @@ export const hi: Record<MessageKey, string> = {
   startTradePlanTitle: "स्थानीय व्यापार लाइसेंस जाँचें",
   startTradePlanBody: "{city} में इस काम के लिए ज़रूरी लाइसेंस जाँचें।",
   startGstPlanTitle: "कर और सहायता जाँचें",
-  startGstPlanBody: "GST, क्षेत्रीय लाइसेंस, योजनाएँ और व्यवसाय बैंक खाता जाँचें।",
+  startGstPlanBody:
+    "GST, क्षेत्रीय लाइसेंस, योजनाएँ और व्यवसाय बैंक खाता जाँचें।",
   startSupportPlanTitle: "व्यवसाय योजनाएँ जाँचें",
   startSupportPlanBody: "व्यवसाय की जानकारी तय होने के बाद सहायता देखें।",
   startMoneyPlanTitle: "व्यवसाय बैंक खाता खोलें",
@@ -255,7 +274,8 @@ export const hi: Record<MessageKey, string> = {
   noLinkedBusiness: "कोई जुड़ा व्यवसाय नहीं",
   switchArjun: "अर्जुन पर जाएँ",
   loanCompleteTitle: "लोन ड्राफ्ट सहेजा गया",
-  loanCompleteBody: "ड्राफ्ट Citizen में सहेजा गया है। बैंक को अभी कुछ नहीं भेजा गया।",
+  loanCompleteBody:
+    "ड्राफ्ट Citizen में सहेजा गया है। बैंक को अभी कुछ नहीं भेजा गया।",
   viewApplication: "सहेजा ड्राफ्ट देखें",
   noActivity: "पूरे काम यहाँ दिखाई देंगे।",
   daysLeft: "{count} दिन बाकी",
@@ -302,8 +322,10 @@ export const hi: Record<MessageKey, string> = {
   eventBusinessPlanStarted: "नए व्यवसाय के पंजीकरण की योजना शुरू हुई",
   eventMarriageInviteSent: "प्रिया को साझा विवाह आवेदन में आमंत्रित किया गया",
   eventMarriageConsentReceived: "प्रिया ने विवाह पंजीकरण की सहमति दी",
-  eventMarriageDocumentsAdded: "सत्यापित पहचान दस्तावेज़ और गवाह विवाह आवेदन में जोड़े गए",
-  eventMarriageAppointmentBooked: "विवाह पंजीकरण का समय तय हुआ और शुल्क भरा गया",
+  eventMarriageDocumentsAdded:
+    "सत्यापित पहचान दस्तावेज़ और गवाह विवाह आवेदन में जोड़े गए",
+  eventMarriageAppointmentBooked:
+    "विवाह पंजीकरण का समय तय हुआ और शुल्क भरा गया",
   eventMarriageRegistered: "विवाह दर्ज हुआ और जीवनसाथी का रिश्ता जुड़ा",
   eventBenefitApplicationStarted: "{benefit} का आवेदन शुरू हुआ",
   eventBenefitApplicationSubmitted: "लाभ आवेदन जमा हुआ",
@@ -322,27 +344,32 @@ export const hi: Record<MessageKey, string> = {
   deathRelationshipFamily: "क्या ये आपके परिवार के सदस्य हैं?",
   deathSpouseFound: "Citizen को एक सत्यापित वैवाहिक रिश्ता मिला।",
   deathFamilyFound: "Citizen को एक सत्यापित पारिवारिक रिश्ता मिला।",
-  deathConfirmBeforeChange: "कोई बदलाव करने से पहले जुड़े रिकॉर्ड की पुष्टि करें।",
+  deathConfirmBeforeChange:
+    "कोई बदलाव करने से पहले जुड़े रिकॉर्ड की पुष्टि करें।",
   deathPensionerLocation: "EPS पेंशनर · बेंगलुरु",
   deathConfirmRajesh: "राजेश की पुष्टि करें",
   deathReviewRegistration: "पंजीकरण जाँचें",
-  deathReviewRegistrationBody: "फ़ॉर्म राजेश की सत्यापित पहचान और पारिवारिक रिकॉर्ड से भरा गया है। इससे केवल सिम्युलेटेड पंजीकरण बनेगा।",
+  deathReviewRegistrationBody:
+    "फ़ॉर्म राजेश की सत्यापित पहचान और पारिवारिक रिकॉर्ड से भरा गया है। इससे केवल सिम्युलेटेड पंजीकरण बनेगा।",
   fieldName: "नाम",
   fieldDate: "तारीख",
   fieldReporter: "सूचना देने वाला",
   deathRegisterAction: "मृत्यु दर्ज करें",
   deathCertificateTitle: "एक बार बनने वाला, बार-बार काम आने वाला प्रमाणपत्र",
-  deathCertificateBody: "प्रमाणपत्र अर्जुन के दस्तावेज़ों में सहेजा जाएगा और पेंशन, नॉमिनी तथा विधवा पेंशन की जाँच में दोबारा इस्तेमाल होगा।",
+  deathCertificateBody:
+    "प्रमाणपत्र अर्जुन के दस्तावेज़ों में सहेजा जाएगा और पेंशन, नॉमिनी तथा विधवा पेंशन की जाँच में दोबारा इस्तेमाल होगा।",
   deathCertificateVerified: "सिम्युलेटेड BBMP प्रतिक्रिया से सत्यापित",
   deathIssueCertificate: "प्रमाणपत्र जारी करें",
   deathClaimsTitle: "सुनीता की पेंशन और नॉमिनी दावे शुरू करें",
-  deathClaimsBody: "राजेश की EPS पेंशन बंद हो गई है। यही प्रमाणपत्र अब पारिवारिक पेंशन और EPF नॉमिनी दावे में काम आएगा।",
+  deathClaimsBody:
+    "राजेश की EPS पेंशन बंद हो गई है। यही प्रमाणपत्र अब पारिवारिक पेंशन और EPF नॉमिनी दावे में काम आएगा।",
   deathFamilyPension: "पारिवारिक पेंशन",
   deathEpfClaim: "EPF नॉमिनी दावा",
   deathSubmitClaims: "दोनों दावे जमा करें",
   deathSharedWorkflow: "परिवार का साझा काम",
   deathConsentTitle: "कानूनी वारिसों की सहमति लें",
-  deathConsentBody: "सुनीता और अर्जुन तैयार हैं। कविता से सहमति माँगें; सिम्युलेटेड माध्यम उनका जवाब दर्ज करेगा।",
+  deathConsentBody:
+    "सुनीता और अर्जुन तैयार हैं। कविता से सहमति माँगें; सिम्युलेटेड माध्यम उनका जवाब दर्ज करेगा।",
   ready: "तैयार",
   waiting: "इंतज़ार",
   deathRequestConsent: "कविता से सहमति माँगें",
@@ -350,7 +377,8 @@ export const hi: Record<MessageKey, string> = {
   processCarry: "साथ रखें",
   processTime: "अनुमानित समय",
   deathRegistrationOffice: "BBMP क्षेत्रीय जन्म-मृत्यु कार्यालय",
-  deathRegistrationCarry: "सूचना देने वाले की ID · अस्पताल या अंतिम संस्कार रिकॉर्ड · मृत व्यक्ति की ID",
+  deathRegistrationCarry:
+    "सूचना देने वाले की ID · अस्पताल या अंतिम संस्कार रिकॉर्ड · मृत व्यक्ति की ID",
   deathRegistrationTime: "जाँच के बाद आम तौर पर 1–3 कार्य दिवस",
   deathCertificateOffice: "BBMP प्रमाणपत्र काउंटर",
   deathCertificateCarry: "पंजीकरण संदर्भ · सूचना देने वाले की ID",
@@ -359,18 +387,22 @@ export const hi: Record<MessageKey, string> = {
   deathClaimsCarry: "मृत्यु प्रमाणपत्र · PPO/UAN · नॉमिनी बैंक प्रमाण",
   deathClaimsTime: "पूरा दावा मिलने के लगभग 20 दिन बाद",
   consentNoticeTitle: "कविता की कानूनी वारिस सहमति मिली",
-  consentNoticeBody: "सिम्युलेटेड सहमति माध्यम ने राजेश शर्मा के कानूनी वारिस काम के लिए कविता वर्मा की मंज़ूरी दर्ज की।",
+  consentNoticeBody:
+    "सिम्युलेटेड सहमति माध्यम ने राजेश शर्मा के कानूनी वारिस काम के लिए कविता वर्मा की मंज़ूरी दर्ज की।",
   eventNoticeRead: "संदेश पढ़ा हुआ दर्ज हुआ",
   deathKeepVisible: "इन कामों को सामने रखें",
   deathDownstreamTitle: "संपत्ति और वाहन के अगले काम बनाएँ",
-  deathDownstreamBody: "Citizen अपने आप मालिकाना हक़ नहीं बदलेगा। परिवार हर उत्तराधिकार प्रक्रिया अलग से पूरी कर सके, इसलिए केवल सीमित मसौदे बनाए जाएँगे।",
+  deathDownstreamBody:
+    "Citizen अपने आप मालिकाना हक़ नहीं बदलेगा। परिवार हर उत्तराधिकार प्रक्रिया अलग से पूरी कर सके, इसलिए केवल सीमित मसौदे बनाए जाएँगे।",
   deathSuccessionDraft: "उत्तराधिकार का मसौदा बनेगा",
   deathCreateDrafts: "मसौदे बनाकर पूरा करें",
   deathCompleteTitle: "परिवार का रिकॉर्ड अब सही है।",
-  deathCompleteBody: "प्रमाणपत्र दोबारा इस्तेमाल हो सकता है, पेंशन और नॉमिनी दावे जमा हैं, कानूनी वारिसों की सहमति दर्ज है और संपत्ति व वाहन के मसौदे दिखाई दे रहे हैं।",
+  deathCompleteBody:
+    "प्रमाणपत्र दोबारा इस्तेमाल हो सकता है, पेंशन और नॉमिनी दावे जमा हैं, कानूनी वारिसों की सहमति दर्ज है और संपत्ति व वाहन के मसौदे दिखाई दे रहे हैं।",
   deathSeeSunitaEligibility: "सुनीता की पात्रता देखें",
   deathViewAuditTrail: "काम का इतिहास देखें",
-  deathServiceError: "सिम्युलेटेड सेवा ने जवाब नहीं दिया। आपके रिकॉर्ड नहीं बदले गए।",
+  deathServiceError:
+    "सिम्युलेटेड सेवा ने जवाब नहीं दिया। आपके रिकॉर्ड नहीं बदले गए।",
   changeRecorded: "सहेजा गया",
   recordsUpdated: "{count} अपडेट",
   mutationRajeshDeceased: "राजेश को मृत दर्ज किया गया",
@@ -410,7 +442,8 @@ export const hi: Record<MessageKey, string> = {
   mutationFieldWitnesses: "गवाह",
   familyBriefing: "परिवार की जानकारी",
   familyBriefingTitle: "परिवार के लिए क्या बदला",
-  familyBriefingBody: "अपडेट हुए पारिवारिक रिकॉर्ड से निकली पात्रता और उत्तराधिकार के अगले काम।",
+  familyBriefingBody:
+    "अपडेट हुए पारिवारिक रिकॉर्ड से निकली पात्रता और उत्तराधिकार के अगले काम।",
   familyPensionEligible: "सुनीता की EPS पारिवारिक पेंशन",
   widowPensionBlocked: "विधवा पेंशन के लिए एक रिकॉर्ड और चाहिए",
   blockedByIncomeDeclaration: "परिवार की आय घोषणा जुड़ने तक आवेदन रुका रहेगा।",
@@ -423,7 +456,8 @@ export const hi: Record<MessageKey, string> = {
   vehicleTimeline: "RTO आवेदन स्वीकार होने के बाद लगभग 14–30 दिन",
   propertyDocuments: "मृत्यु प्रमाणपत्र · कानूनी वारिस सहमति · खाता नकल",
   vehicleDocuments: "मृत्यु प्रमाणपत्र · RC · कानूनी वारिस सहमति · बीमा प्रति",
-  noOwnershipChanged: "यह केवल अगले काम का मसौदा है। मालिकाना हक़ अपने आप नहीं बदला।",
+  noOwnershipChanged:
+    "यह केवल अगले काम का मसौदा है। मालिकाना हक़ अपने आप नहीं बदला।",
   viewAsSunita: "सुनीता के रूप में देखें",
   eventPropertyTaxPaid: "BBMP संपत्ति कर का भुगतान हुआ",
   eventGstrFiled: "GSTR-3B फ़ाइलिंग दर्ज हुई",
@@ -441,7 +475,8 @@ export const hi: Record<MessageKey, string> = {
   propertyTaxPaidBody: "राशि पैसे से हट गई है। रसीद दस्तावेज़ में है।",
   gstrTitle: "अगस्त का GST रिटर्न",
   gstrBody: "केवल डेमो फ़ाइलिंग। GST पोर्टल से संपर्क नहीं होता।",
-  gstrConfirmDeclaration: "मैंने ऊपर दिखाए व्यवसाय, GSTIN और फ़ाइलिंग अवधि की जाँच कर ली है।",
+  gstrConfirmDeclaration:
+    "मैंने ऊपर दिखाए व्यवसाय, GSTIN और फ़ाइलिंग अवधि की जाँच कर ली है।",
   confirmGstrFiling: "डेमो में GST रिटर्न भरें",
   gstrFiledTitle: "GST रिटर्न जमा हुआ",
   gstrFiledBody: "समय-सीमा पूरी हुई और पावती सहेजी गई।",
@@ -458,13 +493,15 @@ export const hi: Record<MessageKey, string> = {
   epfoAuthority: "कर्मचारी भविष्य निधि संगठन",
   epfoPassbookLabel: "सदस्य पासबुक",
   epfoPassbookTitle: "आपका EPF खाता",
-  epfoPassbookBody: "UAN, नियोक्ता और बैलेंस इस प्रोफ़ाइल के जुड़े रोजगार रिकॉर्ड से आते हैं।",
+  epfoPassbookBody:
+    "UAN, नियोक्ता और बैलेंस इस प्रोफ़ाइल के जुड़े रोजगार रिकॉर्ड से आते हैं।",
   epfoBalance: "पासबुक बैलेंस",
   epfoLatestContribution: "नवीनतम अंशदान",
   epfoEmployer: "नियोक्ता",
   epfoReviewContribution: "नवीनतम अंशदान जाँचें",
   epfoContributionTitle: "नवीनतम अंशदान जाँचें",
-  epfoContributionBody: "EPFO ने यह अंशदान जमा बताया है। चुनें कि यह आपके रिकॉर्ड से मेल खाता है या नहीं।",
+  epfoContributionBody:
+    "EPFO ने यह अंशदान जमा बताया है। चुनें कि यह आपके रिकॉर्ड से मेल खाता है या नहीं।",
   epfoContributionMatches: "यह मेरे रिकॉर्ड से मेल खाता है",
   epfoReportIssue: "समस्या दर्ज करें",
   epfoIssueLabel: "क्या गलत है?",
@@ -473,15 +510,20 @@ export const hi: Record<MessageKey, string> = {
   epfoIssueEmployer: "नियोक्ता गलत है",
   epfoSubmitGrievance: "EPFO शिकायत दर्ज करें",
   epfoGrievanceCompleteTitle: "EPFO शिकायत दर्ज हुई",
-  epfoGrievanceCompleteBody: "संदर्भ {reference}। इस डेमो में EPFO 15 दिनों के भीतर जवाब देगा।",
+  epfoGrievanceCompleteBody:
+    "संदर्भ {reference}। इस डेमो में EPFO 15 दिनों के भीतर जवाब देगा।",
   epfoReference: "शिकायत संदर्भ",
   epfoServiceError: "शिकायत दर्ज नहीं हुई। आपके रिकॉर्ड नहीं बदले।",
   epfoNoActionTitle: "अंशदान जाँच लिया गया",
-  epfoNoActionBody: "अंशदान आपके रिकॉर्ड से मेल खाता है। कोई शिकायत दर्ज नहीं हुई।",
-  epfoUnavailableBody: "इस प्रोफ़ाइल से कोई EPFO पासबुक और अंशदान सूचना जुड़ी नहीं है।",
+  epfoNoActionBody:
+    "अंशदान आपके रिकॉर्ड से मेल खाता है। कोई शिकायत दर्ज नहीं हुई।",
+  epfoUnavailableBody:
+    "इस प्रोफ़ाइल से कोई EPFO पासबुक और अंशदान सूचना जुड़ी नहीं है।",
   benefitReviewTitle: "योजना आवेदन जाँचें",
-  benefitReviewBody: "सिम्युलेटेड आवेदन जमा करने से पहले कवर, सालाना प्रीमियम और पात्रता जाँचें।",
-  benefitConsent: "मैं समझता हूँ कि यह सिम्युलेटेड आवेदन है और किसी बैंक खाते से राशि नहीं कटेगी।",
+  benefitReviewBody:
+    "सिम्युलेटेड आवेदन जमा करने से पहले कवर, सालाना प्रीमियम और पात्रता जाँचें।",
+  benefitConsent:
+    "मैं समझता हूँ कि यह सिम्युलेटेड आवेदन है और किसी बैंक खाते से राशि नहीं कटेगी।",
   benefitSubmit: "डेमो आवेदन जमा करें",
   benefitCompleteTitle: "आवेदन जमा हुआ",
   benefitCompleteBody: "संदर्भ {reference}। आवेदन अब होम पर दिखाई देगा।",
@@ -490,7 +532,8 @@ export const hi: Record<MessageKey, string> = {
   benefitDraftMissingTitle: "जारी रखने के लिए कोई लाभ मसौदा नहीं है",
   benefitDraftMissingBody: "लाभ पेज से पात्र योजना का आवेदन शुरू करें।",
   refundTrackTitle: "आपका रिफ़ंड प्रक्रिया में है",
-  refundTrackBody: "{amount} का रिफ़ंड {date} को शुरू हुआ। अभी कुछ करने की ज़रूरत नहीं है।",
+  refundTrackBody:
+    "{amount} का रिफ़ंड {date} को शुरू हुआ। अभी कुछ करने की ज़रूरत नहीं है।",
   refundStarted: "{date} को शुरू हुआ",
   refundExpected: "चार से छह हफ्तों में आने की उम्मीद",
   refundAccount: "बैंक खाता 0042 पर समाप्त",
@@ -503,29 +546,41 @@ export const hi: Record<MessageKey, string> = {
   aboutEyebrow: "मूल विचार",
   aboutTitle: "बेहतर इंटरफ़ेस",
   aboutTitleAccent: "काफ़ी नहीं है।",
-  aboutBody: "अगर सार्वजनिक सेवाएँ पहली कोशिश में काम कर जाएँ? Citizen का जवाब: हर व्यक्ति का एक जुड़ा रिकॉर्ड, जिसे हर सेवा पढ़ती और अपडेट करती है।",
+  aboutBody:
+    "अगर सार्वजनिक सेवाएँ पहली कोशिश में काम कर जाएँ? Citizen का जवाब: हर व्यक्ति का एक जुड़ा रिकॉर्ड, जिसे हर सेवा पढ़ती और अपडेट करती है।",
   aboutReturn: "Citizen पर लौटें",
   aboutGuideEyebrow: "Citizen का उपयोग",
   aboutGuideTitle: "चार स्क्रीन। प्रवेश का एक रास्ता।",
-  aboutGuideBody: "होम, मेरे रिकॉर्ड, सेवाएँ और लाभ सब उसी जुड़े रिकॉर्ड पर चलते हैं। होम का अनुरोध मार्गदर्शक आपको सीधे किसी भी स्क्रीन तक ले जाता है।",
+  aboutGuideBody:
+    "होम, मेरे रिकॉर्ड, सेवाएँ और लाभ सब उसी जुड़े रिकॉर्ड पर चलते हैं। होम का अनुरोध मार्गदर्शक आपको सीधे किसी भी स्क्रीन तक ले जाता है।",
   aboutHomeTitle: "होम",
-  aboutHomeBody: "काम, समय-सीमा, देय राशि, रिफ़ंड, सूचनाएँ, दस्तावेज़ और हाल की गतिविधि का दैनिक सार। ज़रूरी काम सबसे ऊपर आते हैं।",
-  aboutHomeOutcome: "सेवा खोजने से पहले देखें कि क्या बदला और किस पर कार्रवाई चाहिए।",
+  aboutHomeBody:
+    "काम, समय-सीमा, देय राशि, रिफ़ंड, सूचनाएँ, दस्तावेज़ और हाल की गतिविधि का दैनिक सार। ज़रूरी काम सबसे ऊपर आते हैं।",
+  aboutHomeOutcome:
+    "सेवा खोजने से पहले देखें कि क्या बदला और किस पर कार्रवाई चाहिए।",
   aboutRecordsTitle: "मेरे रिकॉर्ड",
-  aboutRecordsBody: "आपके दस्तावेज़, परिवार, काम, व्यवसाय, संपत्ति, वाहन और सरकार से किया गया काम, सब एक जुड़े रिकॉर्ड में।",
-  aboutRecordsOutcome: "वही तथ्य दोबारा भरने की जगह रिकॉर्ड सुधारें या फिर से उपयोग करें।",
+  aboutRecordsBody:
+    "आपके दस्तावेज़, परिवार, काम, व्यवसाय, संपत्ति, वाहन और सरकार से किया गया काम, सब एक जुड़े रिकॉर्ड में।",
+  aboutRecordsOutcome:
+    "वही तथ्य दोबारा भरने की जगह रिकॉर्ड सुधारें या फिर से उपयोग करें।",
   aboutServicesTitle: "सेवाएँ",
-  aboutServicesBody: "आप जिस प्रोफ़ाइल का इस्तेमाल कर रहे हैं, उसके लिए यह डेमो क्या-क्या कर सकता है: EPFO और PAN सुधार से भुगतान और फ़ाइलिंग तक।",
-  aboutServicesOutcome: "जानें कि क्या संभव है, अभी क्या उपलब्ध है और कहाँ से शुरू करें।",
+  aboutServicesBody:
+    "आप जिस प्रोफ़ाइल का इस्तेमाल कर रहे हैं, उसके लिए यह डेमो क्या-क्या कर सकता है: EPFO और PAN सुधार से भुगतान और फ़ाइलिंग तक।",
+  aboutServicesOutcome:
+    "जानें कि क्या संभव है, अभी क्या उपलब्ध है और कहाँ से शुरू करें।",
   aboutBenefitsTitle: "लाभ",
-  aboutBenefitsBody: "पात्रता आपके रिकॉर्ड पर मौजूद बातों से तय होती है: उम्र, बैंक खाता, निवास, व्यवसाय का प्रकार और दस्तावेज़। लोन तुलना में आपका बकाया और लंबित रिफ़ंड साथ दिखता है।",
-  aboutBenefitsOutcome: "उपयुक्त योजना और लोन एक नज़र में देखें, साथ में बाकी प्रमाण भी।",
+  aboutBenefitsBody:
+    "पात्रता आपके रिकॉर्ड पर मौजूद बातों से तय होती है: उम्र, बैंक खाता, निवास, व्यवसाय का प्रकार और दस्तावेज़। लोन तुलना में आपका बकाया और लंबित रिफ़ंड साथ दिखता है।",
+  aboutBenefitsOutcome:
+    "उपयुक्त योजना और लोन एक नज़र में देखें, साथ में बाकी प्रमाण भी।",
   aboutAskTitle: "अनुरोध मार्गदर्शक",
-  aboutAskBody: "होम पर बताएँ कि आपको क्या चाहिए। मार्गदर्शक केवल आपके अपने रिकॉर्ड पढ़ता है और आपको सही स्क्रीन तक ले जाता है।",
+  aboutAskBody:
+    "होम पर बताएँ कि आपको क्या चाहिए। मार्गदर्शक केवल आपके अपने रिकॉर्ड पढ़ता है और आपको सही स्क्रीन तक ले जाता है।",
   aboutAskOutcome: "विभाग या पोर्टल मेनू नहीं, अपनी स्थिति से शुरुआत करें।",
   graphMapEyebrow: "Citizen Graph",
   graphMapTitle: "एक नागरिक। हर जुड़ा तथ्य।",
-  graphMapBody: "यह अर्जुन का रिकॉर्ड ग्राफ के रूप में है। पहचान बीच में है। परिवार, काम, संपत्ति, दस्तावेज़ और सरकारी इतिहास उसके चारों ओर जुड़े हैं।",
+  graphMapBody:
+    "यह अर्जुन का रिकॉर्ड ग्राफ के रूप में है। पहचान बीच में है। परिवार, काम, संपत्ति, दस्तावेज़ और सरकारी इतिहास उसके चारों ओर जुड़े हैं।",
   graphMapCenterLabel: "नागरिक रिकॉर्ड",
   graphMapCenterMeta: "{count} सक्रिय कड़ियाँ",
   graphMapFamily: "परिवार",
@@ -540,24 +595,30 @@ export const hi: Record<MessageKey, string> = {
   graphMapObligations: "देनदारी",
   graphMapNotices: "सूचनाएँ",
   graphMapIdentityTitle: "पहचान प्रमाण के साथ आती है।",
-  graphMapIdentityBody: "एक पता और सात दस्तावेज़। अगली सेवाएँ इन्हें दोबारा इस्तेमाल करती हैं, दोबारा पूछती नहीं।",
+  graphMapIdentityBody:
+    "एक पता और सात दस्तावेज़। अगली सेवाएँ इन्हें दोबारा इस्तेमाल करती हैं, दोबारा पूछती नहीं।",
   graphMapLifeTitle: "रिकॉर्ड एक पूरी ज़िंदगी बनता है।",
-  graphMapLifeBody: "परिवार, नौकरी, व्यवसाय, वाहन और संपत्ति का रिश्ता हर तथ्य को संदर्भ देता है।",
+  graphMapLifeBody:
+    "परिवार, नौकरी, व्यवसाय, वाहन और संपत्ति का रिश्ता हर तथ्य को संदर्भ देता है।",
   graphMapServiceTitle: "सेवाएँ यही संदर्भ पढ़ती हैं।",
-  graphMapServiceBody: "लाभ, आवेदन, भुगतान और सूचनाएँ वही जानकारी दोबारा इस्तेमाल करती हैं।",
+  graphMapServiceBody:
+    "लाभ, आवेदन, भुगतान और सूचनाएँ वही जानकारी दोबारा इस्तेमाल करती हैं।",
   graphMapResultTitle: "हर नतीजा आपके रिकॉर्ड में दर्ज होता है।",
-  graphMapResultBody: "भुगतान देय राशि हटाता है, रसीद बनाता है और उसी इतिहास में जुड़ता है जिसे होम दिखाता है।",
+  graphMapResultBody:
+    "भुगतान देय राशि हटाता है, रसीद बनाता है और उसी इतिहास में जुड़ता है जिसे होम दिखाता है।",
   graphMapSource: "अर्जुन का रिकॉर्ड · {nodes} समूह · {connections} कड़ियाँ",
   graphMapScrollCue: "ग्राफ जुड़ता देखने के लिए स्क्रॉल करें",
   graphMapCompleteCue: "ग्राफ जुड़ गया",
   graphVisualTitle: "समस्या चुनें। देखें ग्राफ कैसे प्रतिक्रिया देता है।",
-  graphVisualBody: "यह Citizen Graph काम करते हुए है। आपकी जानकारी एक बार भरती है। सही सेवा उसका इस्तेमाल करती है। जिस स्क्रीन को नतीजा चाहिए, उसे मिल जाता है।",
+  graphVisualBody:
+    "यह Citizen Graph काम करते हुए है। आपकी जानकारी एक बार भरती है। सही सेवा उसका इस्तेमाल करती है। जिस स्क्रीन को नतीजा चाहिए, उसे मिल जाता है।",
   graphVisualScenarioLabel: "Citizen Graph का उदाहरण चुनें",
   graphVisualSituation: "स्थिति",
   graphVisualEvidence: "जुड़ा प्रमाण",
   graphVisualRecord: "नागरिक रिकॉर्ड",
   graphVisualPersonName: "अर्जुन शर्मा",
-  graphVisualRecordBody: "पहचान, रिश्ते, काम, संपत्ति, देनदारी और अनुमतियाँ जुड़ी रहती हैं।",
+  graphVisualRecordBody:
+    "पहचान, रिश्ते, काम, संपत्ति, देनदारी और अनुमतियाँ जुड़ी रहती हैं।",
   graphVisualAction: "सेवा की कार्रवाई",
   graphVisualResults: "ग्राफ में बदलाव",
   graphVisualEpfoLabel: "EPFO अंशदान",
@@ -591,7 +652,8 @@ export const hi: Record<MessageKey, string> = {
   boundaryMetric: "40वाँ दिन",
   boundaryMetricBody: "सुंदर स्टेटस स्क्रीन के पीछे भी दावा लंबित रह सकता है।",
   boundaryTitle: "बेहतर स्क्रीन लंबित कतार साफ़ नहीं कर सकती।",
-  boundaryBody: "अगर वजह अधिकारियों की कतार है, कोई नीति है, कम स्टाफ़ है या विभाग का डेटाबेस है, तो कोई नया डिज़ाइन उसे ठीक नहीं कर सकता। इसलिए Citizen वही करता है जो एक रिकॉर्ड कर सकता है।",
+  boundaryBody:
+    "अगर वजह अधिकारियों की कतार है, कोई नीति है, कम स्टाफ़ है या विभाग का डेटाबेस है, तो कोई नया डिज़ाइन उसे ठीक नहीं कर सकता। इसलिए Citizen वही करता है जो एक रिकॉर्ड कर सकता है।",
   boundaryCannotTitle: "इंटरफ़ेस यह नहीं कर सकता",
   boundaryCannotOne: "नीति या पात्रता के नियम बदलना",
   boundaryCannotTwo: "अधिकारी या काम निपटाने की क्षमता बढ़ाना",
@@ -604,24 +666,34 @@ export const hi: Record<MessageKey, string> = {
   boundaryCanFour: "रसीद, अनुमति और इतिहास एक रिकॉर्ड में लौटाना",
   aboutProofEyebrow: "चलते हुए प्रमाण",
   aboutProofTitle: "एक रिकॉर्ड। चार चलते डेमो।",
-  aboutProofBody: "ये चारों डेमो उसी रिकॉर्ड पर काम करते हैं। हर एक रिकॉर्ड पढ़ता है, उस पर काम करता है और नतीजा Citizen के बाकी हिस्सों में दिखाता है।",
+  aboutProofBody:
+    "ये चारों डेमो उसी रिकॉर्ड पर काम करते हैं। हर एक रिकॉर्ड पढ़ता है, उस पर काम करता है और नतीजा Citizen के बाकी हिस्सों में दिखाता है।",
   aboutProofEpfo: "EPFO पासबुक और अंशदान देखें, फिर शिकायत दर्ज करें।",
-  aboutProofDocuments: "PAN और आधार की तुलना करके सुधार से पहले DigiLocker दस्तावेज़ फिर उपयोग करें।",
-  aboutProofMoney: "चालान या संपत्ति कर भरें, GSTR-3B जमा करें और रसीद या पावती सहेजें।",
-  aboutProofConsent: "अर्जुन और प्रिया के बीच साझा पंजीकरण पूरा करें; सुनीता की पारिवारिक पहुँच दें या वापस लें।",
+  aboutProofDocuments:
+    "PAN और आधार की तुलना करके सुधार से पहले DigiLocker दस्तावेज़ फिर उपयोग करें।",
+  aboutProofMoney:
+    "चालान या संपत्ति कर भरें, GSTR-3B जमा करें और रसीद या पावती सहेजें।",
+  aboutProofConsent:
+    "अर्जुन और प्रिया के बीच साझा पंजीकरण पूरा करें; सुनीता की पारिवारिक पहुँच दें या वापस लें।",
   aboutWhyEyebrow: "यह क्यों मायने रखता है",
   aboutWhyTitle: "रिकॉर्ड सबसे पहले।",
-  aboutWhyBody: "ज़्यादातर रीडिज़ाइन वही विभाग मेन्यू सजाते हैं। Citizen व्यक्ति और उसके रिकॉर्ड को पहले रखता है, और हर सेवा उसी से पढ़ती है।",
+  aboutWhyBody:
+    "ज़्यादातर रीडिज़ाइन वही विभाग मेन्यू सजाते हैं। Citizen व्यक्ति और उसके रिकॉर्ड को पहले रखता है, और हर सेवा उसी से पढ़ती है।",
   aboutWhyCitizenTitle: "पहले व्यक्ति",
-  aboutWhyCitizenBody: "शुरुआत आपकी ज़िंदगी में बदले से होती है: शादी, परिवार में मृत्यु, या नया व्यवसाय।",
+  aboutWhyCitizenBody:
+    "शुरुआत आपकी ज़िंदगी में बदले से होती है: शादी, परिवार में मृत्यु, या नया व्यवसाय।",
   aboutWhyGraphTitle: "कोई जानकारी दोबारा नहीं",
-  aboutWhyGraphBody: "पात्रता, चेतावनी और अगले कदम आपके मौजूदा रिकॉर्ड से आते हैं। कोई स्क्रीन वही बातें दोबारा नहीं पूछती।",
+  aboutWhyGraphBody:
+    "पात्रता, चेतावनी और अगले कदम आपके मौजूदा रिकॉर्ड से आते हैं। कोई स्क्रीन वही बातें दोबारा नहीं पूछती।",
   aboutWhyProofTitle: "चलते डेमो",
-  aboutWhyProofBody: "हर डेमो रिकॉर्ड बदलता है, रसीदें बनाता है और इतिहास जोड़ता है। यहाँ कुछ भी अधूरा नमूना नहीं है।",
+  aboutWhyProofBody:
+    "हर डेमो रिकॉर्ड बदलता है, रसीदें बनाता है और इतिहास जोड़ता है। यहाँ कुछ भी अधूरा नमूना नहीं है।",
   aboutClosingTitle: "व्यक्ति से शुरू करें।",
-  aboutClosingBody: "Citizen खोलें, एक प्रोफ़ाइल चुनें और पूछें कि उस व्यक्ति को क्या चाहिए। रिकॉर्ड संदर्भ देता है। सेवा अगला कदम बताती है।",
+  aboutClosingBody:
+    "Citizen खोलें, एक प्रोफ़ाइल चुनें और पूछें कि उस व्यक्ति को क्या चाहिए। रिकॉर्ड संदर्भ देता है। सेवा अगला कदम बताती है।",
   aboutClosingAction: "Citizen खोलें",
-  aboutBoundary: "काल्पनिक प्रोफ़ाइल, ब्राउज़र में रहने वाली प्रगति और सिम्युलेटेड सेवा जवाब वाला स्वतंत्र प्रोटोटाइप।",
+  aboutBoundary:
+    "काल्पनिक प्रोफ़ाइल, ब्राउज़र में रहने वाली प्रगति और सिम्युलेटेड सेवा जवाब वाला स्वतंत्र प्रोटोटाइप।",
   profileAccessNotice: "काल्पनिक डेटा। बदलाव इसी ब्राउज़र में रहते हैं।",
   openSampleProfile: "प्रोफ़ाइल खोलें",
   serviceJourneyAuthority: "चलता हुआ डेमो",
@@ -638,7 +710,8 @@ export const hi: Record<MessageKey, string> = {
   homeGraphTitle: "यह आपके अपने रिकॉर्ड से बना है।",
   homeGraphAction: "Citizen Graph देखें",
   homeGraphEvidence: "जुड़ा प्रमाण",
-  homeGraphEvidenceValue: "दस्तावेज़ {documents} · पारिवारिक रिश्ते {relationships}",
+  homeGraphEvidenceValue:
+    "दस्तावेज़ {documents} · पारिवारिक रिश्ते {relationships}",
   homeGraphRecord: "नागरिक रिकॉर्ड",
   homeGraphNow: "जिस पर ध्यान चाहिए",
   homeGraphNowValue: "काम {tasks} · बिना पढ़े अपडेट {unread}",
@@ -647,22 +720,32 @@ export const hi: Record<MessageKey, string> = {
   profileScopeEyebrow: "उपलब्ध नहीं",
   profileScopeTitle: "यह सेवा इस प्रोफ़ाइल के लिए उपलब्ध नहीं है",
   profileScopeBody: "होम पर लौटें और दूसरी प्रोफ़ाइल चुनें।",
-  loanProfileScopeBody: "इस प्रोफ़ाइल में तुलना के लिए व्यवसाय रिकॉर्ड नहीं हैं।",
+  loanProfileScopeBody:
+    "इस प्रोफ़ाइल में तुलना के लिए व्यवसाय रिकॉर्ड नहीं हैं।",
   obligationsProfileScopeBody: "इस प्रोफ़ाइल में वाहन या चालान नहीं है।",
-  moneyProfileScopeBody: "इस प्रोफ़ाइल में मिलता भुगतान, फ़ाइलिंग, पासपोर्ट या रिफ़ंड नहीं है।",
+  moneyProfileScopeBody:
+    "इस प्रोफ़ाइल में मिलता भुगतान, फ़ाइलिंग, पासपोर्ट या रिफ़ंड नहीं है।",
   moneyServiceError: "अनुरोध पूरा नहीं हुआ। कुछ नहीं बदला।",
   loanMudraName: "मुद्रा किशोर",
-  loanMudraNote: "सबसे कम मासिक किस्त। पहले से जमा रिटर्न की ITR-V पावती निकालें।",
+  loanMudraNote:
+    "सबसे कम मासिक किस्त। पहले से जमा रिटर्न की ITR-V पावती निकालें।",
   loanBankName: "लघु व्यवसाय सावधि लोन",
-  loanBankNote: "हर महीने ₹606 और पाँच साल में ₹36,360 अधिक ब्याज। बैंक मज़बूत आय प्रमाण माँग सकता है।",
-  loanEvidenceNeeded: "आपका रिटर्न जमा है। लोन देने वाले के लिए {evidence} निकालें; नया रिटर्न जमा नहीं करना है।",
+  loanBankNote:
+    "हर महीने ₹606 और पाँच साल में ₹36,360 अधिक ब्याज। बैंक मज़बूत आय प्रमाण माँग सकता है।",
+  loanEvidenceNeeded:
+    "आपका रिटर्न जमा है। लोन देने वाले के लिए {evidence} निकालें; नया रिटर्न जमा नहीं करना है।",
   loanEvidenceReady: "ज़रूरी प्रमाण मौजूद हैं।",
-  loanRiskDecisionMudra: "निर्णय: पहले ITR-V पाएँ, फिर कम लागत वाला मुद्रा विकल्प चुनें।",
-  loanRiskDecisionBank: "निर्णय: बैंक की माँग के बिना यह विकल्प न चुनें; इसकी लागत अधिक है और आय के मज़बूत प्रमाण लग सकते हैं।",
-  loanRefundCaution: "{count} अलग बिलों में {due} देना है। {refund} रिफ़ंड अलग रिकॉर्ड है और अभी प्रक्रिया में है, इसलिए Citizen उन्हें आपस में नहीं घटाता।",
+  loanRiskDecisionMudra:
+    "निर्णय: पहले ITR-V पाएँ, फिर कम लागत वाला मुद्रा विकल्प चुनें।",
+  loanRiskDecisionBank:
+    "निर्णय: बैंक की माँग के बिना यह विकल्प न चुनें; इसकी लागत अधिक है और आय के मज़बूत प्रमाण लग सकते हैं।",
+  loanRefundCaution:
+    "{count} अलग बिलों में {due} देना है। {refund} रिफ़ंड अलग रिकॉर्ड है और अभी प्रक्रिया में है, इसलिए Citizen उन्हें आपस में नहीं घटाता।",
   loanRiskSummary: "{option} की मासिक लागत सबसे कम है। {evidence}",
-  loanItrClarification: "आपका आयकर रिटर्न पहले ही जमा हो चुका है; इसलिए रिफ़ंड बना है। बाकी ITR-V लोन देने वाले के लिए उसी रिटर्न की पावती है, दूसरा टैक्स रिटर्न नहीं।",
-  loanRiskVerdict: "{decision} {option} की लागत लगभग {emi} प्रति माह है। मौजूदा बिलों के लिए {due} उपलब्ध रखें। {refund} रिफ़ंड बैंक में आने तक उपलब्ध न मानें।",
+  loanItrClarification:
+    "आपका आयकर रिटर्न पहले ही जमा हो चुका है; इसलिए रिफ़ंड बना है। बाकी ITR-V लोन देने वाले के लिए उसी रिटर्न की पावती है, दूसरा टैक्स रिटर्न नहीं।",
+  loanRiskVerdict:
+    "{decision} {option} की लागत लगभग {emi} प्रति माह है। मौजूदा बिलों के लिए {due} उपलब्ध रखें। {refund} रिफ़ंड बैंक में आने तक उपलब्ध न मानें।",
   challanPaidTitle: "चालान भर दिया गया",
   challanPaidBody: "₹500 पैसे से हट गए हैं। रसीद दस्तावेज़ में है।",
   openReceipt: "रसीद खोलें",
@@ -682,12 +765,15 @@ export const hi: Record<MessageKey, string> = {
   challanPaymentError: "भुगतान पूरा नहीं हुआ। चालान अभी बाकी है।",
   fyTurnover: "FY25 कारोबार {amount}",
   delegationSetupTitle: "परिवार से जुड़े कागज़ अर्जुन से साझा करें",
-  delegationSetupBody: "अर्जुन को {date} तक राजेश की पेंशन और जे.पी. नगर संपत्ति के रिकॉर्ड देखने दें। मालिकाना हक़ नहीं बदलेगा और सुनीता कभी भी पहुँच वापस ले सकती हैं।",
+  delegationSetupBody:
+    "अर्जुन को {date} तक राजेश की पेंशन और जे.पी. नगर संपत्ति के रिकॉर्ड देखने दें। मालिकाना हक़ नहीं बदलेगा और सुनीता कभी भी पहुँच वापस ले सकती हैं।",
   delegationGrantAction: "अर्जुन के साथ साझा करें",
   delegationActiveTitle: "परिवार से जुड़े कागज़",
-  delegationActiveBody: "अर्जुन {date} तक जुड़ी पेंशन और संपत्ति के रिकॉर्ड देख सकते हैं। मालिकाना हक़ नहीं बदला है।",
+  delegationActiveBody:
+    "अर्जुन {date} तक जुड़ी पेंशन और संपत्ति के रिकॉर्ड देख सकते हैं। मालिकाना हक़ नहीं बदला है।",
   delegationEndedTitle: "परिवार के कागज़ों की पहुँच समाप्त",
-  delegationEndedBody: "अर्जुन अब जुड़ी पेंशन या पारिवारिक संपत्ति के रिकॉर्ड नहीं देख सकते।",
+  delegationEndedBody:
+    "अर्जुन अब जुड़ी पेंशन या पारिवारिक संपत्ति के रिकॉर्ड नहीं देख सकते।",
   profileSummary: "{age} वर्ष · {place} · {count} दस्तावेज़",
   profileSummaryOne: "{age} वर्ष · {place} · 1 दस्तावेज़",
   addressPending: "पता बाकी है",
@@ -711,11 +797,37 @@ export const hi: Record<MessageKey, string> = {
   landingJourneyNav: "आज़माएँ",
   landingVisionNav: "साझाकरण",
   landingStart: "डेमो खोलें",
+  landingWatchDemo: "वीडियो देखें",
+  landingWatchDemoTitle: "Citizen डेमो",
+  landingSourceCode: "GitHub",
+  landingMusicCreditPrefix: "संगीत",
   landingHeroTitle: "क्या हो अगर सार्वजनिक सेवाएँ पहली कोशिश में काम करें?",
-  landingHeroBody: "आपके सत्यापित दस्तावेज़ जुड़े रहते हैं। सेवाएँ आपकी जानकारी भरी हुई खुलती हैं। हर नतीजा उसी रिकॉर्ड में लौटता है। कोई फॉर्म शून्य से नहीं शुरू होता।",
-  landingBeyondKicker: "Varun Mayya के Build What Moves India हैकाथॉन के लिए बनाया गया।",
+  landingHeroBody:
+    "आपके सत्यापित दस्तावेज़ जुड़े रहते हैं। सेवाएँ आपकी जानकारी भरी हुई खुलती हैं। हर नतीजा उसी रिकॉर्ड में लौटता है। कोई फॉर्म शून्य से नहीं शुरू होता।",
+  landingOriginKicker: "यह विचार कहाँ से आया",
+  landingOriginTitle: "कोई सेवा मौजूद होकर भी लोगों की नज़र से ओझल रह सकती है।",
+  landingOriginBodyOne:
+    "इस हैकाथॉन से पहले मुझे UMANG के बारे में पता नहीं था। वहीं से हमारी शुरुआत हुई।",
+  landingOriginBodyTwo:
+    "UMANG कई सरकारी सेवाओं को एक जगह लाता है। फिर भी लोगों को योजना का नाम पहचानना, विभाग ढूँढ़ना और यह समझना पड़ता है कि वह उनके काम की है या नहीं।",
+  landingOriginDefinition:
+    "Citizen अगली परत की कल्पना करता है: एक जुड़े हुए नागरिक रिकॉर्ड पर बना निजी सार्वजनिक-सेवा गज़ट।",
+  landingOriginChangedTitle: "क्या बदला?",
+  landingOriginChangedBody: "सूचनाएँ, भुगतान, आवेदन और दस्तावेज़ों के बदलाव।",
+  landingOriginAppliesTitle: "मेरे लिए क्या लागू होता है?",
+  landingOriginAppliesBody: "काम के दायित्व, लाभ और सेवाएँ, साथ में उनका कारण।",
+  landingOriginNextTitle: "अब मुझे क्या करना चाहिए?",
+  landingOriginNextBody:
+    "आपसे पहले से जुड़े रिकॉर्ड इस्तेमाल करके सही अगला कदम।",
+  landingOriginNote:
+    "निजी सार्वजनिक-सेवा गज़ट एक व्यक्ति के लिए निजी जानकारी है, कोई आधिकारिक सरकारी प्रकाशन नहीं।",
+  landingOriginDisclaimer:
+    "स्वतंत्र प्रोटोटाइप। UMANG, EPFO, DigiLocker या किसी सरकारी प्राधिकरण से संबद्ध या समर्थित नहीं। सभी सेवा जवाब सिम्युलेटेड हैं।",
+  landingBeyondKicker:
+    "Varun Mayya के Build What Moves India हैकाथॉन के लिए बनाया गया।",
   landingBeyondTitle: "स्पष्ट सुधार सिर्फ़ इतना ही कर सकते हैं।",
-  landingBeyondBody: "साफ़ स्क्रीन, चैट और डैशबोर्ड सब थोड़ा मदद करते हैं। कोई भी असली समस्या नहीं सुलझाता: हर सेवा फिर से शून्य से शुरू होती है।",
+  landingBeyondBody:
+    "साफ़ स्क्रीन, चैट और डैशबोर्ड सब थोड़ा मदद करते हैं। कोई भी असली समस्या नहीं सुलझाता: हर सेवा फिर से शून्य से शुरू होती है।",
   landingSurfaceOneTitle: "सरल इंटरफ़ेस",
   landingSurfaceOneBody: "एक स्क्रीन को आसान बनाता है",
   landingSurfaceTwoTitle: "अपने शब्दों में पूछें",
@@ -724,18 +836,25 @@ export const hi: Record<MessageKey, string> = {
   landingSurfaceThreeBody: "पहले से मौजूद काम का सार दिखाता है",
   landingSystemKicker: "जो सब कुछ जोड़े रखता है",
   landingSystemTitle: "Citizen Graph",
-  landingSystemBody: "आपके दस्तावेज़, रिकॉर्ड और अनुमतियाँ एक सेवा से दूसरी सेवा तक आपके साथ रहती हैं। अगली सेवा वहीं से शुरू करती है जहाँ पिछली रुकी थी।",
+  landingSystemBody:
+    "आपके दस्तावेज़, रिकॉर्ड और अनुमतियाँ एक सेवा से दूसरी सेवा तक आपके साथ रहती हैं। अगली सेवा वहीं से शुरू करती है जहाँ पिछली रुकी थी।",
   landingHackathonLink: "Build What Moves India हैकाथॉन देखें",
   landingProjectTitle: "अब इसे काम करते देखें।",
-  landingProjectBody: "नीचे हर डेमो उसी रिकॉर्ड पर काम करता है। एक चीज़ बदलें और हर स्क्रीन पर नतीजा दिखता है।",
-  landingCurrentOne: "गायब EPFO अंशदान शिकायत बन जाता है और होम पर काम जमा दिखता है।",
+  landingProjectBody:
+    "नीचे हर डेमो उसी रिकॉर्ड पर काम करता है। एक चीज़ बदलें और हर स्क्रीन पर नतीजा दिखता है।",
+  landingCurrentOne:
+    "गायब EPFO अंशदान शिकायत बन जाता है और होम पर काम जमा दिखता है।",
   landingCurrentTwo: "PAN में अंतर होने पर मौजूदा आधार प्रमाण फिर काम आता है।",
-  landingCurrentThree: "चालान भरने पर राशि देय सूची से हटती है और दस्तावेज़ों में रसीद आती है।",
-  landingCurrentFour: "साझा करने से पहले सहमति चाहिए, और पारिवारिक पहुँच कभी भी हटाई जा सकती है।",
-  landingBoundary: "सभी लोग और रिकॉर्ड काल्पनिक हैं। सरकारी जवाब सिम्युलेटेड हैं।",
+  landingCurrentThree:
+    "चालान भरने पर राशि देय सूची से हटती है और दस्तावेज़ों में रसीद आती है।",
+  landingCurrentFour:
+    "साझा करने से पहले सहमति चाहिए, और पारिवारिक पहुँच कभी भी हटाई जा सकती है।",
+  landingBoundary:
+    "सभी लोग और रिकॉर्ड काल्पनिक हैं। सरकारी जवाब सिम्युलेटेड हैं।",
   landingServiceStatus: "Citizen कैसे काम करता है",
   landingVisionTitle: "क्या साझा हो, यह आप तय करें।",
-  landingVisionBody: "आप तय करते हैं कि कौन क्या देखे और किस उद्देश्य के लिए। सहमति साफ़ दिखती है और आप कभी भी उसे वापस ले सकते हैं।",
+  landingVisionBody:
+    "आप तय करते हैं कि कौन क्या देखे और किस उद्देश्य के लिए। सहमति साफ़ दिखती है और आप कभी भी उसे वापस ले सकते हैं।",
   landingVisionOne: "रिकॉर्ड साझा करने से पहले पूछें",
   landingVisionTwo: "स्वीकृत सरकारी कनेक्शन इस्तेमाल करें",
   landingVisionThree: "दिखाएँ कि किसने क्या देखा",
@@ -744,5 +863,6 @@ export const hi: Record<MessageKey, string> = {
   landingClosingBody: "सारा डेटा काल्पनिक है।",
   startBack: "परियोजना पर लौटें",
   startTitle: "प्रोफ़ाइल चुनें",
-  startBody: "पूरा डेमो अर्जुन में है। प्रिया सहमति और सुनीता साझा पहुँच दिखाती हैं।",
+  startBody:
+    "पूरा डेमो अर्जुन में है। प्रिया सहमति और सुनीता साझा पहुँच दिखाती हैं।",
 };
