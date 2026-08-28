@@ -208,6 +208,8 @@ const applicationNodeSchema = z.object({
     currentStep: z.number().int().min(0).max(20).optional(),
     submittedOn: z.iso.date().optional(),
     amountPaid: z.number().nonnegative().optional(),
+    businessType: z.string().min(1).max(100).optional(),
+    city: z.string().min(1).max(80).optional(),
   }),
   verification: verificationSchema,
 });

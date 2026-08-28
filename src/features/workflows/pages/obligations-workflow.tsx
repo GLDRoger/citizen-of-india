@@ -31,7 +31,7 @@ export function ObligationsWorkflow() {
   const [error, setError] = useState<string | null>(null);
   if (!personId) return null;
   if (personId !== "person:arjun") {
-    return <ProcedureShell authority={t("sampleProfileRole")} currentStep={0} procedureId="echallan-payment" steps={steps} title={t("obligationsService")}><StepCard eyebrow={t("profileScopeEyebrow")} title={t("profileScopeTitle")} body={t("obligationsProfileScopeBody")}><LinkButton href="/services" variant="secondary">{t("back")}</LinkButton></StepCard></ProcedureShell>;
+    return <ProcedureShell authority={t("sampleProfileRole")} currentStep={0} procedureId="echallan-payment" showProgress={false} steps={steps} title={t("obligationsService")}><StepCard eyebrow={t("profileScopeEyebrow")} title={t("profileScopeTitle")} body={t("obligationsProfileScopeBody")}><LinkButton href="/services" variant="secondary">{t("back")}</LinkButton></StepCard></ProcedureShell>;
   }
   const obligation = getObligations(graph, personId).find((node) => node.id === "obl:echallan-500");
   const vehicle = getOwnedAssets(graph, personId).find(
@@ -47,9 +47,9 @@ export function ObligationsWorkflow() {
     try {
       const response = await processPayment({ purpose: obligation.attrs.title, amount: obligation.attrs.amount ?? 0, payerId: personId });
       const mutations: GraphMutation[] = [
-        { type: "patchAttrs", nodeId: obligation.id, attrs: { status: "paid", note: `Paid through simulated Karnataka One receipt ${response.data.receipt}.` }, verification: { source: "RTO", state: "verified", asOf: "2026-08-24" } },
-        { type: "addNode", node: { id: "doc:arjun-echallan-receipt", type: "document", attrs: { kind: "payment-receipt", holderName: "Arjun Sharma", numberMasked: maskIdentifier(response.data.receipt), issuedOn: "2026-08-24", authority: response.authority, downloaded: true }, verification: { source: "RTO", state: "verified", asOf: "2026-08-24" } } },
-        { type: "addEdge", edge: { id: "e:arjun-holds-echallan-receipt", type: "holds", from: personId, to: "doc:arjun-echallan-receipt", attrs: {}, validFrom: "2026-08-24", status: "active", verification: { source: "RTO", state: "verified", asOf: "2026-08-24" } } },
+        { type: "patchAttrs", nodeId: obligation.id, attrs: { status: "paid", note: `Paid through simulated Karnataka One receipt ${response.data.receipt}.` }, verification: { source: "RTO", state: "verified", asOf: "2026-08-28" } },
+        { type: "addNode", node: { id: "doc:arjun-echallan-receipt", type: "document", attrs: { kind: "payment-receipt", holderName: "Arjun Sharma", numberMasked: maskIdentifier(response.data.receipt), issuedOn: "2026-08-28", authority: response.authority, downloaded: true }, verification: { source: "RTO", state: "verified", asOf: "2026-08-28" } } },
+        { type: "addEdge", edge: { id: "e:arjun-holds-echallan-receipt", type: "holds", from: personId, to: "doc:arjun-echallan-receipt", attrs: {}, validFrom: "2026-08-28", status: "active", verification: { source: "RTO", state: "verified", asOf: "2026-08-28" } } },
       ];
       commit({ actorId: personId, labelKey: "eventChallanPaid", procedureId: "echallan-payment", mutations });
     } catch {
@@ -60,7 +60,7 @@ export function ObligationsWorkflow() {
   };
 
   const content = complete ? (
-    <CompletionCard title={t("challanPaidTitle")} body={t("challanPaidBody")}><div className="flex flex-wrap gap-3"><LinkButton href="/documents" variant="inverse">{t("openReceipt")} <ArrowRight aria-hidden className="size-4" /></LinkButton><LinkButton href="/home#attention" variant="inverseQuiet">{t("viewUpdatedActivity")}</LinkButton></div></CompletionCard>
+    <CompletionCard title={t("challanPaidTitle")} body={t("challanPaidBody")}><div className="flex flex-wrap gap-3"><LinkButton href="/documents" variant="inverse">{t("openReceipt")} <ArrowRight aria-hidden className="size-4" /></LinkButton><LinkButton href="/home#attention" variant="inverseQuiet">{t("returnHome")}</LinkButton></div></CompletionCard>
   ) : !reviewed ? (
     <StepCard eyebrow={t("challanAuthority")} title={t("challanConfirmTitle")} body={t("challanConfirmBody")}><div className="grid gap-4 border-y border-paper-line py-4 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:items-center"><ReceiptText aria-hidden className="size-5 text-brick" /><div><strong className="block text-sm">{obligation.attrs.title}</strong><span className="text-xs text-ink-mute">{maskIdentifier(vehicle.attrs.regNumber)} · {t("dueOn", { date: obligation.attrs.dueDate ? formatDate(obligation.attrs.dueDate, language) : t("soon") })}</span></div><VerificationBadge verification={obligation.verification} /></div><Button onClick={() => setReviewed(true)}>{t("reviewPayment")} <ArrowRight aria-hidden className="size-4" /></Button></StepCard>
   ) : (

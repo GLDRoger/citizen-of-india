@@ -17,6 +17,7 @@ export function buildIntentContext(graph: CitizenGraph, personId: string): Inten
   if (!person) throw new Error("The active profile is missing from the graph.");
   const applications = getApplications(graph, personId);
   const availableWorkflows: RoutableIntent[] = [...getAvailableServices(graph, personId)];
+  availableWorkflows.push("profile");
   if (getDocuments(graph, personId).length) availableWorkflows.push("documents");
   const hasBenefitJourney = applications.some((application) => application.attrs.kind === "benefit")
     || getEligibility(graph, personId).some((result) => result.benefit.id !== "ben:mudra-kishor" && isBenefitVisibleInDemo(result.benefit.id));

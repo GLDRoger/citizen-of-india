@@ -23,11 +23,12 @@ interface ProcedureShellProps {
   currentStep: number;
   description?: string;
   procedureId: string;
+  showProgress?: boolean;
   steps: ProcedureStep[];
   title: string;
 }
 
-export function ProcedureShell({ title, description, authority, steps, currentStep, children, complete = false, procedureId }: ProcedureShellProps) {
+export function ProcedureShell({ title, description, authority, steps, currentStep, children, complete = false, procedureId, showProgress = true }: ProcedureShellProps) {
   const { t } = useI18n();
   const progress = complete ? 100 : Math.round((Math.min(currentStep, steps.length) / steps.length) * 100);
   return (
@@ -36,9 +37,9 @@ export function ProcedureShell({ title, description, authority, steps, currentSt
       <header className="grid gap-3 sm:gap-4">
         <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
           <div className="grid max-w-4xl gap-2"><h1 className="font-display text-[clamp(2.3rem,5vw,4.35rem)] font-semibold leading-[0.96] tracking-[-0.04em] text-ink">{title}</h1>{description ? <p className="max-w-2xl text-sm leading-6 text-ink-mute sm:text-base">{description}</p> : null}</div>
-          <div className="hidden items-center gap-3 border-y border-paper-line py-2 text-xs font-bold text-ink-mute md:flex"><span>{complete ? t("completed") : `${t("nextStep")} ${Math.min(currentStep + 1, steps.length)}`}</span><strong className="text-indigo-deep">{progress}%</strong></div>
+          {showProgress ? <div className="hidden items-center gap-3 border-y border-paper-line py-2 text-xs font-bold text-ink-mute md:flex"><span>{complete ? t("completed") : `${t("nextStep")} ${Math.min(currentStep + 1, steps.length)}`}</span><strong className="text-indigo-deep">{progress}%</strong></div> : null}
         </div>
-        <StepTimeline complete={complete} currentStep={currentStep} steps={steps} />
+        {showProgress ? <StepTimeline complete={complete} currentStep={currentStep} steps={steps} /> : null}
       </header>
       <section className="min-w-0">{children}</section>
       <MutationReceipt procedureId={procedureId} />

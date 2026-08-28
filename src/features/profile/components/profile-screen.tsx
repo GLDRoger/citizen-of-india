@@ -9,6 +9,7 @@ import {
   getApplications,
   getDocuments,
   getEmployment,
+  getNodeByType,
   getObligations,
   getOwnedAssets,
   getProfileSummary,
@@ -72,12 +73,15 @@ function DelegationPanel({ personId }: { personId: string }) {
     .filter((node) => node.type === "delegation")
     .find((node) => node.attrs.delegatorId === personId || node.attrs.delegateId === personId);
   if (!delegation && personId !== "person:sunita") return null;
-  const canCreate = personId === "person:sunita" && !delegation;
   const activeDelegation = delegation?.attrs.status === "active";
+  const canCreate = personId === "person:sunita" && !activeDelegation;
+  const rajesh = getNodeByType(graph, "person:rajesh", "person");
+  const familyProperty = getNodeByType(graph, "prop:jpnagar-house", "property");
 
   const createDelegation = () => {
-    const mutations: GraphMutation[] = [
-      {
+    const delegationNode: GraphMutation = delegation
+      ? { type: "patchAttrs", nodeId: delegation.id, attrs: { status: "active", expiresOn: "2026-11-22" } }
+      : {
         type: "addNode",
         node: {
           id: "dlg:sunita-arjun-paperwork",
@@ -90,20 +94,22 @@ function DelegationPanel({ personId }: { personId: string }) {
             expiresOn: "2026-11-22",
             status: "active",
           },
-          verification: { source: "Self", state: "self-declared", asOf: "2026-08-24" },
+          verification: { source: "Self", state: "self-declared", asOf: "2026-08-28" },
         },
-      },
+      };
+    const mutations: GraphMutation[] = [
+      delegationNode,
       {
         type: "addEdge",
         edge: {
-          id: "e:arjun-delegateof-sunita",
+          id: `e:arjun-delegateof-sunita:${crypto.randomUUID()}`,
           type: "delegateOf",
           from: "person:arjun",
           to: "person:sunita",
           attrs: { scopes: ["pension", "property"], expiresOn: "2026-11-22" },
-          validFrom: "2026-08-24",
+          validFrom: "2026-08-28",
           status: "active",
-          verification: { source: "Self", state: "self-declared", asOf: "2026-08-24" },
+          verification: { source: "Self", state: "self-declared", asOf: "2026-08-28" },
         },
       },
     ];
@@ -112,9 +118,10 @@ function DelegationPanel({ personId }: { personId: string }) {
 
   const revoke = () => {
     if (!delegation) return;
+    const activeEdge = graph.edges.find((edge) => edge.type === "delegateOf" && edge.from === delegation.attrs.delegateId && edge.to === delegation.attrs.delegatorId && edge.status === "active");
     const mutations: GraphMutation[] = [
       { type: "patchAttrs", nodeId: delegation.id, attrs: { status: "revoked" } },
-      { type: "endEdge", edgeId: "e:arjun-delegateof-sunita", validTo: "2026-08-24" },
+      ...(activeEdge ? [{ type: "endEdge" as const, edgeId: activeEdge.id, validTo: "2026-08-28" }] : []),
     ];
     commit({ actorId: personId, labelKey: "eventPaperworkRevoked", procedureId: "delegation", mutations });
   };
@@ -123,6 +130,7 @@ function DelegationPanel({ personId }: { personId: string }) {
     <section className="grid gap-5 rounded-[8px] bg-indigo-deep p-6 text-paper">
       <div className="flex items-start justify-between gap-4"><KeyRound aria-hidden className="size-5 text-brick" />{delegation ? <StatusPill label={t(getStatusMessageKey(delegation.attrs.status) ?? "pending")} tone={delegation.attrs.status === "active" ? "success" : "neutral"} /> : null}</div>
       <div className="grid gap-2"><p className="text-xs font-bold uppercase tracking-[0.12em] text-paper/55">{t("delegation")}</p><h2 className="font-display text-3xl font-semibold leading-none">{delegation ? t(activeDelegation ? "delegationActiveTitle" : "delegationEndedTitle") : t("delegationSetupTitle")}</h2><p className="text-xs leading-5 text-paper/72">{delegation ? activeDelegation ? t("delegationActiveBody", { date: formatDate(delegation.attrs.expiresOn, language) }) : t("delegationEndedBody") : t("delegationSetupBody", { date: formatDate("2026-11-22", language) })}</p></div>
+      {activeDelegation && personId === "person:arjun" ? <div className="grid divide-y divide-paper/15 border-y border-paper/15 text-xs"><div className="grid gap-1 py-3"><span className="text-paper/60">{rajesh?.attrs.pension?.scheme ?? "EPS-95"}</span><strong className="text-sm text-paper">{t("monthlyAmount", { amount: formatCurrency(rajesh?.attrs.pension?.monthlyAmount ?? 0) })}</strong></div><div className="grid gap-1 py-3"><span className="capitalize text-paper/60">{familyProperty?.attrs.kind ?? t("propertyAndVehicles")}</span><strong className="text-sm text-paper">{rajesh?.attrs.name ?? "Rajesh Sharma"} · {familyProperty?.attrs.authority ?? "BBMP"}</strong></div></div> : null}
       {canCreate ? <Button className="bg-paper text-ink hover:bg-saffron" onClick={createDelegation}>{t("delegationGrantAction")}</Button> : delegation?.attrs.status === "active" && personId === "person:sunita" ? <Button onClick={revoke} variant="inverseQuiet">{t("revoke")}</Button> : null}
     </section>
   );
@@ -155,7 +163,7 @@ export function ProfileScreen() {
 
           <section className="grid gap-5"><SectionHeader title={t("propertyAndVehicles")} />{assets.filter((asset) => asset.type !== "business").length ? <div>{assets.filter((asset) => asset.type !== "business").map((asset) => <AssetRow asset={asset} key={asset.id} />)}</div> : <p className="border-y border-paper-line py-6 text-sm text-ink-mute">{t("noPropertyVehicles")}</p>}</section>
 
-          <section className="grid gap-5"><SectionHeader eyebrow={`${applications.length + obligations.length}`} title={t("governmentDealings")} /><div className="border-y border-paper-line">{applications.map((application) => <GovernmentRow authority={application.attrs.authority} detail={formatDate(application.attrs.createdOn, language)} key={application.id} status={application.attrs.status} title={localizeNodeTitle(language, application.id, application.attrs.title)} />)}{obligations.map((obligation) => <GovernmentRow authority={obligation.attrs.authority} detail={obligation.attrs.amount !== undefined ? formatCurrency(obligation.attrs.amount) : obligation.attrs.dueDate ? formatDate(obligation.attrs.dueDate, language) : undefined} key={obligation.id} status={obligation.attrs.status} title={localizeNodeTitle(language, obligation.id, obligation.attrs.title)} />)}</div></section>
+          <section className="grid scroll-mt-24 gap-5" id="government-dealings"><SectionHeader eyebrow={`${applications.length + obligations.length}`} title={t("governmentDealings")} /><div className="border-y border-paper-line">{applications.map((application) => <GovernmentRow authority={application.attrs.authority} detail={formatDate(application.attrs.createdOn, language)} key={application.id} status={application.attrs.status} title={localizeNodeTitle(language, application.id, application.attrs.title)} />)}{obligations.map((obligation) => <GovernmentRow authority={obligation.attrs.authority} detail={obligation.attrs.amount !== undefined ? formatCurrency(obligation.attrs.amount) : obligation.attrs.dueDate ? formatDate(obligation.attrs.dueDate, language) : undefined} key={obligation.id} status={obligation.attrs.status ?? "due"} title={localizeNodeTitle(language, obligation.id, obligation.attrs.title)} />)}</div></section>
         </div>
         <div className="grid content-start gap-5">
           <DelegationPanel personId={personId} />

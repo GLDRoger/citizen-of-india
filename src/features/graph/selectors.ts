@@ -165,16 +165,11 @@ function getSpouse(graph: CitizenGraph, personId: string): PersonNode | undefine
   return getPerson(graph, spouseId);
 }
 
-function hasDocumentEvidence(graph: CitizenGraph, evidence: string) {
-  if (graph.nodes.some((node) => node.type === "document" && node.id === evidence)) {
-    return true;
-  }
-  if (evidence === "death-certificate") {
-    return graph.nodes.some(
-      (node) => node.type === "document" && node.attrs.kind === "death-certificate",
-    );
-  }
-  return false;
+function hasDocumentEvidence(graph: CitizenGraph, personId: string, evidence: string) {
+  const documents = getDocuments(graph, personId);
+  return evidence === "death-certificate"
+    ? documents.some((node) => node.attrs.kind === evidence)
+    : documents.some((node) => node.id === evidence);
 }
 
 function resolveFact(graph: CitizenGraph, person: PersonNode, field: string): unknown {
@@ -207,7 +202,7 @@ function resolveFact(graph: CitizenGraph, person: PersonNode, field: string): un
     case "business.vintageYears":
       return business ? ageFromDob(business.attrs.registeredOn) : undefined;
     case "documents.deathCertificate":
-      return hasDocumentEvidence(graph, "death-certificate");
+      return hasDocumentEvidence(graph, person.id, "death-certificate");
     case "spouse.deceased":
       return Boolean(spouse?.attrs.deceasedOn);
     case "spouse.epsPension":
@@ -272,7 +267,7 @@ export function evaluateBenefit(
     return {
       rule,
       passed: rulePasses(fact, rule),
-      missing: rule.missingEvidence && !hasDocumentEvidence(graph, rule.missingEvidence),
+      missing: rule.missingEvidence && !hasDocumentEvidence(graph, person.id, rule.missingEvidence),
     };
   });
   const failedReasons = details
@@ -343,9 +338,9 @@ export function getThingsToDo(graph: CitizenGraph, personId: string): TaskView[]
       href: obligationHrefs[node.id] ?? "/home#attention",
       urgent: node.attrs.dueDate ? daysUntil(node.attrs.dueDate) <= 14 : false,
     }));
-  const applicationTasks = getApplications(graph, personId)
-    .filter((node) => node.attrs.status !== "completed")
-    .map((node) => ({
+  const applications = getApplications(graph, personId)
+    .filter((node) => node.attrs.status !== "completed");
+  const toApplicationTask = (node: ApplicationNode) => ({
       id: node.id,
       title: node.attrs.title,
       meta:
@@ -355,11 +350,21 @@ export function getThingsToDo(graph: CitizenGraph, personId: string): TaskView[]
       metaKey: node.attrs.status === "partner-consent-pending" && personId === "person:priya"
         ? "consentNeeded"
         : undefined,
-      href: getApplicationHref(node) ?? "/home#attention",
+      href: getApplicationHref(node) ?? "/you#government-dealings",
       urgent: node.attrs.status === "partner-consent-pending" && personId === "person:priya",
-    }));
+    });
+  const urgentApplicationTasks = applications
+    .filter((node) => node.attrs.status === "partner-consent-pending" && personId === "person:priya")
+    .map(toApplicationTask);
+  const actionableApplicationTasks = applications
+    .filter((node) => ["draft", "documents-ready", "appointment-booked"].includes(node.attrs.status))
+    .map(toApplicationTask);
+  const trackingApplicationTasks = applications
+    .filter((node) => !urgentApplicationTasks.some((task) => task.id === node.id) && !actionableApplicationTasks.some((task) => task.id === node.id))
+    .map(toApplicationTask);
+  const applicationRecordIds = new Set(applications.map((node) => node.attrs.relatedTo).filter((id): id is string => Boolean(id)));
   const mismatchTasks = getDocuments(graph, personId)
-    .filter((node) => node.verification.state === "mismatch")
+    .filter((node) => node.verification.state === "mismatch" && !applicationRecordIds.has(node.id))
     .map((node) => ({
       id: node.id,
       title: `${node.attrs.kind.toUpperCase()} record needs attention`,
@@ -370,13 +375,13 @@ export function getThingsToDo(graph: CitizenGraph, personId: string): TaskView[]
       href: "/workflows/record-correction",
       urgent: false,
     }));
-  return [...applicationTasks, ...obligationTasks, ...mismatchTasks].slice(0, 6);
+  return [...urgentApplicationTasks, ...obligationTasks, ...mismatchTasks, ...actionableApplicationTasks, ...trackingApplicationTasks];
 }
 
 export function getMoneySummary(graph: CitizenGraph, personId: string) {
   return getObligations(graph, personId).reduce(
     (summary, node) => {
-      if (node.attrs.status === "paid" || node.attrs.status === "received") return summary;
+      if (["paid", "received", "completed"].includes(node.attrs.status ?? "")) return summary;
       if (node.attrs.direction === "payable") summary.payable += node.attrs.amount ?? 0;
       if (node.attrs.direction === "receivable") summary.receivable += node.attrs.amount ?? 0;
       return summary;

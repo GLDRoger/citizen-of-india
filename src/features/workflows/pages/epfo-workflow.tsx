@@ -55,8 +55,8 @@ export function EpfoWorkflow() {
 
   if (!employment || !notice) {
     return (
-      <ProcedureShell authority={t("epfoAuthority")} currentStep={0} procedureId="epfo-grievance" steps={stepsByLanguage[language]} title={t("epfoWorkflowTitle")}>
-        <StepCard title={t("profileScopeTitle")} body={t("epfoUnavailableBody")}>
+      <ProcedureShell authority={t("epfoAuthority")} currentStep={0} procedureId="epfo-grievance" showProgress={false} steps={stepsByLanguage[language]} title={t("epfoWorkflowTitle")}>
+        <StepCard eyebrow={t("profileScopeEyebrow")} title={t("profileScopeTitle")} body={t("epfoUnavailableBody")}>
           <LinkButton href="/services" variant="secondary">{t("back")}</LinkButton>
         </StepCard>
       </ProcedureShell>
@@ -81,8 +81,8 @@ export function EpfoWorkflow() {
               title: t("epfoService"),
               authority: t("epfoAuthority"),
               status: "submitted",
-              createdOn: "2026-08-27",
-              submittedOn: "2026-08-27",
+              createdOn: "2026-08-28",
+              submittedOn: "2026-08-28",
               relatedTo: employment.id,
               kind: "epfo-grievance",
               participants: [personId],
@@ -90,7 +90,7 @@ export function EpfoWorkflow() {
               reference: response.data.grievanceReference,
               note: t(issueKey),
             },
-            verification: { source: "EPFO", state: "pending", asOf: "2026-08-27" },
+            verification: { source: "EPFO", state: "pending", asOf: "2026-08-28" },
           },
         },
         {
@@ -101,9 +101,9 @@ export function EpfoWorkflow() {
             from: personId,
             to: applicationId,
             attrs: {},
-            validFrom: "2026-08-27",
+            validFrom: "2026-08-28",
             status: "active",
-            verification: { source: "EPFO", state: "pending", asOf: "2026-08-27" },
+            verification: { source: "EPFO", state: "pending", asOf: "2026-08-28" },
           },
         },
       ];

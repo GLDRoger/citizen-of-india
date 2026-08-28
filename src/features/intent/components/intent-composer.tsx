@@ -81,6 +81,7 @@ export function IntentComposer() {
   const hasBenefitApplication = graph.nodes.some((node) => node.type === "application" && node.attrs.kind === "benefit" && node.attrs.participants?.includes(personId ?? "") === true);
   const resultHref = result?.route === "service-unavailable" ? "/services"
     : result?.route === "documents" ? "/documents"
+    : result?.route === "profile" ? "/you"
     : result?.route === "benefit-application" ? hasBenefitApplication ? "/workflows/benefit-application" : "/discover"
     : result?.route === "obligations"
     ? /(challan|चालान|ದಂಡ)/iu.test(text) ? "/workflows/obligations" : "/home#attention"
@@ -120,7 +121,7 @@ export function IntentComposer() {
             {result.clarification ? <p className="text-sm font-bold text-ink">{result.clarification}</p> : null}
           </div>
           <Link className="inline-flex min-h-12 items-center justify-center gap-2 rounded-[4px] bg-indigo-deep px-5 text-sm font-bold text-paper transition-colors hover:bg-indigo" href={resultHref}>
-            {result.route === "service-unavailable" ? t("unavailablePageAction") : t("continueAction")} <ArrowRight aria-hidden className="size-4" />
+            {result.route === "service-unavailable" ? t("unavailablePageAction") : result.route === "obligations" ? t("view") : t("continueAction")} <ArrowRight aria-hidden className="size-4" />
           </Link>
         </article>
       ) : null}

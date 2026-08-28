@@ -56,12 +56,12 @@ export function BenefitApplicationWorkflow() {
         nodeId: application.id,
         attrs: {
           status: "submitted",
-          submittedOn: "2026-08-27",
+          submittedOn: "2026-08-28",
           currentStep: 2,
           reference: response.data.applicationReference,
           note: "Simulated scheme application submitted without collecting bank details.",
         },
-        verification: { source: "Self", state: "pending", asOf: "2026-08-27" },
+        verification: { source: "Self", state: "pending", asOf: "2026-08-28" },
       }];
       commit({ actorId: personId, labelKey: "eventBenefitApplicationSubmitted", procedureId: "benefit-application", mutations });
     } catch {
@@ -72,7 +72,7 @@ export function BenefitApplicationWorkflow() {
   };
 
   const content = !application || !benefit ? (
-    <StepCard title={t("benefitDraftMissingTitle")} body={t("benefitDraftMissingBody")}>
+    <StepCard eyebrow={t("profileScopeEyebrow")} title={t("benefitDraftMissingTitle")} body={t("benefitDraftMissingBody")}>
       <LinkButton href="/discover" variant="secondary">{t("discover")}</LinkButton>
     </StepCard>
   ) : submitted ? (
@@ -92,5 +92,5 @@ export function BenefitApplicationWorkflow() {
     </StepCard>
   );
 
-  return <ProcedureShell authority={benefit?.attrs.authority ?? t("simulatedResponse")} complete={submitted} currentStep={submitted ? 2 : application ? 1 : 0} procedureId="benefit-application" steps={stepsByLanguage[language]} title={t("benefitReviewTitle")}>{content}</ProcedureShell>;
+  return <ProcedureShell authority={benefit?.attrs.authority ?? t("simulatedResponse")} complete={submitted} currentStep={submitted ? 2 : application ? 1 : 0} procedureId="benefit-application" showProgress={Boolean(application)} steps={stepsByLanguage[language]} title={t("benefitReviewTitle")}>{content}</ProcedureShell>;
 }

@@ -1,6 +1,6 @@
 import type { ServiceWorkflowSlug } from "@/features/services/availability";
 
-export type RoutableIntent = ServiceWorkflowSlug | "benefit-application" | "documents";
+export type RoutableIntent = ServiceWorkflowSlug | "benefit-application" | "documents" | "profile";
 export type WorkflowSlug = RoutableIntent | "service-unavailable";
 
 export interface IntentContext {

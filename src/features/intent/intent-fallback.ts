@@ -17,7 +17,8 @@ function detectRoute(text: string): WorkflowSlug {
   if (/(passport.*renew|renew.*passport|passport expiry|पासपोर्ट.*नवीनी|पासपोर्ट.*समाप्त|ಪಾಸ್‌ಪೋರ್ಟ್.*ನವೀ|ಪಾಸ್‌ಪೋರ್ಟ್.*ಅವಧಿ)/u.test(normalized)) return "passport-renewal";
   if (/(tax refund|refund status|track.*refund|मेरा.*रिफंड|रिफंड.*स्थिति|कर वापसी|ಮರುಪಾವತಿ.*ಸ್ಥಿತಿ|ತೆರಿಗೆ ಮರುಪಾವತಿ)/u.test(normalized)) return "refund-track";
   if (/(pmsby|suraksha bima|insurance scheme|benefit|scheme eligibility|पीएमएसबीवाई|सुरक्षा बीमा|योजना|पात्रता|ಪಿಎಂಎಸ್‌ಬಿವೈ|ಸುರಕ್ಷಾ ವಿಮೆ|ಯೋಜನೆ|ಅರ್ಹತೆ)/u.test(normalized)) return "benefit-application";
-  if (/(digilocker|documents|my records|दस्तावेज|डिजिलॉकर|मेरे रिकॉर्ड|ದಾಖಲೆಗಳು|ಡಿಜಿಲಾಕರ್|ನನ್ನ ದಾಖಲೆ)/u.test(normalized)) return "documents";
+  if (/(my records|my profile|मेरे रिकॉर्ड|मेरी प्रोफ़ाइल|ನನ್ನ ದಾಖಲೆ|ನನ್ನ ಪ್ರೊಫೈಲ್)/u.test(normalized)) return "profile";
+  if (/(digilocker|documents|दस्तावेज|डिजिलॉकर|ದಾಖಲೆಗಳು|ಡಿಜಿಲಾಕರ್)/u.test(normalized)) return "documents";
   if (/(loan|mudra|credit|कर्ज|लोन|ಸಾಲ)/u.test(normalized)) return "loan";
   if (/(pan|name mismatch|wrong name|record mismatch|correct.*name|नाम.*गलत|नाम.*सुधार|पैन|रिकॉर्ड.*अंतर|ಹೆಸರು.*ತಪ್ಪು|ಹೆಸರು.*ತಿದ್ದು|ಪ್ಯಾನ್|ದಾಖಲೆ.*ವ್ಯತ್ಯಾಸ)/u.test(normalized)) return "record-correction";
   if (/(start.*business|new business|business plan|व्यवसाय|बिज़नेस|ವ್ಯವಹಾರ)/u.test(normalized)) return "start-business";
@@ -32,6 +33,7 @@ const plans: Record<IntentResponse["language"], Record<ConnectedWorkflow, Plan>>
   en: {
     "benefit-application": { title: "Check benefit eligibility", reply: "Review the schemes this profile may qualify for, then continue any draft application.", steps: ["Check eligibility", "Review the scheme", "Submit the demo application"] },
     documents: { title: "Open your documents", reply: "See issued DigiLocker documents and receipts saved by this demo.", steps: ["Open Documents", "Check the source", "Use the record in a service"] },
+    profile: { title: "Open My records", reply: "See your documents, family, work, business, assets and government history in one connected record.", steps: ["Open My records", "Review linked facts", "Check government history"] },
     epfo: { title: "Check EPFO records", reply: "Review your UAN, passbook balance and latest contribution. Register a grievance if something is wrong.", steps: ["Check the passbook", "Review the contribution", "Choose the next action"] },
     gstr3b: { title: "File GSTR-3B", reply: "Review the business, masked GSTIN and filing period before the simulated filing.", steps: ["Check the return", "Confirm the details", "Save the acknowledgement"] },
     marriage: { title: "Marriage registration", reply: "Invite your partner, share records with consent and register together.", steps: ["Send the invitation", "Choose records and witnesses", "Book and register"] },
@@ -46,6 +48,7 @@ const plans: Record<IntentResponse["language"], Record<ConnectedWorkflow, Plan>>
   hi: {
     "benefit-application": { title: "योजना पात्रता जाँचें", reply: "इस प्रोफ़ाइल के लिए उपलब्ध योजनाएँ देखें और किसी मौजूदा ड्राफ्ट आवेदन को आगे बढ़ाएँ।", steps: ["पात्रता जाँचें", "योजना देखें", "डेमो आवेदन जमा करें"] },
     documents: { title: "अपने दस्तावेज़ खोलें", reply: "DigiLocker से जारी दस्तावेज़ और इस डेमो की रसीदें देखें।", steps: ["दस्तावेज़ खोलें", "स्रोत जाँचें", "रिकॉर्ड को सेवा में उपयोग करें"] },
+    profile: { title: "मेरे रिकॉर्ड खोलें", reply: "दस्तावेज़, परिवार, काम, व्यवसाय, संपत्ति और सरकारी इतिहास एक जुड़े रिकॉर्ड में देखें।", steps: ["मेरे रिकॉर्ड खोलें", "जुड़े तथ्य देखें", "सरकारी इतिहास जाँचें"] },
     epfo: { title: "EPFO रिकॉर्ड जाँचें", reply: "UAN, पासबुक बैलेंस और नवीनतम अंशदान जाँचें। कोई गड़बड़ी हो तो शिकायत दर्ज करें।", steps: ["पासबुक जाँचें", "अंशदान जाँचें", "अगला कदम चुनें"] },
     gstr3b: { title: "GSTR-3B जमा करें", reply: "सिम्युलेटेड फ़ाइलिंग से पहले व्यवसाय, छिपा हुआ GSTIN और अवधि जाँचें।", steps: ["रिटर्न जाँचें", "जानकारी पक्की करें", "पावती सहेजें"] },
     marriage: { title: "विवाह पंजीकरण", reply: "साथी को बुलाएँ, सहमति से दस्तावेज़ साझा करें और साथ पंजीकरण करें।", steps: ["आमंत्रण भेजें", "दस्तावेज़ और गवाह चुनें", "अपॉइंटमेंट लेकर पंजीकरण करें"] },
@@ -60,6 +63,7 @@ const plans: Record<IntentResponse["language"], Record<ConnectedWorkflow, Plan>>
   hinglish: {
     "benefit-application": { title: "Scheme eligibility check karein", reply: "Is profile ke liye schemes dekhein aur existing draft application continue karein.", steps: ["Eligibility dekhein", "Scheme review karein", "Demo application submit karein"] },
     documents: { title: "Apne documents kholein", reply: "DigiLocker issued documents aur demo receipts ek jagah dekhein.", steps: ["Documents kholein", "Source check karein", "Record service mein use karein"] },
+    profile: { title: "My records kholein", reply: "Documents, family, work, business, assets aur government history ek connected record mein dekhein.", steps: ["My records kholein", "Linked facts dekhein", "Government history check karein"] },
     epfo: { title: "EPFO records check karein", reply: "UAN, passbook balance aur latest contribution dekhein. Galti ho to grievance register karein.", steps: ["Passbook dekhein", "Contribution check karein", "Agla action chunein"] },
     gstr3b: { title: "GSTR-3B file karein", reply: "Demo filing se pehle business, masked GSTIN aur period check karein.", steps: ["Return check karein", "Details confirm karein", "Acknowledgement save karein"] },
     marriage: { title: "Marriage registration", reply: "Partner ko invite karein, consent se documents share karein aur saath register karein.", steps: ["Invite bhejein", "Documents aur witness chunein", "Appointment lekar register karein"] },
@@ -74,6 +78,7 @@ const plans: Record<IntentResponse["language"], Record<ConnectedWorkflow, Plan>>
   kn: {
     "benefit-application": { title: "ಯೋಜನೆ ಅರ್ಹತೆ ಪರಿಶೀಲಿಸಿ", reply: "ಈ ಪ್ರೊಫೈಲ್‌ಗೆ ದೊರೆಯಬಹುದಾದ ಯೋಜನೆಗಳನ್ನು ನೋಡಿ ಮತ್ತು ಈಗಿರುವ ಕರಡು ಅರ್ಜಿಯನ್ನು ಮುಂದುವರಿಸಿ.", steps: ["ಅರ್ಹತೆ ನೋಡಿ", "ಯೋಜನೆ ಪರಿಶೀಲಿಸಿ", "ಡೆಮೊ ಅರ್ಜಿ ಸಲ್ಲಿಸಿ"] },
     documents: { title: "ನಿಮ್ಮ ದಾಖಲೆಗಳನ್ನು ತೆರೆಯಿರಿ", reply: "DigiLocker ನೀಡಿದ ದಾಖಲೆಗಳು ಮತ್ತು ಈ ಡೆಮೊದಲ್ಲಿ ಉಳಿಸಿದ ರಸೀದಿಗಳನ್ನು ನೋಡಿ.", steps: ["ದಾಖಲೆ ತೆರೆಯಿರಿ", "ಮೂಲ ಪರಿಶೀಲಿಸಿ", "ಸೇವೆಯಲ್ಲಿ ದಾಖಲೆ ಬಳಸಿ"] },
+    profile: { title: "ನನ್ನ ದಾಖಲೆಗಳನ್ನು ತೆರೆಯಿರಿ", reply: "ದಾಖಲೆಗಳು, ಕುಟುಂಬ, ಕೆಲಸ, ವ್ಯವಹಾರ, ಆಸ್ತಿ ಮತ್ತು ಸರ್ಕಾರಿ ಇತಿಹಾಸವನ್ನು ಒಂದೇ ಸಂಪರ್ಕಿತ ದಾಖಲೆಯಲ್ಲಿ ನೋಡಿ.", steps: ["ನನ್ನ ದಾಖಲೆ ತೆರೆಯಿರಿ", "ಸಂಪರ್ಕಿತ ಮಾಹಿತಿಯನ್ನು ನೋಡಿ", "ಸರ್ಕಾರಿ ಇತಿಹಾಸ ಪರಿಶೀಲಿಸಿ"] },
     epfo: { title: "EPFO ದಾಖಲೆ ಪರಿಶೀಲಿಸಿ", reply: "UAN, ಪಾಸ್‌ಬುಕ್ ಬಾಕಿ ಮತ್ತು ಇತ್ತೀಚಿನ ವಂತಿಗೆಯನ್ನು ನೋಡಿ. ತಪ್ಪಿದ್ದರೆ ದೂರು ದಾಖಲಿಸಿ.", steps: ["ಪಾಸ್‌ಬುಕ್ ನೋಡಿ", "ವಂತಿಗೆ ಪರಿಶೀಲಿಸಿ", "ಮುಂದಿನ ಕ್ರಮ ಆರಿಸಿ"] },
     gstr3b: { title: "GSTR-3B ಸಲ್ಲಿಸಿ", reply: "ಅನುಕರಿತ ಸಲ್ಲಿಕೆಗೆ ಮೊದಲು ವ್ಯವಹಾರ, ಮರೆಮಾಡಿದ GSTIN ಮತ್ತು ಅವಧಿ ಪರಿಶೀಲಿಸಿ.", steps: ["ರಿಟರ್ನ್ ಪರಿಶೀಲಿಸಿ", "ವಿವರ ಖಚಿತಪಡಿಸಿ", "ಸ್ವೀಕೃತಿ ಉಳಿಸಿ"] },
     marriage: { title: "ವಿವಾಹ ನೋಂದಣಿ", reply: "ಸಂಗಾತಿಯನ್ನು ಆಹ್ವಾನಿಸಿ, ಒಪ್ಪಿಗೆಯೊಂದಿಗೆ ದಾಖಲೆ ಹಂಚಿ, ಒಟ್ಟಿಗೆ ನೋಂದಾಯಿಸಿ.", steps: ["ಆಹ್ವಾನ ಕಳುಹಿಸಿ", "ದಾಖಲೆ ಮತ್ತು ಸಾಕ್ಷಿ ಆರಿಸಿ", "ಭೇಟಿ ಪಡೆದು ನೋಂದಾಯಿಸಿ"] },

@@ -63,7 +63,7 @@ export function RecordCorrectionWorkflow() {
           verification: {
             source: "NSDL",
             state: "pending",
-            asOf: "2026-08-24",
+            asOf: "2026-08-28",
             note: "A simulated name-correction request is pending. The current PAN name remains unchanged until a response arrives.",
           },
         },
@@ -73,11 +73,11 @@ export function RecordCorrectionWorkflow() {
           attrs: {
             kind: "record-correction",
             status: "submitted",
-            submittedOn: "2026-08-24",
+            submittedOn: "2026-08-28",
             reference: response.data.acknowledgement,
             note: "Simulated correction submitted. The PAN record has not been overwritten.",
           },
-          verification: { source: "Self", state: "pending", asOf: "2026-08-24" },
+          verification: { source: "Self", state: "pending", asOf: "2026-08-28" },
         },
       ];
       commit({ actorId: personId, labelKey: "eventPanCorrectionSubmitted", procedureId: "record-correction", mutations });
@@ -106,7 +106,7 @@ export function RecordCorrectionWorkflow() {
       <Button loading={loading} onClick={() => void submit()}><FileCheck2 aria-hidden className="size-4" />{t("recordCorrectionSubmit")}</Button>
     </StepCard>
   ) : (
-    <StepCard title={t("recordCorrectionUnavailableTitle")} body={t("recordCorrectionUnavailableBody")}>
+    <StepCard eyebrow={t("profileScopeEyebrow")} title={t("recordCorrectionUnavailableTitle")} body={t("recordCorrectionUnavailableBody")}>
       <LinkButton href="/documents" variant="secondary">{t("viewDocuments")}</LinkButton>
     </StepCard>
   );
@@ -117,6 +117,7 @@ export function RecordCorrectionWorkflow() {
       complete={submitted}
       currentStep={submitted ? 3 : 1}
       procedureId="record-correction"
+      showProgress={Boolean(submitted || canSubmit)}
       steps={steps}
       title={t("recordCorrectionService")}
     >

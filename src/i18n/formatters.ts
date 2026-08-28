@@ -22,6 +22,7 @@ const documentKindKeys: Record<string, MessageKey> = {
   "death-certificate": "documentDeathCertificate",
   "driving-licence": "documentDrivingLicence",
   "gst-registration": "documentGstRegistration",
+  "gst-filing-acknowledgement": "documentGstAcknowledgement",
   "marriage-certificate": "documentMarriageCertificate",
   pan: "documentPan",
   passport: "documentPassport",
