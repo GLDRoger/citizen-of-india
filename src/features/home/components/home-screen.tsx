@@ -11,6 +11,7 @@ import {
   getNotices,
   getObligations,
   getProfileSummary,
+  getRelationshipViews,
   getThingsToDo,
   type TaskView,
 } from "@/features/graph/selectors";
@@ -79,6 +80,22 @@ function SummaryLedgerItem({ label, value }: { label: string; value: string | nu
   );
 }
 
+function HomeGraphTrace({ documents, name, relationships, tasks, unread }: { documents: number; name: string; relationships: number; tasks: number; unread: number }) {
+  const { t } = useI18n();
+  return (
+    <section className="grid gap-5 border-y border-paper-line py-5 lg:grid-cols-[13rem_minmax(0,1fr)] lg:items-center lg:gap-8">
+      <div className="grid gap-2"><p className="text-xs font-bold text-indigo-deep">{t("homeGraphKicker")}</p><h2 className="font-display text-2xl font-semibold leading-tight">{t("homeGraphTitle")}</h2><Link className="min-h-11 w-fit content-center text-xs font-bold text-indigo-deep underline decoration-indigo-deep/25 underline-offset-4" href="/about#citizen-graph">{t("homeGraphAction")}</Link></div>
+      <div className="grid gap-2 sm:grid-cols-[minmax(0,1fr)_2rem_minmax(10rem,0.72fr)_2rem_minmax(0,1fr)] sm:items-stretch">
+        <div className="grid content-center gap-1 bg-paper-shade px-4 py-3"><span className="text-xs font-bold text-ink-mute">{t("homeGraphEvidence")}</span><strong className="text-sm leading-5">{t("homeGraphEvidenceValue", { documents, relationships })}</strong></div>
+        <span aria-hidden className="grid place-items-center font-display text-xl text-saffron"><span className="sm:hidden">↓</span><span className="hidden sm:inline">→</span></span>
+        <div className="grid content-center bg-indigo-deep px-4 py-3 text-paper"><span className="text-xs font-bold text-paper/70">{t("homeGraphRecord")}</span><strong className="font-display text-xl leading-tight">{name}</strong></div>
+        <span aria-hidden className="grid place-items-center font-display text-xl text-saffron"><span className="sm:hidden">↓</span><span className="hidden sm:inline">→</span></span>
+        <div className="grid content-center gap-1 bg-indigo-tint px-4 py-3"><span className="text-xs font-bold text-indigo-deep">{t("homeGraphNow")}</span><strong className="text-sm leading-5">{t("homeGraphNowValue", { tasks, unread })}</strong></div>
+      </div>
+    </section>
+  );
+}
+
 export function HomeScreen() {
   const { t } = useI18n();
   const personId = useAuthStore((state) => state.personId);
@@ -89,6 +106,7 @@ export function HomeScreen() {
   if (!profile) return null;
 
   const tasks = getThingsToDo(graph, personId);
+  const relationships = getRelationshipViews(graph, personId);
   const obligations = getObligations(graph, personId).filter((node) => !["paid", "received", "completed"].includes(node.attrs.status ?? ""));
   const obligationsById = new Map(obligations.map((obligation) => [obligation.id, obligation]));
   const documents = getDocuments(graph, personId);
@@ -107,6 +125,7 @@ export function HomeScreen() {
         <div className="grid gap-3 lg:pt-6"><p className="text-sm text-ink-mute">{t(greetingKey())}, {profile.person.attrs.name.split(" ")[0]}</p><h1 className="max-w-2xl font-display text-[clamp(3rem,6vw,5rem)] font-semibold leading-[0.92] tracking-[-0.045em] text-ink">{t("needPrompt")}</h1></div>
         <IntentComposer key={personId} />
       </section>
+      <HomeGraphTrace documents={documents.length} name={profile.person.attrs.name} relationships={relationships.length} tasks={tasks.length} unread={unreadNotices} />
       <section className="grid scroll-mt-20 gap-6" id="attention">
         <div className="grid gap-1.5"><p className="eyebrow">{unreadNotices} {t("unreadNotices").toLowerCase()}</p><h2 className="max-w-4xl font-display text-[clamp(2.35rem,5vw,4rem)] font-semibold leading-[0.96] tracking-[-0.04em] text-ink">{t("dashboardHeadline")}</h2></div>
         <div className="grid gap-5 lg:grid-cols-[minmax(0,1.35fr)_minmax(18rem,0.65fr)] lg:items-start">
