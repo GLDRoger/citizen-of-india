@@ -1,7 +1,10 @@
 {
   "name": "citizen-of-india",
   "version": "0.1.0",
+  "license": "MIT",
   "private": true,
+  "repository": "https://github.com/GLDRoger/citizen-of-india",
+  "homepage": "https://citizen-of-india.vercel.app",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

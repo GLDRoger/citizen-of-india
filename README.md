@@ -6,6 +6,8 @@
 
 An independent, mobile-first product preview for handling life events, obligations, benefits, and public-service paperwork in plain language. Every person and record in the repository is fictional, and all authority integrations run in a clearly labelled simulated mode.
 
+[Try Citizen](https://citizen-of-india.vercel.app) · [Watch the two-minute demo](https://youtu.be/OuqARZ-FIg4)
+
 ## Run locally
 
 ```bash
@@ -45,6 +47,25 @@ npx eslint .
 npm run build
 ```
 
+## Demo video
+
+The complete Remotion project lives in [`demo-video`](demo-video). It includes the timed script, app recordings, captions, Gemini voiceover clips, music mix and deterministic render command.
+
+```bash
+cd demo-video
+npm install
+npm run lint
+npm run render
+```
+
+The rendered MP4 is excluded from Git. You can watch the published edit on [YouTube](https://youtu.be/OuqARZ-FIg4).
+
+Music: [“Bombay Summer” by Shane Ivers](https://www.silvermansound.com/free-music/bombay-summer), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). See [`demo-video/MUSIC-CREDITS.md`](demo-video/MUSIC-CREDITS.md) for the full attribution.
+
 ## Service boundaries
 
 This is an independent product preview, not a government service. It makes no live authority API calls, accepts no real identity or payment data, and uses no government logos. Every simulated response is identified in the interface. See `/about` for the complete service-status disclosure.
+
+## Licence
+
+Citizen is open source under the [MIT Licence](LICENSE). Third-party media retains its original licence and attribution requirements.
