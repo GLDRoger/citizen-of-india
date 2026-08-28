@@ -21,9 +21,9 @@ const stepsByLanguage: Record<Language, ProcedureStep[]> = {
     { id: "identify", title: "Confirm family member", description: "Use verified family relationships." },
     { id: "register", title: "Register the death", description: "Prepare a simulated BBMP registration." },
     { id: "certificate", title: "Issue the certificate", description: "Create one reusable document." },
-    { id: "benefits", title: "Pension and nominee", description: "Stop the old pension and start claims." },
+    { id: "benefits", title: "Pension and nominee", description: "Stop Rajesh's pension and start the family's claims." },
     { id: "heirs", title: "Legal-heir consent", description: "Collect consent across the family." },
-    { id: "finish", title: "Review downstream work", description: "Keep property and vehicle actions visible." },
+    { id: "finish", title: "Review next steps", description: "Keep property and vehicle transfers on the to-do list." },
   ],
   hi: [
     { id: "identify", title: "परिवार के सदस्य की पुष्टि", description: "सत्यापित रिश्तों से सही व्यक्ति चुनें।" },

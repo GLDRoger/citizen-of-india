@@ -38,7 +38,7 @@ export const useAuthStore = create<AuthStore>()(
       openProfile: (phone) => {
         const login = seedLogins.find((candidate) => candidate.phone === phone);
         if (!login) {
-          return { ok: false, reason: "Choose one of the available profiles below." };
+          return { ok: false, reason: "Pick one of the profiles below." };
         }
         set({ personId: login.personId });
         return { ok: true, personId: login.personId };

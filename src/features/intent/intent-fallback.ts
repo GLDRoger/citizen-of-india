@@ -31,10 +31,10 @@ type Plan = { title: string; reply: string; steps: string[] };
 
 const plans: Record<IntentResponse["language"], Record<ConnectedWorkflow, Plan>> = {
   en: {
-    "benefit-application": { title: "Check benefit eligibility", reply: "Review the schemes this profile may qualify for, then continue any draft application.", steps: ["Check eligibility", "Review the scheme", "Submit the demo application"] },
-    documents: { title: "Open your documents", reply: "See issued DigiLocker documents and receipts saved by this demo.", steps: ["Open Documents", "Check the source", "Use the record in a service"] },
+    "benefit-application": { title: "Check benefit eligibility", reply: "See the schemes this profile may qualify for, and pick up any saved application.", steps: ["Check eligibility", "Review the scheme", "Submit the demo application"] },
+    documents: { title: "Open your documents", reply: "See DigiLocker documents and receipts saved in this demo.", steps: ["Open Documents", "Check the source", "Use the record in a service"] },
     profile: { title: "Open My records", reply: "See your documents, family, work, business, assets and government history in one connected record.", steps: ["Open My records", "Review linked facts", "Check government history"] },
-    epfo: { title: "Check EPFO records", reply: "Review your UAN, passbook balance and latest contribution. Register a grievance if something is wrong.", steps: ["Check the passbook", "Review the contribution", "Choose the next action"] },
+    epfo: { title: "Check EPFO records", reply: "See your UAN, passbook balance and latest contribution. Raise a complaint if something looks wrong.", steps: ["Check the passbook", "Review the contribution", "Choose the next action"] },
     gstr3b: { title: "File GSTR-3B", reply: "Review the business, masked GSTIN and filing period before the simulated filing.", steps: ["Check the return", "Confirm the details", "Save the acknowledgement"] },
     marriage: { title: "Marriage registration", reply: "Invite your partner, share records with consent and register together.", steps: ["Send the invitation", "Choose records and witnesses", "Book and register"] },
     obligations: { title: "Payments and deadlines", reply: "You have payments, filings and a refund to check.", steps: ["See what is due", "Open the task", "Check the result on Home"] },

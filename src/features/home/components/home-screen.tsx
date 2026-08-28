@@ -127,7 +127,7 @@ export function HomeScreen() {
       </section>
       <HomeGraphTrace documents={documents.length} name={profile.person.attrs.name} relationships={relationships.length} tasks={tasks.length} unread={unreadNotices} />
       <section className="grid scroll-mt-20 gap-6" id="attention">
-        <div className="grid gap-1.5"><p className="eyebrow">{unreadNotices} {t("unreadNotices").toLowerCase()}</p><h2 className="max-w-4xl font-display text-[clamp(2.35rem,5vw,4rem)] font-semibold leading-[0.96] tracking-[-0.04em] text-ink">{t("dashboardHeadline")}</h2></div>
+        <div className="grid gap-1.5"><p className="eyebrow">{unreadNotices} {t("unread").toLowerCase()}</p><h2 className="max-w-4xl font-display text-[clamp(2.35rem,5vw,4rem)] font-semibold leading-[0.96] tracking-[-0.04em] text-ink">{t("dashboardHeadline")}</h2></div>
         <div className="grid gap-5 lg:grid-cols-[minmax(0,1.35fr)_minmax(18rem,0.65fr)] lg:items-start">
           <FilePanel label={t("thingsToDo")}>
             {tasks.length ? firstTasks.map((task, index) => <TaskLedgerRow application={applicationsById.get(task.id)} index={index} key={task.id} obligation={obligationsById.get(task.id)} task={task} />) : <p className="border-y border-paper-line py-7 text-sm text-ink-mute">{t("nothingWaiting")}</p>}

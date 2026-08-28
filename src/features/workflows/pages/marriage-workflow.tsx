@@ -21,7 +21,7 @@ const stepsByLanguage: Record<Language, ProcedureStep[]> = {
     { id: "invite", title: "Invite Priya", description: "Start one shared application." },
     { id: "consent", title: "Partner consent", description: "Priya approves from her login." },
     { id: "documents", title: "Documents and witnesses", description: "Reuse identity records and choose witnesses." },
-    { id: "appointment", title: "Appointment and fee", description: "Book Bengaluru and pay ₹500." },
+    { id: "appointment", title: "Appointment and fee", description: "Book in Bengaluru and pay the ₹500 fee." },
     { id: "certificate", title: "Register marriage", description: "Receive one shared certificate." },
   ],
   hi: [
