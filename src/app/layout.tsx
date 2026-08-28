@@ -37,12 +37,30 @@ const kannadaFont = Anek_Kannada({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://citizen-of-india.vercel.app"),
   title: {
     default: "Citizen | Independent prototype",
     template: "%s | Citizen",
   },
   description: "A public-services prototype with fictional records and demo-only payments, filings and certificates.",
   applicationName: "Citizen | Independent prototype",
+  icons: {
+    icon: "/citizen-logo.png",
+    shortcut: "/citizen-logo.png",
+    apple: "/citizen-logo.png",
+  },
+  openGraph: {
+    title: "Citizen | Independent prototype",
+    description: "Public services organized around the citizen, not the department.",
+    images: [{ url: "/citizen-logo.png", width: 1254, height: 1254, alt: "Citizen" }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Citizen | Independent prototype",
+    description: "Public services organized around the citizen, not the department.",
+    images: ["/citizen-logo.png"],
+  },
   robots: { index: false, follow: false },
 };
 

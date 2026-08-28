@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="public/citizen-logo.png" alt="Citizen" width="120" />
+</p>
+
 # Citizen of India
 
 An independent, mobile-first product preview for handling life events, obligations, benefits, and public-service paperwork in plain language. Every person and record in the repository is fictional, and all authority integrations run in a clearly labelled simulated mode.
