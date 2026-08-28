@@ -10,6 +10,8 @@ import { getAvailableServices, type ServiceWorkflowSlug } from "@/features/servi
 import { getStatusMessageKey } from "@/i18n/formatters";
 import type { MessageKey } from "@/i18n/messages";
 import { useI18n } from "@/i18n/use-i18n";
+import { cn } from "@/lib/cn";
+import styles from "./services-screen.module.css";
 
 interface ServiceDefinition {
   action: MessageKey;
@@ -50,10 +52,11 @@ function ServiceCard({ application, index, obligation, service }: { application?
   const { t } = useI18n();
   const status = application?.attrs.status ?? obligation?.attrs.status;
   const complete = status === "completed" || status === "paid" || status === "received";
+  const viewOnly = complete || status === "processing" || status === "submitted";
   const statusKey = status ? getStatusMessageKey(status) : undefined;
   return (
     <li>
-      <Link className="group grid gap-4 rounded-[8px] border border-paper-line bg-paper-shade p-5 transition-colors hover:border-indigo/40 md:min-h-48 md:content-between md:gap-6" href={service.slug === "digilocker" ? "/documents" : `/workflows/${service.slug}`}>
+      <Link className={cn(styles.card, "group grid gap-4 rounded-[8px] border border-paper-line bg-paper-shade p-5 md:min-h-48 md:content-between md:gap-6")} data-category={service.category} href={service.slug === "digilocker" ? "/documents" : `/workflows/${service.slug}`}>
         <span className="flex items-start justify-between gap-3">
           <span className="font-display text-sm font-semibold tabular-nums text-ink-mute">{String(index).padStart(2, "0")}</span>
           {status ? <StatusPill label={statusKey ? t(statusKey) : status} tone={complete ? "success" : "info"} /> : null}
@@ -62,7 +65,7 @@ function ServiceCard({ application, index, obligation, service }: { application?
           <strong className="font-display text-[1.75rem] font-semibold leading-none tracking-[-0.03em] text-ink">{t(service.title)}</strong>
           <span className="text-sm leading-6 text-ink-mute">{t(service.promise)}</span>
         </span>
-        <span className="min-h-11 w-fit content-center text-sm font-bold text-indigo-deep underline decoration-indigo-deep/25 underline-offset-4 transition-colors group-hover:decoration-indigo-deep">{complete ? t("view") : application ? t("continueAction") : t(service.action)}</span>
+        <span className="min-h-11 w-fit content-center text-sm font-bold text-indigo-deep underline decoration-indigo-deep/25 underline-offset-4 transition-colors group-hover:decoration-indigo-deep">{viewOnly ? t("view") : application ? t("continueAction") : t(service.action)}</span>
       </Link>
     </li>
   );
