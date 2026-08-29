@@ -107,6 +107,9 @@ function LandingHeader() {
           aria-label={t("primaryNavigation")}
           className="hidden items-center gap-8 text-xs font-bold text-paper/65 lg:flex"
         >
+          <a className="hover:text-paper" href="#origin">
+            {t("landingOriginNav")}
+          </a>
           <a className="hover:text-paper" href="#graph">
             {t("landingGraphNav")}
           </a>
@@ -186,7 +189,10 @@ function OriginStory() {
             </li>
           ))}
         </ol>
-        <div className="grid gap-3 border-t border-paper-line pt-5 text-xs leading-5 text-ink-mute sm:grid-cols-2 sm:gap-8">
+        <p className="border-t border-paper-line pt-5 text-base font-bold leading-7 text-indigo-deep">
+          {t("landingOriginProof")}
+        </p>
+        <div className="grid gap-3 text-xs leading-5 text-ink-mute sm:grid-cols-2 sm:gap-8">
           <p>{t("landingOriginNote")}</p>
           <p>{t("landingOriginDisclaimer")}</p>
         </div>

@@ -818,13 +818,15 @@ export const en = {
   landingHeroBody:
     "Your verified documents stay connected. Services open with your details already filled in. Every result returns to the same record. No form starts from zero.",
   landingOriginKicker: "How this started",
-  landingOriginTitle: "A service can exist and still be invisible.",
+  landingOriginNav: "The story",
+  landingOriginProof: "Home in this demo already works this way. It shows what changed and what could help you before you ask.",
+  landingOriginTitle: "I did not know UMANG existed.",
   landingOriginBodyOne:
-    "Before this hackathon, I did not know UMANG existed. That became our starting point.",
+    "The government does many things, and each thing arrives with its own name: a scheme, a portal, an app, a deadline. Names pile up faster than anyone can learn them. By the time a message reaches you, it has often changed shape or lost its meaning.",
   landingOriginBodyTwo:
-    "UMANG already brings many government services into one gateway. But people still have to recognize a scheme name, know which department owns it and work out whether it matters to them.",
+    "UMANG already puts hundreds of services behind one door. It still asks you to arrive knowing what you need: recognise the scheme, find the department, decide whether it matters to you. Most people never get that far.",
   landingOriginDefinition:
-    "Citizen imagines the next layer: a personal public-service gazette built around one connected citizen record.",
+    "Citizen is our answer: a gazette with an audience of one. Everything happening in your name, from payments to notices to applications and benefits, lands in one brief, with suggestions for what could help you next.",
   landingOriginChangedTitle: "What changed?",
   landingOriginChangedBody:
     "Notices, payments, applications and document updates.",
