@@ -9,6 +9,25 @@ import type { MessageKey } from "@/i18n/messages";
 
 const persistedGraphSchema = citizenGraphSchema.transform((graph) => ({ graph }));
 
+function migratePersistedGraph(persistedState: unknown) {
+  const parsed = persistedGraphSchema.safeParse(
+    typeof persistedState === "object" && persistedState !== null && "graph" in persistedState
+      ? persistedState.graph
+      : undefined,
+  );
+  if (!parsed.success) return { graph: createSeedGraph() };
+
+  const graph = parsed.data.graph;
+  const eventIds = new Set(graph.events.map((event) => event.id));
+  const seededHistory = createSeedGraph().events.filter((event) => !eventIds.has(event.id));
+  return {
+    graph: {
+      ...graph,
+      events: [...seededHistory, ...graph.events].sort((first, second) => first.occurredAt.localeCompare(second.occurredAt)),
+    },
+  };
+}
+
 interface CommitInput {
   actorId: string;
   labelKey: MessageKey;
@@ -41,9 +60,9 @@ export const useCitizenStore = create<CitizenStore>()(
     }),
     {
       name: "citizen-of-india-graph",
-      version: 3,
+      version: 4,
       storage: createJSONStorage(() => localStorage),
-      migrate: () => ({ graph: createSeedGraph() }),
+      migrate: migratePersistedGraph,
       partialize: (state) => ({ graph: state.graph }),
       merge: (persistedState, currentState) => {
         const parsed = persistedGraphSchema.safeParse(

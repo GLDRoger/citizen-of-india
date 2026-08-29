@@ -399,7 +399,7 @@ export const seedSchema = z.object({
   logins: z.array(loginSchema).min(1),
   nodes: z.array(graphNodeSchema),
   edges: z.array(graphEdgeSchema),
-  events: z.array(z.never()),
+  events: z.array(graphEventRuntimeSchema),
 });
 
 export type Login = z.infer<typeof loginSchema>;

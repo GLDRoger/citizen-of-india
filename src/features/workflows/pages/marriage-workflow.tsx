@@ -15,6 +15,7 @@ import { getDocumentKindMessageKey } from "@/i18n/formatters";
 import { formatDate, maskIdentifier } from "@/lib/format";
 import { bookAppointment, processPayment, submitMarriageRegistration } from "@/lib/mockGov";
 import { CompletionCard, ParticipantStrip, ProcedureShell, StepCard, type ProcedureStep } from "../components/procedure-shell";
+import { MarriageRippleCard } from "../components/marriage-ripple";
 
 const stepsByLanguage: Record<Language, ProcedureStep[]> = {
   en: [
@@ -112,6 +113,9 @@ export function MarriageWorkflow() {
       { type: "patchAttrs", nodeId: arjun.id, attrs: { maritalStatus: "married" } },
       { type: "patchAttrs", nodeId: priya.id, attrs: { maritalStatus: "married" } },
       { type: "patchAttrs", nodeId: "app:marriage-arjun-priya", attrs: { currentStep: 5, status: "completed", submittedOn: "2026-09-03", reference: response.data.applicationReference }, verification: verification("Municipal") },
+      { type: "addNode", node: { id: "ntc:marriage-ripple", type: "notice", attrs: { channel: "email", sender: "CITIZEN-RELAY", receivedOn: "2026-09-03", subject: "Marriage registered — review connected next steps", body: "Your marriage certificate is saved to both document wallets. Arjun can now review whether to propose Priya as his EPF nominee, and each of you can check schemes from your own profile. Nothing changes automatically.", legitimacy: "legitimate", relatedTo: "app:marriage-arjun-priya" }, verification: verification("Municipal") } },
+      { type: "addEdge", edge: { id: "e:arjun-subject-marriage-ripple", type: "subjectOf", from: arjun.id, to: "ntc:marriage-ripple", attrs: { read: false }, validFrom: "2026-09-03", status: "active", verification: verification("Municipal") } },
+      { type: "addEdge", edge: { id: "e:priya-subject-marriage-ripple", type: "subjectOf", from: priya.id, to: "ntc:marriage-ripple", attrs: { read: false }, validFrom: "2026-09-03", status: "active", verification: verification("Municipal") } },
     ];
     commit({ actorId: personId, labelKey: "eventMarriageRegistered", procedureId: "marriage-arjun-priya", mutations });
   });
@@ -139,7 +143,10 @@ export function MarriageWorkflow() {
   };
 
   const content = complete ? (
-    <CompletionCard title={t("marriageCompleteTitle")} body={t("marriageCompleteBody")}><div className="flex flex-wrap gap-3"><LinkButton href="/documents" variant="inverse">{t("marriageOpenCertificate")} <ArrowRight aria-hidden className="size-4" /></LinkButton><LinkButton href="/you" variant="inverseQuiet">{t("marriageViewRelationship")}</LinkButton></div></CompletionCard>
+    <div className="grid gap-5">
+      <CompletionCard title={t("marriageCompleteTitle")} body={t("marriageCompleteBody")}><div className="flex flex-wrap gap-3"><LinkButton href="/documents" variant="inverse">{t("marriageOpenCertificate")} <ArrowRight aria-hidden className="size-4" /></LinkButton><LinkButton href="/you" variant="inverseQuiet">{t("marriageViewRelationship")}</LinkButton></div></CompletionCard>
+      <MarriageRippleCard personId={personId} />
+    </div>
   ) : currentStep === 0 ? (
     <StepCard eyebrow={t("marriageSharedEyebrow")} title={personId === arjun.id ? t("marriageInviteTitle") : t("marriageStartWithArjun")} body={t(personId === arjun.id ? "marriageSharedBody" : "marriageStartWithArjunBody")}><div className="flex items-center gap-4 border-y border-paper-line py-4"><Heart aria-hidden className="size-5 shrink-0 text-brick" /><div className="flex-1"><strong className="block text-sm">Arjun Sharma + Priya Patel</strong><span className="text-xs text-ink-mute">Bengaluru · Ahmedabad</span></div><SimulatedChip authority="Citizen invite relay" /></div>{personId === arjun.id ? <Button onClick={invite}>{t("marriageInvitePriya")} <ArrowRight aria-hidden className="size-4" /></Button> : <Button onClick={() => switchTo(arjun.id)} variant="secondary">{t("switchArjun")}</Button>}</StepCard>
   ) : currentStep === 1 ? (

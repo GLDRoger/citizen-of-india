@@ -10,6 +10,6 @@ export function createSeedGraph(): CitizenGraph {
   return structuredClone({
     nodes: seed.nodes,
     edges: seed.edges,
-    events: [],
+    events: seed.events,
   });
 }

@@ -22,6 +22,7 @@ import { localizeNodeTitle } from "@/i18n/content";
 import { getDocumentKindMessageKey, getStatusMessageKey } from "@/i18n/formatters";
 import { daysUntil, formatCurrency } from "@/lib/format";
 import { HomeRecords } from "./home-records";
+import { HomeNudges } from "./home-nudges";
 
 type Obligation = ReturnType<typeof getObligations>[number];
 type Application = ReturnType<typeof getApplications>[number];
@@ -134,6 +135,7 @@ export function HomeScreen() {
             {remainingTasks.length ? <details className="group border-t border-paper-line"><summary className="min-h-11 content-center text-xs font-bold text-indigo-deep underline decoration-indigo-deep/25 underline-offset-4"><span className="group-open:hidden">{t("moreTasks", { count: remainingTasks.length })}</span><span className="hidden group-open:inline">{t("showFewer")}</span></summary>{remainingTasks.map((task, index) => <TaskLedgerRow application={applicationsById.get(task.id)} index={index + firstTasks.length} key={task.id} obligation={obligationsById.get(task.id)} task={task} />)}</details> : null}
           </FilePanel>
           <div className="grid gap-5">
+            <HomeNudges personId={personId} />
             <section className="rounded-[8px] border border-paper-line bg-paper-shade px-5 py-3"><p className="eyebrow py-3 text-indigo-deep">{t("money")}</p><LedgerRow label={t("due")} value={formatCurrency(money.payable)} /><LedgerRow action={money.receivable > 0 ? <Link className="min-h-11 content-center text-xs font-bold text-indigo-deep underline decoration-indigo-deep/25 underline-offset-4" href="/workflows/refund-track">{t("trackRefund")}</Link> : undefined} label={t("comingToYou")} value={formatCurrency(money.receivable)} /></section>
             <section className="rounded-[8px] border border-paper-line bg-paper-shade px-5 py-3"><p className="eyebrow py-3 text-indigo-deep">{t("mySnapshot")}</p><div className="grid divide-y divide-paper-line sm:grid-cols-3 sm:gap-x-5 sm:divide-x sm:divide-y-0"><SummaryLedgerItem label={t("deadlines")} value={deadlineCount} /><div className="min-w-0 sm:pl-4"><SummaryLedgerItem label={t("expiry")} value={expiringDocuments.length} /></div><div className="min-w-0 sm:pl-4"><SummaryLedgerItem label={t("pendingApplications")} value={applications.length} /></div></div></section>
           </div>

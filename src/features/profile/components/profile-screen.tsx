@@ -22,6 +22,7 @@ import { useI18n } from "@/i18n/use-i18n";
 import { localizeNodeTitle } from "@/i18n/content";
 import { getDocumentKindMessageKey, getRelationshipMessageKey, getStatusMessageKey } from "@/i18n/formatters";
 import { formatCurrency, formatDate, maskIdentifier } from "@/lib/format";
+import { GovernmentHealthCard } from "./government-health";
 
 function AssetRow({ asset }: { asset: ReturnType<typeof getOwnedAssets>[number] }) {
   const { t } = useI18n();
@@ -154,7 +155,10 @@ export function ProfileScreen() {
     <Page className="grid gap-7">
       <PageHeader eyebrow={t("you")} title={profile.person.attrs.name} description={t(profile.documentCount === 1 ? "profileSummaryOne" : "profileSummary", { age: profile.age, place: profile.residence ?? t("addressPending"), count: profile.documentCount })} action={<VerificationBadge verification={profile.person.verification} />} />
       <div className="grid gap-7 lg:grid-cols-[1.25fr_0.75fr]">
-        <div className="grid gap-7">
+        <div className="lg:col-start-2 lg:row-start-1">
+          <GovernmentHealthCard personId={personId} />
+        </div>
+        <div className="grid gap-7 lg:col-start-1 lg:row-span-2 lg:row-start-1">
           <section className="grid gap-5"><SectionHeader eyebrow={`${documents.length}`} title={t("documents")} /><div className="border-y border-paper-line">{documents.map((document) => <DocumentRow document={document} key={document.id} />)}</div></section>
 
           <section className="grid gap-5"><SectionHeader eyebrow={`${relationships.length}`} title={t("relationships")} /><div className="border-y border-paper-line">{relationships.map((view) => <RelationshipRow key={view.person.id} view={view} />)}</div></section>
@@ -165,7 +169,7 @@ export function ProfileScreen() {
 
           <section className="grid scroll-mt-24 gap-5" id="government-dealings"><SectionHeader eyebrow={`${applications.length + obligations.length}`} title={t("governmentDealings")} /><div className="border-y border-paper-line">{applications.map((application) => <GovernmentRow authority={application.attrs.authority} detail={formatDate(application.attrs.createdOn, language)} key={application.id} status={application.attrs.status} title={localizeNodeTitle(language, application.id, application.attrs.title)} />)}{obligations.map((obligation) => <GovernmentRow authority={obligation.attrs.authority} detail={obligation.attrs.amount !== undefined ? formatCurrency(obligation.attrs.amount) : obligation.attrs.dueDate ? formatDate(obligation.attrs.dueDate, language) : undefined} key={obligation.id} status={obligation.attrs.status ?? "due"} title={localizeNodeTitle(language, obligation.id, obligation.attrs.title)} />)}</div></section>
         </div>
-        <div className="grid content-start gap-5">
+        <div className="grid content-start gap-5 lg:col-start-2 lg:row-start-2">
           <DelegationPanel personId={personId} />
           <div className="grid gap-4 border-y border-paper-line py-5"><div className="flex items-center gap-3"><ShieldCheck aria-hidden className="size-5 text-green-deep" /><strong className="text-sm text-ink">{t("recordHealth")}</strong></div><div className="grid grid-cols-2 gap-4"><div><span className="block text-xs text-ink-mute">{t("verified")}</span><strong className="font-display text-2xl text-ink">{profile.verifiedDocumentCount}/{profile.documentCount}</strong></div><div><span className="block text-xs text-ink-mute">{t("relationships")}</span><strong className="font-display text-2xl text-ink">{relationships.length}</strong></div></div></div>
         </div>
