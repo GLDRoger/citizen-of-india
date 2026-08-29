@@ -4,7 +4,7 @@
 
 # Citizen of India
 
-An independent, mobile-first product preview for handling life events, obligations, benefits, and public-service paperwork in plain language. Every person and record in the repository is fictional, and all authority integrations run in a clearly labelled simulated mode.
+An independent, mobile-first prototype for handling life events, bills and deadlines, benefits, and government paperwork in plain language. Every person and record in the repository is fictional, and all government responses run in a clearly labelled simulated mode.
 
 [Try Citizen](https://citizen-of-india.vercel.app) · [Watch the two-minute demo](https://youtu.be/OuqARZ-FIg4)
 
@@ -27,7 +27,7 @@ The public landing page always lives at `/`. Profile selection lives at `/start`
 
 ## Hackathon fit
 
-Citizen was built with Codex as a meaningful part of product design, implementation and verification. The [Builder Brief](https://buildwhatmovesindia.com/brief) accepts a prototype built with Codex or powered by an OpenAI model, so the submitted app does not need a paid runtime model or an exposed API key.
+Codex (gpt-5.6) wrote the code, working from design and review direction by the team. The [Builder Brief](https://buildwhatmovesindia.com/brief) accepts a prototype built with Codex or powered by an OpenAI model, so the submitted app needs no paid runtime model and exposes no API key.
 
 ## Architecture
 
@@ -64,7 +64,7 @@ Music: [“Bombay Summer” by Shane Ivers](https://www.silvermansound.com/free-
 
 ## Service boundaries
 
-This is an independent product preview, not a government service. It makes no live authority API calls, accepts no real identity or payment data, and uses no government logos. Every simulated response is identified in the interface. See `/about` for the complete service-status disclosure.
+This is an independent prototype, not a government service. It makes no live government API calls, accepts no real identity or payment data, and uses no government logos. Every simulated response is identified in the interface. See `/about` for the complete service-status disclosure.
 
 ## Licence
 

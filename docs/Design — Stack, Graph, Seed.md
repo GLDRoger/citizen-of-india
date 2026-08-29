@@ -130,4 +130,4 @@ Married (active `spouseOf` edge since 2019 — shows a pre-existing relationship
 | Cheap | Start a business | Local action plan from profile context + plan cards |
 | Deferred | Death in family | Kept outside the current pitch and primary navigation |
 
-The marriage journey proves the product deeply; the other visible journeys show how the same record-first model extends.
+The marriage journey shows the product at full depth. The other visible journeys show how the same record-first model extends.
