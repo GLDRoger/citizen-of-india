@@ -1,3 +1,5 @@
+import { manifestoEn } from "./manifesto";
+
 export const en = {
   brand: "Citizen",
   simulated: "Simulated",
@@ -927,6 +929,7 @@ export const en = {
   eventSeedChallan: "Traffic challan issued",
   eventSeedRefund: "Income tax refund initiated",
   eventSeedCorrectionDraft: "PAN correction saved as draft",
+  ...manifestoEn,
 } as const;
 
 export type MessageKey = keyof typeof en;

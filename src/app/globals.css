@@ -85,6 +85,18 @@ html[lang="kn"] .landing-hero-title {
   line-height: 1.02;
 }
 
+html[lang="kn"] .manifesto-title {
+  font-size: clamp(2.85rem, 12vw, 6.4rem);
+  line-height: 0.96;
+  letter-spacing: -0.035em;
+}
+
+html[lang="kn"] .manifesto-section-title {
+  font-size: clamp(2.55rem, 10.5vw, 5rem);
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+}
+
 html[lang="hi"] .landing-hero-title {
   font-size: clamp(3rem, 7.5vw, 6.5rem);
   line-height: 0.98;
@@ -170,12 +182,54 @@ summary::-webkit-details-marker {
   animation: page-enter 340ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+.manifesto-flow-step {
+  position: relative;
+  border-top: 1px solid color-mix(in srgb, var(--paper) 24%, transparent);
+}
+
+.manifesto-flow-step::after {
+  position: absolute;
+  top: -0.28rem;
+  left: 0;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--saffron);
+  content: "";
+  opacity: 0.32;
+  animation: manifesto-step-pulse 6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  transform: scale(0.72);
+}
+
+.manifesto-flow-step:nth-child(2)::after {
+  animation-delay: 1.5s;
+}
+
+.manifesto-flow-step:nth-child(3)::after {
+  animation-delay: 3s;
+}
+
+.manifesto-flow-step:nth-child(4)::after {
+  animation-delay: 4.5s;
+}
+
 @keyframes page-enter {
   from {
     transform: translateY(6px);
   }
   to {
     transform: translateY(0);
+  }
+}
+
+@keyframes manifesto-step-pulse {
+  0%, 18%, 100% {
+    opacity: 0.32;
+    transform: scale(0.72);
+  }
+  6% {
+    opacity: 1;
+    transform: scale(1.35);
   }
 }
 

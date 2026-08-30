@@ -1,4 +1,5 @@
 import type { MessageKey } from "./en";
+import { manifestoKn } from "./manifesto";
 
 export const kn: Record<MessageKey, string> = {
   brand: "Citizen",
@@ -920,4 +921,5 @@ export const kn: Record<MessageKey, string> = {
   eventSeedChallan: "ಸಂಚಾರ ದಂಡ ನೀಡಲಾಯಿತು",
   eventSeedRefund: "ಆದಾಯ ತೆರಿಗೆ ಮರುಪಾವತಿ ಪ್ರಾರಂಭವಾಯಿತು",
   eventSeedCorrectionDraft: "PAN ತಿದ್ದುಪಡಿ ಡ್ರಾಫ್ಟ್ ಆಗಿ ಉಳಿಸಲಾಗಿದೆ",
+  ...manifestoKn,
 };

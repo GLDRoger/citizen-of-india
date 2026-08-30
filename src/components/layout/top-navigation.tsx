@@ -36,10 +36,10 @@ function MobileNavigation() {
   const pathname = usePathname();
   const { t } = useI18n();
   return (
-    <nav aria-label={t("primaryNavigation")} className="fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-50 grid grid-cols-4 rounded-[8px] border border-paper/20 bg-indigo-deep p-1.5 text-paper shadow-[0_4px_12px_rgba(19,28,75,0.18)] min-[900px]:hidden">
+    <nav aria-label={t("primaryNavigation")} className="fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-50 grid grid-cols-5 rounded-[8px] border border-paper/20 bg-indigo-deep p-1.5 text-paper shadow-[0_4px_12px_rgba(19,28,75,0.18)] min-[900px]:hidden">
       {navItems.map(({ href, icon: Icon, label }) => {
         const active = isActive(pathname, href);
-        return <Link aria-current={active ? "page" : undefined} className={cn("flex min-h-16 min-w-0 flex-col items-center justify-center gap-1 rounded-[4px] px-1 text-center text-xs font-bold leading-4 transition-colors", active ? "bg-saffron text-ink" : "text-paper/72 hover:bg-paper/10 hover:text-paper")} href={href} key={href}><Icon aria-hidden className="size-4.5 shrink-0" /><span className="max-w-full [overflow-wrap:anywhere]">{t(label)}</span></Link>;
+        return <Link aria-current={active ? "page" : undefined} className={cn("flex min-h-16 min-w-0 flex-col items-center justify-center gap-1 rounded-[4px] px-1 text-center text-xs font-bold leading-4 transition-colors", active ? "bg-saffron text-ink" : "text-paper/72 hover:bg-paper/10 hover:text-paper")} href={href} key={href}><Icon aria-hidden className="size-4.5 shrink-0" /><span className="max-w-full break-normal text-[0.6875rem] min-[380px]:text-xs">{t(label)}</span></Link>;
       })}
     </nav>
   );

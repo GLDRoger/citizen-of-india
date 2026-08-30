@@ -477,6 +477,10 @@
   .staticScene .shell {
     min-height: 50rem;
   }
+
+  .staticScene:global(.manifesto-graph-map) .stage {
+    width: calc(100% - 1rem);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,4 +1,5 @@
 import {
+  BookOpenText,
   Compass,
   Grid2X2,
   House,
@@ -18,4 +19,5 @@ export const navItems: NavItem[] = [
   { href: "/services", label: "services", icon: Grid2X2 },
   { href: "/you", label: "you", icon: UserRound },
   { href: "/discover", label: "discover", icon: Compass },
+  { href: "/manifesto", label: "manifestoNav", icon: BookOpenText },
 ];

@@ -1,4 +1,5 @@
 import type { MessageKey } from "./en";
+import { manifestoHi } from "./manifesto";
 
 export const hi: Record<MessageKey, string> = {
   brand: "Citizen",
@@ -911,4 +912,5 @@ export const hi: Record<MessageKey, string> = {
   eventSeedChallan: "ट्रैफ़िक चालान जारी हुआ",
   eventSeedRefund: "आयकर रिफ़ंड शुरू हुआ",
   eventSeedCorrectionDraft: "PAN सुधार ड्राफ़्ट में सहेजा गया",
+  ...manifestoHi,
 };
