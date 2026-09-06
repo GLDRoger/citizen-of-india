@@ -3,6 +3,7 @@
 :root {
   --paper: #fffdf5;
   --paper-shade: #f5efe2;
+  --panel: #ffffff;
   --paper-line: #ded4c3;
   --ink: #261d16;
   --ink-mute: #685d50;
@@ -19,6 +20,7 @@
 @theme inline {
   --color-paper: var(--paper);
   --color-paper-shade: var(--paper-shade);
+  --color-panel: var(--panel);
   --color-paper-line: var(--paper-line);
   --color-ink: var(--ink);
   --color-ink-mute: var(--ink-mute);
@@ -138,9 +140,14 @@ summary::-webkit-details-marker {
   color: var(--indigo-deep);
 }
 
+.eyebrow.text-saffron {
+  color: var(--saffron);
+}
+
 .stamp { display:inline-flex; align-items:center; min-height:1.75rem; border:3px double var(--paper-line); border-radius:2px; padding:.2rem .5rem; background:transparent; font-family:var(--font-body),sans-serif; font-size:.75rem; font-weight:750; letter-spacing:.08em; line-height:1; text-transform:uppercase; transform:rotate(-1deg); }
 .stamp--verified { border-color:color-mix(in srgb,var(--green-deep) 50%,var(--paper-line)); color:var(--green-deep); }
 .stamp--simulated { border-color:color-mix(in srgb,var(--indigo) 45%,var(--paper-line)); color:var(--indigo-deep); }
+.stamp--inverse { border-color:color-mix(in srgb,var(--paper) 55%,transparent); color:var(--paper); }
 .status-text { display:inline-flex; align-items:center; gap:.45rem; color:var(--ink-mute); font-size:.75rem; font-weight:700; }
 .status-text::before { width:.42rem; height:.42rem; border-radius:50%; background:var(--paper-line); content:""; }
 .status-text--success::before { background:var(--green-deep); }
@@ -253,4 +260,132 @@ summary::-webkit-details-marker {
   animation-duration: 0.01ms !important;
   animation-iteration-count: 1 !important;
   transition-duration: 0.01ms !important;
+}
+
+/* Scroll-linked reveal for public pages. Pure CSS: browsers without view()
+   timelines simply show the content; reduced-motion and data-saver opt out. */
+@keyframes landing-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .landing-reveal {
+      animation: landing-reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 45%;
+    }
+  }
+}
+
+.data-saver .landing-reveal {
+  animation: none;
+}
+
+/* Two inline marks used by public copy: a saffron highlighter for the phrase
+   that carries the sentence, and a tricolour rule under the word India. Both
+   arrive as an effect: the highlighter strokes across the phrase and the rule
+   wipes in, either on load (hero) or as the line scrolls into view. */
+.pop {
+  padding: 0 0.12em;
+  border-radius: 3px;
+  background: linear-gradient(transparent 12%, var(--saffron) 12%, var(--saffron) 92%, transparent 92%) no-repeat 0 0 / 100% 100%;
+  color: var(--ink);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* India carries a tricolour shimmer: the text keeps its own colour and a
+   saffron–white–green band sweeps through it, then rests until the next pass. */
+.india {
+  display: inline-block;
+  font-weight: 700;
+  background-image: linear-gradient(45deg, currentColor 0 40%, var(--saffron) 45%, #fffdf5 50%, #138808 55%, currentColor 60% 100%);
+  background-size: 340% 340%;
+  background-position: 100% 0%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* The band enters at the bottom-left and leaves at the top-right. */
+@keyframes india-shimmer {
+  0% { background-position: 100% 0%; }
+  42% { background-position: 0% 100%; }
+  100% { background-position: 0% 100%; }
+}
+
+@keyframes pop-stroke {
+  from { background-size: 0% 100%; }
+  to { background-size: 100% 100%; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .mark-load .pop {
+    animation: pop-stroke 720ms cubic-bezier(0.22, 1, 0.36, 1) 420ms both;
+  }
+
+  .mark-load .india,
+  .mark-scroll .india {
+    animation: india-shimmer 7.5s ease-in-out infinite;
+  }
+
+  @supports (animation-timeline: view()) {
+    .mark-scroll .pop {
+      animation: pop-stroke linear both;
+      animation-timeline: view();
+      /* Inline marks time against their block, so the range is where that block
+         sits in the viewport: the stroke runs while the line is in the lower half. */
+      animation-range: cover 22% cover 48%;
+    }
+  }
+}
+
+.data-saver .pop,
+.data-saver .india {
+  animation: none;
+}
+
+/* Gazette typography: an oversize word inside a line, a stronger bold, and a
+   drop cap on the first letter of each section's opening paragraph. Drop caps
+   stay Latin-only: Devanagari and Kannada first letters carry vowel signs that
+   ::first-letter would split. */
+.oversize {
+  font-size: 1.45em;
+  font-weight: 700;
+  line-height: 0.8;
+  letter-spacing: -0.04em;
+  vertical-align: -0.06em;
+}
+
+.text-ink-strong {
+  font-weight: 800;
+}
+
+:lang(en) .dropcap::first-letter {
+  float: left;
+  margin: 0.08em 0.12em 0 0;
+  padding-right: 0.04em;
+  font-family: var(--font-display-latin), sans-serif;
+  font-size: 3.6em;
+  font-weight: 700;
+  line-height: 0.78;
+  color: var(--saffron);
+}
+
+.dropcap--indigo:lang(en)::first-letter,
+:lang(en) .dropcap--indigo::first-letter {
+  color: var(--indigo-deep);
+}
+
+/* No single-word last lines in display copy. */
+h1, h2, h3, p, li, dd, summary, figcaption {
+  text-wrap: pretty;
 }

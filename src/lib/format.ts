@@ -1,4 +1,5 @@
 import type { Language } from "@/i18n/messages";
+import { demoNow } from "./demo-clock";
 
 const currencyFormatter = new Intl.NumberFormat("en-IN", {
   style: "currency",
@@ -61,7 +62,7 @@ export function maskIdentifier(value: string, visibleCharacters = 4) {
 
 export function daysUntil(value: string) {
   const target = new Date(`${value.slice(0, 10)}T00:00:00+05:30`).getTime();
-  return Math.ceil((target - Date.now()) / 86_400_000);
+  return Math.ceil((target - demoNow().getTime()) / 86_400_000);
 }
 
 const evidenceLabels: Record<string, string> = {

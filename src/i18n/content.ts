@@ -4,6 +4,7 @@ interface LocalizedContent {
   nodeTitles: Record<string, string>;
   noticeBodies: Record<string, string>;
   ruleExplanations: Record<string, string>;
+  benefitAudiences: Record<string, string>;
 }
 
 const hi: LocalizedContent = {
@@ -20,6 +21,7 @@ const hi: LocalizedContent = {
     "ntc:marriage-ripple": "विवाह पंजीकृत — जुड़े अगले कदम देखें",
     "ben:pmsby": "प्रधानमंत्री सुरक्षा बीमा योजना",
     "ben:mudra-kishor": "प्रधानमंत्री मुद्रा लोन — किशोर",
+    "ben:apy": "अटल पेंशन योजना",
     "ben:eps-family-pension": "EPS-95 पारिवारिक पेंशन",
     "ben:ka-widow-pension": "कर्नाटक विधवा वेतन",
     "app:pan-name-correction": "आधार से मिलाने के लिए PAN नाम सुधार",
@@ -40,6 +42,7 @@ const hi: LocalizedContent = {
   },
   ruleExplanations: {
     "You are between 18 and 70.": "आपकी उम्र 18 से 70 वर्ष के बीच है।",
+    "You are between 18 and 40.": "आपकी उम्र 18 से 40 वर्ष के बीच है।",
     "You have an active bank account.": "आपका बैंक खाता सक्रिय है।",
     "Sharma Web Solutions is a proprietorship.": "Sharma Web Solutions एकल स्वामित्व वाला व्यवसाय है।",
     "Udyam registration is active.": "उद्यम पंजीकरण सक्रिय है।",
@@ -51,6 +54,13 @@ const hi: LocalizedContent = {
     "Payable to widowed residents of Karnataka.": "कर्नाटक की विधवा निवासी इस पेंशन के लिए पात्र हो सकती हैं।",
     "Sunita is a resident of Karnataka.": "सुनीता कर्नाटक की निवासी हैं।",
     "Household income must be within the limit — needs income declaration.": "परिवार की आय तय सीमा में होनी चाहिए; आय घोषणा अभी चाहिए।",
+  },
+  benefitAudiences: {
+    "ben:pmsby": "बैंक खाते वाला 18–70 वर्ष का कोई भी व्यक्ति। ₹20 सालाना प्रीमियम पर दुर्घटना बीमा।",
+    "ben:mudra-kishor": "कम से कम दो साल पुरानी पंजीकृत प्रोप्राइटरशिप या पार्टनरशिप चलाने वाले छोटे व्यवसायी।",
+    "ben:apy": "बैंक खाते वाला 18–40 वर्ष का व्यक्ति जो अभी या कभी आयकरदाता नहीं रहा है। 60 वर्ष तक अंशदान होता है।",
+    "ben:eps-family-pension": "EPS-95 पेंशनभोगी का जीवित जीवनसाथी।",
+    "ben:ka-widow-pension": "कर्नाटक में रहने वाली विधवा महिलाएँ जिनकी घरेलू आय सीमा के भीतर हो।",
   },
 };
 
@@ -68,6 +78,7 @@ const kn: LocalizedContent = {
     "ntc:marriage-ripple": "ವಿವಾಹ ನೋಂದಣಿಯಾಗಿದೆ — ಸಂಬಂಧಿತ ಮುಂದಿನ ಹೆಜ್ಜೆಗಳನ್ನು ನೋಡಿ",
     "ben:pmsby": "ಪ್ರಧಾನಮಂತ್ರಿ ಸುರಕ್ಷಾ ವಿಮಾ ಯೋಜನೆ",
     "ben:mudra-kishor": "ಪ್ರಧಾನಮಂತ್ರಿ ಮುದ್ರಾ ಸಾಲ — ಕಿಶೋರ್",
+    "ben:apy": "ಅಟಲ್ ಪಿಂಚಣಿ ಯೋಜನೆ",
     "ben:eps-family-pension": "EPS-95 ಕುಟುಂಬ ಪಿಂಚಣಿ",
     "ben:ka-widow-pension": "ಕರ್ನಾಟಕ ವಿಧವಾ ವೇತನ",
     "app:pan-name-correction": "ಆಧಾರ್‌ಗೆ ಹೊಂದಿಸಲು PAN ಹೆಸರು ತಿದ್ದುಪಡಿ",
@@ -88,6 +99,7 @@ const kn: LocalizedContent = {
   },
   ruleExplanations: {
     "You are between 18 and 70.": "ನಿಮ್ಮ ವಯಸ್ಸು 18ರಿಂದ 70 ವರ್ಷಗಳ ನಡುವೆ ಇದೆ.",
+    "You are between 18 and 40.": "ನಿಮ್ಮ ವಯಸ್ಸು 18ರಿಂದ 40 ವರ್ಷಗಳ ನಡುವೆ ಇದೆ.",
     "You have an active bank account.": "ನಿಮ್ಮ ಬ್ಯಾಂಕ್ ಖಾತೆ ಸಕ್ರಿಯವಾಗಿದೆ.",
     "Sharma Web Solutions is a proprietorship.": "Sharma Web Solutions ಏಕಮಾಲೀಕತ್ವದ ವ್ಯವಹಾರವಾಗಿದೆ.",
     "Udyam registration is active.": "ಉದ್ಯಮ ನೋಂದಣಿ ಸಕ್ರಿಯವಾಗಿದೆ.",
@@ -99,6 +111,13 @@ const kn: LocalizedContent = {
     "Payable to widowed residents of Karnataka.": "ಕರ್ನಾಟಕದ ವಿಧವಾ ನಿವಾಸಿಗಳಿಗೆ ಈ ಪಿಂಚಣಿ ದೊರೆಯಬಹುದು.",
     "Sunita is a resident of Karnataka.": "ಸುನೀತಾ ಕರ್ನಾಟಕದ ನಿವಾಸಿ.",
     "Household income must be within the limit — needs income declaration.": "ಕುಟುಂಬದ ಆದಾಯ ನಿಗದಿತ ಮಿತಿಯೊಳಗಿರಬೇಕು; ಆದಾಯ ಘೋಷಣೆ ಇನ್ನೂ ಬೇಕಾಗಿದೆ.",
+  },
+  benefitAudiences: {
+    "ben:pmsby": "ಬ್ಯಾಂಕ್ ಖಾತೆ ಇರುವ 18–70 ವರ್ಷದ ಯಾರಾದರೂ. ವರ್ಷಕ್ಕೆ ₹20 ಪ್ರೀಮಿಯಂಗೆ ಅಪಘಾತ ವಿಮೆ.",
+    "ben:mudra-kishor": "ಕನಿಷ್ಠ ಎರಡು ವರ್ಷ ಹಳೆಯ ನೋಂದಾಯಿತ ಪ್ರೊಪ್ರೈಟರ್‌ಶಿಪ್ ಅಥವಾ ಪಾಲುದಾರಿಕೆ ಇರುವ ಸಣ್ಣ ಉದ್ಯಮಿಗಳು.",
+    "ben:apy": "ಬ್ಯಾಂಕ್ ಖಾತೆ ಇರುವ 18–40 ವರ್ಷದವರು, ಈಗ ಅಥವಾ ಹಿಂದೆ ಆದಾಯ ತೆರಿಗೆ ಪಾವತಿದಾರರಾಗಿರಬಾರದು. 60ರವರೆಗೆ ವಂತಿಗೆ ಮುಂದುವರಿಯುತ್ತದೆ.",
+    "ben:eps-family-pension": "EPS-95 ಪಿಂಚಣಿದಾರರ ಜೀವಂತ ಸಂಗಾತಿ.",
+    "ben:ka-widow-pension": "ಕುಟುಂಬ ಆದಾಯ ಮಿತಿಯೊಳಗಿರುವ, ಕರ್ನಾಟಕ ನಿವಾಸಿ ವಿಧವೆಯರು.",
   },
 };
 
@@ -114,4 +133,8 @@ export function localizeNoticeBody(language: Language, noticeId: string, fallbac
 
 export function localizeRuleExplanation(language: Language, fallback: string) {
   return dictionaries[language]?.ruleExplanations[fallback] ?? fallback;
+}
+
+export function localizeBenefitAudience(language: Language, benefitId: string, fallback: string) {
+  return dictionaries[language]?.benefitAudiences[benefitId] ?? fallback;
 }

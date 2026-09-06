@@ -13,12 +13,14 @@ const statusKeys: Record<string, MessageKey> = {
   "partner-consent-pending": "statusPartnerConsentPending",
   processing: "statusProcessing",
   received: "statusReceived",
+  requested: "statusRequested",
   revoked: "statusRevoked",
   submitted: "statusSubmitted",
 };
 
 const documentKindKeys: Record<string, MessageKey> = {
   aadhaar: "documentAadhaar",
+  "consent-receipt": "documentConsentReceipt",
   "death-certificate": "documentDeathCertificate",
   "driving-licence": "documentDrivingLicence",
   "gst-registration": "documentGstRegistration",
@@ -54,6 +56,7 @@ export function getRelationshipMessageKey(relationship: string) {
 export function localizeEvidence(language: Language, evidence: string) {
   if (evidence === "doc:itr-v-fy25") return getMessage(language, "evidenceLatestItr");
   if (evidence === "income-declaration") return getMessage(language, "evidenceIncomeDeclaration");
+  if (evidence === "Income-tax payer history") return getMessage(language, "evidenceIncomeTaxHistory");
   if (evidence === "death-certificate") return getMessage(language, "documentDeathCertificate");
   return evidence.replace("doc:", "").replaceAll("-", " ");
 }

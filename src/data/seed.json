@@ -53,7 +53,8 @@
         "phone": "9800000002",
         "email": "priya.patel@example.com",
         "maritalStatus": "single",
-        "preferredLanguage": "en"
+        "preferredLanguage": "en",
+        "hasBankAccount": true
       },
       "verification": {
         "source": "UIDAI",
@@ -96,7 +97,8 @@
         "gender": "female",
         "phone": "9800000003",
         "maritalStatus": "married",
-        "preferredLanguage": "hi"
+        "preferredLanguage": "hi",
+        "hasBankAccount": true
       },
       "verification": {
         "source": "UIDAI",
@@ -230,8 +232,9 @@
       },
       "verification": {
         "source": "EPFO",
-        "state": "verified",
-        "asOf": "2026-06-30"
+        "state": "not-documented",
+        "asOf": "2026-06-30",
+        "note": "No EPFO or employer filing is on record for this work. Priya declared it herself."
       }
     },
     {
@@ -317,7 +320,9 @@
       "verification": {
         "source": "UIDAI",
         "state": "verified",
-        "asOf": "2026-05-10"
+        "asOf": "2026-05-10",
+        "sourceUrl": "https://uidai.gov.in",
+        "jurisdiction": "union"
       }
     },
     {
@@ -333,7 +338,9 @@
         "source": "NSDL",
         "state": "mismatch",
         "asOf": "2026-05-10",
-        "note": "Name on PAN ('ARJUN KUMAR SHARMA') differs from Aadhaar ('Arjun Sharma')."
+        "note": "Name on PAN ('ARJUN KUMAR SHARMA') differs from Aadhaar ('Arjun Sharma').",
+        "sourceUrl": "https://www.incometax.gov.in",
+        "jurisdiction": "union"
       }
     },
     {
@@ -349,7 +356,9 @@
       "verification": {
         "source": "Self",
         "state": "verified",
-        "asOf": "2026-05-10"
+        "asOf": "2026-05-10",
+        "sourceUrl": "https://www.passportindia.gov.in",
+        "jurisdiction": "union"
       }
     },
     {
@@ -365,7 +374,9 @@
       "verification": {
         "source": "RTO",
         "state": "verified",
-        "asOf": "2026-01-10"
+        "asOf": "2026-01-10",
+        "sourceUrl": "https://parivahan.gov.in",
+        "jurisdiction": "state"
       }
     },
     {
@@ -380,7 +391,9 @@
       "verification": {
         "source": "RTO",
         "state": "verified",
-        "asOf": "2026-01-10"
+        "asOf": "2026-01-10",
+        "sourceUrl": "https://parivahan.gov.in",
+        "jurisdiction": "state"
       }
     },
     {
@@ -395,7 +408,9 @@
       "verification": {
         "source": "MCA",
         "state": "verified",
-        "asOf": "2026-04-15"
+        "asOf": "2026-04-15",
+        "sourceUrl": "https://udyamregistration.gov.in",
+        "jurisdiction": "union"
       }
     },
     {
@@ -410,7 +425,9 @@
       "verification": {
         "source": "Self",
         "state": "verified",
-        "asOf": "2026-04-15"
+        "asOf": "2026-04-15",
+        "sourceUrl": "https://www.gst.gov.in",
+        "jurisdiction": "union"
       }
     },
     {
@@ -425,7 +442,9 @@
       "verification": {
         "source": "UIDAI",
         "state": "verified",
-        "asOf": "2026-04-02"
+        "asOf": "2026-04-02",
+        "sourceUrl": "https://uidai.gov.in",
+        "jurisdiction": "union"
       }
     },
     {
@@ -440,7 +459,9 @@
       "verification": {
         "source": "NSDL",
         "state": "verified",
-        "asOf": "2026-04-02"
+        "asOf": "2026-04-02",
+        "sourceUrl": "https://www.incometax.gov.in",
+        "jurisdiction": "union"
       }
     },
     {
@@ -456,7 +477,9 @@
       "verification": {
         "source": "Self",
         "state": "verified",
-        "asOf": "2026-04-02"
+        "asOf": "2026-04-02",
+        "sourceUrl": "https://www.passportindia.gov.in",
+        "jurisdiction": "union"
       }
     },
     {
@@ -471,7 +494,9 @@
       "verification": {
         "source": "UIDAI",
         "state": "verified",
-        "asOf": "2026-02-18"
+        "asOf": "2026-02-18",
+        "sourceUrl": "https://uidai.gov.in",
+        "jurisdiction": "union"
       }
     },
     {
@@ -486,7 +511,9 @@
       "verification": {
         "source": "NSDL",
         "state": "verified",
-        "asOf": "2026-02-18"
+        "asOf": "2026-02-18",
+        "sourceUrl": "https://www.incometax.gov.in",
+        "jurisdiction": "union"
       }
     },
     {
@@ -501,7 +528,9 @@
       "verification": {
         "source": "RTO",
         "state": "verified",
-        "asOf": "2025-09-14"
+        "asOf": "2025-09-14",
+        "sourceUrl": "https://parivahan.gov.in",
+        "jurisdiction": "state"
       }
     },
     {
@@ -516,7 +545,26 @@
       "verification": {
         "source": "Municipal",
         "state": "verified",
-        "asOf": "2025-11-20"
+        "asOf": "2025-11-20",
+        "sourceUrl": "https://bbmp.gov.in",
+        "jurisdiction": "city"
+      }
+    },
+    {
+      "id": "doc:sunita-khata",
+      "type": "document",
+      "attrs": {
+        "kind": "property-khata",
+        "holderName": "Rajesh Sharma & Sunita Sharma",
+        "propertyId": "prop:jpnagar-house",
+        "issuedOn": "2004-05-12"
+      },
+      "verification": {
+        "source": "Municipal",
+        "state": "verified",
+        "asOf": "2025-11-20",
+        "sourceUrl": "https://bbmp.gov.in",
+        "jurisdiction": "city"
       }
     },
     {
@@ -531,7 +579,9 @@
       "verification": {
         "source": "UIDAI",
         "state": "verified",
-        "asOf": "2026-02-18"
+        "asOf": "2026-02-18",
+        "sourceUrl": "https://uidai.gov.in",
+        "jurisdiction": "union"
       }
     },
     {
@@ -546,7 +596,9 @@
       "verification": {
         "source": "UIDAI",
         "state": "verified",
-        "asOf": "2025-12-01"
+        "asOf": "2025-12-01",
+        "sourceUrl": "https://uidai.gov.in",
+        "jurisdiction": "union"
       }
     },
     {
@@ -572,7 +624,8 @@
             "value": true,
             "explanation": "You have an active bank account."
           }
-        ]
+        ],
+        "audience": "Anyone 18–70 with a bank account. Accident insurance for a yearly premium of ₹20."
       },
       "verification": {
         "source": "Self",
@@ -616,12 +669,55 @@
             "explanation": "Latest ITR acknowledgement (ITR-V) is required.",
             "missingEvidence": "doc:itr-v-fy25"
           }
-        ]
+        ],
+        "audience": "Small business owners with a registered proprietorship or partnership at least two years old."
       },
       "verification": {
         "source": "Self",
         "state": "verified",
         "asOf": "2026-08-01"
+      }
+    },
+    {
+      "id": "ben:apy",
+      "type": "benefit",
+      "attrs": {
+        "name": "Atal Pension Yojana",
+        "authority": "PFRDA",
+        "valuePerYear": "Guaranteed ₹1,000–₹5,000/month pension after 60",
+        "audience": "People aged 18–40 with a bank account who are not and have never been income-tax payers. Contributions continue until 60.",
+        "rules": [
+          {
+            "field": "person.age",
+            "op": "between",
+            "value": [
+              18,
+              40
+            ],
+            "explanation": "You are between 18 and 40."
+          },
+          {
+            "field": "person.hasBankAccount",
+            "op": "==",
+            "value": true,
+            "explanation": "You have an active bank account."
+          },
+          {
+            "field": "person.hasBeenIncomeTaxPayer",
+            "op": "==",
+            "value": false,
+            "explanation": "You are not and have never been an income-tax payer.",
+            "missingEvidence": "Income-tax payer history",
+            "evidenceType": "fact"
+          }
+        ]
+      },
+      "verification": {
+        "source": "Self",
+        "state": "verified",
+        "asOf": "2026-08-01",
+        "sourceUrl": "https://pfrda.org.in/web/pfrda/schemes/atal-pension-yojana-apy",
+        "jurisdiction": "union"
       }
     },
     {
@@ -651,7 +747,8 @@
             "explanation": "Death certificate is required.",
             "missingEvidence": "death-certificate"
           }
-        ]
+        ],
+        "audience": "The surviving spouse of an EPS-95 pensioner."
       },
       "verification": {
         "source": "EPFO",
@@ -693,7 +790,8 @@
             "explanation": "Household income must be within the limit — needs income declaration.",
             "missingEvidence": "income-declaration"
           }
-        ]
+        ],
+        "audience": "Widowed women resident in Karnataka with a household income within the limit."
       },
       "verification": {
         "source": "Self",
@@ -735,6 +833,23 @@
         "source": "RTO",
         "state": "verified",
         "asOf": "2026-08-02"
+      }
+    },
+    {
+      "id": "obl:sunita-ration-ekyc",
+      "type": "obligation",
+      "attrs": {
+        "title": "Ration card e-KYC for Sunita",
+        "authority": "Food and Civil Supplies, Karnataka",
+        "direction": "action",
+        "issuedOn": "2026-08-10",
+        "dueDate": "2026-09-30",
+        "consequence": "Name may be dropped from the ration card if e-KYC is not completed."
+      },
+      "verification": {
+        "source": "Self",
+        "state": "pending",
+        "asOf": "2026-08-10"
       }
     },
     {
@@ -1112,6 +1227,20 @@
       }
     },
     {
+      "id": "e:sunita-owns-house",
+      "type": "owns",
+      "from": "person:sunita",
+      "to": "prop:jpnagar-house",
+      "attrs": {},
+      "validFrom": "2004-05-12",
+      "status": "active",
+      "verification": {
+        "source": "Municipal",
+        "state": "verified",
+        "asOf": "2025-11-20"
+      }
+    },
+    {
       "id": "e:rajesh-owns-dzire",
       "type": "owns",
       "from": "person:rajesh",
@@ -1395,6 +1524,20 @@
       }
     },
     {
+      "id": "e:sunita-subject-ration-ekyc",
+      "type": "subjectOf",
+      "from": "person:sunita",
+      "to": "obl:sunita-ration-ekyc",
+      "attrs": {},
+      "validFrom": "2026-08-10",
+      "status": "active",
+      "verification": {
+        "source": "Self",
+        "state": "pending",
+        "asOf": "2026-08-10"
+      }
+    },
+    {
       "id": "e:arjun-subject-proptax",
       "type": "subjectOf",
       "from": "person:arjun",
@@ -1564,6 +1707,68 @@
         "source": "Self",
         "state": "verified",
         "asOf": "2026-08-01"
+      }
+    },
+    {
+      "id": "e:sunita-subject-pmsby",
+      "type": "subjectOf",
+      "from": "person:sunita",
+      "to": "ben:pmsby",
+      "attrs": {
+        "eligibility": "eligible"
+      },
+      "validFrom": "2026-08-01",
+      "status": "active",
+      "verification": {
+        "source": "Self",
+        "state": "verified",
+        "asOf": "2026-08-01"
+      }
+    },
+    {
+      "id": "e:priya-subject-pmsby",
+      "type": "subjectOf",
+      "from": "person:priya",
+      "to": "ben:pmsby",
+      "attrs": {
+        "eligibility": "eligible"
+      },
+      "validFrom": "2026-08-01",
+      "status": "active",
+      "verification": {
+        "source": "Self",
+        "state": "verified",
+        "asOf": "2026-08-01"
+      }
+    },
+    {
+      "id": "e:priya-subject-apy",
+      "type": "subjectOf",
+      "from": "person:priya",
+      "to": "ben:apy",
+      "attrs": {
+        "eligibility": "eligible"
+      },
+      "validFrom": "2026-08-01",
+      "status": "active",
+      "verification": {
+        "source": "Self",
+        "state": "verified",
+        "asOf": "2026-08-01"
+      }
+    },
+    {
+      "id": "e:sunita-holds-khata",
+      "type": "holds",
+      "from": "person:sunita",
+      "to": "doc:sunita-khata",
+      "attrs": {},
+      "validFrom": "2004-05-12",
+      "status": "active",
+      "verification": {
+        "source": "Municipal",
+        "state": "verified",
+        "asOf": "2025-11-20"
       }
     }
   ],

@@ -1,12 +1,76 @@
+import { controlsHi } from "./controls";
 import type { MessageKey } from "./en";
+import { aboutHi } from "./about";
+import { askHi } from "./ask";
+import { workflowHi } from "./workflow";
+import { landingHi } from "./landing";
 import { manifestoHi } from "./manifesto";
+import { productHi } from "./product";
+import { recordsHi } from "./records";
+
+// Temporary compatibility for the existing screens; removed when their replacements land.
+const legacyHi = {
+  marriageStartWithArjun: "यह अनुरोध अर्जुन शुरू करेंगे",
+  marriageStartWithArjunBody: "आमंत्रण भेजने के लिए अर्जुन पर जाएँ।",
+  marriageIdentityVerification: "प्रिया की पहचान की पुष्टि",
+  marriageVerifiedDocumentsOnly: "सत्यापित पहचान दस्तावेज़ इस्तेमाल करें",
+  marriageSpouseAfterSubmission: "पंजीकरण के बाद अर्जुन को जीवनसाथी जोड़ें",
+  aboutEyebrow: "मूल विचार",
+  aboutTitle: "बेहतर इंटरफ़ेस",
+  aboutTitleAccent: "काफ़ी नहीं है।",
+  aboutBody:
+    "अगर सार्वजनिक सेवाएँ पहली कोशिश में काम कर जाएँ? Citizen का जवाब: हर व्यक्ति का एक जुड़ा रिकॉर्ड, जिसे हर सेवा पढ़ती और अपडेट करती है।",
+  aboutReturn: "Citizen पर लौटें",
+  aboutProofEyebrow: "चलते हुए प्रमाण",
+  aboutProofTitle: "एक रिकॉर्ड। चार चलते डेमो।",
+  aboutProofBody:
+    "ये चारों डेमो उसी रिकॉर्ड पर काम करते हैं। हर एक रिकॉर्ड पढ़ता है, उस पर काम करता है और नतीजा Citizen के बाकी हिस्सों में दिखाता है।",
+  aboutProofEpfo: "EPFO पासबुक और अंशदान देखें, फिर शिकायत दर्ज करें।",
+  aboutProofDocuments:
+    "PAN और आधार की तुलना करके सुधार से पहले DigiLocker दस्तावेज़ फिर उपयोग करें।",
+  aboutProofMoney:
+    "चालान या संपत्ति कर भरें, GSTR-3B जमा करें और रसीद या पावती सहेजें।",
+  aboutProofConsent:
+    "अर्जुन और प्रिया के बीच साझा पंजीकरण पूरा करें; सुनीता की पारिवारिक पहुँच दें या वापस लें।",
+  aboutWhyEyebrow: "यह क्यों मायने रखता है",
+  aboutWhyTitle: "रिकॉर्ड सबसे पहले।",
+  aboutWhyBody:
+    "ज़्यादातर रीडिज़ाइन वही विभाग मेन्यू सजाते हैं। Citizen व्यक्ति और उसके रिकॉर्ड को पहले रखता है, और हर सेवा उसी से पढ़ती है।",
+  aboutWhyCitizenTitle: "पहले व्यक्ति",
+  aboutWhyCitizenBody:
+    "शुरुआत आपकी ज़िंदगी में बदले से होती है: शादी, परिवार में मृत्यु, या नया व्यवसाय।",
+  aboutWhyGraphTitle: "कोई जानकारी दोबारा नहीं",
+  aboutWhyGraphBody:
+    "पात्रता, चेतावनी और अगले कदम आपके मौजूदा रिकॉर्ड से आते हैं। कोई स्क्रीन वही बातें दोबारा नहीं पूछती।",
+  aboutWhyProofTitle: "चलते डेमो",
+  aboutWhyProofBody:
+    "हर डेमो रिकॉर्ड बदलता है, रसीदें बनाता है और इतिहास जोड़ता है। यहाँ कुछ भी अधूरा नमूना नहीं है।",
+  homeGraphKicker: "यह होम अलग क्यों है",
+  homeGraphTitle: "यह आपके अपने रिकॉर्ड से बना है।",
+  homeGraphAction: "Citizen Graph देखें",
+  homeGraphEvidence: "जुड़ा प्रमाण",
+  homeGraphEvidenceValue:
+    "दस्तावेज़ {documents} · पारिवारिक रिश्ते {relationships}",
+  homeGraphRecord: "नागरिक रिकॉर्ड",
+  homeGraphNow: "जिस पर ध्यान चाहिए",
+  homeGraphNowValue: "काम {tasks} · बिना पढ़े अपडेट {unread}",
+  landingVisionNav: "साझाकरण",
+  landingBeyondKicker:
+    "Varun Mayya के Build What Moves India हैकाथॉन के लिए बनाया गया।",
+  landingSystemKicker: "जो सब कुछ जोड़े रखता है",
+  landingSystemTitle: "Citizen Graph",
+  landingSystemBody:
+    "आपके दस्तावेज़, रिकॉर्ड और अनुमतियाँ एक सेवा से दूसरी सेवा तक आपके साथ रहती हैं। अगली सेवा वहीं से शुरू करती है जहाँ पिछली रुकी थी।",
+} as const;
 
 export const hi: Record<MessageKey, string> = {
+  ...legacyHi,
+  ...controlsHi,
   brand: "Citizen",
   simulated: "सिम्युलेटेड",
   home: "होम",
   services: "सेवाएँ",
-  dashboardHeadline: "इन कामों पर ध्यान दें",
+  dashboardHeadline: "इन कामों पर [[ध्यान]] दें",
   servicesHeadline: "सेवा चुनें",
   servicesBody: "काम पूरा होने पर होम अपडेट हो जाता है।",
   serviceCategoryIdentity: "पहचान और परिवार",
@@ -193,25 +257,22 @@ export const hi: Record<MessageKey, string> = {
   marriageViewRelationship: "परिवार का रिकॉर्ड देखें",
   marriageOpenCertificate: "प्रमाणपत्र खोलें",
   marriageSharedEyebrow: "आमंत्रण",
-  marriageInviteTitle: "प्रिया को बुलाएँ",
-  marriageStartWithArjun: "यह अनुरोध अर्जुन शुरू करेंगे",
-  marriageStartWithArjunBody: "आमंत्रण भेजने के लिए अर्जुन पर जाएँ।",
-  marriageSharedBody: "प्रिया अपनी प्रोफ़ाइल से अनुरोध जाँचेंगी।",
-  marriageInvitePriya: "प्रिया को आमंत्रित करें",
+  marriageInviteTitle: "{name} को बुलाएँ",
+  marriageStartWithCouple: "यह अनुरोध अर्जुन या प्रिया शुरू करेंगे",
+  marriageStartWithCoupleBody: "दोनों में से कोई भी अपने लॉगिन से आमंत्रण भेज सकता है।",
+  marriageSharedBody: "{name} अपनी प्रोफ़ाइल से अनुरोध जाँचेंगे और अलग से सहमति देंगे।",
+  marriageInvitePriya: "{name} को आमंत्रित करें",
   marriageConsentEyebrow: "सहमति ज़रूरी है",
-  marriageConsentQuestion: "प्रिया, क्या आप सहमत हैं?",
-  marriageWaitingPriya: "प्रिया की सहमति बाकी है",
+  marriageConsentQuestion: "{name}, क्या आप सहमत हैं?",
+  marriageWaitingPriya: "{name} की सहमति बाकी है",
   marriageConsentBody:
-    "अर्जुन इस पंजीकरण के लिए नीचे दिए रिकॉर्ड इस्तेमाल करना चाहते हैं।",
-  marriageIdentityVerification: "प्रिया की पहचान की पुष्टि",
-  marriageVerifiedDocumentsOnly: "सत्यापित पहचान दस्तावेज़ इस्तेमाल करें",
-  marriageSpouseAfterSubmission: "पंजीकरण के बाद अर्जुन को जीवनसाथी जोड़ें",
+    "{name} इस पंजीकरण के लिए नीचे दिए रिकॉर्ड इस्तेमाल करना चाहते हैं।",
   marriageIConsent: "मैं सहमत हूँ",
-  marriageSwitchPriya: "प्रिया पर जाएँ",
+  marriageSwitchPriya: "{name} पर जाएँ",
   marriageRecordsEyebrow: "दस्तावेज़ और गवाह",
   marriageRecordsTitle: "गवाह चुनें",
   marriageRecordsBody:
-    "{count} सत्यापित पहचान दस्तावेज़ तैयार हैं। कम से कम एक गवाह चुनें।",
+    "{count} सत्यापित पहचान दस्तावेज़ तैयार हैं। इस डेमो के लिए दोनों गवाह चुनें।",
   marriageWitnesses: "गवाह",
   marriageUseDocuments: "इन रिकॉर्ड के साथ आगे बढ़ें",
   marriageAppointmentTitle: "अपॉइंटमेंट बुक करें",
@@ -294,6 +355,7 @@ export const hi: Record<MessageKey, string> = {
   statusReceived: "प्राप्त हुआ",
   statusActive: "सक्रिय",
   statusRevoked: "वापस लिया गया",
+  statusRequested: "अनुरोध किया",
   documentAadhaar: "आधार",
   documentPan: "PAN",
   documentPassport: "पासपोर्ट",
@@ -310,6 +372,7 @@ export const hi: Record<MessageKey, string> = {
   evidenceIncomeDeclaration: "आय घोषणा",
   eventPaperworkDelegated: "रिकॉर्ड अर्जुन के साथ साझा किए गए",
   eventPaperworkRevoked: "अर्जुन की रिकॉर्ड पहुँच समाप्त हुई",
+  eventAccessRequested: "अर्जुन ने सुनीता से पहुँच माँगी",
   eventChallanPaid: "ट्रैफ़िक ई-चालान का भुगतान हुआ",
   eventDocumentSaved: "{document} इस डिवाइस पर सहेजा गया",
   eventPanCorrectionSubmitted: "PAN नाम सुधार का अनुरोध भेजा गया",
@@ -321,8 +384,8 @@ export const hi: Record<MessageKey, string> = {
   eventDeathJourneyCompleted: "मृत्यु पंजीकरण और परिवार के दावे पूरे हुए",
   eventLoanApplicationStarted: "{option} का आवेदन शुरू हुआ",
   eventBusinessPlanStarted: "नए व्यवसाय के पंजीकरण की योजना शुरू हुई",
-  eventMarriageInviteSent: "प्रिया को साझा विवाह आवेदन में आमंत्रित किया गया",
-  eventMarriageConsentReceived: "प्रिया ने विवाह पंजीकरण की सहमति दी",
+  eventMarriageInviteSent: "{name} को साझा विवाह आवेदन में आमंत्रित किया गया",
+  eventMarriageConsentReceived: "{name} ने विवाह पंजीकरण की सहमति दी",
   eventMarriageDocumentsAdded:
     "सत्यापित पहचान दस्तावेज़ और गवाह विवाह आवेदन में जोड़े गए",
   eventMarriageAppointmentBooked:
@@ -530,8 +593,8 @@ export const hi: Record<MessageKey, string> = {
   benefitCompleteBody: "संदर्भ {reference}। आवेदन अब होम पर दिखाई देगा।",
   benefitReference: "आवेदन संदर्भ",
   benefitApplicationError: "आवेदन जमा नहीं हुआ। मसौदा सुरक्षित है।",
-  benefitDraftMissingTitle: "जारी रखने के लिए कोई लाभ मसौदा नहीं है",
-  benefitDraftMissingBody: "लाभ पेज से पात्र योजना का आवेदन शुरू करें।",
+  benefitDraftMissingTitle: "लाभ आवेदन चुनें",
+  benefitDraftMissingBody: "नीचे अपना मसौदा खोलें या नया शुरू करने के लिए लाभ पेज पर जाएँ। यहाँ केवल इस प्रोफ़ाइल के आवेदन हैं।",
   refundTrackTitle: "आपका रिफ़ंड प्रक्रिया में है",
   refundTrackBody:
     "{amount} का रिफ़ंड {date} को शुरू हुआ। अभी कुछ करने की ज़रूरत नहीं है।",
@@ -544,12 +607,6 @@ export const hi: Record<MessageKey, string> = {
   recordNeedsAttention: "{document} रिकॉर्ड पर ध्यान दें",
   recordMismatch: "जानकारी आपके दूसरे रिकॉर्ड से मेल नहीं खाती",
   independentNotice: "भारत सरकार या किसी राज्य प्राधिकरण से संबद्ध नहीं है।",
-  aboutEyebrow: "मूल विचार",
-  aboutTitle: "बेहतर इंटरफ़ेस",
-  aboutTitleAccent: "काफ़ी नहीं है।",
-  aboutBody:
-    "अगर सार्वजनिक सेवाएँ पहली कोशिश में काम कर जाएँ? Citizen का जवाब: हर व्यक्ति का एक जुड़ा रिकॉर्ड, जिसे हर सेवा पढ़ती और अपडेट करती है।",
-  aboutReturn: "Citizen पर लौटें",
   aboutGuideEyebrow: "Citizen का उपयोग",
   aboutGuideTitle: "चार स्क्रीन। प्रवेश का एक रास्ता।",
   aboutGuideBody:
@@ -665,30 +722,6 @@ export const hi: Record<MessageKey, string> = {
   boundaryCanTwo: "मौजूदा स्थिति और अगली उपलब्ध कार्रवाई दिखाना",
   boundaryCanThree: "हर काम को शून्य से शुरू होने से रोकना",
   boundaryCanFour: "रसीद, अनुमति और इतिहास एक रिकॉर्ड में लौटाना",
-  aboutProofEyebrow: "चलते हुए प्रमाण",
-  aboutProofTitle: "एक रिकॉर्ड। चार चलते डेमो।",
-  aboutProofBody:
-    "ये चारों डेमो उसी रिकॉर्ड पर काम करते हैं। हर एक रिकॉर्ड पढ़ता है, उस पर काम करता है और नतीजा Citizen के बाकी हिस्सों में दिखाता है।",
-  aboutProofEpfo: "EPFO पासबुक और अंशदान देखें, फिर शिकायत दर्ज करें।",
-  aboutProofDocuments:
-    "PAN और आधार की तुलना करके सुधार से पहले DigiLocker दस्तावेज़ फिर उपयोग करें।",
-  aboutProofMoney:
-    "चालान या संपत्ति कर भरें, GSTR-3B जमा करें और रसीद या पावती सहेजें।",
-  aboutProofConsent:
-    "अर्जुन और प्रिया के बीच साझा पंजीकरण पूरा करें; सुनीता की पारिवारिक पहुँच दें या वापस लें।",
-  aboutWhyEyebrow: "यह क्यों मायने रखता है",
-  aboutWhyTitle: "रिकॉर्ड सबसे पहले।",
-  aboutWhyBody:
-    "ज़्यादातर रीडिज़ाइन वही विभाग मेन्यू सजाते हैं। Citizen व्यक्ति और उसके रिकॉर्ड को पहले रखता है, और हर सेवा उसी से पढ़ती है।",
-  aboutWhyCitizenTitle: "पहले व्यक्ति",
-  aboutWhyCitizenBody:
-    "शुरुआत आपकी ज़िंदगी में बदले से होती है: शादी, परिवार में मृत्यु, या नया व्यवसाय।",
-  aboutWhyGraphTitle: "कोई जानकारी दोबारा नहीं",
-  aboutWhyGraphBody:
-    "पात्रता, चेतावनी और अगले कदम आपके मौजूदा रिकॉर्ड से आते हैं। कोई स्क्रीन वही बातें दोबारा नहीं पूछती।",
-  aboutWhyProofTitle: "चलते डेमो",
-  aboutWhyProofBody:
-    "हर डेमो रिकॉर्ड बदलता है, रसीदें बनाता है और इतिहास जोड़ता है। यहाँ कुछ भी अधूरा नमूना नहीं है।",
   aboutClosingTitle: "व्यक्ति से शुरू करें।",
   aboutClosingBody:
     "Citizen खोलें, एक प्रोफ़ाइल चुनें और पूछें कि उस व्यक्ति को क्या चाहिए। रिकॉर्ड संदर्भ देता है। सेवा अगला कदम बताती है।",
@@ -707,15 +740,6 @@ export const hi: Record<MessageKey, string> = {
   suggestDocuments: "मेरे दस्तावेज़ देखें",
   suggestProfile: "मेरी प्रोफ़ाइल जाँचें",
   homeContext: "{name} के भुगतान, सूचनाएँ, दस्तावेज़, लाभ या आवेदन पूछें।",
-  homeGraphKicker: "यह होम अलग क्यों है",
-  homeGraphTitle: "यह आपके अपने रिकॉर्ड से बना है।",
-  homeGraphAction: "Citizen Graph देखें",
-  homeGraphEvidence: "जुड़ा प्रमाण",
-  homeGraphEvidenceValue:
-    "दस्तावेज़ {documents} · पारिवारिक रिश्ते {relationships}",
-  homeGraphRecord: "नागरिक रिकॉर्ड",
-  homeGraphNow: "जिस पर ध्यान चाहिए",
-  homeGraphNowValue: "काम {tasks} · बिना पढ़े अपडेट {unread}",
   moreTasks: "{count} और दिखाएँ",
   showFewer: "कम दिखाएँ",
   profileScopeEyebrow: "उपलब्ध नहीं",
@@ -765,16 +789,24 @@ export const hi: Record<MessageKey, string> = {
   confirmSimulatedPayment: "डेमो में भुगतान करें",
   challanPaymentError: "भुगतान पूरा नहीं हुआ। चालान अभी बाकी है।",
   fyTurnover: "FY25 कारोबार {amount}",
-  delegationSetupTitle: "परिवार से जुड़े कागज़ अर्जुन से साझा करें",
+  delegationSetupTitle: "अपना कागज़ी काम अर्जुन से साझा करें",
   delegationSetupBody:
-    "अर्जुन को {date} तक राजेश की पेंशन और जे.पी. नगर संपत्ति के रिकॉर्ड देखने दें। मालिकाना हक़ नहीं बदलेगा और सुनीता कभी भी पहुँच वापस ले सकती हैं।",
+    "{date} तक अर्जुन को जे.पी. नगर संपत्ति रिकॉर्ड देखने और दस्तावेज़ देखने या सहेजने दें। भुगतान, आवेदन और राशन कार्ड e-KYC शामिल नहीं हैं। अनुमति कभी भी वापस ले सकते हैं।",
+  delegationRequestedTitle: "अर्जुन ने मदद माँगी है",
+  delegationRequestedBody:
+    "अर्जुन {date} तक संपत्ति रिकॉर्ड देखने और दस्तावेज़ देखने या सहेजने की अनुमति माँग रहे हैं। आपकी सहमति से पहले कुछ साझा नहीं होगा।",
+  delegationRequestAction: "सुनीता से पहुँच माँगें",
+  delegationRequestSentTitle: "सुनीता को अनुरोध भेजा गया",
+  delegationRequestSentBody:
+    "सुनीता को यह अनुरोध उनके होम पर दिखेगा। जब तक वे हाँ न कहें, उनके रिकॉर्ड सिर्फ़ उनके रहेंगे।",
+  delegationRequestHint: "संपत्ति रिकॉर्ड और दस्तावेज़ देखने की अनुमति सुनीता से माँगें। उनकी सहमति से पहले कुछ साझा नहीं होता।",
   delegationGrantAction: "अर्जुन के साथ साझा करें",
-  delegationActiveTitle: "परिवार से जुड़े कागज़",
+  delegationActiveTitle: "अर्जुन के साथ साझा",
   delegationActiveBody:
-    "अर्जुन {date} तक जुड़ी पेंशन और संपत्ति के रिकॉर्ड देख सकते हैं। मालिकाना हक़ नहीं बदला है।",
-  delegationEndedTitle: "परिवार के कागज़ों की पहुँच समाप्त",
+    "अर्जुन {date} तक साझा संपत्ति रिकॉर्ड देख सकते हैं और दस्तावेज़ देख या सहेज सकते हैं। आवेदन, भुगतान या अनुमति में बदलाव नहीं कर सकते।",
+  delegationEndedTitle: "अर्जुन की पहुँच समाप्त",
   delegationEndedBody:
-    "अर्जुन अब जुड़ी पेंशन या पारिवारिक संपत्ति के रिकॉर्ड नहीं देख सकते।",
+    "अर्जुन अब साझा संपत्ति रिकॉर्ड या दस्तावेज़ नहीं खोल सकते।",
   profileSummary: "{age} वर्ष · {place} · {count} दस्तावेज़",
   profileSummaryOne: "{age} वर्ष · {place} · 1 दस्तावेज़",
   addressPending: "पता बाकी है",
@@ -784,6 +816,10 @@ export const hi: Record<MessageKey, string> = {
   recordRelationshipHistory: "पुराने पारिवारिक रिश्ते इतिहास में रहते हैं।",
   recordVersionHistory: "रिकॉर्ड बदलने पर पुराने संस्करण उपलब्ध रहते हैं।",
   continuousEligibility: "आपके रिकॉर्ड पर आधारित",
+  benefitsForYou: "आपके लिए",
+  benefitsOthersTitle: "अन्य योजनाएँ",
+  benefitsOthersBody: "यह प्रोफ़ाइल आज पात्र नहीं है। पढ़ें कि हर योजना क्या देती है और किसके लिए है।",
+  benefitsWhoFor: "किसके लिए",
   noLinkedSchemes: "अभी कोई लाभ उपलब्ध नहीं",
   noLinkedSchemesBody: "पात्र होने पर लाभ यहाँ दिखेंगे।",
   unavailablePageTitle: "यह सेवा डेमो में नहीं है",
@@ -796,15 +832,11 @@ export const hi: Record<MessageKey, string> = {
   landingProblemNav: "समस्या",
   landingGraphNav: "Citizen Graph",
   landingJourneyNav: "आज़माएँ",
-  landingVisionNav: "साझाकरण",
   landingStart: "डेमो खोलें",
   landingWatchDemo: "वीडियो देखें",
   landingWatchDemoTitle: "Citizen डेमो",
   landingSourceCode: "GitHub",
   landingMusicCreditPrefix: "संगीत",
-  landingHeroTitle: "क्या हो अगर सार्वजनिक सेवाएँ पहली कोशिश में काम करें?",
-  landingHeroBody:
-    "आपके सत्यापित दस्तावेज़ जुड़े रहते हैं। सेवाएँ आपकी जानकारी भरी हुई खुलती हैं। हर नतीजा उसी रिकॉर्ड में लौटता है। कोई फॉर्म शून्य से नहीं शुरू होता।",
   landingOriginKicker: "यह विचार कहाँ से आया",
   landingOriginNav: "कहानी",
   landingOriginProof: "इस डेमो का होम पहले से ऐसा ही काम करता है। आपके पूछने से पहले ही बताता है कि क्या बदला और आपके लिए क्या फ़ायदेमंद हो सकता है।",
@@ -826,8 +858,6 @@ export const hi: Record<MessageKey, string> = {
     "निजी सार्वजनिक-सेवा गज़ट एक व्यक्ति के लिए निजी जानकारी है, कोई आधिकारिक सरकारी प्रकाशन नहीं।",
   landingOriginDisclaimer:
     "स्वतंत्र प्रोटोटाइप। UMANG, EPFO, DigiLocker या किसी सरकारी प्राधिकरण से संबद्ध या समर्थित नहीं। सभी सेवा जवाब सिम्युलेटेड हैं।",
-  landingBeyondKicker:
-    "Varun Mayya के Build What Moves India हैकाथॉन के लिए बनाया गया।",
   landingBeyondTitle: "स्पष्ट सुधार सिर्फ़ इतना ही कर सकते हैं।",
   landingBeyondBody:
     "साफ़ स्क्रीन, चैट और डैशबोर्ड सब थोड़ा मदद करते हैं। कोई भी असली समस्या नहीं सुलझाता: हर सेवा फिर से शून्य से शुरू होती है।",
@@ -837,10 +867,6 @@ export const hi: Record<MessageKey, string> = {
   landingSurfaceTwoBody: "आपको सही सेवा तक ले जाता है",
   landingSurfaceThreeTitle: "डैशबोर्ड",
   landingSurfaceThreeBody: "पहले से मौजूद काम का सार दिखाता है",
-  landingSystemKicker: "जो सब कुछ जोड़े रखता है",
-  landingSystemTitle: "Citizen Graph",
-  landingSystemBody:
-    "आपके दस्तावेज़, रिकॉर्ड और अनुमतियाँ एक सेवा से दूसरी सेवा तक आपके साथ रहती हैं। अगली सेवा वहीं से शुरू करती है जहाँ पिछली रुकी थी।",
   landingHackathonLink: "Build What Moves India हैकाथॉन देखें",
   landingProjectTitle: "अब इसे काम करते देखें।",
   landingProjectBody:
@@ -857,7 +883,7 @@ export const hi: Record<MessageKey, string> = {
   landingServiceStatus: "Citizen कैसे काम करता है",
   landingVisionTitle: "क्या साझा हो, यह आप तय करें।",
   landingVisionBody:
-    "आप तय करते हैं कि कौन क्या देखे और किस उद्देश्य के लिए। सहमति साफ़ दिखती है और आप कभी भी उसे वापस ले सकते हैं।",
+    "असली Citizen में सीमित उद्देश्य के लिए साझाकरण, दिखने वाला एक्सेस इतिहास और अनुमति वापस लेने का तरीका चाहिए। डेमो में परिवार की अनुमति वापस ले सकते हैं; लाइव एकीकरण और विवाह सहमति वापस लेना उपलब्ध नहीं हैं।",
   landingVisionOne: "रिकॉर्ड साझा करने से पहले पूछें",
   landingVisionTwo: "स्वीकृत सरकारी कनेक्शन इस्तेमाल करें",
   landingVisionThree: "दिखाएँ कि किसने क्या देखा",
@@ -873,7 +899,9 @@ export const hi: Record<MessageKey, string> = {
   nudgeEpfNomineeTitle: "प्रिया को EPF नॉमिनी बनाने की समीक्षा करें",
   nudgeEpfNomineeBody: "विवाह पंजीकृत है, पर EPF में अभी कोई नॉमिनी नहीं है।",
   nudgeDelegationTitle: "अर्जुन के साथ कागज़ी काम साझा करें",
-  nudgeDelegationBody: "पेंशन और संपत्ति के काम अर्जुन को सौंपें।",
+  nudgeDelegationBody: "जे.पी. नगर संपत्ति के रिकॉर्ड और अपना राशन कार्ड e-KYC अर्जुन को सौंपें।",
+  nudgeAskAccessTitle: "आपकी माँ को जे.पी. नगर संपत्ति के रिकॉर्ड में मदद चाहिए हो सकती है",
+  nudgeAskAccessBody: "सुनीता से संपत्ति और दस्तावेज़ साझा करने की अनुमति माँगें। अन्य काम उनकी अपनी प्रोफ़ाइल में रहेंगे।",
   healthTitle: "सरकार से आपका रिश्ता",
   healthAllClear: "अभी कुछ करने की ज़रूरत नहीं है।",
   healthAttention: "{count} चीज़ों पर ध्यान चाहिए।",
@@ -912,5 +940,11 @@ export const hi: Record<MessageKey, string> = {
   eventSeedChallan: "ट्रैफ़िक चालान जारी हुआ",
   eventSeedRefund: "आयकर रिफ़ंड शुरू हुआ",
   eventSeedCorrectionDraft: "PAN सुधार ड्राफ़्ट में सहेजा गया",
+  ...landingHi,
+  ...aboutHi,
+  ...askHi,
+  ...workflowHi,
   ...manifestoHi,
+  ...productHi,
+  ...recordsHi,
 };

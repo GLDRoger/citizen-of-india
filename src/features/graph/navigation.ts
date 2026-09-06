@@ -7,7 +7,7 @@ export function getApplicationHref(application: ApplicationNode) {
     case "marriage":
       return "/workflows/marriage";
     case "benefit":
-      return "/workflows/benefit-application";
+      return `/workflows/benefit-application?application=${encodeURIComponent(application.id)}`;
     case "business-loan":
       return "/workflows/loan";
     case "business-registration":

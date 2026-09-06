@@ -1,4 +1,5 @@
 import type { CitizenGraph, GraphNode } from "./schema";
+import { getActiveDelegation as getDelegationFor } from "./delegation";
 import {
   getApplications,
   getDocuments,
@@ -36,10 +37,14 @@ function hasActiveDelegation(graph: CitizenGraph, delegatorId: string) {
   );
 }
 
+/** The active delegation this person may act under, if any (they are the delegate). */
+export { getActiveDelegation as getDelegationFor } from "./delegation";
+
 export interface Nudge {
   id: string;
-  kind: "benefit" | "epf-nominee" | "delegation";
+  kind: "benefit" | "epf-nominee" | "delegation" | "act-for" | "ask-access";
   benefit?: BenefitNode;
+  personName?: string;
   href: string;
 }
 
@@ -55,7 +60,15 @@ export function getProactiveNudges(graph: CitizenGraph, personId: string): Nudge
     nudges.push({ id: "nudge:epf-nominee", kind: "epf-nominee", href: "/workflows/marriage" });
   }
   if (personId === "person:sunita" && !hasActiveDelegation(graph, personId)) {
-    nudges.push({ id: "nudge:delegation", kind: "delegation", href: "/you" });
+    nudges.push({ id: "nudge:delegation", kind: "delegation", href: "/you#delegation" });
+  }
+  if (personId === "person:arjun" && !graph.nodes.some((node) => node.type === "delegation" && node.attrs.delegatorId === "person:sunita" && node.attrs.status !== "revoked" && node.attrs.status !== "expired")) {
+    nudges.push({ id: "nudge:ask-access", kind: "ask-access", href: "/you#delegation" });
+  }
+  const delegation = getDelegationFor(graph, personId);
+  if (delegation) {
+    const delegator = graph.nodes.find((node) => node.id === delegation.attrs.delegatorId);
+    nudges.push({ id: "nudge:act-for", kind: "act-for", personName: delegator?.type === "person" ? delegator.attrs.name : undefined, href: "/you#delegation" });
   }
   return nudges;
 }

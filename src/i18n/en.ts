@@ -1,11 +1,76 @@
+import { controlsEn } from "./controls";
+import { aboutEn } from "./about";
+import { askEn } from "./ask";
+import { workflowEn } from "./workflow";
+import { landingEn } from "./landing";
 import { manifestoEn } from "./manifesto";
+import { productEn } from "./product";
+import { recordsEn } from "./records";
+
+// Temporary compatibility for the existing screens; removed when their replacements land.
+const legacyEn = {
+  marriageStartWithArjun: "Arjun needs to start this request",
+  marriageStartWithArjunBody: "Switch to Arjun to send the invitation.",
+  marriageIdentityVerification: "Confirm Priya's identity",
+  marriageVerifiedDocumentsOnly: "Use verified identity documents",
+  marriageSpouseAfterSubmission: "Add Arjun as spouse after registration",
+  aboutEyebrow: "The idea",
+  aboutTitle: "A better interface",
+  aboutTitleAccent: "is not enough.",
+  aboutBody:
+    "What if public services worked on the first try? Citizen's answer is one connected record per person that every service reads and updates.",
+  aboutReturn: "Return to Citizen",
+  aboutProofEyebrow: "Working proof",
+  aboutProofTitle: "One record. Four working demos.",
+  aboutProofBody:
+    "These four demos all work on the same record. Each one reads it, acts on it and shows the result everywhere else in Citizen.",
+  aboutProofEpfo:
+    "Review an EPFO passbook, inspect a contribution and register a grievance.",
+  aboutProofDocuments:
+    "Reuse DigiLocker documents to compare PAN and Aadhaar before a correction.",
+  aboutProofMoney:
+    "Pay a challan or property tax, file GSTR-3B and keep the resulting receipt or acknowledgement.",
+  aboutProofConsent:
+    "Complete a shared registration across Arjun and Priya; grant or revoke Sunita’s family access.",
+  aboutWhyEyebrow: "Why this matters",
+  aboutWhyTitle: "The record comes first.",
+  aboutWhyBody:
+    "Most redesigns tidy up the same department menu. Citizen puts the person and their record first, and every service reads from it.",
+  aboutWhyCitizenTitle: "Person first",
+  aboutWhyCitizenBody:
+    "It starts with what changed in your life: a marriage, a death in the family, a new business.",
+  aboutWhyGraphTitle: "Nothing asked twice",
+  aboutWhyGraphBody:
+    "Eligibility, warnings and next steps come from the records you already have. No screen asks you to repeat them.",
+  aboutWhyProofTitle: "Working demos",
+  aboutWhyProofBody:
+    "Every demo changes records, creates receipts and adds history. Nothing here is a dead-end mock page.",
+  homeGraphKicker: "Why this Home is different",
+  homeGraphTitle: "Built from your own records.",
+  homeGraphAction: "See the Citizen Graph",
+  homeGraphEvidence: "Connected evidence",
+  homeGraphEvidenceValue:
+    "Documents {documents} · Family links {relationships}",
+  homeGraphRecord: "Citizen record",
+  homeGraphNow: "What needs attention",
+  homeGraphNowValue: "Actions {tasks} · Unread {unread}",
+  landingVisionNav: "Sharing",
+  landingBeyondKicker:
+    "Built for the Build What Moves India hackathon by Varun Mayya.",
+  landingSystemKicker: "What holds it together",
+  landingSystemTitle: "Citizen Graph",
+  landingSystemBody:
+    "Your documents, records and permissions follow you from one service to the next. Each service picks up where the last one ended.",
+} as const;
 
 export const en = {
+  ...legacyEn,
+  ...controlsEn,
   brand: "Citizen",
   simulated: "Simulated",
   home: "Home",
   services: "Services",
-  dashboardHeadline: "Needs your attention",
+  dashboardHeadline: "Needs your [[attention]]",
   servicesHeadline: "Choose a service",
   servicesBody: "Home updates when you finish a task.",
   serviceCategoryIdentity: "Identity and family",
@@ -198,25 +263,22 @@ export const en = {
   marriageViewRelationship: "View family record",
   marriageOpenCertificate: "Open certificate",
   marriageSharedEyebrow: "Invitation",
-  marriageInviteTitle: "Invite Priya",
-  marriageStartWithArjun: "Arjun needs to start this request",
-  marriageStartWithArjunBody: "Switch to Arjun to send the invitation.",
-  marriageSharedBody: "Priya will review the request from her profile.",
-  marriageInvitePriya: "Invite Priya",
+  marriageInviteTitle: "Invite {name}",
+  marriageStartWithCouple: "Arjun or Priya needs to start this request",
+  marriageStartWithCoupleBody: "Either of them can send the invitation from their own login.",
+  marriageSharedBody: "{name} will review the request from their own profile and consent separately.",
+  marriageInvitePriya: "Invite {name}",
   marriageConsentEyebrow: "Consent required",
-  marriageConsentQuestion: "Priya, do you consent?",
-  marriageWaitingPriya: "Waiting for Priya",
+  marriageConsentQuestion: "{name}, do you consent?",
+  marriageWaitingPriya: "Waiting for {name}",
   marriageConsentBody:
-    "Arjun is asking to use the records below for this registration.",
-  marriageIdentityVerification: "Confirm Priya's identity",
-  marriageVerifiedDocumentsOnly: "Use verified identity documents",
-  marriageSpouseAfterSubmission: "Add Arjun as spouse after registration",
+    "{name} is asking to use the records below for this registration.",
   marriageIConsent: "I consent",
-  marriageSwitchPriya: "Switch to Priya",
+  marriageSwitchPriya: "Switch to {name}",
   marriageRecordsEyebrow: "Documents and witnesses",
   marriageRecordsTitle: "Choose witnesses",
   marriageRecordsBody:
-    "{count} verified identity documents are ready. Choose at least one witness.",
+    "{count} verified identity documents are ready. Choose both witnesses for this demo.",
   marriageWitnesses: "Witnesses",
   marriageUseDocuments: "Continue with these records",
   marriageAppointmentTitle: "Book the appointment",
@@ -297,6 +359,7 @@ export const en = {
   statusReceived: "Received",
   statusActive: "Active",
   statusRevoked: "Revoked",
+  statusRequested: "Requested",
   documentAadhaar: "Aadhaar",
   documentPan: "PAN",
   documentPassport: "Passport",
@@ -313,6 +376,7 @@ export const en = {
   evidenceIncomeDeclaration: "Income declaration",
   eventPaperworkDelegated: "Records shared with Arjun",
   eventPaperworkRevoked: "Arjun's record access ended",
+  eventAccessRequested: "Arjun asked Sunita for access",
   eventChallanPaid: "Traffic e-challan paid",
   eventDocumentSaved: "{document} saved to this device",
   eventPanCorrectionSubmitted: "PAN name-correction request submitted",
@@ -324,8 +388,8 @@ export const en = {
   eventDeathJourneyCompleted: "Death registration and family claims completed",
   eventLoanApplicationStarted: "{option} application started",
   eventBusinessPlanStarted: "New business registration plan started",
-  eventMarriageInviteSent: "Priya invited to a shared marriage application",
-  eventMarriageConsentReceived: "Priya consented to the marriage registration",
+  eventMarriageInviteSent: "{name} invited to a shared marriage application",
+  eventMarriageConsentReceived: "{name} consented to the marriage registration",
   eventMarriageDocumentsAdded:
     "Verified identity documents and witnesses added to the marriage application",
   eventMarriageAppointmentBooked: "Marriage appointment booked and fee paid",
@@ -539,9 +603,9 @@ export const en = {
   benefitReference: "Application reference",
   benefitApplicationError:
     "The application could not be submitted. The draft is still saved.",
-  benefitDraftMissingTitle: "No benefit draft to continue",
+  benefitDraftMissingTitle: "Choose a benefit application",
   benefitDraftMissingBody:
-    "Start an eligible scheme application from Benefits.",
+    "Open one of your drafts below, or visit Benefits to start one. Only applications in this profile are shown.",
   refundTrackTitle: "Your refund is being processed",
   refundTrackBody: "{amount} was started on {date}. No action is needed yet.",
   refundStarted: "Started {date}",
@@ -554,12 +618,6 @@ export const en = {
   recordMismatch: "Details do not match your other records",
   independentNotice:
     "Not affiliated with the Government of India or any state authority.",
-  aboutEyebrow: "The idea",
-  aboutTitle: "A better interface",
-  aboutTitleAccent: "is not enough.",
-  aboutBody:
-    "What if public services worked on the first try? Citizen's answer is one connected record per person that every service reads and updates.",
-  aboutReturn: "Return to Citizen",
   aboutGuideEyebrow: "How to use Citizen",
   aboutGuideTitle: "Four screens. One way in.",
   aboutGuideBody:
@@ -677,31 +735,6 @@ export const en = {
   boundaryCanTwo: "Show the current state and next available action",
   boundaryCanThree: "Stop each task from restarting at zero",
   boundaryCanFour: "Return receipts, permissions and history to one record",
-  aboutProofEyebrow: "Working proof",
-  aboutProofTitle: "One record. Four working demos.",
-  aboutProofBody:
-    "These four demos all work on the same record. Each one reads it, acts on it and shows the result everywhere else in Citizen.",
-  aboutProofEpfo:
-    "Review an EPFO passbook, inspect a contribution and register a grievance.",
-  aboutProofDocuments:
-    "Reuse DigiLocker documents to compare PAN and Aadhaar before a correction.",
-  aboutProofMoney:
-    "Pay a challan or property tax, file GSTR-3B and keep the resulting receipt or acknowledgement.",
-  aboutProofConsent:
-    "Complete a shared registration across Arjun and Priya; grant or revoke Sunita’s family access.",
-  aboutWhyEyebrow: "Why this matters",
-  aboutWhyTitle: "The record comes first.",
-  aboutWhyBody:
-    "Most redesigns tidy up the same department menu. Citizen puts the person and their record first, and every service reads from it.",
-  aboutWhyCitizenTitle: "Person first",
-  aboutWhyCitizenBody:
-    "It starts with what changed in your life: a marriage, a death in the family, a new business.",
-  aboutWhyGraphTitle: "Nothing asked twice",
-  aboutWhyGraphBody:
-    "Eligibility, warnings and next steps come from the records you already have. No screen asks you to repeat them.",
-  aboutWhyProofTitle: "Working demos",
-  aboutWhyProofBody:
-    "Every demo changes records, creates receipts and adds history. Nothing here is a dead-end mock page.",
   aboutClosingTitle: "Start with the person.",
   aboutClosingBody:
     "Open Citizen, pick a profile and ask what that person needs. The record gives the context. The service gives the next step.",
@@ -721,15 +754,6 @@ export const en = {
   suggestProfile: "Review my profile",
   homeContext:
     "Ask about {name}'s payments, notices, documents, benefits or applications.",
-  homeGraphKicker: "Why this Home is different",
-  homeGraphTitle: "Built from your own records.",
-  homeGraphAction: "See the Citizen Graph",
-  homeGraphEvidence: "Connected evidence",
-  homeGraphEvidenceValue:
-    "Documents {documents} · Family links {relationships}",
-  homeGraphRecord: "Citizen record",
-  homeGraphNow: "What needs attention",
-  homeGraphNowValue: "Actions {tasks} · Unread {unread}",
   moreTasks: "Show {count} more",
   showFewer: "Show fewer",
   profileScopeEyebrow: "Not available",
@@ -779,16 +803,24 @@ export const en = {
   challanPaymentError:
     "The payment could not be completed. The challan is still unpaid.",
   fyTurnover: "{amount} FY25 turnover",
-  delegationSetupTitle: "Share linked family paperwork with Arjun",
+  delegationSetupTitle: "Share your paperwork with Arjun",
   delegationSetupBody:
-    "Let Arjun view Rajesh's pension and JP Nagar property records until {date}. Ownership does not change, and Sunita can revoke access at any time.",
+    "Let Arjun view your JP Nagar property records and view or save your documents until {date}. Payments, applications and ration card e-KYC are not included. You can revoke access at any time.",
+  delegationRequestedTitle: "Arjun asked to help",
+  delegationRequestedBody:
+    "Arjun asks to view your property records and view or save documents until {date}. Nothing is shared until you agree.",
+  delegationRequestAction: "Ask Sunita for access",
+  delegationRequestSentTitle: "Request sent to Sunita",
+  delegationRequestSentBody:
+    "Sunita will see your request on her Home. Until she says yes, her records stay hers alone.",
+  delegationRequestHint: "Ask Sunita for permission to view property records and documents. Nothing is shared until she agrees.",
   delegationGrantAction: "Share with Arjun",
-  delegationActiveTitle: "Linked family paperwork",
+  delegationActiveTitle: "Shared with Arjun",
   delegationActiveBody:
-    "Arjun can view the linked pension and property records until {date}. Ownership is unchanged.",
-  delegationEndedTitle: "Family paperwork access ended",
+    "Arjun can view the shared property records and view or save documents until {date}. He cannot submit applications, make payments or change permissions.",
+  delegationEndedTitle: "Access for Arjun ended",
   delegationEndedBody:
-    "Arjun can no longer view the linked pension or family-property records.",
+    "Arjun can no longer open the shared property records or documents.",
   profileSummary: "{age} years · {place} · {count} documents",
   profileSummaryOne: "{age} years · {place} · 1 document",
   addressPending: "Address pending",
@@ -798,6 +830,10 @@ export const en = {
   recordRelationshipHistory: "Past family links are saved.",
   recordVersionHistory: "Past record versions are saved.",
   continuousEligibility: "Based on your records",
+  benefitsForYou: "For you",
+  benefitsOthersTitle: "Other schemes",
+  benefitsOthersBody: "This profile does not qualify today. Read what each one offers and who it is for.",
+  benefitsWhoFor: "Who it is for",
   noLinkedSchemes: "No benefits available yet",
   noLinkedSchemesBody: "Benefits will appear when this profile qualifies.",
   unavailablePageTitle: "This service is not part of the demo",
@@ -810,15 +846,11 @@ export const en = {
   landingProblemNav: "Problem",
   landingGraphNav: "Citizen Graph",
   landingJourneyNav: "Try it",
-  landingVisionNav: "Sharing",
   landingStart: "Open demo",
   landingWatchDemo: "Watch demo",
   landingWatchDemoTitle: "Citizen demo",
   landingSourceCode: "GitHub",
   landingMusicCreditPrefix: "Music",
-  landingHeroTitle: "What if public services worked the first time?",
-  landingHeroBody:
-    "Your verified documents stay connected. Services open with your details already filled in. Every result returns to the same record. No form starts from zero.",
   landingOriginKicker: "How this started",
   landingOriginNav: "The story",
   landingOriginProof: "Home in this demo already works this way. It shows what changed and what could help you before you ask.",
@@ -842,8 +874,6 @@ export const en = {
     "A personal public-service gazette is a private brief for one person, not an official government publication.",
   landingOriginDisclaimer:
     "Independent prototype. Not affiliated with or endorsed by UMANG, EPFO, DigiLocker or any government authority. All service responses are simulated.",
-  landingBeyondKicker:
-    "Built for the Build What Moves India hackathon by Varun Mayya.",
   landingBeyondTitle: "The obvious fixes only go so far.",
   landingBeyondBody:
     "Cleaner screens, chat boxes and dashboards each help a little. None of them fixes the real problem: every service still starts from zero.",
@@ -853,10 +883,6 @@ export const en = {
   landingSurfaceTwoBody: "Takes you to the right service",
   landingSurfaceThreeTitle: "Dashboard",
   landingSurfaceThreeBody: "Summarises tasks that already exist",
-  landingSystemKicker: "What holds it together",
-  landingSystemTitle: "Citizen Graph",
-  landingSystemBody:
-    "Your documents, records and permissions follow you from one service to the next. Each service picks up where the last one ended.",
   landingHackathonLink: "Visit the Build What Moves India hackathon",
   landingProjectTitle: "Now watch it work.",
   landingProjectBody:
@@ -874,7 +900,7 @@ export const en = {
   landingServiceStatus: "How Citizen works",
   landingVisionTitle: "You control what gets shared.",
   landingVisionBody:
-    "You decide who sees what, and for what purpose. Consent stays visible and you can take it back anytime.",
+    "A real Citizen would need purpose-limited sharing, visible access history and a way to withdraw permission. The demo implements revocable family access; live integrations and marriage-consent withdrawal are not built.",
   landingVisionOne: "Ask before sharing records",
   landingVisionTwo: "Use approved government connections",
   landingVisionThree: "Show who accessed what",
@@ -890,7 +916,9 @@ export const en = {
   nudgeEpfNomineeTitle: "Review Priya as your EPF nominee",
   nudgeEpfNomineeBody: "Your marriage is registered, but your EPF still has no nominee.",
   nudgeDelegationTitle: "Share paperwork with Arjun",
-  nudgeDelegationBody: "Let Arjun handle pension and property tasks for you.",
+  nudgeDelegationBody: "Let Arjun handle the JP Nagar property records and your ration card e-KYC.",
+  nudgeAskAccessTitle: "Your mother may need help with the JP Nagar property records",
+  nudgeAskAccessBody: "Ask Sunita to share property and document access. Other actions stay in her own profile.",
   healthTitle: "Government relationship",
   healthAllClear: "Nothing needs you right now.",
   healthAttention: "{count} things need you.",
@@ -929,7 +957,13 @@ export const en = {
   eventSeedChallan: "Traffic challan issued",
   eventSeedRefund: "Income tax refund initiated",
   eventSeedCorrectionDraft: "PAN correction saved as draft",
+  ...landingEn,
+  ...aboutEn,
+  ...askEn,
+  ...workflowEn,
   ...manifestoEn,
+  ...productEn,
+  ...recordsEn,
 } as const;
 
 export type MessageKey = keyof typeof en;

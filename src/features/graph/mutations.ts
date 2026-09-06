@@ -1,3 +1,4 @@
+import { demoTimestamp } from "@/lib/demo-clock";
 import {
   graphEdgeSchema,
   graphNodeSchema,
@@ -84,6 +85,6 @@ export function createGraphEvent(input: Omit<GraphEvent, "id" | "occurredAt">): 
   return {
     ...input,
     id: `evt:${crypto.randomUUID()}`,
-    occurredAt: new Date().toISOString(),
+    occurredAt: demoTimestamp(),
   };
 }

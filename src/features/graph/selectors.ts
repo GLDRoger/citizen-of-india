@@ -1,3 +1,4 @@
+import { demoNow } from "@/lib/demo-clock";
 import { daysUntil } from "@/lib/format";
 import type { MessageKey } from "@/i18n/messages";
 import type {
@@ -10,6 +11,7 @@ import type {
   NodeType,
 } from "./schema";
 import { getApplicationHref } from "./navigation";
+import { needsPartnerConsent } from "./ownership";
 
 type PersonNode = Extract<GraphNode, { type: "person" }>;
 type DocumentNode = Extract<GraphNode, { type: "document" }>;
@@ -80,7 +82,9 @@ export function getApplications(graph: CitizenGraph, personId: string): Applicat
 function mutationAffectsPerson(graph: CitizenGraph, mutation: GraphMutation, personId: string) {
   switch (mutation.type) {
     case "addNode":
-      return mutation.node.id === personId || (mutation.node.type === "application" && mutation.node.attrs.participants?.includes(personId) === true);
+      return mutation.node.id === personId
+        || (mutation.node.type === "application" && mutation.node.attrs.participants?.includes(personId) === true)
+        || (mutation.node.type === "delegation" && [mutation.node.attrs.delegatorId, mutation.node.attrs.delegateId].includes(personId));
     case "addEdge":
       return mutation.edge.from === personId || mutation.edge.to === personId;
     case "endEdge": {
@@ -94,7 +98,11 @@ function mutationAffectsPerson(graph: CitizenGraph, mutation: GraphMutation, per
     case "patchAttrs": {
       if (mutation.nodeId === personId) return true;
       const application = getNodeByType(graph, mutation.nodeId, "application");
-      return application?.attrs.participants?.includes(personId) === true;
+      const delegation = getNodeByType(graph, mutation.nodeId, "delegation");
+      return application?.attrs.participants?.includes(personId) === true
+        || Boolean(delegation && [delegation.attrs.delegatorId, delegation.attrs.delegateId].includes(personId))
+        || graph.edges.some((edge) => edge.from === personId && edge.to === mutation.nodeId
+          && ["holds", "subjectOf", "owns"].includes(edge.type));
     }
     default: {
       const exhaustive: never = mutation;
@@ -135,8 +143,8 @@ export function getNotices(graph: CitizenGraph, personId: string): NoticeView[] 
     );
 }
 
-function ageFromDob(dob: string) {
-  const today = new Date();
+export function ageFromDob(dob: string) {
+  const today = demoNow();
   const birth = new Date(`${dob}T00:00:00+05:30`);
   let age = today.getFullYear() - birth.getFullYear();
   const beforeBirthday =
@@ -191,6 +199,8 @@ function resolveFact(graph: CitizenGraph, person: PersonNode, field: string): un
       return person.attrs.hasBankAccount;
     case "person.itrFiledLastYear":
       return person.attrs.itrFiledLastYear;
+    case "person.hasBeenIncomeTaxPayer":
+      return person.attrs.hasBeenIncomeTaxPayer;
     case "person.residentState":
       return getResidenceState(graph, person.id);
     case "person.widowed":
@@ -267,7 +277,9 @@ export function evaluateBenefit(
     return {
       rule,
       passed: rulePasses(fact, rule),
-      missing: rule.missingEvidence && !hasDocumentEvidence(graph, person.id, rule.missingEvidence),
+      missing: rule.missingEvidence && (rule.evidenceType === "fact"
+        ? fact === undefined
+        : !hasDocumentEvidence(graph, person.id, rule.missingEvidence)),
     };
   });
   const failedReasons = details
@@ -310,6 +322,15 @@ export function getEligibility(graph: CitizenGraph, personId: string): Eligibili
     .map((benefit) => evaluateBenefit(graph, person, benefit));
 }
 
+/** Every benefit in the demo evaluated against this person, linked or not, so the page can be read even when nothing qualifies. */
+export function getBenefitCatalogue(graph: CitizenGraph, personId: string): EligibilityResult[] {
+  const person = getPerson(graph, personId);
+  if (!person) return [];
+  return graph.nodes
+    .filter((node): node is BenefitNode => node.type === "benefit")
+    .map((benefit) => evaluateBenefit(graph, person, benefit));
+}
+
 export interface TaskView {
   id: string;
   title: string;
@@ -328,33 +349,48 @@ export function getThingsToDo(graph: CitizenGraph, personId: string): TaskView[]
     "obl:gstr3b-sep": "/workflows/gstr3b",
     "obl:passport-renewal": "/workflows/passport-renewal",
     "obl:itr-refund": "/workflows/refund-track",
+    "obl:sunita-ration-ekyc": "/workflows/service-unavailable",
   };
   const obligationTasks = getObligations(graph, personId)
-    .filter((node) => !["paid", "received", "completed"].includes(node.attrs.status ?? "due"))
-    .map((node) => ({
-      id: node.id,
+    .filter((node) => node.attrs.citizenOutcome !== "unresolved" && !["paid", "received", "completed"].includes(node.attrs.status ?? "due"))
+    .map((node): TaskView => {
+      const days = node.attrs.dueDate ? daysUntil(node.attrs.dueDate) : undefined;
+      return {
+        id: node.id,
+        title: node.attrs.title,
+        meta: days === undefined ? node.attrs.authority : days < 0 ? `${Math.abs(days)} days overdue` : `${days} days left`,
+        metaKey: days !== undefined && days < 0 ? "daysOverdue" : undefined,
+        href: obligationHrefs[node.id] ?? "/home#attention",
+        urgent: days !== undefined ? days <= 14 : false,
+      };
+    });
+  const unresolvedTasks: TaskView[] = [...getObligations(graph, personId), ...getApplications(graph, personId)]
+    .filter((node) => node.attrs.citizenOutcome === "unresolved")
+    .map((node): TaskView => ({
+      id: `${node.id}:follow-up`,
       title: node.attrs.title,
-      meta: node.attrs.dueDate ? `${daysUntil(node.attrs.dueDate)} days left` : node.attrs.authority,
-      href: obligationHrefs[node.id] ?? "/home#attention",
-      urgent: node.attrs.dueDate ? daysUntil(node.attrs.dueDate) <= 14 : false,
+      meta: "Not solved yet, you said",
+      metaKey: "outcomeUnresolvedMeta",
+      href: node.type === "obligation" ? obligationHrefs[node.id] ?? "/activity" : getApplicationHref(node) ?? "/activity",
+      urgent: true,
     }));
   const applications = getApplications(graph, personId)
-    .filter((node) => node.attrs.status !== "completed");
-  const toApplicationTask = (node: ApplicationNode) => ({
+    .filter((node) => node.attrs.status !== "completed" && node.attrs.citizenOutcome !== "unresolved");
+  const toApplicationTask = (node: ApplicationNode): TaskView => ({
       id: node.id,
       title: node.attrs.title,
       meta:
-        node.attrs.status === "partner-consent-pending" && personId === "person:priya"
+        needsPartnerConsent(node, personId)
           ? "Your consent is needed"
           : `Status: ${node.attrs.status.replaceAll("-", " ")}`,
-      metaKey: node.attrs.status === "partner-consent-pending" && personId === "person:priya"
+      metaKey: needsPartnerConsent(node, personId)
         ? "consentNeeded"
         : undefined,
       href: getApplicationHref(node) ?? "/you#government-dealings",
-      urgent: node.attrs.status === "partner-consent-pending" && personId === "person:priya",
+      urgent: needsPartnerConsent(node, personId),
     });
   const urgentApplicationTasks = applications
-    .filter((node) => node.attrs.status === "partner-consent-pending" && personId === "person:priya")
+    .filter((node) => needsPartnerConsent(node, personId))
     .map(toApplicationTask);
   const actionableApplicationTasks = applications
     .filter((node) => ["draft", "documents-ready", "appointment-booked"].includes(node.attrs.status))
@@ -365,7 +401,7 @@ export function getThingsToDo(graph: CitizenGraph, personId: string): TaskView[]
   const applicationRecordIds = new Set(applications.map((node) => node.attrs.relatedTo).filter((id): id is string => Boolean(id)));
   const mismatchTasks = getDocuments(graph, personId)
     .filter((node) => node.verification.state === "mismatch" && !applicationRecordIds.has(node.id))
-    .map((node) => ({
+    .map((node): TaskView => ({
       id: node.id,
       title: `${node.attrs.kind.toUpperCase()} record needs attention`,
       titleKey: "recordNeedsAttention",
@@ -375,7 +411,7 @@ export function getThingsToDo(graph: CitizenGraph, personId: string): TaskView[]
       href: "/workflows/record-correction",
       urgent: false,
     }));
-  return [...urgentApplicationTasks, ...obligationTasks, ...mismatchTasks, ...actionableApplicationTasks, ...trackingApplicationTasks];
+  return [...unresolvedTasks, ...urgentApplicationTasks, ...obligationTasks, ...mismatchTasks, ...actionableApplicationTasks, ...trackingApplicationTasks];
 }
 
 export function getMoneySummary(graph: CitizenGraph, personId: string) {

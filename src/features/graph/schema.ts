@@ -17,14 +17,24 @@ export const verificationStateSchema = z.enum([
   "mismatch",
   "expired",
   "pending",
+  "not-documented",
 ]);
+
+/** Which level of government a record belongs to, when the record knows. */
+export const jurisdictionSchema = z.enum(["union", "state", "city", "self"]);
 
 export const verificationSchema = z.object({
   source: verificationSourceSchema,
   state: verificationStateSchema,
   asOf: z.iso.date(),
   note: z.string().optional(),
+  /** Public site of the issuing body. A pointer to where the record type lives, never a claim that this demo fetched it. */
+  sourceUrl: z.url().optional(),
+  jurisdiction: jurisdictionSchema.optional(),
 });
+
+/** What the citizen said after a procedure finished: did it solve the real problem? */
+export const citizenOutcomeSchema = z.enum(["solved", "unresolved"]);
 
 const personNodeSchema = z.object({
   id: z.string().startsWith("person:"),
@@ -42,6 +52,7 @@ const personNodeSchema = z.object({
     deceasedOn: z.iso.date().optional(),
     hasBankAccount: z.boolean().optional(),
     itrFiledLastYear: z.boolean().optional(),
+    hasBeenIncomeTaxPayer: z.boolean().optional(),
     pension: z
       .object({
         scheme: z.string(),
@@ -166,6 +177,7 @@ export const eligibilityRuleSchema = z.object({
   value: ruleValueSchema,
   explanation: z.string(),
   missingEvidence: z.string().optional(),
+  evidenceType: z.enum(["document", "fact"]).optional(),
 });
 
 const benefitNodeSchema = z.object({
@@ -175,6 +187,8 @@ const benefitNodeSchema = z.object({
     name: z.string(),
     authority: z.string(),
     valuePerYear: z.string(),
+    /** Plain-language "who this is for", shown when a profile does not qualify. */
+    audience: z.string().optional(),
     rules: z.array(eligibilityRuleSchema).min(1),
   }),
   verification: verificationSchema,
@@ -206,6 +220,7 @@ const applicationNodeSchema = z.object({
     appointmentOn: z.iso.datetime({ offset: true }).optional(),
     reference: z.string().optional(),
     currentStep: z.number().int().min(0).max(20).optional(),
+    citizenOutcome: citizenOutcomeSchema.optional(),
     submittedOn: z.iso.date().optional(),
     amountPaid: z.number().nonnegative().optional(),
     businessType: z.string().min(1).max(100).optional(),
@@ -228,6 +243,7 @@ const obligationNodeSchema = z.object({
     relatedTo: z.string().optional(),
     consequence: z.string().optional(),
     status: z.enum(["due", "processing", "paid", "received", "completed"]).optional(),
+    citizenOutcome: citizenOutcomeSchema.optional(),
     note: z.string().optional(),
   }),
   verification: verificationSchema,
@@ -259,7 +275,7 @@ const delegationNodeSchema = z.object({
     delegatorId: z.string().startsWith("person:"),
     scopes: z.array(z.enum(["pension", "property", "documents", "tax"])),
     expiresOn: z.iso.date(),
-    status: z.enum(["active", "revoked", "expired"]),
+    status: z.enum(["requested", "active", "revoked", "expired"]),
   }),
   verification: verificationSchema,
 });
