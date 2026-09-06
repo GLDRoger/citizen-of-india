@@ -9,7 +9,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "export:monuments": "node scripts/export-monuments.mjs"
   },
   "dependencies": {
     "lucide-react": "^1.33.0",

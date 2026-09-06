@@ -2,27 +2,29 @@
 
 import Link from "next/link";
 import { FilePanel, LedgerRow } from "@/components/ui/file-panel";
-import { Page } from "@/components/ui/page";
+import { RichText } from "@/components/rich-text";
+import { Backdrop, Page } from "@/components/ui/page";
 import { useAuthStore } from "@/features/auth/store";
 import {
-  getDocuments,
   getApplications,
   getMoneySummary,
   getNotices,
   getObligations,
   getProfileSummary,
-  getRelationshipViews,
   getThingsToDo,
   type TaskView,
 } from "@/features/graph/selectors";
+import { getApplicationOwnership, getObligationOwnership, summarizeOwnership } from "@/features/graph/ownership";
 import { useCitizenStore } from "@/features/graph/store";
 import { IntentComposer } from "@/features/intent/components/intent-composer";
 import { useI18n } from "@/i18n/use-i18n";
 import { localizeNodeTitle } from "@/i18n/content";
 import { getDocumentKindMessageKey, getStatusMessageKey } from "@/i18n/formatters";
-import { daysUntil, formatCurrency } from "@/lib/format";
+import { daysUntil, formatCurrency, formatDate } from "@/lib/format";
+import { DEMO_TODAY } from "@/lib/demo-clock";
 import { HomeRecords } from "./home-records";
 import { HomeNudges } from "./home-nudges";
+import { HomeStand, OwnershipLine } from "./home-stand";
 
 type Obligation = ReturnType<typeof getObligations>[number];
 type Application = ReturnType<typeof getApplications>[number];
@@ -32,14 +34,18 @@ function greetingKey() {
   return hour < 12 ? "goodMorning" as const : hour < 17 ? "goodAfternoon" as const : "goodEvening" as const;
 }
 
-function TaskLedgerRow({ application, index, obligation, task }: { application?: Application; index: number; obligation?: Obligation; task: TaskView }) {
+function TaskLedgerRow({ application, index, obligation, personId, task }: { application?: Application; index: number; obligation?: Obligation; personId: string; task: TaskView }) {
   const { language, t } = useI18n();
+  const graph = useCitizenStore((state) => state.graph);
+  const ownership = obligation ? getObligationOwnership(obligation) : application ? getApplicationOwnership(graph, application, personId) : undefined;
   const status = obligation?.attrs.status ?? application?.attrs.status;
   const statusKey = status ? getStatusMessageKey(status) : undefined;
   const localizedStatus = statusKey ? t(statusKey) : status;
   const localizedMeta = task.metaKey ? t(task.metaKey) : task.meta;
-  const value = obligation?.attrs.dueDate
-    ? t("daysLeft", { count: daysUntil(obligation.attrs.dueDate) })
+  const value = task.metaKey === "outcomeUnresolvedMeta"
+    ? t("outcomeUnresolvedMeta")
+    : obligation?.attrs.dueDate
+    ? daysUntil(obligation.attrs.dueDate) < 0 ? t("daysOverdue", { count: Math.abs(daysUntil(obligation.attrs.dueDate)) }) : t("daysLeft", { count: daysUntil(obligation.attrs.dueDate) })
     : application && task.urgent && task.metaKey
       ? localizedMeta
       : application && localizedStatus
@@ -50,8 +56,9 @@ function TaskLedgerRow({ application, index, obligation, task }: { application?:
     ? t(task.titleKey, { document: documentKindKey ? t(documentKindKey) : task.documentKind ?? "" })
     : application?.attrs.kind === "benefit" && application.attrs.relatedTo
     ? t("benefitApplicationTitle", { benefit: localizeNodeTitle(language, application.attrs.relatedTo, task.title) })
-    : localizeNodeTitle(language, task.id, task.title);
-  const actionLabel = task.id === "obl:echallan-500" ? t("pay")
+    : localizeNodeTitle(language, application?.id ?? obligation?.id ?? task.id, task.title);
+  const actionLabel = task.metaKey === "outcomeUnresolvedMeta" ? t("followUp")
+    : task.id === "obl:echallan-500" ? t("pay")
     : task.id === "obl:bbmp-property-tax" ? t("payPropertyTax")
       : task.id === "obl:gstr3b-sep" ? t("fileGstr")
         : task.id === "obl:passport-renewal" ? t("reviewScope")
@@ -60,45 +67,22 @@ function TaskLedgerRow({ application, index, obligation, task }: { application?:
               : t("view");
 
   return (
-    <div className="grid min-h-16 grid-cols-[minmax(0,3fr)_minmax(0,2fr)] items-center gap-4 border-b border-paper-line py-3 last:border-b-0" id={`task-${task.id}`}>
-      <div className="min-w-0">
-        <span className="block text-sm font-medium leading-5 text-ink">{String(index + 1).padStart(2, "0")} · {title}</span>
+    <div className="grid min-h-16 grid-cols-[2rem_minmax(0,3fr)_minmax(0,2fr)] items-start gap-3 border-b border-paper-line py-4 last:border-b-0 sm:gap-4" id={`task-${task.id}`}>
+      <span aria-hidden className={`font-display text-2xl font-bold leading-none tabular-nums ${task.urgent ? "text-brick" : "text-indigo-deep"}`}>{String(index + 1).padStart(2, "0")}</span>
+      <div className="grid min-w-0 gap-1.5">
+        <span className="block font-display text-lg font-semibold leading-6 tracking-[-0.01em] text-ink">{title}</span>
+        {ownership ? <OwnershipLine language={language} ownership={ownership} /> : null}
       </div>
       <div className="min-w-0 text-right">
-        <strong className="block font-display text-sm font-bold leading-5 tabular-nums text-ink">{value}</strong>
-        <Link aria-label={`${actionLabel}: ${title}`} className="mt-1 inline-block min-h-11 content-center text-xs font-bold text-indigo-deep underline decoration-indigo-deep/25 underline-offset-4" href={task.href}>{actionLabel}</Link>
+        <strong className={`block font-display text-base font-bold leading-6 tabular-nums ${task.urgent ? "text-brick" : "text-ink"}`}>{value}</strong>
+        <Link aria-label={`${actionLabel}: ${title}`} className="mt-1 inline-block min-h-11 content-center text-xs font-bold text-indigo-deep underline decoration-indigo-deep/25 underline-offset-4 hover:decoration-indigo-deep" href={task.href}>{actionLabel}</Link>
       </div>
     </div>
-  );
-}
-
-function SummaryLedgerItem({ label, value }: { label: string; value: string | number }) {
-  return (
-    <div className="grid min-h-14 min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-3 py-3 sm:min-h-20 sm:grid-cols-1 sm:content-between sm:items-stretch">
-      <span className="min-w-0 text-xs font-bold leading-4 text-ink-mute [overflow-wrap:anywhere]">{label}</span>
-      <strong className="font-display text-3xl font-bold leading-none tabular-nums text-ink">{value}</strong>
-    </div>
-  );
-}
-
-function HomeGraphTrace({ documents, name, relationships, tasks, unread }: { documents: number; name: string; relationships: number; tasks: number; unread: number }) {
-  const { t } = useI18n();
-  return (
-    <section className="grid gap-5 border-y border-paper-line py-5 lg:grid-cols-[13rem_minmax(0,1fr)] lg:items-center lg:gap-8">
-      <div className="grid gap-2"><p className="text-xs font-bold text-indigo-deep">{t("homeGraphKicker")}</p><h2 className="font-display text-2xl font-semibold leading-tight">{t("homeGraphTitle")}</h2><Link className="min-h-11 w-fit content-center text-xs font-bold text-indigo-deep underline decoration-indigo-deep/25 underline-offset-4" href="/about#citizen-graph">{t("homeGraphAction")}</Link></div>
-      <div className="grid gap-2 sm:grid-cols-[minmax(0,1fr)_2rem_minmax(10rem,0.72fr)_2rem_minmax(0,1fr)] sm:items-stretch">
-        <div className="grid content-center gap-1 bg-paper-shade px-4 py-3"><span className="text-xs font-bold text-ink-mute">{t("homeGraphEvidence")}</span><strong className="text-sm leading-5">{t("homeGraphEvidenceValue", { documents, relationships })}</strong></div>
-        <span aria-hidden className="grid place-items-center font-display text-xl text-saffron"><span className="sm:hidden">↓</span><span className="hidden sm:inline">→</span></span>
-        <div className="grid content-center bg-indigo-deep px-4 py-3 text-paper"><span className="text-xs font-bold text-paper/70">{t("homeGraphRecord")}</span><strong className="font-display text-xl leading-tight">{name}</strong></div>
-        <span aria-hidden className="grid place-items-center font-display text-xl text-saffron"><span className="sm:hidden">↓</span><span className="hidden sm:inline">→</span></span>
-        <div className="grid content-center gap-1 bg-indigo-tint px-4 py-3"><span className="text-xs font-bold text-indigo-deep">{t("homeGraphNow")}</span><strong className="text-sm leading-5">{t("homeGraphNowValue", { tasks, unread })}</strong></div>
-      </div>
-    </section>
   );
 }
 
 export function HomeScreen() {
-  const { t } = useI18n();
+  const { language, t } = useI18n();
   const personId = useAuthStore((state) => state.personId);
   const graph = useCitizenStore((state) => state.graph);
   if (!personId) return null;
@@ -107,40 +91,44 @@ export function HomeScreen() {
   if (!profile) return null;
 
   const tasks = getThingsToDo(graph, personId);
-  const relationships = getRelationshipViews(graph, personId);
-  const obligations = getObligations(graph, personId).filter((node) => !["paid", "received", "completed"].includes(node.attrs.status ?? ""));
+  const obligations = getObligations(graph, personId);
   const obligationsById = new Map(obligations.map((obligation) => [obligation.id, obligation]));
-  const documents = getDocuments(graph, personId);
-  const applications = getApplications(graph, personId).filter((node) => node.attrs.status !== "completed");
+  const applications = getApplications(graph, personId);
   const applicationsById = new Map(applications.map((application) => [application.id, application]));
-  const expiringDocuments = documents.filter((document) => document.attrs.expiresOn && daysUntil(document.attrs.expiresOn) >= 0 && daysUntil(document.attrs.expiresOn) <= 180);
-  const deadlineCount = obligations.filter((node) => Boolean(node.attrs.dueDate)).length;
   const unreadNotices = getNotices(graph, personId).filter((notice) => !notice.read).length;
   const money = getMoneySummary(graph, personId);
+  const stand = summarizeOwnership([
+    ...obligations.map((node) => getObligationOwnership(node)),
+    ...applications.map((node) => getApplicationOwnership(graph, node, personId)),
+  ]);
   const firstTasks = tasks.slice(0, 3);
   const remainingTasks = tasks.slice(3);
 
   return (
     <Page className="grid gap-10 lg:gap-12">
       <section className="grid content-start gap-6 lg:grid-cols-[minmax(16rem,0.68fr)_minmax(0,1.32fr)] lg:items-start lg:gap-10 lg:pt-3">
-        <div className="grid gap-3 lg:pt-6"><p className="text-sm text-ink-mute">{t(greetingKey())}, {profile.person.attrs.name.split(" ")[0]}</p><h1 className="max-w-2xl font-display text-[clamp(3rem,6vw,5rem)] font-semibold leading-[0.92] tracking-[-0.045em] text-ink">{t("needPrompt")}</h1></div>
+        <div className="relative isolate grid gap-4 lg:min-h-[26rem] lg:content-start lg:pt-6">
+          <Backdrop className="-bottom-3 h-auto w-[min(46vw,17rem)] max-w-none sm:w-[min(36vw,22rem)] lg:-bottom-1 lg:w-full" name="taj-mahal" />
+          <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-y-2 border-ink py-2 text-xs font-extrabold uppercase tracking-[0.12em] text-ink"><span>{t("homeEdition", { name: profile.person.attrs.name.split(" ")[0] })}</span><span className="text-ink-mute">{formatDate(DEMO_TODAY, language)}</span></div>
+          <p className="text-sm text-ink-mute">{t(greetingKey())}, {profile.person.attrs.name.split(" ")[0]}</p>
+          <h1 className="max-w-2xl font-display text-[clamp(3rem,6vw,5rem)] font-semibold leading-[0.92] tracking-[-0.045em] text-ink"><RichText entrance="load" text={t("homeHeadline")} /></h1>
+        </div>
         <IntentComposer key={personId} />
       </section>
-      <HomeGraphTrace documents={documents.length} name={profile.person.attrs.name} relationships={relationships.length} tasks={tasks.length} unread={unreadNotices} />
+      <HomeStand unread={unreadNotices} withGovernment={stand.withGovernment} withYou={stand.withYou} withOthers={stand.withOthers} />
       <section className="grid scroll-mt-20 gap-6" id="attention">
-        <div className="grid gap-1.5"><p className="eyebrow">{unreadNotices} {t("unread").toLowerCase()}</p><h2 className="max-w-4xl font-display text-[clamp(2.35rem,5vw,4rem)] font-semibold leading-[0.96] tracking-[-0.04em] text-ink">{t("dashboardHeadline")}</h2></div>
+        <div className="grid gap-1.5 border-t-2 border-ink pt-5"><p className="eyebrow text-indigo-deep">{unreadNotices} {t("unread").toLowerCase()}</p><h2 className="max-w-4xl font-display text-[clamp(2.35rem,5vw,4rem)] font-semibold leading-[0.96] tracking-[-0.04em] text-ink"><RichText entrance="scroll" text={t("dashboardHeadline")} /></h2></div>
         <div className="grid gap-5 lg:grid-cols-[minmax(0,1.35fr)_minmax(18rem,0.65fr)] lg:items-start">
           <FilePanel label={t("thingsToDo")}>
-            {tasks.length ? firstTasks.map((task, index) => <TaskLedgerRow application={applicationsById.get(task.id)} index={index} key={task.id} obligation={obligationsById.get(task.id)} task={task} />) : <p className="border-y border-paper-line py-7 text-sm text-ink-mute">{t("nothingWaiting")}</p>}
-            {remainingTasks.length ? <details className="group border-t border-paper-line"><summary className="min-h-11 content-center text-xs font-bold text-indigo-deep underline decoration-indigo-deep/25 underline-offset-4"><span className="group-open:hidden">{t("moreTasks", { count: remainingTasks.length })}</span><span className="hidden group-open:inline">{t("showFewer")}</span></summary>{remainingTasks.map((task, index) => <TaskLedgerRow application={applicationsById.get(task.id)} index={index + firstTasks.length} key={task.id} obligation={obligationsById.get(task.id)} task={task} />)}</details> : null}
+            {tasks.length ? firstTasks.map((task, index) => <TaskLedgerRow application={applicationsById.get(task.id.replace(/:follow-up$/, ""))} index={index} key={task.id} obligation={obligationsById.get(task.id.replace(/:follow-up$/, ""))} personId={personId} task={task} />) : <p className="py-7 text-sm text-ink-mute">{t("nothingWaiting")}</p>}
+            {remainingTasks.length ? <details className="group border-t border-paper-line"><summary className="min-h-11 cursor-pointer content-center text-xs font-bold text-indigo-deep underline decoration-indigo-deep/25 underline-offset-4"><span className="group-open:hidden">{t("moreTasks", { count: remainingTasks.length })}</span><span className="hidden group-open:inline">{t("showFewer")}</span></summary>{remainingTasks.map((task, index) => <TaskLedgerRow application={applicationsById.get(task.id.replace(/:follow-up$/, ""))} index={index + firstTasks.length} key={task.id} obligation={obligationsById.get(task.id.replace(/:follow-up$/, ""))} personId={personId} task={task} />)}</details> : null}
           </FilePanel>
           <div className="grid gap-5">
             <HomeNudges personId={personId} />
-            <section className="rounded-[8px] border border-paper-line bg-paper-shade px-5 py-3"><p className="eyebrow py-3 text-indigo-deep">{t("money")}</p><LedgerRow label={t("due")} value={formatCurrency(money.payable)} /><LedgerRow action={money.receivable > 0 ? <Link className="min-h-11 content-center text-xs font-bold text-indigo-deep underline decoration-indigo-deep/25 underline-offset-4" href="/workflows/refund-track">{t("trackRefund")}</Link> : undefined} label={t("comingToYou")} value={formatCurrency(money.receivable)} /></section>
-            <section className="rounded-[8px] border border-paper-line bg-paper-shade px-5 py-3"><p className="eyebrow py-3 text-indigo-deep">{t("mySnapshot")}</p><div className="grid divide-y divide-paper-line sm:grid-cols-3 sm:gap-x-5 sm:divide-x sm:divide-y-0"><SummaryLedgerItem label={t("deadlines")} value={deadlineCount} /><div className="min-w-0 sm:pl-4"><SummaryLedgerItem label={t("expiry")} value={expiringDocuments.length} /></div><div className="min-w-0 sm:pl-4"><SummaryLedgerItem label={t("pendingApplications")} value={applications.length} /></div></div></section>
+            <FilePanel label={t("money")}><LedgerRow label={t("due")} tone={money.payable > 0 ? "brick" : "ink"} value={formatCurrency(money.payable)} /><LedgerRow action={money.receivable > 0 ? <Link className="min-h-11 content-center text-xs font-bold text-indigo-deep underline decoration-indigo-deep/25 underline-offset-4" href="/workflows/refund-track">{t("trackRefund")}</Link> : undefined} label={t("comingToYou")} tone={money.receivable > 0 ? "green" : "ink"} value={formatCurrency(money.receivable)} /></FilePanel>
           </div>
         </div>
-        <HomeRecords key={personId} personId={personId} />
+        <div className="scroll-mt-20" id="records"><HomeRecords key={personId} personId={personId} /></div>
       </section>
     </Page>
   );

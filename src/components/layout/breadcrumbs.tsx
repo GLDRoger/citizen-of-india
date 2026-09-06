@@ -5,6 +5,7 @@ import { ChevronRight } from "lucide-react";
 import { usePathname } from "next/navigation";
 import type { MessageKey } from "@/i18n/messages";
 import { useI18n } from "@/i18n/use-i18n";
+import { useAuthStore } from "@/features/auth/store";
 
 const workflowLabels: Record<string, MessageKey> = {
   "benefit-application": "benefitReviewTitle",
@@ -45,6 +46,8 @@ export function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
 export function RouteBreadcrumbs() {
   const pathname = usePathname();
   const { t } = useI18n();
+  const actorId = useAuthStore((state) => state.actorId);
+  if (actorId) return null;
   const segments = pathname.split("/").filter(Boolean);
   const current = segments.at(-1);
   if (segments[0] !== "workflows" || !current) return null;

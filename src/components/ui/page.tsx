@@ -1,5 +1,14 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
+import { Monument, type MonumentName } from "./monuments";
+
+/**
+ * A faint architectural etching behind a page header: a nod to the country the
+ * app serves, never louder than the words in front of it. Decorative only.
+ */
+export function Backdrop({ name, className }: { name: MonumentName; className?: string }) {
+  return <Monument className={cn("pointer-events-none absolute right-0 bottom-0 -z-10 h-[96%] w-auto max-w-[72%] text-ink/[0.13]", className)} name={name} />;
+}
 
 export function Page({ children, className }: { children: ReactNode; className?: string }) {
   return <div className={cn("page-enter mx-auto min-w-0 w-full max-w-[1180px] grid-cols-[minmax(0,1fr)] px-5 pb-14 pt-6 sm:px-8 lg:px-10 lg:pb-16 lg:pt-8", className)}>{children}</div>;
@@ -10,14 +19,17 @@ export function PageHeader({
   title,
   description,
   action,
+  backdrop,
 }: {
   eyebrow?: string;
   title: string;
   description?: string;
   action?: ReactNode;
+  backdrop?: MonumentName;
 }) {
   return (
-    <header className="grid gap-4 border-b border-paper-line pb-6 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
+    <header className={cn("relative isolate grid gap-4 overflow-hidden border-b border-paper-line pb-6 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end", backdrop && "min-h-[13rem] content-end sm:min-h-[16rem]")}>
+      {backdrop ? <Backdrop name={backdrop} /> : null}
       <div className="grid gap-2">
         {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
         <h1 className="max-w-4xl font-display text-[clamp(2.4rem,5vw,4.35rem)] font-semibold leading-[0.96] tracking-[-0.04em] text-ink">{title}</h1>

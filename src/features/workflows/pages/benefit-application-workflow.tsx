@@ -1,11 +1,14 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-import { useState } from "react";
+import { Suspense, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { PageSkeleton } from "@/components/ui/feedback";
 import { Button, LinkButton } from "@/components/ui/button";
 import { SimulatedChip } from "@/components/ui/status";
 import { useAuthStore } from "@/features/auth/store";
-import { getApplications, getNodeByType } from "@/features/graph/selectors";
+import { getApplications, getBenefitCatalogue, getNodeByType } from "@/features/graph/selectors";
+import { getApplicationHref } from "@/features/graph/navigation";
 import type { GraphMutation } from "@/features/graph/schema";
 import { useCitizenStore } from "@/features/graph/store";
 import { localizeNodeTitle } from "@/i18n/content";
@@ -29,7 +32,7 @@ const stepsByLanguage: Record<Language, ProcedureStep[]> = {
   ],
 };
 
-export function BenefitApplicationWorkflow() {
+function BenefitApplication({ applicationId }: { applicationId: string | null }) {
   const { language, t } = useI18n();
   const personId = useAuthStore((state) => state.personId);
   const graph = useCitizenStore((state) => state.graph);
@@ -39,14 +42,16 @@ export function BenefitApplicationWorkflow() {
   const [error, setError] = useState("");
   if (!personId) return null;
 
-  const application = getApplications(graph, personId).find((candidate) => candidate.attrs.kind === "benefit");
+  const applications = getApplications(graph, personId).filter((candidate) => candidate.attrs.kind === "benefit");
+  const application = applicationId ? applications.find((candidate) => candidate.id === applicationId) : applications.length === 1 ? applications[0] : undefined;
   const benefit = application?.attrs.relatedTo
     ? getNodeByType(graph, application.attrs.relatedTo, "benefit")
     : undefined;
   const submitted = application?.attrs.status === "submitted";
+  const eligible = getBenefitCatalogue(graph, personId).find((result) => result.benefit.id === benefit?.id)?.status === "eligible";
 
   const submit = async () => {
-    if (!application || !benefit || submitted || !understood) return;
+    if (!application || !benefit || submitted || !understood || !eligible) return;
     setLoading(true);
     setError("");
     try {
@@ -73,6 +78,7 @@ export function BenefitApplicationWorkflow() {
 
   const content = !application || !benefit ? (
     <StepCard eyebrow={t("profileScopeEyebrow")} title={t("benefitDraftMissingTitle")} body={t("benefitDraftMissingBody")}>
+      {applications.map((candidate) => <LinkButton href={getApplicationHref(candidate) ?? "/discover"} key={candidate.id}>{localizeNodeTitle(language, candidate.attrs.relatedTo ?? candidate.id, candidate.attrs.title)}</LinkButton>)}
       <LinkButton href="/discover" variant="secondary">{t("discover")}</LinkButton>
     </StepCard>
   ) : submitted ? (
@@ -88,9 +94,19 @@ export function BenefitApplicationWorkflow() {
       </div>
       <label className="flex min-h-12 cursor-pointer items-start gap-3 border-b border-paper-line py-3 text-sm leading-6"><input checked={understood} className="mt-1 size-4" onChange={(event) => setUnderstood(event.target.checked)} type="checkbox" /><span>{t("benefitConsent")}</span></label>
       {error ? <p className="text-sm font-bold text-brick" role="alert">{error}</p> : null}
-      <Button disabled={!understood} loading={loading} onClick={() => void submit()}>{t("benefitSubmit")} <ArrowRight aria-hidden className="size-4" /></Button>
+      {!eligible ? <p className="text-sm leading-6 text-brick" role="status">{t("missingEvidence")}. {t("benefitEvidenceScope")}</p> : null}
+      <Button disabled={!understood || !eligible} loading={loading} onClick={() => void submit()}>{t("benefitSubmit")} <ArrowRight aria-hidden className="size-4" /></Button>
     </StepCard>
   );
 
-  return <ProcedureShell authority={benefit?.attrs.authority ?? t("simulatedResponse")} complete={submitted} currentStep={submitted ? 2 : application ? 1 : 0} procedureId="benefit-application" showProgress={Boolean(application)} steps={stepsByLanguage[language]} title={t("benefitReviewTitle")}>{content}</ProcedureShell>;
+  return <ProcedureShell authority={benefit?.attrs.authority ?? t("simulatedResponse")} complete={submitted} outcomeTargetId={application?.id} currentStep={submitted ? 2 : application ? 1 : 0} procedureId="benefit-application" showProgress={Boolean(application)} steps={stepsByLanguage[language]} title={t("benefitReviewTitle")}>{content}</ProcedureShell>;
+}
+
+function BenefitApplicationRoute() {
+  const applicationId = useSearchParams().get("application");
+  return <BenefitApplication applicationId={applicationId} key={applicationId} />;
+}
+
+export function BenefitApplicationWorkflow() {
+  return <Suspense fallback={<PageSkeleton />}><BenefitApplicationRoute /></Suspense>;
 }

@@ -1,0 +1,175 @@
+.stage {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  height: 26rem;
+  border: 1px solid var(--paper-line);
+  border-radius: 3px;
+  background-color: var(--panel);
+  background-image: radial-gradient(color-mix(in srgb, var(--paper-line) 70%, transparent) 1px, transparent 1px);
+  background-size: 22px 22px;
+  touch-action: none;
+  cursor: grab;
+  user-select: none;
+}
+
+.stage[data-dragging="true"] {
+  cursor: grabbing;
+}
+
+@media (min-width: 640px) {
+  .stage {
+    height: 32rem;
+  }
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.pan {
+  transition: transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.stage[data-dragging="true"] .pan {
+  transition: none;
+}
+
+.spiral {
+  fill: none;
+  stroke: var(--paper-line);
+  stroke-width: 1.5;
+  stroke-dasharray: 3 6;
+  stroke-linecap: round;
+}
+
+.edge {
+  fill: none;
+  stroke-width: 1.5;
+  opacity: 0.55;
+}
+
+.link {
+  fill: none;
+  stroke: var(--ink-mute);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+  opacity: 0.6;
+}
+
+.identity { stroke: var(--indigo); }
+.family { stroke: var(--brick); }
+.work { stroke: var(--green-deep); }
+.assets { stroke: var(--saffron); }
+
+.node {
+  cursor: pointer;
+  outline: none;
+}
+
+.disc {
+  fill: var(--panel);
+  stroke-width: 2;
+  transition: stroke-width 160ms ease, r 160ms ease;
+}
+
+.node:hover .disc,
+.node:focus-visible .disc {
+  stroke-width: 3;
+}
+
+.node[aria-pressed="true"] .disc {
+  stroke: var(--ink);
+  stroke-width: 3;
+}
+
+.ring {
+  fill: none;
+  stroke: var(--saffron);
+  stroke-width: 3;
+  opacity: 0;
+  transition: opacity 160ms ease;
+}
+
+.node:focus-visible .ring,
+.node[aria-pressed="true"] .ring {
+  opacity: 1;
+}
+
+.warn {
+  fill: var(--brick);
+  stroke: var(--panel);
+  stroke-width: 2;
+}
+
+.icon {
+  pointer-events: none;
+}
+
+.label {
+  fill: var(--ink);
+  font-family: var(--font-body), sans-serif;
+  font-size: 12px;
+  font-weight: 750;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.sublabel {
+  fill: var(--ink-mute);
+  font-family: var(--font-body), sans-serif;
+  font-size: 10.5px;
+  font-weight: 500;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.center {
+  cursor: default;
+}
+
+.centerDisc {
+  fill: var(--ink);
+}
+
+.centerLabel {
+  fill: var(--paper);
+  font-family: var(--font-body), sans-serif;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-anchor: middle;
+  text-transform: uppercase;
+}
+
+.centerName {
+  fill: var(--ink);
+  font-family: var(--font-display), serif;
+  font-size: 18px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.tools {
+  position: absolute;
+  inset: auto 0.75rem 0.75rem auto;
+  z-index: 1;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.hint {
+  position: absolute;
+  inset: auto auto 0.75rem 0.75rem;
+  z-index: 1;
+  max-width: calc(100% - 9.5rem);
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--panel) 88%, transparent);
+  padding: 0.35rem 0.6rem;
+  font-size: 0.75rem;
+  line-height: 1.1rem;
+  color: var(--ink-mute);
+  pointer-events: none;
+}

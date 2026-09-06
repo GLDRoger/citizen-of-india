@@ -29,13 +29,13 @@ export function GovernmentHealthCard({ personId }: { personId: string }) {
     : "healthUnclaimedTitleMany";
 
   return (
-    <section className="grid gap-4 rounded-[8px] border border-paper-line bg-paper-shade p-5">
+    <section className="grid gap-4 rounded-[3px] border border-paper-line bg-panel p-5">
       <div className="flex items-center gap-3">
         <Activity aria-hidden className={`size-5 ${healthy ? "text-green-deep" : "text-brick"}`} />
         <strong className="text-sm text-ink">{t("healthTitle")}</strong>
       </div>
       <p className="font-display text-2xl font-semibold leading-tight text-ink">
-        {healthy ? t("healthAllClear") : t("healthAttention", { count: health.attentionCount })}
+        {healthy ? t("healthAllClear") : health.attentionCount === 1 ? t("healthAttentionOne") : t("healthAttention", { count: health.attentionCount })}
       </p>
       <div>
         <HealthRow href="/home#attention" label={t("healthObligations")} value={String(health.obligationsDue)} warn={health.obligationsDue > 0} />
@@ -46,7 +46,7 @@ export function GovernmentHealthCard({ personId }: { personId: string }) {
         <HealthRow href="/home" label={t("healthUnread")} value={String(health.unreadNotices)} warn={health.unreadNotices > 0} />
       </div>
       {health.unclaimedBenefits.length > 0 ? (
-        <Link className="grid gap-1 rounded-[8px] bg-indigo-tint p-4" href="/discover">
+        <Link className="grid gap-1 rounded-[3px] bg-indigo-tint p-4" href="/discover">
           <span className="text-xs font-bold text-indigo-deep">{t(unclaimedTitleKey, { count: health.unclaimedBenefits.length })}</span>
           <span className="text-xs leading-5 text-ink-mute">
             {health.unclaimedBenefits.map((benefit) => localizeNodeTitle(language, benefit.id, benefit.attrs.name)).join(" · ")}

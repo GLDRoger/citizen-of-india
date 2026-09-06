@@ -58,7 +58,7 @@ export function MarriageRippleCard({ personId }: { personId: string }) {
       : <span className="text-xs font-bold text-paper/72">{t("rippleNomineeOwnerOnly")}</span>;
 
   return (
-    <section className="grid gap-2 rounded-[8px] bg-indigo-deep p-6 text-paper sm:p-7">
+    <section className="grid gap-2 rounded-[3px] bg-indigo-deep p-6 text-paper sm:p-7">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <p className="text-xs font-bold uppercase tracking-[0.12em] text-paper/55">{t("rippleEyebrow")}</p>
         <SimulatedChip authority="Citizen record relay" />

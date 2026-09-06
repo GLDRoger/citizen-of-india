@@ -1,4 +1,7 @@
+import { rankServices, serviceAliases } from "./aliases";
 import type { IntentContext, IntentResponse, RoutableIntent, WorkflowSlug } from "./schema";
+
+const allRoutes = Object.keys(serviceAliases) as RoutableIntent[];
 
 function detectLanguage(text: string): IntentResponse["language"] {
   if (/\p{Script=Kannada}/u.test(text)) return "kn";
@@ -10,6 +13,8 @@ function detectLanguage(text: string): IntentResponse["language"] {
 function detectRoute(text: string): WorkflowSlug {
   const normalized = text.toLowerCase();
   if (/(death|died|passed away|death ho|निधन|मृत्यु|तेरहवीं|ನಿಧನ|ತೀರಿಕೊಂಡ|ಮರಣ)/u.test(normalized)) return "service-unavailable";
+  const ranked = rankServices(text, allRoutes);
+  if (ranked.length) return ranked[0].route;
   if (/(marriage|marry|wedding|shaadi|शादी|विवाह|ವಿವಾಹ|ಮದುವೆ)/u.test(normalized)) return "marriage";
   if (/(epfo|epf|provident fund|uan|pf balance|passbook|grievance|पीएफ|ईपीएफओ|यूएएन|भविष्य निधि|ಪಿಎಫ್|ಇಪಿಎಫ್‌ಒ|ಯುಎಎನ್|ಭವಿಷ್ಯ ನಿಧಿ)/u.test(normalized)) return "epfo";
   if (/(gstr|gst return|file gst|जीएसटीआर|जीएसटी रिटर्न|ಜಿಎಸ್‌ಟಿಆರ್|ಜಿಎಸ್‌ಟಿ ರಿಟರ್ನ್)/u.test(normalized)) return "gstr3b";
@@ -98,6 +103,11 @@ const unavailable: Record<IntentResponse["language"], Plan & { clarification: st
   hinglish: { title: "Yeh service demo mein nahi hai", reply: "Neeche working services mein se ek chunein.", steps: ["Services kholein"], clarification: "Common request chunein ya Services kholein." },
   kn: { title: "ಈ ಸೇವೆ ಡೆಮೊದಲ್ಲಿ ಇಲ್ಲ", reply: "ಕೆಳಗಿನ ಕಾರ್ಯನಿರ್ವಹಿಸುವ ಸೇವೆಗಳಲ್ಲಿ ಒಂದನ್ನು ಆರಿಸಿ.", steps: ["ಸೇವೆಗಳನ್ನು ತೆರೆಯಿರಿ"], clarification: "ಸಾಮಾನ್ಯ ವಿನಂತಿ ಆರಿಸಿ ಅಥವಾ ಸೇವೆಗಳನ್ನು ತೆರೆಯಿರಿ." },
 };
+
+/** The short title the planner would give a route, in the interface language. */
+export function planTitle(language: "en" | "hi" | "kn", route: RoutableIntent) {
+  return plans[language][route].title;
+}
 
 function routeIsConnected(route: ConnectedWorkflow, context: IntentContext) {
   return context.availableWorkflows.includes(route);

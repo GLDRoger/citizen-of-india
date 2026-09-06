@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Monument, type MonumentName } from "@/components/ui/monuments";
 import { Page, PageHeader } from "@/components/ui/page";
 import { StatusPill } from "@/components/ui/status";
 import { useAuthStore } from "@/features/auth/store";
@@ -15,6 +16,7 @@ import styles from "./services-screen.module.css";
 
 interface ServiceDefinition {
   action: MessageKey;
+  landmark: MonumentName;
   applicationKind?: string;
   category: ServiceCategory;
   obligationId?: string;
@@ -35,37 +37,36 @@ const categories: ReadonlyArray<{ id: ServiceCategory; label: MessageKey }> = [
 ];
 
 const services: ServiceDefinition[] = [
-  { action: "continueAction", applicationKind: "epfo-grievance", category: "employment", promise: "epfoPromise", slug: "epfo", title: "epfoService" },
-  { action: "viewDocuments", category: "identity", promise: "digilockerPromise", slug: "digilocker", title: "documents" },
-  { action: "start", applicationKind: "marriage", category: "identity", promise: "marriagePromise", slug: "marriage", title: "marriageService" },
-  { action: "continueAction", applicationKind: "record-correction", category: "identity", promise: "recordCorrectionPromise", slug: "record-correction", title: "recordCorrectionService" },
-  { action: "reviewScope", category: "identity", obligationId: "obl:passport-renewal", promise: "passportServicePromise", slug: "passport-renewal", title: "passportWorkflowTitle" },
-  { action: "pay", category: "money", obligationId: "obl:echallan-500", promise: "obligationsPromise", slug: "obligations", title: "challanWorkflowTitle" },
-  { action: "payPropertyTax", category: "money", obligationId: "obl:bbmp-property-tax", promise: "propertyTaxServicePromise", slug: "property-tax", title: "payPropertyTax" },
-  { action: "fileGstr", category: "money", obligationId: "obl:gstr3b-sep", promise: "gstrServicePromise", slug: "gstr3b", title: "fileGstr" },
-  { action: "trackRefund", category: "money", obligationId: "obl:itr-refund", promise: "refundServicePromise", slug: "refund-track", title: "trackRefund" },
-  { action: "loanService", applicationKind: "business-loan", category: "business", promise: "loanPromise", slug: "loan", title: "loanService" },
-  { action: "start", applicationKind: "business-registration", category: "business", promise: "startBusinessPromise", slug: "start-business", title: "startBusinessService" },
+  { action: "continueAction", applicationKind: "epfo-grievance", category: "employment", landmark: "howrah-bridge", promise: "epfoPromise", slug: "epfo", title: "epfoService" },
+  { action: "viewDocuments", category: "identity", landmark: "charminar", promise: "digilockerPromise", slug: "digilocker", title: "documents" },
+  { action: "start", applicationKind: "marriage", category: "identity", landmark: "taj-mahal", promise: "marriagePromise", slug: "marriage", title: "marriageService" },
+  { action: "continueAction", applicationKind: "record-correction", category: "identity", landmark: "hawa-mahal", promise: "recordCorrectionPromise", slug: "record-correction", title: "recordCorrectionService" },
+  { action: "reviewScope", category: "identity", landmark: "india-gate", obligationId: "obl:passport-renewal", promise: "passportServicePromise", slug: "passport-renewal", title: "passportWorkflowTitle" },
+  { action: "pay", category: "money", landmark: "gateway-of-india", obligationId: "obl:echallan-500", promise: "obligationsPromise", slug: "obligations", title: "challanWorkflowTitle" },
+  { action: "payPropertyTax", category: "money", landmark: "mysore-palace", obligationId: "obl:bbmp-property-tax", promise: "propertyTaxServicePromise", slug: "property-tax", title: "payPropertyTax" },
+  { action: "fileGstr", category: "money", landmark: "konark-wheel", obligationId: "obl:gstr3b-sep", promise: "gstrServicePromise", slug: "gstr3b", title: "fileGstr" },
+  { action: "trackRefund", category: "money", landmark: "sanchi-stupa", obligationId: "obl:itr-refund", promise: "refundServicePromise", slug: "refund-track", title: "trackRefund" },
+  { action: "loanService", applicationKind: "business-loan", category: "business", landmark: "meenakshi-gopuram", promise: "loanPromise", slug: "loan", title: "loanService" },
+  { action: "start", applicationKind: "business-registration", category: "business", landmark: "qutub-minar", promise: "startBusinessPromise", slug: "start-business", title: "startBusinessService" },
 ];
 
 function ServiceCard({ application, index, obligation, service }: { application?: Application; index: number; obligation?: Obligation; service: ServiceDefinition }) {
   const { t } = useI18n();
   const status = application?.attrs.status ?? obligation?.attrs.status;
   const complete = status === "completed" || status === "paid" || status === "received";
-  const viewOnly = complete || status === "processing" || status === "submitted";
   const statusKey = status ? getStatusMessageKey(status) : undefined;
   return (
     <li>
-      <Link className={cn(styles.card, "group grid gap-4 rounded-[8px] border border-paper-line bg-paper-shade p-5 md:min-h-48 md:content-between md:gap-6")} data-category={service.category} href={service.slug === "digilocker" ? "/documents" : `/workflows/${service.slug}`}>
+      <Link className={cn(styles.card, "group grid content-start gap-5 rounded-[3px] border border-paper-line bg-panel p-5 md:min-h-56 md:gap-6")} data-category={service.category} href={service.slug === "digilocker" ? "/documents" : `/workflows/${service.slug}`}>
+        <Monument className={styles.landmark} name={service.landmark} />
         <span className="flex items-start justify-between gap-3">
           <span className="font-display text-sm font-semibold tabular-nums text-ink-mute">{String(index).padStart(2, "0")}</span>
           {status ? <StatusPill label={statusKey ? t(statusKey) : status} tone={complete ? "success" : "info"} /> : null}
         </span>
         <span className="grid gap-2">
-          <strong className="font-display text-[1.75rem] font-semibold leading-none tracking-[-0.03em] text-ink">{t(service.title)}</strong>
-          <span className="text-sm leading-6 text-ink-mute">{t(service.promise)}</span>
+          <strong className={cn(styles.title, "max-w-[18ch] font-display text-[1.75rem] sm:text-[2.25rem]")}>{t(service.title)}</strong>
+          <span className="max-w-[30ch] text-sm leading-6 text-ink-mute">{t(service.promise)}</span>
         </span>
-        <span className="min-h-11 w-fit content-center text-sm font-bold text-indigo-deep underline decoration-indigo-deep/25 underline-offset-4 transition-colors group-hover:decoration-indigo-deep">{viewOnly ? t("view") : application ? t("continueAction") : t(service.action)}</span>
       </Link>
     </li>
   );
@@ -84,7 +85,7 @@ export function ServicesScreen() {
 
   return (
     <Page className="grid gap-6 lg:gap-8">
-      <PageHeader title={t("servicesHeadline")} />
+      <PageHeader backdrop="qutub-minar" title={t("servicesHeadline")} />
       <div className="grid gap-8">
         {categories.map((category) => {
           const categoryServices = visibleServices.filter((service) => service.category === category.id);

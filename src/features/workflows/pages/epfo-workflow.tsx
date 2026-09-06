@@ -2,6 +2,8 @@
 
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
+import { useDraft } from "@/features/workflows/progress-store";
+
 import { Button, LinkButton } from "@/components/ui/button";
 import { VerificationBadge } from "@/components/ui/status";
 import { useAuthStore } from "@/features/auth/store";
@@ -41,8 +43,11 @@ export function EpfoWorkflow() {
   const personId = useAuthStore((state) => state.personId);
   const graph = useCitizenStore((state) => state.graph);
   const commit = useCitizenStore((state) => state.commit);
-  const [screen, setScreen] = useState<Screen>("passbook");
-  const [issueKey, setIssueKey] = useState<MessageKey>(issueKeys[0]);
+  const { draft, save } = useDraft("epfo-grievance", personId);
+  const screen: Screen = draft.screen === "contribution" || draft.screen === "issue" || draft.screen === "checked" ? draft.screen : "passbook";
+  const setScreen = (next: Screen) => save({ screen: next });
+  const issueKey: MessageKey = issueKeys.find((key) => key === draft.issueKey) ?? issueKeys[0];
+  const setIssueKey = (next: MessageKey) => save({ issueKey: next });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   if (!personId) return null;
@@ -153,7 +158,7 @@ export function EpfoWorkflow() {
   );
 
   return (
-    <ProcedureShell authority={t("epfoAuthority")} complete={submitted || screen === "checked"} currentStep={currentStep} description={t("epfoWorkflowBody")} procedureId="epfo-grievance" steps={stepsByLanguage[language]} title={t("epfoWorkflowTitle")}>
+    <ProcedureShell authority={t("epfoAuthority")} complete={submitted || screen === "checked"} outcomeTargetId={application?.id} currentStep={currentStep} description={t("epfoWorkflowBody")} procedureId="epfo-grievance" steps={stepsByLanguage[language]} title={t("epfoWorkflowTitle")}>
       {content}
     </ProcedureShell>
   );

@@ -98,11 +98,11 @@ export function RecordCorrectionWorkflow() {
         <div className="grid gap-2 border-b border-paper-line py-4 sm:grid-cols-[9rem_minmax(0,1fr)_auto] sm:items-center"><dt className="text-xs font-bold text-ink-mute">{t("citizenRecord")}</dt><dd className="font-display text-xl font-semibold text-ink">{person.attrs.name}</dd><VerificationBadge verification={aadhaar.verification} /></div>
         <div className="grid gap-2 py-4 sm:grid-cols-[9rem_minmax(0,1fr)_auto] sm:items-center"><dt className="text-xs font-bold text-ink-mute">{t("documentPan")}</dt><dd className="font-display text-xl font-semibold text-ink">{pan.attrs.holderName}</dd><VerificationBadge verification={pan.verification} /></div>
       </dl>
-      <div className="grid gap-3 rounded-[8px] bg-green-tint p-5 text-sm leading-6 text-ink">
+      <div className="grid gap-3 rounded-[3px] bg-green-tint p-5 text-sm leading-6 text-ink">
         <p className="flex gap-2"><Check aria-hidden className="mt-1 size-4 shrink-0 text-green-deep" />{t("recordCorrectionUses")}</p>
         <p className="flex gap-2"><Check aria-hidden className="mt-1 size-4 shrink-0 text-green-deep" />{t("recordCorrectionLeaves")}</p>
       </div>
-      {error ? <p className="rounded-[4px] bg-brick-tint p-3 text-sm font-semibold text-brick" role="alert">{error}</p> : null}
+      {error ? <p className="rounded-[2px] bg-brick-tint p-3 text-sm font-semibold text-brick" role="alert">{error}</p> : null}
       <Button loading={loading} onClick={() => void submit()}><FileCheck2 aria-hidden className="size-4" />{t("recordCorrectionSubmit")}</Button>
     </StepCard>
   ) : (
@@ -114,7 +114,7 @@ export function RecordCorrectionWorkflow() {
   return (
     <ProcedureShell
       authority={t("recordCorrectionAuthority")}
-      complete={submitted}
+      complete={submitted} outcomeTargetId={application?.id}
       currentStep={submitted ? 3 : 1}
       procedureId="record-correction"
       showProgress={Boolean(submitted || canSubmit)}

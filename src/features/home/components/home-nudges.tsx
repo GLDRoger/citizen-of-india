@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { FilePanel } from "@/components/ui/file-panel";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { getProactiveNudges, type Nudge } from "@/features/graph/insights";
 import { useCitizenStore } from "@/features/graph/store";
@@ -14,20 +15,28 @@ function NudgeRow({ nudge }: { nudge: Nudge }) {
       ? t("nudgeBenefitTitle", { benefit: localizeNodeTitle(language, nudge.benefit.id, nudge.benefit.attrs.name) })
       : nudge.kind === "epf-nominee"
         ? t("nudgeEpfNomineeTitle")
-        : t("nudgeDelegationTitle");
+        : nudge.kind === "act-for"
+          ? t("nudgeActForTitle", { name: nudge.personName?.split(" ")[0] ?? "" })
+          : nudge.kind === "ask-access"
+            ? t("nudgeAskAccessTitle")
+            : t("nudgeDelegationTitle");
   const body =
     nudge.kind === "benefit" && nudge.benefit
       ? nudge.benefit.attrs.valuePerYear
       : nudge.kind === "epf-nominee"
         ? t("nudgeEpfNomineeBody")
-        : t("nudgeDelegationBody");
+        : nudge.kind === "act-for"
+          ? t("nudgeActForBody", { name: nudge.personName?.split(" ")[0] ?? "" })
+          : nudge.kind === "ask-access"
+            ? t("nudgeAskAccessBody")
+            : t("nudgeDelegationBody");
   return (
     <Link
       className="group grid min-h-16 grid-cols-[minmax(0,1fr)_auto] items-center gap-4 border-b border-paper-line py-3 last:border-b-0"
       href={nudge.href}
     >
       <div className="min-w-0">
-        <strong className="block text-sm font-medium leading-5 text-ink">{title}</strong>
+        <strong className="block font-display text-base font-semibold leading-5 text-ink">{title}</strong>
         <span className="text-xs leading-5 text-ink-mute">{body}</span>
       </div>
       <ArrowRight aria-hidden className="size-4 text-indigo-deep transition-transform group-hover:translate-x-0.5" />
@@ -41,14 +50,10 @@ export function HomeNudges({ personId }: { personId: string }) {
   const nudges = getProactiveNudges(graph, personId);
   if (nudges.length === 0) return null;
   return (
-    <section className="rounded-[8px] border border-paper-line bg-paper-shade px-5 py-3">
-      <p className="eyebrow flex items-center gap-2 py-3 text-indigo-deep">
-        <Sparkles aria-hidden className="size-3.5" />
-        {t("nudgesTitle")}
-      </p>
+    <FilePanel aside={<Sparkles aria-hidden className="mb-0.5 size-3.5 text-saffron" />} label={t("nudgesTitle")}>
       {nudges.map((nudge) => (
         <NudgeRow key={nudge.id} nudge={nudge} />
       ))}
-    </section>
+    </FilePanel>
   );
 }

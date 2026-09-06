@@ -59,12 +59,12 @@ export function LoginScreen() {
               return (
                 <button
                   aria-pressed={selected}
-                  className={`group flex min-h-18 items-center gap-4 rounded-[8px] border px-4 text-left transition-colors focus-visible:outline-2 focus-visible:outline-indigo-deep ${selected ? "border-indigo/35 bg-indigo-tint" : "border-paper-line bg-paper-shade hover:border-indigo/40"}`}
+                  className={`group flex min-h-18 items-center gap-4 rounded-[3px] border px-4 text-left transition-colors focus-visible:outline-2 focus-visible:outline-indigo-deep ${selected ? "border-indigo/35 bg-indigo-tint" : "border-paper-line bg-panel hover:border-indigo/40"}`}
                   key={login.personId}
                   onClick={() => setPhone(login.phone)}
                   type="button"
                 >
-                  <span className="grid size-11 shrink-0 place-items-center rounded-[4px] bg-indigo-deep font-display text-sm font-semibold text-paper">{getInitials(person.attrs.name)}</span>
+                  <span className="grid size-11 shrink-0 place-items-center rounded-[2px] bg-indigo-deep font-display text-sm font-semibold text-paper">{getInitials(person.attrs.name)}</span>
                   <span className="min-w-0 flex-1"><span className="block font-bold text-ink">{person.attrs.name}</span><span className="block text-xs text-ink-mute">{t(profileRoleKeys[login.personId] ?? "sampleProfileRole")}</span></span>
                   {selected ? <Check aria-hidden className="size-5 shrink-0 text-indigo-deep" /> : null}
                 </button>
@@ -73,11 +73,11 @@ export function LoginScreen() {
           </div>
 
           <p className="border-y border-paper-line py-4 text-xs leading-5 text-ink-mute">{t("profileAccessNotice")}</p>
-          {error ? <p className="rounded-[4px] bg-brick-tint px-4 py-3 text-sm font-semibold text-brick" role="alert">{error}</p> : null}
+          {error ? <p className="rounded-[2px] bg-brick-tint px-4 py-3 text-sm font-semibold text-brick" role="alert">{error}</p> : null}
           <Button type="submit">{t("openSampleProfile")} <ArrowRight aria-hidden className="size-4" /></Button>
 
           <div className="flex flex-wrap gap-2 border-t border-paper-line pt-5" aria-label={t("language")}>
-            {languages.map((option) => <button aria-pressed={language === option} className={`min-h-11 rounded-[4px] px-3 py-2 text-xs font-bold transition-colors ${language === option ? "bg-indigo-deep text-paper" : "bg-paper-shade text-ink-mute hover:text-ink"}`} key={option} onClick={() => setLanguage(option)} type="button">{languageLabels[option]}</button>)}
+            {languages.map((option) => <button aria-pressed={language === option} className={`min-h-11 rounded-[2px] px-3 py-2 text-xs font-bold transition-colors ${language === option ? "bg-indigo-deep text-paper" : "bg-paper-shade text-ink-mute hover:text-ink"}`} key={option} onClick={() => setLanguage(option)} type="button">{languageLabels[option]}</button>)}
           </div>
         </form>
       </section>

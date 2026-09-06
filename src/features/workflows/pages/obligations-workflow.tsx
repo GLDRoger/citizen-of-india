@@ -2,6 +2,8 @@
 
 import { ArrowRight, CheckCircle2, IndianRupee, ReceiptText } from "lucide-react";
 import { useState } from "react";
+import { useDraft } from "@/features/workflows/progress-store";
+
 import { Button, LinkButton } from "@/components/ui/button";
 import { SimulatedChip, VerificationBadge } from "@/components/ui/status";
 import { useAuthStore } from "@/features/auth/store";
@@ -26,7 +28,9 @@ export function ObligationsWorkflow() {
   const personId = useAuthStore((state) => state.personId);
   const graph = useCitizenStore((state) => state.graph);
   const commit = useCitizenStore((state) => state.commit);
-  const [reviewed, setReviewed] = useState(false);
+  const { draft, save } = useDraft("echallan-payment", personId);
+  const reviewed = draft.reviewed === true;
+  const setReviewed = (value: boolean) => save({ reviewed: value });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   if (!personId) return null;
@@ -64,8 +68,8 @@ export function ObligationsWorkflow() {
   ) : !reviewed ? (
     <StepCard eyebrow={t("challanAuthority")} title={t("challanConfirmTitle")} body={t("challanConfirmBody")}><div className="grid gap-4 border-y border-paper-line py-4 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:items-center"><ReceiptText aria-hidden className="size-5 text-brick" /><div><strong className="block text-sm">{obligation.attrs.title}</strong><span className="text-xs text-ink-mute">{maskIdentifier(vehicle.attrs.regNumber)} · {t("dueOn", { date: obligation.attrs.dueDate ? formatDate(obligation.attrs.dueDate, language) : t("soon") })}</span></div><VerificationBadge verification={obligation.verification} /></div><Button onClick={() => setReviewed(true)}>{t("reviewPayment")} <ArrowRight aria-hidden className="size-4" /></Button></StepCard>
   ) : (
-    <StepCard eyebrow={t("challanPaymentEyebrow")} title={t("payAmount", { amount: formatCurrency(obligation.attrs.amount ?? 0) })} body={t("challanPaymentBody")}><div className="flex items-center justify-between gap-4 rounded-[8px] bg-green-tint p-5"><div className="flex items-center gap-3"><IndianRupee aria-hidden className="size-5 text-green-deep" /><div><strong className="block text-sm">{t("total")}</strong><span className="font-display text-2xl font-semibold">{formatCurrency(obligation.attrs.amount ?? 0)}</span></div></div><SimulatedChip authority="Karnataka One" /></div><Button loading={loading} onClick={() => void pay()}>{t("confirmSimulatedPayment")} <CheckCircle2 aria-hidden className="size-4" /></Button></StepCard>
+    <StepCard eyebrow={t("challanPaymentEyebrow")} title={t("payAmount", { amount: formatCurrency(obligation.attrs.amount ?? 0) })} body={t("challanPaymentBody")}><div className="flex items-center justify-between gap-4 rounded-[3px] bg-green-tint p-5"><div className="flex items-center gap-3"><IndianRupee aria-hidden className="size-5 text-green-deep" /><div><strong className="block text-sm">{t("total")}</strong><span className="font-display text-2xl font-semibold">{formatCurrency(obligation.attrs.amount ?? 0)}</span></div></div><SimulatedChip authority="Karnataka One" /></div><Button loading={loading} onClick={() => void pay()}>{t("confirmSimulatedPayment")} <CheckCircle2 aria-hidden className="size-4" /></Button></StepCard>
   );
 
-  return <ProcedureShell authority="Bengaluru Traffic Police + Karnataka One" complete={complete} currentStep={currentStep} procedureId="echallan-payment" steps={steps} title={t("challanWorkflowTitle")}>{error ? <p className="mb-3 rounded-[4px] bg-brick-tint p-3 text-sm font-semibold text-brick" role="alert">{error}</p> : null}{content}</ProcedureShell>;
+  return <ProcedureShell authority="Bengaluru Traffic Police + Karnataka One" complete={complete} outcomeTargetId={obligation.id} currentStep={currentStep} procedureId="echallan-payment" steps={steps} title={t("challanWorkflowTitle")}>{error ? <p className="mb-3 rounded-[2px] bg-brick-tint p-3 text-sm font-semibold text-brick" role="alert">{error}</p> : null}{content}</ProcedureShell>;
 }
