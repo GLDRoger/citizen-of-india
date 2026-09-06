@@ -61,7 +61,7 @@ export function MarriageRippleCard({ personId }: { personId: string }) {
     <section className="grid gap-2 rounded-[3px] bg-indigo-deep p-6 text-paper sm:p-7">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <p className="text-xs font-bold uppercase tracking-[0.12em] text-paper/55">{t("rippleEyebrow")}</p>
-        <SimulatedChip authority="Citizen record relay" />
+        <SimulatedChip authority="Citizen record relay" inverse />
       </div>
       <h3 className="font-display text-2xl font-semibold leading-tight">{t("rippleTitle")}</h3>
       <div className="mt-2">

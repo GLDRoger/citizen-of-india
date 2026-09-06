@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { AskCitizen } from "@/features/landing/ask/ask-citizen";
 import { LandingFooter, LandingHeader } from "@/features/landing/components/landing-header";
 import { ManifestoScreen } from "@/features/manifesto/components/manifesto-screen";
 
@@ -13,6 +14,7 @@ export default function ManifestoPage() {
       <LandingHeader />
       <ManifestoScreen />
       <LandingFooter />
+      <AskCitizen />
     </main>
   );
 }

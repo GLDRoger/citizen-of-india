@@ -32,6 +32,7 @@ const simulatedItems: Item[] = [
   { body: "aboutSimSixBody", title: "aboutSimSix" },
   { body: "aboutSimSevenBody", title: "aboutSimSeven" },
   { body: "aboutSimEightBody", title: "aboutSimEight" },
+  { body: "aboutSimNineBody", title: "aboutSimNine" },
 ];
 
 const neverItems: MessageKey[] = ["aboutNeverOne", "aboutNeverTwo", "aboutNeverThree", "aboutNeverFour", "aboutNeverFive", "aboutNeverSix"];

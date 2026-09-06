@@ -227,12 +227,12 @@ export function LandingScreen() {
     <main className="break-words bg-paper text-ink">
       <LandingHeader />
       <Hero onWatch={() => setIsVideoOpen(true)} />
-      <ProofSection />
-      <CitizenGraphMap id="graph" mode="journey" />
-      <OriginStory />
       <WhyPublic id="why" />
       <AlreadyHere id="here" />
+      <OriginStory />
+      <CitizenGraphMap id="graph" mode="journey" />
       <TheField />
+      <ProofSection />
       <PublicServiceBoundary id="problem" />
       <Faq id="faq" />
       <VisionSection />

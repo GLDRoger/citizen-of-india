@@ -242,6 +242,7 @@ function RightsAndRemedies() {
         ))}
       </div>
       <p className="font-display text-2xl font-semibold leading-tight text-green-tint">{t("manifestoRightsClosing")}</p>
+      <p className="flex flex-wrap items-baseline gap-x-3 gap-y-1 border-l-4 border-saffron pl-4 text-sm leading-7 text-green-tint"><span>{t("manifestoRightsDemo")}</span><Link className="inline-flex items-center gap-1 font-bold text-paper underline decoration-green-tint/50 underline-offset-4" href="/start">{t("manifestoRightsDemoLink")}<ArrowUpRight aria-hidden className="size-4" /></Link></p>
     </section>
   );
 }

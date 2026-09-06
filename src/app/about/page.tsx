@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AboutScreen } from "@/features/about/components/about-screen";
+import { AskCitizen } from "@/features/landing/ask/ask-citizen";
 import { LandingFooter, LandingHeader } from "@/features/landing/components/landing-header";
 
 export const metadata: Metadata = {
@@ -13,6 +14,7 @@ export default function AboutPage() {
       <LandingHeader />
       <AboutScreen />
       <LandingFooter />
+      <AskCitizen />
     </main>
   );
 }

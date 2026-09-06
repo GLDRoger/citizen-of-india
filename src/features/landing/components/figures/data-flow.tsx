@@ -4,8 +4,9 @@ import { useI18n } from "@/i18n/use-i18n";
 import styles from "./data-flow.module.css";
 
 /**
- * A conceptual contrast of commercial incentives and purpose-limited public
- * service. This is not a claim about any named company’s data practices.
+ * Where your data goes: out of a private super app to lenders, advertisers and
+ * the next offer, or between you, Citizen and the departments, with nothing
+ * leaving. Every label comes from the dictionaries.
  */
 export function DataFlowFigure() {
   const { t } = useI18n();

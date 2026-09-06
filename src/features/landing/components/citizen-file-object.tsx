@@ -4,13 +4,19 @@ import { useEffect, useRef } from "react";
 import { useAuthStore } from "@/features/auth/store";
 import { arjunEdges, arjunFile, arjunMoneyDue, countArjunLinks } from "@/features/graph/seed-facts";
 import { useI18n } from "@/i18n/use-i18n";
-import { DEMO_TODAY } from "@/lib/demo-clock";
-import { ageFromDob } from "@/features/graph/selectors";
+import { DEMO_TODAY, demoNow } from "@/lib/demo-clock";
 import { formatCurrency, formatDate, getInitials } from "@/lib/format";
 import styles from "./citizen-file-object.module.css";
 
 const documentCount = countArjunLinks("holds", "document");
 const obligationCount = countArjunLinks("subjectOf", "obligation");
+
+function ageOn(dob: string) {
+  const today = demoNow();
+  const birth = new Date(`${dob}T00:00:00+05:30`);
+  const beforeBirthday = today.getMonth() < birth.getMonth() || (today.getMonth() === birth.getMonth() && today.getDate() < birth.getDate());
+  return today.getFullYear() - birth.getFullYear() - (beforeBirthday ? 1 : 0);
+}
 
 /**
  * Pointer tilt writes CSS custom properties through rAF. No React state, so
@@ -93,7 +99,7 @@ export function CitizenFileObject() {
               <span className={styles.monogram}>{getInitials(arjunFile.name)}</span>
               <div className={styles.name}>
                 <strong className="font-display">{arjunFile.name}</strong>
-                <small>{t("landingFileAge", { age: ageFromDob(arjunFile.dob) })} · {arjunFile.locality}, {arjunFile.city}</small>
+                <small>{t("landingFileAge", { age: ageOn(arjunFile.dob) })} · {arjunFile.locality}, {arjunFile.city}</small>
               </div>
             </div>
             <dl className={styles.ids}>

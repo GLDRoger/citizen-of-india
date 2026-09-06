@@ -1,21 +1,65 @@
 "use client";
 
-import type { CSSProperties } from "react";
+import { useEffect, useRef } from "react";
 import { useI18n } from "@/i18n/use-i18n";
 import styles from "./crore-grid.module.css";
 
-const USERS_IN_CRORE = 55.49;
-const dots = Array.from({ length: Math.ceil(USERS_IN_CRORE) }, (_, index) => index);
+const CRORES = 140;
+const dots = Array.from({ length: CRORES }, (_, index) => index);
+const PHASES = 9;
 
-/** One crore onboarded UPI users per dot, with a fractional last dot and a dated primary source. */
+/** A fixed sprinkle so the three colours look scattered rather than striped. */
+function baseColour(index: number) {
+  return (Math.imul(index + 1, 2654435761) >>> 27) % 3;
+}
+
+/**
+ * 1.4 billion people as 140 dots of one crore each. They fill in one by one
+ * when the grid enters the viewport, then trade colours as the reader scrolls
+ * past, so the figure stays alive without asking for attention.
+ */
 export function CroreGrid() {
   const { t } = useI18n();
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const cells = Array.from(element.children) as HTMLElement[];
+    let phase = -1;
+    let frame = 0;
+    let visible = false;
+
+    const paint = () => {
+      frame = 0;
+      const bounds = element.getBoundingClientRect();
+      const progress = Math.min(1, Math.max(0, (window.innerHeight - bounds.top) / (window.innerHeight + bounds.height)));
+      const next = Math.floor(progress * PHASES);
+      if (next === phase) return;
+      phase = next;
+      cells.forEach((cell, index) => { cell.dataset.c = String((baseColour(index) + phase) % 3); });
+    };
+    const onScroll = () => { if (visible && !frame) frame = requestAnimationFrame(paint); };
+    const observer = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      if (visible) { element.dataset.in = "true"; onScroll(); }
+    }, { threshold: 0.2 });
+
+    observer.observe(element);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(frame);
+    };
+  }, []);
+
   return (
     <figure className="m-0">
-      <div aria-hidden className={styles.grid}>
-        {dots.map((index) => <span className={styles.dot} key={index} style={{ "--fill": `${Math.min(1, USERS_IN_CRORE - index) * 100}%` } as CSSProperties} />)}
+      <div aria-hidden className={styles.grid} ref={ref}>
+        {dots.map((index) => <span className={styles.dot} data-c={baseColour(index)} key={index} style={{ "--i": index } as React.CSSProperties} />)}
       </div>
-      <figcaption className={styles.caption}>{t("landingUpiFigure")} <a className="inline-flex min-h-11 items-center font-bold text-indigo-deep underline underline-offset-4" href="https://www.pib.gov.in/PressReleaseIframePage.aspx?PRID=2286608&lang=2&reg=48" rel="noreferrer" target="_blank">{t("landingUpiSource")}</a></figcaption>
+      <figcaption className={styles.caption}>{t("landingUpiFigure")}</figcaption>
     </figure>
   );
 }

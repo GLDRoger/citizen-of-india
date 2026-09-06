@@ -1,19 +1,46 @@
+/* 140 dots, one per crore. They fill in from the top-left when the grid
+   scrolls into view, so the number is felt before it is read. */
 .grid {
   display: grid;
-  grid-template-columns: repeat(14, minmax(0, 1fr));
-  max-width: 36rem;
-  gap: 0.35rem;
+  grid-template-columns: repeat(20, minmax(0, 1fr));
+  gap: 0.3rem;
 }
 
 .dot {
   aspect-ratio: 1;
   border-radius: 50%;
-  background: linear-gradient(to right, var(--indigo) var(--fill), var(--paper-line) var(--fill));
+  background: var(--saffron);
+  opacity: 0.12;
+  transform: scale(0.55);
+  transition: opacity 320ms ease-out, transform 420ms cubic-bezier(0.22, 1, 0.36, 1), background-color 520ms ease-in-out;
+  transition-delay: calc(var(--i) * 14ms), calc(var(--i) * 14ms), calc(var(--i) * 3ms);
+}
+
+.dot[data-c="1"] { background: var(--indigo); }
+.dot[data-c="2"] { background: #138808; }
+
+.grid[data-in="true"] .dot {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Reduced motion: no entry stagger and no colour swap, but the grid still shows. */
+@media (prefers-reduced-motion: reduce) {
+  .dot { opacity: 1; transform: none; }
 }
 
 .caption {
   margin-top: 0.75rem;
   font-size: 0.78rem;
-  line-height: 1.6;
+  font-weight: 700;
+  line-height: 1.4;
   color: var(--ink-mute);
+}
+
+@media (max-width: 640px) {
+  .grid { grid-template-columns: repeat(14, minmax(0, 1fr)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot { transition: none; }
 }
