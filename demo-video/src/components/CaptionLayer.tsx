@@ -18,7 +18,7 @@ const captions = z.array(captionSchema).parse(rawCaptions);
 export function CaptionLayer() {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  if (frame < 96 || frame >= 3510) return null;
+  if (frame >= 3560) return null;
   const timeMs = (frame / fps) * 1000;
   const caption = captions.find(
     (candidate) => candidate.startMs <= timeMs && candidate.endMs > timeMs,
@@ -33,7 +33,7 @@ export function CaptionLayer() {
         position: "absolute",
         left: 80,
         right: 80,
-        bottom: 74,
+        bottom: 44,
         display: "flex",
         justifyContent: "center",
         pointerEvents: "none",
@@ -52,14 +52,14 @@ export function CaptionLayer() {
     >
       <div
         style={{
-          maxWidth: 1600,
-          padding: "18px 28px 20px 30px",
+          maxWidth: 1500,
+          padding: "12px 22px 13px 24px",
           backgroundColor: "rgba(255,253,245,0.97)",
-          borderLeft: `9px solid ${colors.saffron}`,
+          borderLeft: `7px solid ${colors.saffron}`,
           boxShadow: "0 12px 42px rgba(24,31,67,0.20)",
           color: colors.ink,
           fontFamily: displayFont,
-          fontSize: 48,
+          fontSize: 34,
           fontWeight: 700,
           lineHeight: 1.04,
           textAlign: "center",

@@ -31,3 +31,18 @@ await Promise.all([
     weight: "800",
   }),
 ]);
+
+export const devanagariFont = "Citizen Anek Devanagari";
+export const kannadaFont = "Citizen Anek Kannada";
+await Promise.all([
+  loadFont({
+    family: devanagariFont,
+    url: staticFile("fonts-anek-devanagari.woff2"),
+    weight: "800",
+  }),
+  loadFont({
+    family: kannadaFont,
+    url: staticFile("fonts-anek-kannada.woff2"),
+    weight: "800",
+  }),
+]);

@@ -2,136 +2,175 @@
   {
     "id": "problem",
     "startFrame": 0,
-    "durationInFrames": 300,
-    "endPaddingInFrames": 6,
+    "durationInFrames": 301,
+    "endPaddingInFrames": 12,
     "maximumTempo": 1.3,
-    "direction": "Open with genuine curiosity at about 145 words per minute. Keep the pauses short, then make the two closing sentences crisp. Stop immediately after 'No starting over.' Do not answer the questions or add a concluding phrase.",
-    "narration": "What if public-service websites just worked? What if you could get the job done on your first attempt? No portal hunt. No starting over.",
+    "direction": "Low and unhurried, telling a friend something they half-know. 'Fix a name here, pay a fine there' gets a small dry lift; the last clause lands flat and final.",
+    "narration": "Your government record already exists — split across portals that never talk. Fix a name here, pay a fine there; nothing remembers what you did last week.",
     "captions": [
-      "What if public-service websites just worked?",
-      "What if you could get the job done on your first attempt?",
-      "No portal hunt. No starting over."
-    ]
+      "Your government record already exists —",
+      "split across portals that never talk.",
+      "Fix a name here, pay a fine there;",
+      "nothing remembers what you did last week."
+    ],
+    "speechSeconds": 9.6
   },
   {
-    "id": "graph",
-    "startFrame": 300,
-    "durationInFrames": 300,
-    "endPaddingInFrames": 6,
-    "maximumTempo": 1.2,
-    "direction": "Tell this as a candid personal discovery at a steady conversational pace. Let 'That was the clue' turn the confession into the product insight.",
-    "narration": "I entered this hackathon without knowing UMANG existed. That was the clue: useful services can still disappear behind department names.",
+    "id": "thesis",
+    "startFrame": 301,
+    "durationInFrames": 222,
+    "endPaddingInFrames": 12,
+    "maximumTempo": 1.3,
+    "direction": "The product sentence. Say 'one living record' with quiet certainty, then the three clauses evenly, like three fingers.",
+    "narration": "Citizen is one living record. It knows what changed, what applies to you, and what to do next.",
     "captions": [
-      "I entered this hackathon without knowing UMANG existed.",
-      "That was the clue:",
-      "useful services can still disappear behind department names."
-    ]
+      "Citizen is one living record.",
+      "It knows what changed, what applies to you,",
+      "and what to do next."
+    ],
+    "speechSeconds": 6.88
   },
   {
     "id": "home",
-    "startFrame": 600,
-    "durationInFrames": 300,
-    "endPaddingInFrames": 6,
+    "startFrame": 523,
+    "durationInFrames": 291,
+    "endPaddingInFrames": 12,
     "maximumTempo": 1.3,
-    "direction": "Introduce 'personal public-service gazette' clearly, then make the three questions feel immediately useful rather than conceptual.",
-    "narration": "Citizen is a personal public-service gazette: one record showing what changed, what applies to Arjun, and what he should do next.",
+    "direction": "Steady demo pace. Three findings as facts, not alarms; the mother is warmer than the other two.",
+    "narration": "Arjun opens Home. It already knows: his PAN doesn't match Aadhaar, a challan is due, and his mother may need help with her property papers.",
     "captions": [
-      "Citizen is a personal public-service gazette:",
-      "one record showing what changed, what applies to Arjun,",
-      "and what he should do next."
-    ]
+      "Arjun opens Home. It already knows:",
+      "his PAN doesn't match Aadhaar,",
+      "a challan is due,",
+      "and his mother may need help with her property papers."
+    ],
+    "speechSeconds": 9.27
   },
   {
-    "id": "intent",
-    "startFrame": 900,
-    "durationInFrames": 300,
-    "direction": "Keep this simple and conversational. Quote the request naturally, then land 'right service' with quiet assurance.",
-    "narration": "He asks, 'Check my E P F O passbook.' Citizen uses Arjun's connected records and opens the right service.",
-    "captions": [
-      "He asks, “Check my EPFO passbook.”",
-      "Citizen uses Arjun's connected records",
-      "and opens the right service."
-    ]
-  },
-  {
-    "id": "epfo",
-    "startFrame": 1200,
-    "durationInFrames": 420,
+    "id": "challan",
+    "startFrame": 814,
+    "durationInFrames": 427,
+    "endPaddingInFrames": 12,
     "maximumTempo": 1.3,
-    "direction": "Use clear product-demo momentum. Make the final Submitted status sound like a concrete result, not a slogan.",
-    "narration": "His U A N, employer, balance, and latest contribution are already together. He reports July's missing payment, gets a grievance reference, and Home shows the task as Submitted.",
+    "direction": "Walk the viewer through it, step by step, brisk and clear. 'in one tap' satisfied. Then 'Money, Documents and History' evenly spaced; 'one write, no copies' relaxed.",
+    "narration": "He types 'pay my challan'. Citizen finds the fine on his record, matches it to his scooter, and he pays in one tap. Money, Documents and History update together — one write, no copies.",
     "captions": [
-      "His UAN, employer, balance, and latest contribution are already together.",
-      "He reports July's missing payment and gets a grievance reference.",
-      "Home shows the task as Submitted."
-    ]
+      "He types “pay my challan”.",
+      "Citizen finds the fine on his record, matches it to his scooter,",
+      "and he pays in one tap.",
+      "Money, Documents and History update together —",
+      "one write, no copies."
+    ],
+    "speechSeconds": 13.4
   },
   {
-    "id": "boundary",
-    "startFrame": 1620,
-    "durationInFrames": 360,
-    "direction": "Turn serious and candid. Deliver the forty-day constraint plainly, without cynicism, and let 'cannot clear it' land firmly.",
-    "narration": "But if a claim waits forty days on an officer, a database, a policy, or staff capacity, prettier screens cannot clear it.",
-    "captions": [
-      "But if a claim waits forty days on an officer,",
-      "a database, a policy, or staff capacity,",
-      "prettier screens cannot clear it."
-    ]
-  },
-  {
-    "id": "architecture",
-    "startFrame": 1980,
-    "durationInFrames": 300,
-    "endPaddingInFrames": 6,
+    "id": "marriage",
+    "startFrame": 1241,
+    "durationInFrames": 348,
+    "endPaddingInFrames": 12,
     "maximumTempo": 1.3,
-    "direction": "Rebuild momentum at a steady 145 words per minute. 'We did the homework' should feel earned. Emphasize the four plain things held by the graph.",
-    "narration": "We did the homework, then built the system behind the screen: one Citizen Graph holds his records, relationships, payments, and outcomes.",
+    "direction": "Warm; this is two people. 'Say Arjun and Priya…' like setting up a story. Gentle emphasis on 'exactly'. 'Both records update' with a small smile.",
+    "narration": "Say Arjun and Priya want to register their marriage. He invites her from the app; on her own phone, Priya sees exactly what she is sharing, and consents. Both records update.",
     "captions": [
-      "We did the homework, then built the system behind the screen:",
-      "one Citizen Graph holds his records, relationships,",
-      "payments, and outcomes."
-    ]
+      "Say Arjun and Priya want to register their marriage.",
+      "He invites her from the app;",
+      "on her own phone, Priya sees exactly what she is sharing,",
+      "and consents. Both records update."
+    ],
+    "speechSeconds": 11.08
   },
   {
-    "id": "mutations",
-    "startFrame": 2280,
-    "durationInFrames": 420,
-    "direction": "Precise and assured. Emphasize the user-visible consequence: Money, receipt, and history change together without duplicate records.",
-    "narration": "Every action writes to that one graph. So a payment updates Money, saves the receipt, and joins Arjun's history, with no disconnected copies drifting apart.",
-    "captions": [
-      "Every action writes to that one graph.",
-      "A payment updates Money, saves the receipt,",
-      "and joins Arjun's history, with no disconnected copies drifting apart."
-    ]
-  },
-  {
-    "id": "safety",
-    "startFrame": 2700,
-    "durationInFrames": 360,
-    "endPaddingInFrames": 6,
+    "id": "after-round-one",
+    "startFrame": 1589,
+    "durationInFrames": 466,
+    "endPaddingInFrames": 12,
     "maximumTempo": 1.3,
-    "direction": "Calm, candid, and trustworthy at roughly 145 words per minute. Give the last sentence only a very short pause beforehand and a firm finish.",
-    "narration": "We stay honest. The guide reads only your own records, and every government response is simulated. Citizen shows status and next steps. It cannot invent processing capacity.",
+    "direction": "Two beats. First the finding, plain and factual, with a slight shrug on 'mostly assistants, portals and wallets'. Then a turn on 'That is where we went deeper' — quieter, decided; 'the hard questions to ourselves' with a small smile. Brisk, about 165 words per minute.",
+    "narration": "After round one we read the rest of the top two-fifty: mostly assistants, portals and wallets. None keep a living record with consent and consequences. That is where we went deeper — and put the hard questions to ourselves.",
     "captions": [
-      "We stay honest. The guide reads only your own records,",
-      "and every government response is simulated.",
-      "Citizen shows status and next steps.",
-      "It cannot invent processing capacity."
-    ]
+      "After round one we read the rest of the top 250:",
+      "mostly assistants, portals and wallets.",
+      "None keep a living record with consent and consequences.",
+      "That is where we went deeper —",
+      "and put the hard questions to ourselves."
+    ],
+    "speechSeconds": 14.596
   },
   {
-    "id": "reach",
-    "startFrame": 3060,
-    "durationInFrames": 540,
-    "endPaddingInFrames": 90,
+    "id": "umang",
+    "startFrame": 2055,
+    "durationInFrames": 404,
     "maximumTempo": 1.3,
-    "direction": "Open the tone up for the hopeful payoff at roughly 150 words per minute. Keep the consent and language lines flowing, then give the tagline a clean cadence before the end card.",
-    "narration": "One graph keeps Records, Services, and Benefits in sync. Shared work asks for consent first, and access can be revoked anytime. It works in English, Hindi, and Kannada. Citizen: public services, in one place.",
+    "direction": "Brisk, about 165 words per minute, never rushed. 'No.' is its own beat. The list is quick and even. 'not a chatbot' dry.",
+    "narration": "No. Those are a directory and a wallet. Citizen connects records to the work: every document, relative, job and asset on one map — and Home speaks first, from rules, not a chatbot.",
     "captions": [
-      "One graph keeps Records, Services, and Benefits in sync.",
-      "Shared work asks for consent first, and access can be revoked anytime.",
-      "It works in English, Hindi, and Kannada.",
-      "Citizen: public services, in one place."
-    ]
+      "No. Those are a directory and a wallet.",
+      "Citizen connects records to the work:",
+      "every document, relative, job and asset on one map —",
+      "and Home speaks first, from rules, not a chatbot."
+    ],
+    "endPaddingInFrames": 12,
+    "speechSeconds": 12.764
+  },
+  {
+    "id": "delegation",
+    "startFrame": 2459,
+    "durationInFrames": 441,
+    "maximumTempo": 1.3,
+    "direction": "Plain and kind. 'nothing else' firm. Slow slightly on 'When the permission is revoked, the link ends' and let 'so the history stays' sit — it is the point of the film.",
+    "narration": "Sunita never fills a form. Arjun asks for access, she approves, and he sees only her property papers — nothing else. When the permission is revoked, the link ends — never deleted, so the history stays.",
+    "captions": [
+      "Sunita never fills a form.",
+      "Arjun asks for access, she approves,",
+      "and he sees only her property papers — nothing else.",
+      "When the permission is revoked, the link ends —",
+      "never deleted, so the history stays."
+    ],
+    "endPaddingInFrames": 12,
+    "speechSeconds": 13.88
+  },
+  {
+    "id": "wrong",
+    "startFrame": 2900,
+    "durationInFrames": 223,
+    "maximumTempo": 1.3,
+    "direction": "Matter-of-fact, reassuring. Brisk.",
+    "narration": "The old PAN stays until the authority answers. A bad result can be marked unresolved, without losing what happened.",
+    "captions": [
+      "The old PAN stays until the authority answers.",
+      "A bad result can be marked unresolved,",
+      "without losing what happened."
+    ],
+    "endPaddingInFrames": 12,
+    "speechSeconds": 7.099
+  },
+  {
+    "id": "timeline",
+    "startFrame": 3123,
+    "durationInFrames": 184,
+    "maximumTempo": 1.3,
+    "direction": "Quiet and conclusive. 'the whole story you just watched' with a touch of warmth, as if closing a file. Keep the pace brisk, around 160 words per minute; do not stretch to fill time.",
+    "narration": "Every change names who made it. One log holds the whole story you just watched.",
+    "captions": [
+      "Every change names who made it.",
+      "One log holds the whole story you just watched."
+    ],
+    "endPaddingInFrames": 12,
+    "speechSeconds": 5.302
+  },
+  {
+    "id": "close",
+    "startFrame": 3307,
+    "durationInFrames": 293,
+    "endPaddingInFrames": 120,
+    "maximumTempo": 1.3,
+    "direction": "Three short facts, each a beat: 'Ukraine has one. Estonia has one.' Then 'one point four billion' with weight. The final question is not rhetorical bravado — ask it sincerely, slightly slower, and stop.",
+    "narration": "Ukraine has one. Estonia has one. Nobody has built it for one point four billion people. Why can't India be the first?",
+    "captions": [
+      "Ukraine has one. Estonia has one.",
+      "Nobody has built it for 1.4 billion people.",
+      "Why can't India be the first?"
+    ],
+    "speechSeconds": 8.167
   }
 ]

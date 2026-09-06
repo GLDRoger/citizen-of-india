@@ -1,35 +1,45 @@
-# Citizen — Two-Minute Demo Video Script
+# Citizen — Two-Minute Demo Video Script (round 2)
+
+Shipped 6 September 2026 for the top-250 mentorship round. Minute one states the problem and shows Citizen working; minute two is what changed after round one, told as the fair questions we put to ourselves and the answers we built.
 
 ## Production format
 
-- **Canvas:** 1920 × 1080, 16:9
-- **Frame rate:** 30fps
-- **Duration:** 120 seconds / 3,600 frames
-- **Final frame:** 3,599
-- **Voice:** Calm, direct and confident; approximately 122 words per minute (~237 spoken words)
-- **Visual rule:** Use recordings of the working app as the background. Remotion adds sequencing, crops, captions, cursor emphasis and transitions; it should not fabricate alternate product screens.
+- **Canvas:** 1920 × 1080, 16:9, 30 fps, 3,600 frames, exactly 120.000 s
+- **Voice:** Gemini `gemini-3.1-flash-tts-preview`, voice Sulafat, en-IN. Direction: low register, unhurried, polished urban Indian English with lightly American vowels; warm, a little amused; ~150–165 words per minute. 299 spoken words.
+- **Footage:** stop-motion captures of the working app (`demo-video/scripts/capture-app.mjs`): phone clips at 1170 × 2532, desktop at 3840 × 2160, one shared Citizen Graph across all clips so the Timeline at the end lists everything the film did.
+- **Motion:** the file, the ledger and the stamp — paper sheets, saffron file tabs, rubber stamps, ledger rows, a native record map on the product's spiral geometry, question cards on their own track so each lands before the voice answers it.
+- **Sound:** *Bombay Summer* by Shane Ivers (CC BY 4.0; credit in `demo-video/MUSIC-CREDITS.md`) ducked −12 dB under speech and dipping on every hit. Every non-text element that appears — and every typed character — lands on a clean sine sub pulse; cuts on a heavy sub; stamps on a thud; consent on a two-note chime. No risers, sweeps or whooshes. All effects are synthesised with ffmpeg (`demo-video/public/audio/sfx`).
+- **Text tracks:** the big question cards carry the FAQ; the small subtitle at the bottom is the voice transcript for muted viewing.
 
 ## Timed script
 
-| Time / frames | Spoken dialogue | App visuals and Remotion treatment |
+| Time / frames | Spoken dialogue | On screen |
 |---|---|---|
-| **0:00–0:10**<br>`0–299` | “What if public-service websites just worked? What if you could get the job done on your first attempt? No portal hunt. No starting over.” | Open on the landing page. Move from the problem questions to the hero. Use restrained push-ins and large captions for the two opening questions. |
-| **0:10–0:20**<br>`300–599` | “I entered this hackathon without knowing UMANG existed. That was the clue: useful services can still disappear behind department names.” | Hold on the landing origin section: **A service can exist and still be invisible.** Move through the personal UMANG discovery and the communication problem. |
-| **0:20–0:30**<br>`600–899` | “Citizen is a personal public-service gazette: one record showing what changed, what applies to Arjun, and what he should do next.” | Open Arjun’s Home. Pan across Needs your attention, Money, Summary, notices and documents as the concrete personal gazette. |
-| **0:30–0:40**<br>`900–1199` | “He asks, ‘Check my EPFO passbook.’ Citizen uses Arjun’s connected records and opens the right service.” | Type **“Check my EPFO passbook”** into the request guide. Submit it, show the contextual answer, then click **Open**. |
-| **0:40–0:54**<br>`1200–1619` | “His UAN, employer, balance, and latest contribution are already together. He reports July’s missing payment, gets a grievance reference, and Home shows the task as Submitted.” | Play the EPFO journey end to end: passbook → contribution → Report a problem → missing contribution → grievance confirmation → updated Home task. |
-| **0:54–1:06**<br>`1620–1979` | “But if a claim waits forty days on an officer, a database, a policy, or staff capacity, prettier screens cannot clear it.” | Cut to the landing boundary section. Hold on the **Day 40** stat, then run the “An interface cannot / What Citizen changes” lists. |
-| **1:06–1:16**<br>`1980–2279` | “We did the homework, then built the system behind the screen: one Citizen Graph holds his records, relationships, payments, and outcomes.” | Scroll the graph map as it assembles. Settle on the identity node at the centre. |
-| **1:16–1:30**<br>`2280–2699` | “Every action writes to that one graph. So a payment updates Money, saves the receipt, and joins Arjun’s history, with no disconnected copies drifting apart.” | Pay the challan in three deliberate cuts: Money drops by ₹500, the receipt appears in Documents, Activity records the payment. |
-| **1:30–1:42**<br>`2700–3059` | “We stay honest. The guide reads only your own records, and every government response is simulated. Citizen shows status and next steps. It cannot invent processing capacity.” | Close-up on a **Simulated** chip, then the /about disclaimer line. Return briefly to the boundary lists to land the last sentence. |
-| **1:42–2:00**<br>`3060–3599` | “One graph keeps Records, Services, and Benefits in sync. Shared work asks for consent first, and access can be revoked anytime. It works in English, Hindi, and Kannada. Citizen: public services, in one place.” | Consent clip (Priya approving, or Sunita revoking access), then a phone-frame shot with the language switcher. Dissolve into the landing hero. End on the product name and tagline for three seconds. |
+| **0:00–0:10**<br>`0–300` | “Your government record already exists — split across portals that never talk. Fix a name here, pay a fine there; nothing remembers what you did last week.” | Three portal sheets (PAN, challan, EPFO) stack misaligned, each holding one slice of Arjun; they collapse into one file tabbed ONE FILE with "One record. Not a portal hunt." Stamp: Independent prototype. |
+| **0:10–0:17**<br>`301–522` | “Citizen is one living record. It knows what changed, what applies to you, and what to do next.” | Native record map: 13 records fly onto the product's spiral geometry around Arjun; group-coloured edges; one bass pulse per record. Ticker: 3 profiles · 11 journeys · EN · HI · KN. |
+| **0:17–0:27**<br>`523–813` | “Arjun opens Home. It already knows: his PAN doesn't match Aadhaar, a challan is due, and his mother may need help with her property papers.” | Phone: Arjun's Home (real clip). Ledger on the right rules in the three findings on their words. |
+| **0:27–0:41**<br>`814–1240` | “He types 'pay my challan'. Citizen finds the fine on his record, matches it to his scooter, and he pays in one tap. Money, Documents and History update together — one write, no copies.” | Desktop: "pay my challan" typed (one pulse per character), Citizen matches the fine, Review payment, Pay in demo, Challan paid. Split into three phone panes at once: Money −₹500, receipt in Documents, History row. Stamp: PAID · SIMULATED. |
+| **0:41–0:52**<br>`1241–1588` | “Say Arjun and Priya want to register their marriage. He invites her from the app; on her own phone, Priya sees exactly what she is sharing, and consents. Both records update.” | Two phones: Arjun invites; Priya's phone shows the consent packet; she taps I consent (chime + CONSENTED stamp); the spouseOf edge draws between the phones; Arjun completes to Marriage registered. |
+| **0:52–1:08**<br>`1589–2054` | “After round one we read the rest of the top two-fifty: mostly assistants, portals and wallets. None keep a living record with consent and consequences. That is where we went deeper — and put the hard questions to ourselves.” | 249 tiles gather into three labelled piles (assistants · portals · wallets); the Citizen tile stays lit. The first question card slams in on the last words. |
+| **1:08–1:21**<br>`2055–2458` | “No. Those are a directory and a wallet. Citizen connects records to the work: every document, relative, job and asset on one map — and Home speaks first, from rules, not a chatbot.” | Card: "Isn't this just UMANG or DigiLocker again?" Desktop record map: drag, tap PAN, Fix name mismatch. Cut to the Home nudges on a phone on "Home speaks first". |
+| **1:21–1:36**<br>`2459–2899` | “Sunita never fills a form. Arjun asks for access, she approves, and he sees only her property papers — nothing else. When the permission is revoked, the link ends — never deleted, so the history stays.” | Card: "What about a shared phone, and a grandmother who never typed?" Two phones: Arjun asks, Sunita approves, delegateOf edge draws, Arjun acts for Sunita and sees only the khata. Card: "One record of everything — what about privacy?" Sunita revokes; the edge greys but stays. |
+| **1:36–1:44**<br>`2900–3122` | “The old PAN stays until the authority answers. A bad result can be marked unresolved, without losing what happened.” | Card: "What happens when a department gets it wrong?" Desktop: Send correction request → Correction request sent → Did this solve it? → No, not yet → Kept open. Nothing restarts. |
+| **1:44–1:50**<br>`3123–3306` | “Every change names who made it. One log holds the whole story you just watched.” | Desktop Timeline scrolling the events of the film: challan paid, marriage registered, access asked/shared/ended, correction kept open — each attributed. |
+| **1:50–2:00**<br>`3307–3599` | “Ukraine has one. Estonia has one. Nobody has built it for one point four billion people. Why can't India be the first?” | Card: "Isn't this too big to build?" Home headline re-sets EN → HI → KN in place. End card: logo, One record, carried forward, URL, stamp Independent prototype · fictional data. |
 
-## Recording checklist
+## Claims and their sources
 
-1. Reset demo progress before recording the first clip.
-2. Capture the app without browser chrome at 1920 × 1080.
-3. Record journeys as separate clean clips so Remotion can control their timing precisely.
-4. Keep pointer movement deliberate and visible without becoming the focus.
-5. Use captions throughout, limited to two lines and synchronized to the spoken dialogue.
-6. Preserve the app’s indigo, paper and saffron palette for titles and transitions.
-7. Leave enough stillness for judges to read references, amounts, status changes and receipts.
+- "the rest of the top two-fifty … mostly assistants, portals and wallets. None keep a living record with consent and consequences" — `docs/research/top-250/competitive-analysis.md` (all 249 other project URLs inspected on 2 September 2026).
+- "Ukraine has one. Estonia has one." — Diia (Ukraine, 2020) and Estonia's state portal; both are state-run citizen apps. "Nobody has built it for one point four billion people" is a scale claim, not a capability claim.
+- Everything shown is the working prototype at the commit this was rendered from; nothing on screen is fabricated product.
+
+## Reproduce
+
+```bash
+npm run build && npm run start -- --port 3177      # repo root
+cd demo-video
+npm run capture                                     # stop-motion clips (≈8 min)
+npm run voiceover                                   # needs GEMINI_API_KEY in demo-video/.env
+node scripts/voice-envelope.mjs                     # ducking curve
+npm run render                                      # out/citizen-hackathon-demo.mp4
+```

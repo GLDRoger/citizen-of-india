@@ -1,0 +1,50 @@
+[
+  {
+    "name": "impact-sub-big",
+    "duration": 0.45
+  },
+  {
+    "name": "impact-sub-small",
+    "duration": 0.35
+  },
+  {
+    "name": "stamp-thud",
+    "duration": 0.18
+  },
+  {
+    "name": "paper-slide",
+    "duration": 0.38
+  },
+  {
+    "name": "riser-long",
+    "duration": 1.2
+  },
+  {
+    "name": "riser-short",
+    "duration": 0.6
+  },
+  {
+    "name": "ledger-tick",
+    "duration": 0.005
+  },
+  {
+    "name": "ledger-tick-soft",
+    "duration": 0.005
+  },
+  {
+    "name": "tap",
+    "duration": 0.035
+  },
+  {
+    "name": "edge-draw",
+    "duration": 0.4
+  },
+  {
+    "name": "consent-chime",
+    "duration": 0.5
+  },
+  {
+    "name": "edge-end",
+    "duration": 0.3
+  }
+]

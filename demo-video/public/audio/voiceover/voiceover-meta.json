@@ -3,17 +3,18 @@
   "model": "gemini-3.1-flash-tts-preview",
   "voice": "Sulafat",
   "language": "en-IN",
-  "generatedAt": "2026-08-28T14:02:21.328Z",
+  "generatedAt": "2026-09-06T13:15:02.380Z",
   "sceneIds": [
     "problem",
-    "graph",
+    "thesis",
     "home",
-    "intent",
-    "epfo",
-    "boundary",
-    "architecture",
-    "mutations",
-    "safety",
-    "reach"
+    "challan",
+    "marriage",
+    "after-round-one",
+    "umang",
+    "delegation",
+    "wrong",
+    "timeline",
+    "close"
   ]
 }

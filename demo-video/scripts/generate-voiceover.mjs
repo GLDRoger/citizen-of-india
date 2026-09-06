@@ -24,7 +24,7 @@ const sceneSchema = z.object({
 });
 const scriptSchema = z
   .array(sceneSchema)
-  .length(10)
+  .min(1)
   .superRefine((scenes, context) => {
     const frames = scenes.reduce((expectedStart, scene) => {
       if (scene.startFrame !== expectedStart) {
@@ -75,6 +75,18 @@ const script = scriptSchema.parse(
     await readFile(new URL("../content/script.json", import.meta.url), "utf8"),
   ),
 );
+const loadDotEnv = async () => {
+  try {
+    const text = await readFile(new URL("../.env", import.meta.url), "utf8");
+    for (const line of text.split("\n")) {
+      const match = /^\s*([A-Z0-9_]+)\s*=\s*"?([^"\n]*)"?\s*$/u.exec(line);
+      if (match && !process.env[match[1]]) process.env[match[1]] = match[2];
+    }
+  } catch {
+    // No .env file; rely on the shell environment.
+  }
+};
+await loadDotEnv();
 const apiKey = process.env.GEMINI_API_KEY;
 if (!apiKey) {
   throw new Error(
@@ -130,14 +142,14 @@ const promptFor = (
 ) => `Perform a single-speaker voiceover. Speak only the transcript.
 
 # Audio profile
-A warm, thoughtful Indian product storyteller speaking contemporary Indian English. Intelligent, grounded and quietly optimistic. Human and conversational, never theatrical or sales-like.
+A woman in her early thirties: low register, unhurried, polished urban Indian English with lightly American vowels — an educated Mumbai professional who studied abroad. Warm, confident and a little amused, with a slight smile in the voice. Never sing-song, never breathy, never sales-like. Think of a sharp, dry-witted friend explaining something she is proud of.
 
 # Scene
 This is one chapter of a two-minute hackathon demo for judges watching a working public-service prototype. The performance should carry a coherent argument across chapters.
 
 # Director's notes
 Timing: finish naturally within ${speechTargetFor(scene).toFixed(1)} seconds. Do not add words.
-Pace: calm, direct, and confident, with purposeful pauses and varied sentence energy.
+Pace: brisk but unhurried, around 150–160 words per minute, with short purposeful pauses and varied sentence energy.
 Articulation: clear and natural. Pronounce product and technology names carefully.
 Delivery: ${scene.direction}
 
