@@ -7,64 +7,7 @@ import { manifestoEn } from "./manifesto";
 import { productEn } from "./product";
 import { recordsEn } from "./records";
 
-// Temporary compatibility for the existing screens; removed when their replacements land.
-const legacyEn = {
-  marriageStartWithArjun: "Arjun needs to start this request",
-  marriageStartWithArjunBody: "Switch to Arjun to send the invitation.",
-  marriageIdentityVerification: "Confirm Priya's identity",
-  marriageVerifiedDocumentsOnly: "Use verified identity documents",
-  marriageSpouseAfterSubmission: "Add Arjun as spouse after registration",
-  aboutEyebrow: "The idea",
-  aboutTitle: "A better interface",
-  aboutTitleAccent: "is not enough.",
-  aboutBody:
-    "What if public services worked on the first try? Citizen's answer is one connected record per person that every service reads and updates.",
-  aboutReturn: "Return to Citizen",
-  aboutProofEyebrow: "Working proof",
-  aboutProofTitle: "One record. Four working demos.",
-  aboutProofBody:
-    "These four demos all work on the same record. Each one reads it, acts on it and shows the result everywhere else in Citizen.",
-  aboutProofEpfo:
-    "Review an EPFO passbook, inspect a contribution and register a grievance.",
-  aboutProofDocuments:
-    "Reuse DigiLocker documents to compare PAN and Aadhaar before a correction.",
-  aboutProofMoney:
-    "Pay a challan or property tax, file GSTR-3B and keep the resulting receipt or acknowledgement.",
-  aboutProofConsent:
-    "Complete a shared registration across Arjun and Priya; grant or revoke Sunita’s family access.",
-  aboutWhyEyebrow: "Why this matters",
-  aboutWhyTitle: "The record comes first.",
-  aboutWhyBody:
-    "Most redesigns tidy up the same department menu. Citizen puts the person and their record first, and every service reads from it.",
-  aboutWhyCitizenTitle: "Person first",
-  aboutWhyCitizenBody:
-    "It starts with what changed in your life: a marriage, a death in the family, a new business.",
-  aboutWhyGraphTitle: "Nothing asked twice",
-  aboutWhyGraphBody:
-    "Eligibility, warnings and next steps come from the records you already have. No screen asks you to repeat them.",
-  aboutWhyProofTitle: "Working demos",
-  aboutWhyProofBody:
-    "Every demo changes records, creates receipts and adds history. Nothing here is a dead-end mock page.",
-  homeGraphKicker: "Why this Home is different",
-  homeGraphTitle: "Built from your own records.",
-  homeGraphAction: "See the Citizen Graph",
-  homeGraphEvidence: "Connected evidence",
-  homeGraphEvidenceValue:
-    "Documents {documents} · Family links {relationships}",
-  homeGraphRecord: "Citizen record",
-  homeGraphNow: "What needs attention",
-  homeGraphNowValue: "Actions {tasks} · Unread {unread}",
-  landingVisionNav: "Sharing",
-  landingBeyondKicker:
-    "Built for the Build What Moves India hackathon by Varun Mayya.",
-  landingSystemKicker: "What holds it together",
-  landingSystemTitle: "Citizen Graph",
-  landingSystemBody:
-    "Your documents, records and permissions follow you from one service to the next. Each service picks up where the last one ended.",
-} as const;
-
 export const en = {
-  ...legacyEn,
   ...controlsEn,
   brand: "Citizen",
   simulated: "Simulated",

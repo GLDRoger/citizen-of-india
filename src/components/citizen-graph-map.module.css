@@ -3,12 +3,15 @@
   --graph-identity: 0;
   --graph-life: 0;
   --graph-service: 0;
+  --graph-act: 0;
+  --graph-pulse: 0;
   --graph-result: 0;
   --caption-identity: 1;
   --caption-life: 0;
   --caption-service: 0;
+  --caption-act: 0;
   --caption-result: 0;
-  min-height: 300svh;
+  min-height: 360svh;
   scroll-margin-top: 4rem;
   background: var(--indigo-deep);
   color: var(--paper);
@@ -118,6 +121,13 @@
 .lifeEdge { --edge-phase: var(--graph-life); }
 .serviceEdge { --edge-phase: var(--graph-service); }
 
+/* The two edges the challan payment travels along light up saffron while the
+   write is in flight, then settle back. */
+.actEdge {
+  stroke: color-mix(in srgb, var(--saffron) calc(var(--graph-pulse) * 100%), color-mix(in srgb, var(--paper) 32%, transparent));
+  stroke-width: calc(1px + var(--graph-pulse) * 1.5px);
+}
+
 .centerNode {
   position: absolute;
   z-index: 3;
@@ -166,6 +176,65 @@
   color: var(--ink-mute);
   font-size: 0.62rem;
   font-weight: 700;
+}
+
+.centerNode .money {
+  margin-top: 0.15rem;
+  color: var(--indigo-deep);
+  opacity: calc(0.35 + var(--graph-service) * 0.65);
+}
+
+.centerNode::after {
+  position: absolute;
+  inset: -0.55rem;
+  border: 2px solid var(--saffron);
+  border-radius: 50%;
+  content: "";
+  opacity: var(--graph-pulse);
+  transform: scale(calc(0.9 + var(--graph-pulse) * 0.18));
+  pointer-events: none;
+}
+
+/* Count swap: the old number fades and lifts away as the new one arrives. */
+.countSwap {
+  display: inline-grid;
+}
+
+.countSwap > span {
+  grid-area: 1 / 1;
+  transition: none;
+}
+
+.countBefore {
+  opacity: calc(1 - var(--graph-act));
+  transform: translateY(calc(var(--graph-act) * -0.4rem));
+}
+
+.countAfter {
+  opacity: var(--graph-act);
+  transform: translateY(calc((1 - var(--graph-act)) * 0.4rem));
+}
+
+.actNode {
+  border-color: color-mix(in srgb, var(--saffron) calc(var(--graph-pulse) * 80%), color-mix(in srgb, var(--paper) 42%, transparent));
+}
+
+.badge {
+  position: absolute;
+  top: -0.9rem;
+  right: -0.4rem;
+  padding: 0.18rem 0.5rem;
+  border-radius: 2px;
+  background: var(--saffron);
+  color: var(--ink);
+  font-size: 0.6rem;
+  font-style: normal;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: var(--graph-act);
+  transform: translateY(calc((1 - var(--graph-act)) * 0.5rem)) scale(calc(0.85 + var(--graph-act) * 0.15));
+  will-change: opacity, transform;
 }
 
 .node {
@@ -273,6 +342,7 @@
 .captionIdentity { --caption-phase: var(--caption-identity); }
 .captionLife { --caption-phase: var(--caption-life); }
 .captionService { --caption-phase: var(--caption-service); }
+.captionAct { --caption-phase: var(--caption-act); }
 .captionResult { --caption-phase: var(--caption-result); }
 
 .source {
@@ -305,6 +375,8 @@
   --graph-identity: 1;
   --graph-life: 1;
   --graph-service: 1;
+  --graph-act: 0;
+  --graph-pulse: 0;
   --graph-result: 1;
   --caption-identity: 0;
   --caption-result: 1;
@@ -341,8 +413,44 @@
 
 @media (max-width: 760px) {
   .scene {
-    min-height: 280svh;
+    min-height: 330svh;
   }
+
+  .badge {
+    top: -0.75rem;
+    right: auto;
+    left: -0.25rem;
+    font-size: 0.52rem;
+  }
+
+  .nodeObligations .badge {
+    right: -0.25rem;
+    left: auto;
+  }
+
+  .centerNode {
+    top: 51%;
+    width: 6.2rem;
+    height: 6.2rem;
+    padding: 0.5rem;
+  }
+
+  .centerIcon {
+    width: 0.9rem;
+    height: 0.9rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .centerNode .money,
+  .centerNode small {
+    display: none;
+  }
+
+  .centerNode span {
+    font-size: 0.52rem;
+  }
+
+
 
   .shell {
     padding: 1.15rem 1.25rem 0.9rem;
@@ -434,10 +542,10 @@
   .nodeWork { top: 21%; left: 75%; }
   .nodeBusiness { top: 35%; left: 25%; }
   .nodeVehicle { top: 35%; left: 75%; }
-  .nodeDocuments { top: 68%; left: 25%; }
-  .nodeBenefits { top: 68%; left: 75%; }
-  .nodeApplications { top: 82%; left: 25%; }
-  .nodeObligations { top: 82%; left: 75%; }
+  .nodeDocuments { top: 71%; left: 25%; }
+  .nodeBenefits { top: 71%; left: 75%; }
+  .nodeApplications { top: 84%; left: 25%; }
+  .nodeObligations { top: 84%; left: 75%; }
   .nodeNotices { top: 92%; left: 50%; }
 
   .footer {
@@ -461,11 +569,15 @@
   }
 
   .source {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
+    display: grid;
+    gap: 0.2rem;
+    justify-items: start;
     font-size: 0.65rem;
     text-align: left;
+  }
+
+  .completeCue {
+    grid-area: auto;
   }
 
   .staticScene {
@@ -489,8 +601,11 @@
     --graph-identity: 1;
     --graph-life: 1;
     --graph-service: 1;
+    --graph-act: 1;
+    --graph-pulse: 0;
     --graph-result: 1;
     --caption-identity: 0;
+    --caption-act: 0;
     --caption-result: 1;
     min-height: 0;
     padding: 4rem 0;

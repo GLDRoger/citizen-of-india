@@ -1,0 +1,393 @@
+/*
+ * The citizen file as a physical object: a manila folder with a saffron docket
+ * tab, two document sheets fanned out of it, and the record sheet on top, all
+ * drawn with real CSS 3D. The pointer tilts the file; a slow float keeps it
+ * alive when nobody is touching it. Every fact printed here comes from the seed.
+ */
+.stage {
+  --rx: 0deg;
+  --ry: 0deg;
+  --lift: 0;
+  position: relative;
+  display: grid;
+  width: min(100%, 27rem);
+  aspect-ratio: 4 / 4.45;
+  margin: 0 auto;
+  perspective: 1400px;
+  perspective-origin: 50% 40%;
+  touch-action: pan-y;
+}
+
+.float {
+  display: grid;
+  height: 100%;
+  animation: file-float 7.5s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+.file {
+  position: relative;
+  height: 100%;
+  transform: rotateX(calc(var(--rx) + 14deg)) rotateY(calc(var(--ry) - 12deg)) rotateZ(-2deg);
+  transform-style: preserve-3d;
+  transition: transform 640ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.stage[data-live="true"] .file {
+  transition-duration: 180ms;
+}
+
+/* ---- folder ---------------------------------------------------------- */
+
+.folder {
+  position: absolute;
+  inset: 10% 2% 0 -2%;
+  border: 1px solid color-mix(in srgb, var(--saffron) 45%, #c9a26f);
+  border-radius: 6px 6px 8px 8px;
+  background:
+    repeating-linear-gradient(115deg, transparent 0 7px, color-mix(in srgb, #8a6a3c 6%, transparent) 7px 8px),
+    linear-gradient(160deg, #f0d6b2, #e3bf8e);
+  box-shadow: 0 1.8rem 3.6rem color-mix(in srgb, #050c2f 38%, transparent);
+  transform: translateZ(-70px);
+}
+
+.spine {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0.55rem;
+  border-radius: 6px 0 0 8px;
+  background: linear-gradient(90deg, #c99a62, #dcb684);
+}
+
+/* Side tab on the folder's right edge, the only part of the folder that the
+   sheets never cover. Reads top-to-bottom like a real docket tab. */
+.tab {
+  position: absolute;
+  top: 16%;
+  right: -1.55rem;
+  display: grid;
+  width: 1.6rem;
+  padding: 1rem 0;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--ink) 18%, transparent);
+  border-left: 0;
+  border-radius: 0 4px 4px 0;
+  background: var(--saffron);
+  color: var(--ink);
+  font-size: 0.62rem;
+  font-weight: 850;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  writing-mode: vertical-rl;
+  clip-path: polygon(0 0, 100% 6%, 100% 94%, 0 100%);
+}
+
+/* ---- sheets ---------------------------------------------------------- */
+
+.sheet {
+  position: absolute;
+  display: grid;
+  gap: 0.55rem;
+  padding: 1rem 1.1rem 0.9rem;
+  border: 1px solid var(--paper-line);
+  border-radius: 5px;
+  background:
+    repeating-linear-gradient(transparent 0 1.35rem, color-mix(in srgb, var(--indigo) 7%, transparent) 1.35rem calc(1.35rem + 1px)),
+    var(--paper);
+  color: var(--ink);
+  box-shadow:
+    0 1px 0 color-mix(in srgb, var(--ink) 8%, transparent),
+    0 1.2rem 2.6rem color-mix(in srgb, #050c2f 30%, transparent);
+  backface-visibility: hidden;
+}
+
+.sheet header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  color: var(--ink-mute);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.number {
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+.sheetPassport {
+  inset: 2% 28% 32% 0;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  background-color: var(--paper-shade);
+  transform: translateZ(-34px) rotateZ(-4deg);
+}
+
+.sheetPan {
+  inset: 5% 4% 24% 15%;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  transform: translateZ(4px) rotateZ(3deg);
+}
+
+.sheetFront {
+  inset: 15% 0 0 9%;
+  grid-template-rows: auto auto auto auto minmax(0, 1fr) auto;
+  padding-left: 1.7rem;
+  background: var(--paper);
+  transform: translateZ(60px);
+}
+
+.margin {
+  position: absolute;
+  inset: 0 auto 0 1.15rem;
+  width: 1px;
+  background: color-mix(in srgb, var(--brick) 45%, transparent);
+}
+
+.lines {
+  display: grid;
+  gap: 0.55rem;
+  align-content: start;
+  padding-top: 0.45rem;
+}
+
+.lines span {
+  display: block;
+  height: 0.4rem;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--ink) 11%, transparent);
+}
+
+.lines span:nth-child(2) { width: 78%; }
+.lines span:nth-child(3) { width: 58%; }
+.lines span:nth-child(4) { width: 86%; }
+
+/* ---- record sheet contents ------------------------------------------- */
+
+.identity {
+  display: grid;
+  grid-template-columns: 2.9rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.8rem;
+  padding-top: 0.25rem;
+}
+
+.monogram {
+  display: grid;
+  width: 2.9rem;
+  height: 2.9rem;
+  place-items: center;
+  border-radius: 4px;
+  background: var(--indigo-deep);
+  color: var(--paper);
+  font-family: var(--font-display-latin), sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.name {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.name strong {
+  color: var(--indigo-deep);
+  font-size: clamp(1.45rem, 2.4vw, 1.85rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+}
+
+.name small {
+  color: var(--ink-mute);
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.ids {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0.55rem 0;
+  border-top: 1px solid var(--paper-line);
+  border-bottom: 1px solid var(--paper-line);
+}
+
+.ids div {
+  display: grid;
+  gap: 0.1rem;
+}
+
+.ids dt {
+  color: var(--ink-mute);
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.ids dd {
+  margin: 0;
+  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.03em;
+}
+
+.rows {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  align-content: start;
+  list-style: none;
+}
+
+.rows li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.38rem 0;
+  border-bottom: 1px solid var(--paper-line);
+  color: var(--ink-mute);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.rows li strong {
+  color: var(--ink);
+  font-family: var(--font-display-latin), sans-serif;
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.sheetFront footer {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--paper-line);
+  gap: 0.5rem;
+  color: var(--ink-mute);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* ---- stamps ---------------------------------------------------------- */
+
+.stamp,
+.stampInline,
+.simulated {
+  padding: 0.16rem 0.45rem;
+  border: 3px double color-mix(in srgb, var(--green-deep) 55%, var(--paper-line));
+  border-radius: 2px;
+  color: var(--green-deep);
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.stamp {
+  justify-self: end;
+  transform: rotate(-3deg);
+}
+
+.stampInline {
+  transform: rotate(-2deg);
+}
+
+.simulated {
+  align-self: end;
+  justify-self: end;
+  margin: 0.4rem 0.3rem 0.2rem 0;
+  border-color: color-mix(in srgb, var(--indigo) 45%, var(--paper-line));
+  color: var(--indigo-deep);
+  opacity: 0.85;
+  transform: rotate(-6deg);
+}
+
+.shadow {
+  position: absolute;
+  inset: auto 8% -6% 8%;
+  height: 12%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, color-mix(in srgb, #050c2f 55%, transparent), transparent 70%);
+  filter: blur(6px);
+  transform: translateZ(-90px) scale(calc(1 - var(--lift) * 0.08));
+}
+
+@keyframes file-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-0.55rem); }
+}
+
+@media (max-width: 760px) {
+  .stage {
+    width: min(100%, 19.5rem);
+    aspect-ratio: 4 / 5.5;
+    perspective: 1000px;
+  }
+
+  .sheet {
+    gap: 0.45rem;
+    padding: 0.8rem 0.9rem 0.75rem;
+  }
+
+  .monogram {
+    width: 2.4rem;
+    height: 2.4rem;
+    font-size: 0.95rem;
+  }
+
+  .identity {
+    grid-template-columns: 2.4rem minmax(0, 1fr);
+    gap: 0.6rem;
+  }
+
+  .simulated {
+    margin-top: 0.2rem;
+  }
+
+  .sheetFront {
+    padding-left: 1.5rem;
+  }
+
+  .margin {
+    left: 1rem;
+  }
+
+  .rows li {
+    font-size: 0.66rem;
+  }
+
+  .tab {
+    right: -1.35rem;
+    width: 1.4rem;
+    font-size: 0.56rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float {
+    animation: none;
+  }
+
+  .file {
+    transition: none;
+  }
+}
+
+:global(.data-saver) .float {
+  animation: none;
+}

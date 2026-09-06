@@ -8,63 +8,7 @@ import { manifestoHi } from "./manifesto";
 import { productHi } from "./product";
 import { recordsHi } from "./records";
 
-// Temporary compatibility for the existing screens; removed when their replacements land.
-const legacyHi = {
-  marriageStartWithArjun: "यह अनुरोध अर्जुन शुरू करेंगे",
-  marriageStartWithArjunBody: "आमंत्रण भेजने के लिए अर्जुन पर जाएँ।",
-  marriageIdentityVerification: "प्रिया की पहचान की पुष्टि",
-  marriageVerifiedDocumentsOnly: "सत्यापित पहचान दस्तावेज़ इस्तेमाल करें",
-  marriageSpouseAfterSubmission: "पंजीकरण के बाद अर्जुन को जीवनसाथी जोड़ें",
-  aboutEyebrow: "मूल विचार",
-  aboutTitle: "बेहतर इंटरफ़ेस",
-  aboutTitleAccent: "काफ़ी नहीं है।",
-  aboutBody:
-    "अगर सार्वजनिक सेवाएँ पहली कोशिश में काम कर जाएँ? Citizen का जवाब: हर व्यक्ति का एक जुड़ा रिकॉर्ड, जिसे हर सेवा पढ़ती और अपडेट करती है।",
-  aboutReturn: "Citizen पर लौटें",
-  aboutProofEyebrow: "चलते हुए प्रमाण",
-  aboutProofTitle: "एक रिकॉर्ड। चार चलते डेमो।",
-  aboutProofBody:
-    "ये चारों डेमो उसी रिकॉर्ड पर काम करते हैं। हर एक रिकॉर्ड पढ़ता है, उस पर काम करता है और नतीजा Citizen के बाकी हिस्सों में दिखाता है।",
-  aboutProofEpfo: "EPFO पासबुक और अंशदान देखें, फिर शिकायत दर्ज करें।",
-  aboutProofDocuments:
-    "PAN और आधार की तुलना करके सुधार से पहले DigiLocker दस्तावेज़ फिर उपयोग करें।",
-  aboutProofMoney:
-    "चालान या संपत्ति कर भरें, GSTR-3B जमा करें और रसीद या पावती सहेजें।",
-  aboutProofConsent:
-    "अर्जुन और प्रिया के बीच साझा पंजीकरण पूरा करें; सुनीता की पारिवारिक पहुँच दें या वापस लें।",
-  aboutWhyEyebrow: "यह क्यों मायने रखता है",
-  aboutWhyTitle: "रिकॉर्ड सबसे पहले।",
-  aboutWhyBody:
-    "ज़्यादातर रीडिज़ाइन वही विभाग मेन्यू सजाते हैं। Citizen व्यक्ति और उसके रिकॉर्ड को पहले रखता है, और हर सेवा उसी से पढ़ती है।",
-  aboutWhyCitizenTitle: "पहले व्यक्ति",
-  aboutWhyCitizenBody:
-    "शुरुआत आपकी ज़िंदगी में बदले से होती है: शादी, परिवार में मृत्यु, या नया व्यवसाय।",
-  aboutWhyGraphTitle: "कोई जानकारी दोबारा नहीं",
-  aboutWhyGraphBody:
-    "पात्रता, चेतावनी और अगले कदम आपके मौजूदा रिकॉर्ड से आते हैं। कोई स्क्रीन वही बातें दोबारा नहीं पूछती।",
-  aboutWhyProofTitle: "चलते डेमो",
-  aboutWhyProofBody:
-    "हर डेमो रिकॉर्ड बदलता है, रसीदें बनाता है और इतिहास जोड़ता है। यहाँ कुछ भी अधूरा नमूना नहीं है।",
-  homeGraphKicker: "यह होम अलग क्यों है",
-  homeGraphTitle: "यह आपके अपने रिकॉर्ड से बना है।",
-  homeGraphAction: "Citizen Graph देखें",
-  homeGraphEvidence: "जुड़ा प्रमाण",
-  homeGraphEvidenceValue:
-    "दस्तावेज़ {documents} · पारिवारिक रिश्ते {relationships}",
-  homeGraphRecord: "नागरिक रिकॉर्ड",
-  homeGraphNow: "जिस पर ध्यान चाहिए",
-  homeGraphNowValue: "काम {tasks} · बिना पढ़े अपडेट {unread}",
-  landingVisionNav: "साझाकरण",
-  landingBeyondKicker:
-    "Varun Mayya के Build What Moves India हैकाथॉन के लिए बनाया गया।",
-  landingSystemKicker: "जो सब कुछ जोड़े रखता है",
-  landingSystemTitle: "Citizen Graph",
-  landingSystemBody:
-    "आपके दस्तावेज़, रिकॉर्ड और अनुमतियाँ एक सेवा से दूसरी सेवा तक आपके साथ रहती हैं। अगली सेवा वहीं से शुरू करती है जहाँ पिछली रुकी थी।",
-} as const;
-
 export const hi: Record<MessageKey, string> = {
-  ...legacyHi,
   ...controlsHi,
   brand: "Citizen",
   simulated: "सिम्युलेटेड",

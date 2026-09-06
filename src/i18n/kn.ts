@@ -8,64 +8,7 @@ import { manifestoKn } from "./manifesto";
 import { productKn } from "./product";
 import { recordsKn } from "./records";
 
-// Temporary compatibility for the existing screens; removed when their replacements land.
-const legacyKn = {
-  marriageStartWithArjun: "ಈ ವಿನಂತಿಯನ್ನು ಅರ್ಜುನ್ ಆರಂಭಿಸಬೇಕು",
-  marriageStartWithArjunBody: "ಆಹ್ವಾನ ಕಳುಹಿಸಲು ಅರ್ಜುನ್‌ಗೆ ಬದಲಿಸಿ.",
-  marriageIdentityVerification: "ಪ್ರಿಯಾ ಅವರ ಗುರುತು ಖಚಿತಪಡಿಸಿ",
-  marriageVerifiedDocumentsOnly: "ಪರಿಶೀಲಿತ ಗುರುತಿನ ದಾಖಲೆ ಬಳಸಿ",
-  marriageSpouseAfterSubmission:
-    "ನೋಂದಣಿಯ ನಂತರ ಅರ್ಜುನ್ ಅವರನ್ನು ಸಂಗಾತಿಯಾಗಿ ಸೇರಿಸಿ",
-  aboutEyebrow: "ಮೂಲ ಕಲ್ಪನೆ",
-  aboutTitle: "ಉತ್ತಮ ಇಂಟರ್ಫೇಸ್",
-  aboutTitleAccent: "ಮಾತ್ರ ಸಾಕಾಗುವುದಿಲ್ಲ.",
-  aboutBody:
-    "ಸಾರ್ವಜನಿಕ ಸೇವೆಗಳು ಮೊದಲ ಪ್ರಯತ್ನದಲ್ಲೇ ಕೆಲಸ ಮಾಡಿದರೆ? Citizen ಉತ್ತರ: ಪ್ರತಿ ವ್ಯಕ್ತಿಗೂ ಒಂದು ಸಂಪರ್ಕಿತ ದಾಖಲೆ, ಅದನ್ನು ಪ್ರತಿ ಸೇವೆಯೂ ಓದುತ್ತದೆ ಮತ್ತು ಅಪ್‌ಡೇಟ್ ಮಾಡುತ್ತದೆ.",
-  aboutReturn: "Citizenಗೆ ಮರಳಿ",
-  aboutProofEyebrow: "ಕೆಲಸ ಮಾಡುವ ಸಾಕ್ಷ್ಯ",
-  aboutProofTitle: "ಒಂದು ದಾಖಲೆ. ನಾಲ್ಕು ಕೆಲಸ ಮಾಡುವ ಡೆಮೊ.",
-  aboutProofBody:
-    "ಈ ನಾಲ್ಕು ಡೆಮೊಗಳು ಅದೇ ದಾಖಲೆಯ ಮೇಲೆ ಕೆಲಸ ಮಾಡುತ್ತವೆ. ಪ್ರತಿಯೊಂದೂ ದಾಖಲೆ ಓದುತ್ತದೆ, ಅದರ ಮೇಲೆ ಕ್ರಮ ತೆಗೆದುಕೊಳ್ಳುತ್ತದೆ ಮತ್ತು ಫಲಿತಾಂಶವನ್ನು Citizenನ ಉಳಿದ ಭಾಗಗಳಲ್ಲಿ ತೋರಿಸುತ್ತದೆ.",
-  aboutProofEpfo: "EPFO ಪಾಸ್‌ಬುಕ್ ಮತ್ತು ವಂತಿಗೆ ನೋಡಿ, ನಂತರ ದೂರು ದಾಖಲಿಸಿ.",
-  aboutProofDocuments:
-    "PAN ಮತ್ತು ಆಧಾರ್ ಹೋಲಿಸಿ ತಿದ್ದುಪಡಿಗೂ ಮೊದಲು DigiLocker ದಾಖಲೆಗಳನ್ನು ಮರುಬಳಸಿ.",
-  aboutProofMoney:
-    "ದಂಡ ಅಥವಾ ಆಸ್ತಿ ತೆರಿಗೆ ಪಾವತಿಸಿ, GSTR-3B ಸಲ್ಲಿಸಿ ಮತ್ತು ರಸೀದಿ ಅಥವಾ ಸ್ವೀಕೃತಿ ಉಳಿಸಿ.",
-  aboutProofConsent:
-    "ಅರ್ಜುನ್ ಮತ್ತು ಪ್ರಿಯಾ ನಡುವೆ ಹಂಚಿದ ನೋಂದಣಿ ಪೂರ್ಣಗೊಳಿಸಿ; ಸುನೀತಾ ಅವರ ಕುಟುಂಬದ ಪ್ರವೇಶ ನೀಡಿ ಅಥವಾ ಹಿಂಪಡೆಯಿರಿ.",
-  aboutWhyEyebrow: "ಇದು ಏಕೆ ಮುಖ್ಯ",
-  aboutWhyTitle: "ದಾಖಲೆ ಮೊದಲು.",
-  aboutWhyBody:
-    "ಬಹುತೇಕ ಮರುವಿನ್ಯಾಸಗಳು ಅದೇ ಇಲಾಖೆ ಪಟ್ಟಿ ಅಲಂಕರಿಸುತ್ತವೆ. Citizen ವ್ಯಕ್ತಿ ಮತ್ತು ಅವರ ದಾಖಲೆಯನ್ನು ಮೊದಲಿಡುತ್ತದೆ, ಮತ್ತು ಪ್ರತಿ ಸೇವೆಯೂ ಅದರಿಂದ ಓದುತ್ತದೆ.",
-  aboutWhyCitizenTitle: "ಮೊದಲು ವ್ಯಕ್ತಿ",
-  aboutWhyCitizenBody:
-    "ಆರಂಭ ನಿಮ್ಮ ಬದುಕಿನ ಬದಲಾವಣೆಯಿಂದ: ಮದುವೆ, ಮನೆಯಲ್ಲಿ ಮರಣ, ಅಥವಾ ಹೊಸ ವ್ಯವಹಾರ.",
-  aboutWhyGraphTitle: "ಮತ್ತೆ ಕೇಳುವಿಲ್ಲ",
-  aboutWhyGraphBody:
-    "ಅರ್ಹತೆ, ಎಚ್ಚರಿಕೆ ಮತ್ತು ಮುಂದಿನ ಕ್ರಮ ನಿಮ್ಮ ಈಗಿರುವ ದಾಖಲೆಗಳಿಂದಲೇ ಬರುತ್ತವೆ. ಯಾವ ಪರದೆಯೂ ಅದನ್ನು ಮತ್ತೆ ಕೇಳುವುದಿಲ್ಲ.",
-  aboutWhyProofTitle: "ಕೆಲಸ ಮಾಡುವ ಡೆಮೊಗಳು",
-  aboutWhyProofBody:
-    "ಪ್ರತಿ ಡೆಮೊ ದಾಖಲೆ ಬದಲಿಸುತ್ತದೆ, ರಸೀದಿ ಸೃಷ್ಟಿಸುತ್ತದೆ ಮತ್ತು ಇತಿಹಾಸ ಸೇರಿಸುತ್ತದೆ. ಇಲ್ಲಿ ಯಾವುದೂ ಅಪೂರ್ಣ ಮಾದರಿ ಅಲ್ಲ.",
-  homeGraphKicker: "ಈ ಮುಖಪುಟ ಏಕೆ ಬೇರೆ",
-  homeGraphTitle: "ಇದು ನಿಮ್ಮ ದಾಖಲೆಗಳಿಂದ ರೂಪಿಸಲಾಗಿದೆ.",
-  homeGraphAction: "Citizen Graph ನೋಡಿ",
-  homeGraphEvidence: "ಸಂಪರ್ಕಿತ ಸಾಕ್ಷ್ಯ",
-  homeGraphEvidenceValue:
-    "ದಾಖಲೆಗಳು {documents} · ಕುಟುಂಬ ಸಂಬಂಧಗಳು {relationships}",
-  homeGraphRecord: "ನಾಗರಿಕ ದಾಖಲೆ",
-  homeGraphNow: "ಗಮನ ಬೇಕಾದುದು",
-  homeGraphNowValue: "ಕೆಲಸಗಳು {tasks} · ಓದದ ನವೀಕರಣಗಳು {unread}",
-  landingVisionNav: "ಹಂಚಿಕೆ",
-  landingBeyondKicker:
-    "Varun Mayya ಅವರ Build What Moves India ಹ್ಯಾಕಥಾನ್‌ಗಾಗಿ ನಿರ್ಮಿಸಲಾಗಿದೆ.",
-  landingSystemKicker: "ಎಲ್ಲವನ್ನೂ ಜೋಡಿಸಿ ಇಡುವ ಭಾಗ",
-  landingSystemTitle: "Citizen Graph",
-  landingSystemBody:
-    "ನಿಮ್ಮ ದಾಖಲೆ, ಮಾಹಿತಿ ಮತ್ತು ಅನುಮತಿಗಳು ಒಂದು ಸೇವೆಯಿಂದ ಇನ್ನೊಂದಕ್ಕೆ ನಿಮ್ಮ ಜೊತೆಯಲ್ಲೇ ಇರುತ್ತವೆ. ಮುಂದಿನ ಸೇವೆ ಹಿಂದಿನದು ನಿಂತಲ್ಲೇ ಆರಂಭಿಸುತ್ತದೆ.",
-} as const;
-
 export const kn: Record<MessageKey, string> = {
-  ...legacyKn,
   ...controlsKn,
   brand: "Citizen",
   simulated: "ಅನುಕರಿಸಲಾಗಿದೆ",
