@@ -19,10 +19,15 @@ Read before building anything:
 - Next.js App Router + TypeScript + Tailwind, deployed on Vercel.
 - Client state: Zustand store holding the graph (`nodes`, `edges`, `events`), hydrated from `seed.json`, persisted to `localStorage`. "Reset demo" restores the seed.
 - Mutations: procedures emit `GraphMutation[]` (`addNode` | `addEdge` | `endEdge` | `patchAttrs`) applied by one reducer and appended to `events`. Never write to the graph directly from components. Nothing is ever deleted — end edges with `validTo`/`status: 'ended'`.
-- Derived views (obligations, money, things-to-do, eligibility) are selector functions over the graph, recomputed after every mutation. Benefit eligibility evaluates the `rules` arrays in seed data.
+- Derived views (obligations, money, things-to-do, eligibility, ownership/"who has the ball") are selector functions over the graph, recomputed after every mutation. Public-page numbers come from `src/features/graph/seed-facts.ts`.
+- The demo clock is frozen: `src/lib/demo-clock.ts` pins today to 28 Aug 2026 IST for due-day counts, ages and event timestamps, so the story never drifts with the real date.
+- Benefit eligibility evaluates the `rules` arrays in seed data.
+- Delegated access is a scoped view, not a profile impersonation: only shared property records and documents are visible. Check active, unexpired permission and relationship records at the view and mutation boundaries; document caching is the only delegated write implemented in this prototype.
+- Outcome feedback names an explicit application or obligation in the active profile. Never infer the target from the latest global procedure event. An unresolved issue can be marked resolved later without resetting its history.
+- Saved demos carry a seed revision. Offer an explicit update/reset when sample records change; never silently overwrite saved progress. Reset clears workflow drafts as well as the graph.
 - Simulated government: `src/lib/mockGov/` — async functions with 400–1200 ms latency and believable, deterministic responses.
 - Local planners classify intents and explain notices in deterministic TypeScript. Use only the active profile slice. Do not add external model calls or an API key to this frontend prototype.
-- Public entry: `/` is always the project landing page; `/start` is the focused profile picker; `/home` is the authenticated citizen workspace. Phones in `seed.json.logins` identify fictional personas, which open with one tap. Shared-workflow consent remains inside the workflow that needs it.
+- Public entry: `/` is always the project landing page (thesis: a public super app with nothing to sell; the Citizen Graph scroll scene includes the challan-payment mutation beat); `/manifesto` is public and shares the landing header; `/start` is the focused profile picker; `/home` is the authenticated citizen workspace; `/activity` is the Government Timeline built from `graph.events`. Phones in `seed.json.logins` identify fictional personas, which open with one tap. Shared-workflow consent remains inside the workflow that needs it.
 
 ## Conventions
 
