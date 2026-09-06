@@ -82,6 +82,25 @@ export function registerEpfoGrievance(input: { employmentId: string; issue: stri
   });
 }
 
+export function fileRtiRequest(input: { applicantId: string; authority: string; subjectId: string }) {
+  return mockResponse(`rti:${input.applicantId}:${input.subjectId}`, "RTI Online", {
+    registrationNumber: reference("RTI", `${input.applicantId}:${input.subjectId}`),
+    authority: input.authority,
+    fee: 10,
+    status: "filed" as const,
+    replyDueDays: 30,
+  });
+}
+
+export function lodgeGrievance(input: { complainantId: string; authority: string; subjectId: string }) {
+  return mockResponse(`grievance:${input.complainantId}:${input.subjectId}`, "CPGRAMS", {
+    registrationNumber: reference("CPGRAMS", `${input.complainantId}:${input.subjectId}`),
+    authority: input.authority,
+    status: "registered" as const,
+    replyDueDays: 30,
+  });
+}
+
 export function submitBenefitApplication(input: { benefitId: string; applicantId: string }) {
   return mockResponse(`benefit:${input.benefitId}:${input.applicantId}`, "UMANG scheme application desk", {
     applicationReference: reference("SCH", `${input.benefitId}:${input.applicantId}`),

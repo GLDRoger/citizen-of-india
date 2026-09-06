@@ -6,6 +6,7 @@ import { EpfoWorkflow } from "@/features/workflows/pages/epfo-workflow";
 import { MarriageWorkflow } from "@/features/workflows/pages/marriage-workflow";
 import { MoneyActionWorkflow } from "@/features/workflows/pages/money-action-workflow";
 import { ObligationsWorkflow } from "@/features/workflows/pages/obligations-workflow";
+import { RedressWorkflow } from "@/features/workflows/pages/redress-workflow";
 import { RecordCorrectionWorkflow } from "@/features/workflows/pages/record-correction-workflow";
 import { ServiceUnavailable } from "@/features/workflows/pages/service-unavailable";
 import { StartBusinessWorkflow } from "@/features/workflows/pages/start-business-workflow";
@@ -23,6 +24,8 @@ const titles: Record<string, string> = {
   gstr3b: "GSTR-3B filing",
   "passport-renewal": "Renew passport",
   "refund-track": "Refund tracking",
+  rti: "Ask for information (RTI)",
+  grievance: "Raise a grievance",
 };
 
 export const dynamicParams = false;
@@ -50,6 +53,8 @@ export default async function WorkflowPage({ params }: { params: Promise<{ slug:
     case "gstr3b": return <MoneyActionWorkflow action="gstr3b" />;
     case "passport-renewal": return <MoneyActionWorkflow action="passport-renewal" />;
     case "refund-track": return <MoneyActionWorkflow action="refund-track" />;
+    case "rti": return <RedressWorkflow remedy="rti" />;
+    case "grievance": return <RedressWorkflow remedy="grievance" />;
     case "service-unavailable": return <ServiceUnavailable />;
     default: notFound();
   }

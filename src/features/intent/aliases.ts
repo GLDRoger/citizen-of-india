@@ -9,7 +9,7 @@ import type { RoutableIntent } from "./schema";
  */
 export const serviceAliases: Record<RoutableIntent, readonly string[]> = {
   marriage: ["marriage", "marry", "married", "wedding", "shaadi", "shadi", "vivah", "spouse", "partner", "husband", "wife", "शादी", "विवाह", "पति", "पत्नी", "ವಿವಾಹ", "ಮದುವೆ", "ಗಂಡ", "ಹೆಂಡತಿ"],
-  epfo: ["epfo", "epf", "pf", "provident fund", "uan", "pf balance", "passbook", "grievance", "employer contribution", "पीएफ", "ईपीएफ", "ईपीएफओ", "यूएएन", "भविष्य निधि", "पासबुक", "ಪಿಎಫ್", "ಇಪಿಎಫ್", "ಇಪಿಎಫ್‌ಒ", "ಯುಎಎನ್", "ಭವಿಷ್ಯ ನಿಧಿ", "ಪಾಸ್‌ಬುಕ್"],
+  epfo: ["epfo", "epf", "pf", "provident fund", "uan", "pf balance", "passbook", "employer contribution", "पीएफ", "ईपीएफ", "ईपीएफओ", "यूएएन", "भविष्य निधि", "पासबुक", "ಪಿಎಫ್", "ಇಪಿಎಫ್", "ಇಪಿಎಫ್‌ಒ", "ಯುಎಎನ್", "ಭವಿಷ್ಯ ನಿಧಿ", "ಪಾಸ್‌ಬುಕ್"],
   gstr3b: ["gstr", "gstr-3b", "gstr3b", "gst return", "file gst", "gst filing", "gstin", "जीएसटी", "जीएसटीआर", "ಜಿಎಸ್‌ಟಿ", "ಜಿಎಸ್‌ಟಿಆರ್"],
   "property-tax": ["property tax", "property", "bbmp tax", "bbmp", "khata", "house tax", "संपत्ति कर", "संपत्ति", "प्रॉपर्टी टैक्स", "प्रॉपर्टी", "मकान कर", "ಆಸ್ತಿ ತೆರಿಗೆ", "ಆಸ್ತಿ", "ಖಾತಾ"],
   "passport-renewal": ["passport", "passport renewal", "renew passport", "passport expiry", "visa", "पासपोर्ट", "ಪಾಸ್‌ಪೋರ್ಟ್"],
@@ -20,6 +20,8 @@ export const serviceAliases: Record<RoutableIntent, readonly string[]> = {
   loan: ["loan", "loans", "mudra", "credit", "business loan", "emi", "borrow", "कर्ज", "क़र्ज़", "लोन", "ऋण", "मुद्रा", "ಸಾಲ", "ಮುದ್ರಾ"],
   "record-correction": ["pan", "pan card", "pan name", "name mismatch", "wrong name", "name wrong", "record mismatch", "correct name", "correct my name", "fix name", "spelling", "पैन", "नाम गलत", "नाम सुधार", "नाम ठीक", "ಪ್ಯಾನ್", "ಹೆಸರು ತಪ್ಪು", "ಹೆಸರು ತಿದ್ದು", "ಹೆಸರು ಸರಿ"],
   "start-business": ["start a business", "start business", "new business", "business", "business plan", "udyam", "msme", "shop", "startup", "register business", "company", "start a", "start my", "open a", "bakery", "cafe", "restaurant", "store", "kirana", "व्यवसाय", "बिज़नेस", "बिजनेस", "दुकान", "उद्यम", "ವ್ಯವಹಾರ", "ಉದ್ಯಮ", "ಅಂಗಡಿ"],
+  rti: ["rti", "an rti", "file rti", "file an rti", "rti about", "rti for", "under rti", "right to information", "information request", "rti application", "ask for information", "सूचना का अधिकार", "आरटीआई", "सूचना माँग", "ಮಾಹಿತಿ ಹಕ್ಕು", "ಆರ್‌ಟಿಐ", "ಮಾಹಿತಿ ಕೇಳ"],
+  grievance: ["grievance", "complaint", "complain", "cpgrams", "redress", "escalate", "nobody is responding", "no response", "not resolved", "shikayat", "शिकायत", "कोई जवाब नहीं", "ದೂರು", "ಉತ್ತರವಿಲ್ಲ"],
   obligations: ["challan", "e-challan", "fine", "traffic", "deadline", "deadlines", "due", "dues", "payment", "payments", "pay", "obligation", "tax", "what do i owe", "जुर्माना", "चालान", "भुगतान", "बकाया", "देय", "समय-सीमा", "टैक्स", "कर", "ದಂಡ", "ಚಲನ್", "ಪಾವತಿ", "ಬಾಕಿ", "ಗಡುವು", "ತೆರಿಗೆ"],
 };
 

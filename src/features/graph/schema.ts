@@ -8,6 +8,8 @@ export const verificationSourceSchema = z.enum([
   "RTO",
   "MCA",
   "Municipal",
+  "DoPT",
+  "DARPG",
   "Self",
 ]);
 

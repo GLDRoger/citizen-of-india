@@ -7,6 +7,7 @@ import { landingKn } from "./landing";
 import { manifestoKn } from "./manifesto";
 import { productKn } from "./product";
 import { recordsKn } from "./records";
+import { redressKn } from "./redress";
 
 export const kn: Record<MessageKey, string> = {
   ...controlsKn,
@@ -835,7 +836,7 @@ export const kn: Record<MessageKey, string> = {
   landingServiceStatus: "Citizen ಹೇಗೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ",
   landingVisionTitle: "ಏನು ಹಂಚಬೇಕು ಎಂದು ನೀವೇ ನಿರ್ಧರಿಸಿ.",
   landingVisionBody:
-    "ನಿಜವಾದ Citizenಗೆ ಉದ್ದೇಶ-ಸೀಮಿತ ಹಂಚಿಕೆ, ಕಾಣುವ ಪ್ರವೇಶ ಇತಿಹಾಸ ಮತ್ತು ಅನುಮತಿ ಹಿಂಪಡೆಯುವ ಮಾರ್ಗ ಬೇಕು. ಡೆಮೊದಲ್ಲಿ ಕುಟುಂಬದ ಅನುಮತಿ ಹಿಂಪಡೆಯಬಹುದು; ನೇರ ಜೋಡಣೆ ಮತ್ತು ವಿವಾಹ ಒಪ್ಪಿಗೆ ಹಿಂಪಡೆಯುವುದು ಲಭ್ಯವಿಲ್ಲ.",
+    "ಯಾರು ಏನನ್ನು ನೋಡಬಹುದು, ಯಾವ ಉದ್ದೇಶಕ್ಕೆ ಎಂದು ನೀವೇ ತೀರ್ಮಾನಿಸುತ್ತೀರಿ. ಒಪ್ಪಿಗೆ ಸ್ಪಷ್ಟವಾಗಿ ಕಾಣುತ್ತದೆ ಮತ್ತು ನೀವು ಯಾವಾಗ ಬೇಕಾದರೂ ಅದನ್ನು ಹಿಂಪಡೆಯಬಹುದು.",
   landingVisionOne: "ದಾಖಲೆ ಹಂಚುವ ಮೊದಲು ಕೇಳಿ",
   landingVisionTwo: "ಅನುಮೋದಿತ ಸರ್ಕಾರಿ ಸಂಪರ್ಕ ಬಳಸಿ",
   landingVisionThree: "ಯಾರು ಏನು ನೋಡಿದರು ತೋರಿಸಿ",
@@ -899,4 +900,5 @@ export const kn: Record<MessageKey, string> = {
   ...manifestoKn,
   ...productKn,
   ...recordsKn,
+  ...redressKn,
 };

@@ -6,6 +6,7 @@ import { landingEn } from "./landing";
 import { manifestoEn } from "./manifesto";
 import { productEn } from "./product";
 import { recordsEn } from "./records";
+import { redressEn } from "./redress";
 
 export const en = {
   ...controlsEn,
@@ -843,7 +844,7 @@ export const en = {
   landingServiceStatus: "How Citizen works",
   landingVisionTitle: "You control what gets shared.",
   landingVisionBody:
-    "A real Citizen would need purpose-limited sharing, visible access history and a way to withdraw permission. The demo implements revocable family access; live integrations and marriage-consent withdrawal are not built.",
+    "You decide who sees what, and for what purpose. Consent stays visible and you can take it back anytime.",
   landingVisionOne: "Ask before sharing records",
   landingVisionTwo: "Use approved government connections",
   landingVisionThree: "Show who accessed what",
@@ -907,6 +908,7 @@ export const en = {
   ...manifestoEn,
   ...productEn,
   ...recordsEn,
+  ...redressEn,
 } as const;
 
 export type MessageKey = keyof typeof en;

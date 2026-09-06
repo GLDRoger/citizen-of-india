@@ -128,6 +128,25 @@ function epfo(graph: CitizenGraph, personId: string): Preflight {
   };
 }
 
+const redressKinds = ["rti-request", "grievance"];
+
+/** A rights request needs identity and a pending matter on the record; the reply clock is the unlock. */
+function redress(graph: CitizenGraph, personId: string, kind: "rti-request" | "grievance"): Preflight {
+  const applications = getApplications(graph, personId);
+  const matters = applications.filter((node) => !redressKinds.includes(node.attrs.kind ?? "")).length + getObligations(graph, personId).length;
+  const existing = applications.find((node) => node.attrs.kind === kind);
+  return {
+    authority: kind === "rti-request" ? "RTI Online" : "CPGRAMS",
+    checks: [
+      docCheck("aadhaar", "checkAadhaar", findDoc(graph, personId, "aadhaar"), { name: firstName(graph, personId) }),
+      ready("matter", "checkMatterOnRecord", matters > 0),
+    ],
+    needsFirst: [],
+    unlocks: [{ labelKey: kind === "rti-request" ? "unlockRtiReply" : "unlockGrievanceReply", done: Boolean(existing) }, { labelKey: "unlockAppeal", done: false }],
+    estimatedDays: 30,
+  };
+}
+
 function challan(graph: CitizenGraph, personId: string): Preflight {
   const rc = findDoc(graph, personId, "vehicle-rc");
   const obligation = getNodeByType(graph, "obl:echallan-500", "obligation");
@@ -205,6 +224,8 @@ export function getPreflight(graph: CitizenGraph, personId: string, procedureId:
     case "gstr3b-filing": return gstr(graph, personId);
     case "start-business": return startBusiness(graph, personId);
     case "benefit-application": return benefit(graph, personId);
+    case "rti-request": return redress(graph, personId, "rti-request");
+    case "grievance": return redress(graph, personId, "grievance");
     default: return undefined;
   }
 }

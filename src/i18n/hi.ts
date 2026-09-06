@@ -7,6 +7,7 @@ import { landingHi } from "./landing";
 import { manifestoHi } from "./manifesto";
 import { productHi } from "./product";
 import { recordsHi } from "./records";
+import { redressHi } from "./redress";
 
 export const hi: Record<MessageKey, string> = {
   ...controlsHi,
@@ -827,7 +828,7 @@ export const hi: Record<MessageKey, string> = {
   landingServiceStatus: "Citizen कैसे काम करता है",
   landingVisionTitle: "क्या साझा हो, यह आप तय करें।",
   landingVisionBody:
-    "असली Citizen में सीमित उद्देश्य के लिए साझाकरण, दिखने वाला एक्सेस इतिहास और अनुमति वापस लेने का तरीका चाहिए। डेमो में परिवार की अनुमति वापस ले सकते हैं; लाइव एकीकरण और विवाह सहमति वापस लेना उपलब्ध नहीं हैं।",
+    "आप तय करते हैं कि कौन क्या देखे और किस उद्देश्य के लिए। सहमति साफ़ दिखती है और आप कभी भी उसे वापस ले सकते हैं।",
   landingVisionOne: "रिकॉर्ड साझा करने से पहले पूछें",
   landingVisionTwo: "स्वीकृत सरकारी कनेक्शन इस्तेमाल करें",
   landingVisionThree: "दिखाएँ कि किसने क्या देखा",
@@ -891,4 +892,5 @@ export const hi: Record<MessageKey, string> = {
   ...manifestoHi,
   ...productHi,
   ...recordsHi,
+  ...redressHi,
 };

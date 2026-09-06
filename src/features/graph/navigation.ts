@@ -16,6 +16,10 @@ export function getApplicationHref(application: ApplicationNode) {
       return "/workflows/record-correction";
     case "epfo-grievance":
       return "/workflows/epfo";
+    case "rti-request":
+      return "/workflows/rti";
+    case "grievance":
+      return "/workflows/grievance";
     default:
       return application.attrs.relatedTo?.startsWith("doc:") ? "/workflows/record-correction" : null;
   }

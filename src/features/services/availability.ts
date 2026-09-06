@@ -8,6 +8,8 @@ export const connectedWorkflowSlugs = [
   "loan",
   "record-correction",
   "start-business",
+  "rti",
+  "grievance",
 ] as const;
 
 export type ConnectedWorkflowSlug = (typeof connectedWorkflowSlugs)[number];
@@ -29,7 +31,7 @@ export function isBenefitVisibleInDemo(benefitId: string) {
 }
 
 export function getAvailableWorkflows(graph: CitizenGraph, personId: string): ConnectedWorkflowSlug[] {
-  const available: ConnectedWorkflowSlug[] = ["start-business"];
+  const available: ConnectedWorkflowSlug[] = ["start-business", "rti", "grievance"];
   const employment = getEmployment(graph, personId);
   const hasPassbook = employment?.verification.source === "EPFO"
     && Boolean(employment.attrs.uan)

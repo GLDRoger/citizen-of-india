@@ -15,6 +15,8 @@ function detectRoute(text: string): WorkflowSlug {
   if (/(death|died|passed away|death ho|निधन|मृत्यु|तेरहवीं|ನಿಧನ|ತೀರಿಕೊಂಡ|ಮರಣ)/u.test(normalized)) return "service-unavailable";
   const ranked = rankServices(text, allRoutes);
   if (ranked.length) return ranked[0].route;
+  if (/(\brti\b|right to information|सूचना का अधिकार|आरटीआई|ಮಾಹಿತಿ ಹಕ್ಕು)/u.test(normalized)) return "rti";
+  if (/(grievance|complain|cpgrams|redress|escalat|shikayat|शिकायत|ದೂರು)/u.test(normalized)) return "grievance";
   if (/(marriage|marry|wedding|shaadi|शादी|विवाह|ವಿವಾಹ|ಮದುವೆ)/u.test(normalized)) return "marriage";
   if (/(epfo|epf|provident fund|uan|pf balance|passbook|grievance|पीएफ|ईपीएफओ|यूएएन|भविष्य निधि|ಪಿಎಫ್|ಇಪಿಎಫ್‌ಒ|ಯುಎಎನ್|ಭವಿಷ್ಯ ನಿಧಿ)/u.test(normalized)) return "epfo";
   if (/(gstr|gst return|file gst|जीएसटीआर|जीएसटी रिटर्न|ಜಿಎಸ್‌ಟಿಆರ್|ಜಿಎಸ್‌ಟಿ ರಿಟರ್ನ್)/u.test(normalized)) return "gstr3b";
@@ -48,6 +50,8 @@ const plans: Record<IntentResponse["language"], Record<ConnectedWorkflow, Plan>>
     "refund-track": { title: "Track your tax refund", reply: "See the refund amount, current status and destination account already on file.", steps: ["Check the amount", "Review the status", "Return to Home"] },
     loan: { title: "Compare business loans", reply: "Compare monthly cost, missing documents and money already due.", steps: ["Check eligibility", "Compare both options", "Save an application draft"] },
     "record-correction": { title: "Fix PAN name", reply: "PAN and Aadhaar show different names. Check both before sending a correction request.", steps: ["Compare the names", "Check the documents", "Send the request"] },
+    rti: { title: "Ask for information", reply: "Put an RTI question to the authority that holds one of your records. The reply is due in 30 days.", steps: ["Choose the record", "Check the question", "Track the reply"] },
+    grievance: { title: "Raise a grievance", reply: "Take a stalled matter to the grievance portal with its history attached.", steps: ["Choose the matter", "Check the complaint", "Track the reply"] },
     "start-business": { title: "Plan a business", reply: "Enter the business and city to see the registrations, licences and tax steps.", steps: ["Enter the details", "Review the plan", "Save the first step"] },
   },
   hi: {
@@ -63,6 +67,8 @@ const plans: Record<IntentResponse["language"], Record<ConnectedWorkflow, Plan>>
     "refund-track": { title: "कर वापसी देखें", reply: "रिफ़ंड की राशि, मौजूदा स्थिति और दर्ज बैंक खाते को देखें।", steps: ["राशि जाँचें", "स्थिति देखें", "होम पर लौटें"] },
     loan: { title: "व्यवसाय लोन की तुलना", reply: "मासिक किस्त, बाकी दस्तावेज़ और मौजूदा बकाया की तुलना करें।", steps: ["पात्रता जाँचें", "दोनों विकल्प देखें", "आवेदन का ड्राफ्ट सहेजें"] },
     "record-correction": { title: "PAN नाम ठीक करें", reply: "PAN और आधार पर अलग नाम हैं। सुधार अनुरोध भेजने से पहले दोनों जाँचें।", steps: ["नाम मिलाएँ", "दस्तावेज़ जाँचें", "अनुरोध भेजें"] },
+    rti: { title: "सूचना माँगें", reply: "अपने किसी रिकॉर्ड वाले प्राधिकरण से RTI सवाल पूछें। जवाब 30 दिन में देय है।", steps: ["रिकॉर्ड चुनें", "सवाल जाँचें", "जवाब पर नज़र रखें"] },
+    grievance: { title: "शिकायत दर्ज करें", reply: "अटके मामले को उसके इतिहास के साथ शिकायत पोर्टल तक ले जाएँ।", steps: ["मामला चुनें", "शिकायत जाँचें", "जवाब पर नज़र रखें"] },
     "start-business": { title: "व्यवसाय की योजना बनाएँ", reply: "पंजीकरण, लाइसेंस और कर के कदम देखने के लिए व्यवसाय और शहर बताएँ।", steps: ["जानकारी भरें", "योजना देखें", "पहला कदम सहेजें"] },
   },
   hinglish: {
@@ -78,6 +84,8 @@ const plans: Record<IntentResponse["language"], Record<ConnectedWorkflow, Plan>>
     "refund-track": { title: "Tax refund track karein", reply: "Refund amount, current status aur file par bank account dekhein.", steps: ["Amount check karein", "Status dekhein", "Home par lautein"] },
     loan: { title: "Business loans compare karein", reply: "Monthly EMI, missing documents aur current dues compare karein.", steps: ["Eligibility dekhein", "Dono options compare karein", "Application draft save karein"] },
     "record-correction": { title: "PAN name theek karein", reply: "PAN aur Aadhaar par alag naam hain. Request bhejne se pehle dono check karein.", steps: ["Names compare karein", "Documents check karein", "Request bhejein"] },
+    rti: { title: "Information maangein (RTI)", reply: "Apne kisi record wale authority se RTI sawaal poochein. Jawab 30 din mein due hai.", steps: ["Record chunein", "Sawaal check karein", "Jawab track karein"] },
+    grievance: { title: "Shikayat darj karein", reply: "Atke hue matter ko uski history ke saath grievance portal tak le jaayein.", steps: ["Matter chunein", "Shikayat check karein", "Jawab track karein"] },
     "start-business": { title: "Business plan karein", reply: "Registration, licence aur tax steps ke liye business aur city batayein.", steps: ["Details bharein", "Plan dekhein", "Pehla step save karein"] },
   },
   kn: {
@@ -93,6 +101,8 @@ const plans: Record<IntentResponse["language"], Record<ConnectedWorkflow, Plan>>
     "refund-track": { title: "ತೆರಿಗೆ ಮರುಪಾವತಿ ಗಮನಿಸಿ", reply: "ಮರುಪಾವತಿ ಮೊತ್ತ, ಈಗಿನ ಸ್ಥಿತಿ ಮತ್ತು ದಾಖಲೆಯಲ್ಲಿರುವ ಬ್ಯಾಂಕ್ ಖಾತೆಯನ್ನು ನೋಡಿ.", steps: ["ಮೊತ್ತ ಪರಿಶೀಲಿಸಿ", "ಸ್ಥಿತಿ ನೋಡಿ", "ಮುಖಪುಟಕ್ಕೆ ಮರಳಿ"] },
     loan: { title: "ವ್ಯವಹಾರ ಸಾಲ ಹೋಲಿಸಿ", reply: "ತಿಂಗಳ ಕಂತು, ಬಾಕಿ ದಾಖಲೆ ಮತ್ತು ಈಗಿನ ಪಾವತಿಗಳನ್ನು ಹೋಲಿಸಿ.", steps: ["ಅರ್ಹತೆ ನೋಡಿ", "ಎರಡೂ ಆಯ್ಕೆ ಹೋಲಿಸಿ", "ಅರ್ಜಿ ಕರಡು ಉಳಿಸಿ"] },
     "record-correction": { title: "PAN ಹೆಸರು ತಿದ್ದುಪಡಿ", reply: "PAN ಮತ್ತು ಆಧಾರ್‌ನಲ್ಲಿ ಹೆಸರು ಬೇರೆ ಇದೆ. ವಿನಂತಿ ಕಳುಹಿಸುವ ಮೊದಲು ಎರಡನ್ನೂ ಪರಿಶೀಲಿಸಿ.", steps: ["ಹೆಸರು ಹೋಲಿಸಿ", "ದಾಖಲೆ ಪರಿಶೀಲಿಸಿ", "ವಿನಂತಿ ಕಳುಹಿಸಿ"] },
+    rti: { title: "ಮಾಹಿತಿ ಕೇಳಿ", reply: "ನಿಮ್ಮ ದಾಖಲೆ ಹಿಡಿದಿರುವ ಪ್ರಾಧಿಕಾರಕ್ಕೆ RTI ಪ್ರಶ್ನೆ ಕೇಳಿ. ಉತ್ತರ 30 ದಿನಗಳಲ್ಲಿ ಬರಬೇಕು.", steps: ["ದಾಖಲೆ ಆರಿಸಿ", "ಪ್ರಶ್ನೆ ಪರಿಶೀಲಿಸಿ", "ಉತ್ತರ ಗಮನಿಸಿ"] },
+    grievance: { title: "ದೂರು ಸಲ್ಲಿಸಿ", reply: "ನಿಂತುಹೋದ ವಿಷಯವನ್ನು ಇತಿಹಾಸದೊಂದಿಗೆ ದೂರು ಪೋರ್ಟಲ್‌ಗೆ ಕೊಂಡೊಯ್ಯಿರಿ.", steps: ["ವಿಷಯ ಆರಿಸಿ", "ದೂರು ಪರಿಶೀಲಿಸಿ", "ಉತ್ತರ ಗಮನಿಸಿ"] },
     "start-business": { title: "ವ್ಯವಹಾರ ಯೋಜಿಸಿ", reply: "ನೋಂದಣಿ, ಪರವಾನಗಿ ಮತ್ತು ತೆರಿಗೆ ಕ್ರಮಗಳಿಗೆ ವ್ಯವಹಾರ ಮತ್ತು ನಗರ ತಿಳಿಸಿ.", steps: ["ವಿವರ ನೀಡಿ", "ಯೋಜನೆ ನೋಡಿ", "ಮೊದಲ ಕ್ರಮ ಉಳಿಸಿ"] },
   },
 };

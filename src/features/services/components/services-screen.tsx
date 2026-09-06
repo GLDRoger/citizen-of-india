@@ -25,7 +25,7 @@ interface ServiceDefinition {
   title: MessageKey;
 }
 
-type ServiceCategory = "identity" | "employment" | "money" | "business";
+type ServiceCategory = "identity" | "employment" | "money" | "business" | "rights";
 type Application = ReturnType<typeof getApplications>[number];
 type Obligation = ReturnType<typeof getObligations>[number];
 
@@ -34,6 +34,7 @@ const categories: ReadonlyArray<{ id: ServiceCategory; label: MessageKey }> = [
   { id: "identity", label: "serviceCategoryIdentity" },
   { id: "money", label: "serviceCategoryMoney" },
   { id: "business", label: "serviceCategoryBusiness" },
+  { id: "rights", label: "serviceCategoryRights" },
 ];
 
 const services: ServiceDefinition[] = [
@@ -48,6 +49,8 @@ const services: ServiceDefinition[] = [
   { action: "trackRefund", category: "money", landmark: "sanchi-stupa", obligationId: "obl:itr-refund", promise: "refundServicePromise", slug: "refund-track", title: "trackRefund" },
   { action: "loanService", applicationKind: "business-loan", category: "business", landmark: "meenakshi-gopuram", promise: "loanPromise", slug: "loan", title: "loanService" },
   { action: "start", applicationKind: "business-registration", category: "business", landmark: "qutub-minar", promise: "startBusinessPromise", slug: "start-business", title: "startBusinessService" },
+  { action: "start", applicationKind: "grievance", category: "rights", landmark: "vidhana-soudha", promise: "grievancePromise", slug: "grievance", title: "grievanceService" },
+  { action: "start", applicationKind: "rti-request", category: "rights", landmark: "sanchi-stupa", promise: "rtiPromise", slug: "rti", title: "rtiService" },
 ];
 
 function ServiceCard({ application, index, obligation, service }: { application?: Application; index: number; obligation?: Obligation; service: ServiceDefinition }) {

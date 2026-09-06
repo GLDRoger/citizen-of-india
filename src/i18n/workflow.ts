@@ -70,7 +70,7 @@ export const workflowEn = {
   unlockLoanApply: "Apply to the lender with evidence attached",
 
   resolveTitle: "Did this solve it?",
-  resolveBody: "This step is recorded. Has it resolved the problem you came with?",
+  resolveBody: "The department says done. You decide whether the real problem is fixed.",
   resolveYes: "Yes, solved",
   resolveNo: "No, not yet",
   resolveSolvedTitle: "Marked solved",
@@ -107,8 +107,8 @@ export const workflowEn = {
   fieldAddress: "Current address",
   fieldMarital: "Marital status",
 
-  resumedTitle: "Progress saved",
-  resumedBody: "Saved in this browser. You can return to this step after a reload.",
+  resumedTitle: "Resumed where you left off",
+  resumedBody: "Saved in this browser. A reload or a weak network never sends you back to step one.",
   daysOverdue: "{count} days overdue",
   homeEdition: "Edition for {name}",
   homeHeadline: "What do [[you]] need?",
@@ -196,7 +196,7 @@ export const workflowHi = {
   unlockLoanApply: "प्रमाण के साथ ऋणदाता को आवेदन",
 
   resolveTitle: "क्या इससे बात बनी?",
-  resolveBody: "यह चरण दर्ज है। क्या इससे आपकी समस्या हल हुई?",
+  resolveBody: "विभाग कहता है हो गया। असली समस्या हल हुई या नहीं, यह आप तय करें।",
   resolveYes: "हाँ, हल हुआ",
   resolveNo: "नहीं, अभी नहीं",
   resolveSolvedTitle: "हल हुआ दर्ज",
@@ -233,8 +233,8 @@ export const workflowHi = {
   fieldAddress: "वर्तमान पता",
   fieldMarital: "वैवाहिक स्थिति",
 
-  resumedTitle: "प्रगति सहेजी गई",
-  resumedBody: "इस ब्राउज़र में सहेजा गया। रीलोड के बाद इसी चरण पर लौट सकते हैं।",
+  resumedTitle: "जहाँ छोड़ा था, वहीं से",
+  resumedBody: "इसी ब्राउज़र में सहेजा। रीलोड या कमज़ोर नेटवर्क आपको कभी पहले कदम पर नहीं भेजता।",
   daysOverdue: "{count} दिन देर",
   homeEdition: "{name} का संस्करण",
   homeHeadline: "[[आपको]] क्या चाहिए?",
@@ -322,7 +322,7 @@ export const workflowKn = {
   unlockLoanApply: "ಸಾಕ್ಷ್ಯದೊಂದಿಗೆ ಸಾಲದಾತರಿಗೆ ಅರ್ಜಿ",
 
   resolveTitle: "ಇದರಿಂದ ಸಮಸ್ಯೆ ಬಗೆಹರಿಯಿತೇ?",
-  resolveBody: "ಈ ಹಂತ ದಾಖಲಾಗಿದೆ. ನೀವು ಬಂದ ಸಮಸ್ಯೆ ಬಗೆಹರಿದಿದೆಯೇ?",
+  resolveBody: "ಇಲಾಖೆ ಆಯಿತು ಎನ್ನುತ್ತದೆ. ನಿಜವಾದ ಸಮಸ್ಯೆ ಬಗೆಹರಿಯಿತೇ ಎಂದು ನೀವು ನಿರ್ಧರಿಸಿ.",
   resolveYes: "ಹೌದು, ಬಗೆಹರಿಯಿತು",
   resolveNo: "ಇಲ್ಲ, ಇನ್ನೂ ಇಲ್ಲ",
   resolveSolvedTitle: "ಬಗೆಹರಿಯಿತು ಎಂದು ದಾಖಲು",
@@ -359,8 +359,8 @@ export const workflowKn = {
   fieldAddress: "ಪ್ರಸ್ತುತ ವಿಳಾಸ",
   fieldMarital: "ವೈವಾಹಿಕ ಸ್ಥಿತಿ",
 
-  resumedTitle: "ಪ್ರಗತಿ ಉಳಿಸಲಾಗಿದೆ",
-  resumedBody: "ಈ ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಉಳಿಸಲಾಗಿದೆ. ರೀಲೋಡ್ ನಂತರ ಇದೇ ಹಂತಕ್ಕೆ ಮರಳಬಹುದು.",
+  resumedTitle: "ಬಿಟ್ಟ ಜಾಗದಿಂದ ಮುಂದುವರಿದಿದೆ",
+  resumedBody: "ಈ ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಉಳಿಸಿದೆ. ರೀಲೋಡ್ ಅಥವಾ ದುರ್ಬಲ ನೆಟ್‌ವರ್ಕ್ ನಿಮ್ಮನ್ನು ಮೊದಲ ಹೆಜ್ಜೆಗೆ ಕಳಿಸುವುದಿಲ್ಲ.",
   daysOverdue: "{count} ದಿನ ತಡ",
   homeEdition: "{name} ಅವರ ಆವೃತ್ತಿ",
   homeHeadline: "[[ನಿಮಗೆ]] ಏನು ಬೇಕು?",
