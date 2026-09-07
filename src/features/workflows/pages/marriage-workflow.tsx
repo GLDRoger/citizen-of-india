@@ -17,6 +17,7 @@ import { formatDate, maskIdentifier } from "@/lib/format";
 import { bookAppointment, processPayment, submitMarriageRegistration } from "@/lib/mockGov";
 import { CompletionCard, ParticipantStrip, ProcedureShell, StepCard, type ProcedureStep } from "../components/procedure-shell";
 import { MarriageRippleCard } from "../components/marriage-ripple";
+import { MarriageFamilyCue } from "../components/marriage-family-cue";
 import { ConsentPacket, marriageConsentFields } from "../components/consent-packet";
 
 /** `{partner}` is replaced with the other person's first name, seen from whoever is logged in. */
@@ -181,5 +182,5 @@ export function MarriageWorkflow() {
     <StepCard eyebrow={application?.attrs.reference} title={t("marriageConfirmTitle")} body={t("marriageConfirmBody", { date: application?.attrs.appointmentOn ? formatDate(application.attrs.appointmentOn, language) : formatDate("2026-09-03", language) })}><div className="flex items-center justify-between gap-4 rounded-[3px] bg-green-tint p-4"><div><strong className="block text-sm">{t("marriageSpouseRelationship")}</strong><span className="text-xs text-ink-mute">Arjun Sharma ↔ Priya Patel</span></div><SimulatedChip authority="Kaveri Online Services" /></div><Button loading={loading} onClick={() => void register()}>{t("marriageRegisterAction")} <ArrowRight aria-hidden className="size-4" /></Button></StepCard>
   );
 
-  return <ProcedureShell authority="Kaveri Online Services + Karnataka One" complete={complete} outcomeTargetId={application?.id} currentStep={currentStep} description={t("marriageWorkflowBody")} procedureId="marriage-arjun-priya" steps={steps} title={t("marriageWorkflowTitle")}><div className="grid gap-5"><ParticipantStrip left={{ name: initiator.attrs.name, status: initiatorStatus, tone: complete || currentStep > 0 ? "success" : "info" }} right={{ name: partner.attrs.name, status: partnerStatus, tone: complete || currentStep > 1 ? "success" : "warning" }} />{error ? <p className="rounded-[2px] bg-brick-tint p-3 text-sm font-semibold text-brick" role="alert">{error}</p> : null}{content}</div></ProcedureShell>;
+  return <ProcedureShell authority="Kaveri Online Services + Karnataka One" complete={complete} outcomeTargetId={application?.id} currentStep={currentStep} description={t("marriageWorkflowBody")} procedureId="marriage-arjun-priya" steps={steps} title={t("marriageWorkflowTitle")}><div className="grid gap-5">{complete ? <MarriageFamilyCue names={[arjun.attrs.name, priya.attrs.name]} /> : <ParticipantStrip left={{ name: initiator.attrs.name, status: initiatorStatus, tone: complete || currentStep > 0 ? "success" : "info" }} right={{ name: partner.attrs.name, status: partnerStatus, tone: complete || currentStep > 1 ? "success" : "warning" }} />}{error ? <p className="rounded-[2px] bg-brick-tint p-3 text-sm font-semibold text-brick" role="alert">{error}</p> : null}{content}</div></ProcedureShell>;
 }

@@ -4,6 +4,7 @@
  * resume notices and record provenance.
  */
 export const workflowEn = {
+  marriageFamilyRecorded: "Connected as family",
   notDocumented: "Not documented",
   provenanceIssuer: "Issuer",
   provenanceOpenIssuer: "Issuer's public site",
@@ -130,6 +131,7 @@ export const workflowEn = {
 };
 
 export const workflowHi = {
+  marriageFamilyRecorded: "परिवार के रूप में जुड़े",
   notDocumented: "दर्ज नहीं",
   provenanceIssuer: "जारीकर्ता",
   provenanceOpenIssuer: "जारीकर्ता की सार्वजनिक साइट",
@@ -256,6 +258,7 @@ export const workflowHi = {
 };
 
 export const workflowKn = {
+  marriageFamilyRecorded: "ಕುಟುಂಬವಾಗಿ ಸಂಪರ್ಕಗೊಂಡಿದ್ದಾರೆ",
   notDocumented: "ದಾಖಲಾಗಿಲ್ಲ",
   provenanceIssuer: "ನೀಡಿದವರು",
   provenanceOpenIssuer: "ನೀಡಿದವರ ಸಾರ್ವಜನಿಕ ತಾಣ",
