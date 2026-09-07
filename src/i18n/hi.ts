@@ -1,3 +1,4 @@
+import { roundTwoHi } from "./round-two";
 import { controlsHi } from "./controls";
 import type { MessageKey } from "./en";
 import { aboutHi } from "./about";
@@ -11,6 +12,7 @@ import { redressHi } from "./redress";
 
 export const hi: Record<MessageKey, string> = {
   ...controlsHi,
+  ...roundTwoHi,
   brand: "Citizen",
   simulated: "सिम्युलेटेड",
   home: "होम",

@@ -1,3 +1,4 @@
+import { roundTwoEn } from "./round-two";
 import { controlsEn } from "./controls";
 import { aboutEn } from "./about";
 import { askEn } from "./ask";
@@ -10,6 +11,7 @@ import { redressEn } from "./redress";
 
 export const en = {
   ...controlsEn,
+  ...roundTwoEn,
   brand: "Citizen",
   simulated: "Simulated",
   home: "Home",

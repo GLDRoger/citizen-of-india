@@ -1,3 +1,4 @@
+import { roundTwoKn } from "./round-two";
 import { controlsKn } from "./controls";
 import type { MessageKey } from "./en";
 import { aboutKn } from "./about";
@@ -11,6 +12,7 @@ import { redressKn } from "./redress";
 
 export const kn: Record<MessageKey, string> = {
   ...controlsKn,
+  ...roundTwoKn,
   brand: "Citizen",
   simulated: "ಅನುಕರಿಸಲಾಗಿದೆ",
   home: "ಮುಖಪುಟ",

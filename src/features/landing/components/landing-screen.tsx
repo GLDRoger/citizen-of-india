@@ -15,6 +15,7 @@ import { CitizenFileObject } from "./citizen-file-object";
 import { Faq } from "./faq";
 import { BriefPreview } from "./figures/brief-preview";
 import { LandingFooter, LandingHeader, githubUrl, musicUrl } from "./landing-header";
+import { RoundTwoUpdate } from "./round-two-update";
 import { WhyPublic } from "./why-public";
 
 const proofKeys: MessageKey[] = ["landingCurrentOne", "landingCurrentTwo", "landingCurrentThree", "landingCurrentFour"];
@@ -56,6 +57,7 @@ function Hero({ onWatch }: { onWatch: () => void }) {
               {t("landingSourceCode")}
             </a>
           </div>
+          <RoundTwoUpdate />
         </div>
         <div className="pt-6 lg:pt-0">
           <CitizenFileObject />
