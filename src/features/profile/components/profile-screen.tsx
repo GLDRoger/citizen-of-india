@@ -30,6 +30,7 @@ import { buildRecordMap } from "../record-map/model";
 import { RecordDetail } from "../record-map/record-detail";
 import { RecordMap } from "../record-map/record-map";
 import { GovernmentHealthCard } from "./government-health";
+import { FamilyConnectionsPanel } from "./family-connections";
 
 function AssetRow({ asset }: { asset: ReturnType<typeof getOwnedAssets>[number] }) {
   const { t } = useI18n();
@@ -214,6 +215,8 @@ function RecordSections({ personId }: { personId: string }) {
       <section className="grid gap-5"><SectionHeader eyebrow={`${documents.length}`} title={t("documents")} action={<Link className="text-sm font-bold text-indigo-deep underline decoration-indigo-deep/25 underline-offset-4" href="/documents">{t("recordsAllDocuments")}</Link>} /><div className="border-y border-paper-line">{documents.map((document) => <DocumentRow document={document} key={document.id} />)}</div></section>
 
       <section className="grid gap-5"><SectionHeader eyebrow={`${relationships.length}`} title={t("relationships")} /><div className="border-y border-paper-line">{relationships.map((view) => <RelationshipRow key={view.person.id} view={view} />)}</div></section>
+
+      <FamilyConnectionsPanel personId={personId} />
 
       <section className="grid gap-5"><SectionHeader title={t("workAndBusiness")} />{employment ? <div className="flex min-h-24 items-center gap-4 border-y border-paper-line py-4"><Building2 aria-hidden className="size-5 shrink-0 text-indigo-deep" /><div className="min-w-0 flex-1"><strong className="block text-sm leading-5 text-ink [overflow-wrap:anywhere]">{employment.attrs.employer}</strong><span className="text-xs text-ink-mute">{employment.attrs.designation} · {employment.attrs.location}</span></div><VerificationBadge verification={employment.verification} /></div> : null}{assets.filter((asset) => asset.type === "business").map((asset) => <AssetRow asset={asset} key={asset.id} />)}</section>
 

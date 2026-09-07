@@ -10,6 +10,9 @@ import { manifestoHi } from "./manifesto";
 import { productHi } from "./product";
 import { recordsHi } from "./records";
 import { redressHi } from "./redress";
+import { attentionHi } from "./attention";
+import { familyHi } from "./family";
+import { noticeLensHi } from "./notice-lens";
 
 export const hi: Record<MessageKey, string> = {
   ...controlsHi,
@@ -888,4 +891,7 @@ export const hi: Record<MessageKey, string> = {
   ...productHi,
   ...recordsHi,
   ...redressHi,
+  ...attentionHi,
+  ...familyHi,
+  ...noticeLensHi,
 };

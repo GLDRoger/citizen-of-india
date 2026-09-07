@@ -8,6 +8,7 @@ const nodeTypeKeys: Record<NodeType, MessageKey> = {
   application: "mutationNodeApplication",
   benefit: "mutationNodeBenefit",
   business: "mutationNodeBusiness",
+  connectionInvitation: "mutationNodeConnectionInvitation",
   delegation: "mutationNodeDelegation",
   document: "mutationNodeDocument",
   employment: "mutationNodeEmployment",

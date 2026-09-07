@@ -84,6 +84,7 @@ function mutationAffectsPerson(graph: CitizenGraph, mutation: GraphMutation, per
     case "addNode":
       return mutation.node.id === personId
         || (mutation.node.type === "application" && mutation.node.attrs.participants?.includes(personId) === true)
+        || (mutation.node.type === "connectionInvitation" && [mutation.node.attrs.inviterId, mutation.node.attrs.inviteeId].includes(personId))
         || (mutation.node.type === "delegation" && [mutation.node.attrs.delegatorId, mutation.node.attrs.delegateId].includes(personId));
     case "addEdge":
       return mutation.edge.from === personId || mutation.edge.to === personId;
@@ -99,7 +100,9 @@ function mutationAffectsPerson(graph: CitizenGraph, mutation: GraphMutation, per
       if (mutation.nodeId === personId) return true;
       const application = getNodeByType(graph, mutation.nodeId, "application");
       const delegation = getNodeByType(graph, mutation.nodeId, "delegation");
+      const invitation = getNodeByType(graph, mutation.nodeId, "connectionInvitation");
       return application?.attrs.participants?.includes(personId) === true
+        || Boolean(invitation && [invitation.attrs.inviterId, invitation.attrs.inviteeId].includes(personId))
         || Boolean(delegation && [delegation.attrs.delegatorId, delegation.attrs.delegateId].includes(personId))
         || graph.edges.some((edge) => edge.from === personId && edge.to === mutation.nodeId
           && ["holds", "subjectOf", "owns"].includes(edge.type));
@@ -133,8 +136,8 @@ export function getNotices(graph: CitizenGraph, personId: string): NoticeView[] 
     .filter(
       (node): node is NoticeNode =>
         node.type === "notice" &&
-        node.attrs.legitimacy === "legitimate" &&
-        node.verification.source !== "Self" &&
+        (node.attrs.legitimacy === "legitimate" || Boolean(node.attrs.lensSavedOn)) &&
+        (node.verification.source !== "Self" || Boolean(node.attrs.lensSavedOn)) &&
         linkByTarget.has(node.id),
     )
     .map((node) => ({ node, read: linkByTarget.get(node.id)?.attrs.read ?? false }))
@@ -437,34 +440,47 @@ export function getProfileSummary(graph: CitizenGraph, personId: string) {
     residence,
     documentCount: documents.length,
     verifiedDocumentCount: documents.filter((node) => node.verification.state === "verified").length,
-    relationships: activeEdges(graph, personId, "childOf").length + activeEdges(graph, personId, "spouseOf").length,
+    relationships: activeEdges(graph, personId, "childOf").length + activeEdges(graph, personId, "spouseOf").length + activeEdges(graph, personId, "familyOf").length,
   };
 }
 
 export interface RelationshipView {
   person: PersonNode;
-  relationship: "parent" | "child" | "spouse" | "historical spouse";
+  relationship: "parent" | "child" | "spouse" | "historical spouse" | "sibling" | "partner" | "other";
 }
 
 export function getRelationshipViews(graph: CitizenGraph, personId: string): RelationshipView[] {
   const views = graph.edges
     .filter(
       (edge) =>
-        (edge.type === "childOf" || edge.type === "spouseOf") &&
+        (edge.type === "childOf" || edge.type === "spouseOf" || edge.type === "familyOf") &&
         (edge.from === personId || edge.to === personId),
     )
     .flatMap((edge): RelationshipView[] => {
       const relativeId = edge.from === personId ? edge.to : edge.from;
       const person = getPerson(graph, relativeId);
       if (!person) return [];
-      const relationship = edge.type === "spouseOf"
+      const relationship = edge.type === "familyOf"
+        ? edge.attrs.relationship
+        : edge.type === "spouseOf"
         ? edge.status === "ended" ? "historical spouse" : "spouse"
         : edge.from === personId ? "parent" : "child";
       return [{ person, relationship }];
     });
-  return views.filter(
-    (view, index) => views.findIndex((candidate) => candidate.person.id === view.person.id) === index,
-  );
+  const priority: Record<RelationshipView["relationship"], number> = {
+    spouse: 0,
+    "historical spouse": 1,
+    partner: 2,
+    parent: 3,
+    child: 4,
+    sibling: 5,
+    other: 6,
+  };
+  const unique = new Map<string, RelationshipView>();
+  for (const view of views.slice().sort((first, second) => priority[first.relationship] - priority[second.relationship])) {
+    if (!unique.has(view.person.id)) unique.set(view.person.id, view);
+  }
+  return Array.from(unique.values());
 }
 
 export function getOwnedAssets(graph: CitizenGraph, personId: string) {
