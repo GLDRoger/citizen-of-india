@@ -15,6 +15,7 @@ import { CitizenFileObject } from "./citizen-file-object";
 import { Faq } from "./faq";
 import { BriefPreview } from "./figures/brief-preview";
 import { LandingFooter, LandingHeader, githubUrl, musicUrl } from "./landing-header";
+import { ContinuitySection } from "./continuity-section";
 import { RoundTwoUpdate } from "./round-two-update";
 import { WhyPublic } from "./why-public";
 
@@ -99,10 +100,7 @@ function OriginStory() {
           ))}
         </ol>
         <p className="border-t border-paper-line pt-5 text-base font-bold leading-7 text-indigo-deep">{t("landingOriginProof")}</p>
-        <div className="grid gap-3 text-xs leading-5 text-ink-mute sm:grid-cols-2 sm:gap-8">
-          <p>{t("landingOriginNote")}</p>
-          <p>{t("landingOriginDisclaimer")}</p>
-        </div>
+
       </div>
     </section>
   );
@@ -151,7 +149,6 @@ function ProofSection() {
         ))}
       </ol>
       <div className="mt-7 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p className="max-w-2xl text-sm leading-7 text-ink-mute">{t("landingBoundary")}</p>
         <Link className="inline-flex min-h-12 items-center gap-2 rounded-[4px] bg-indigo-deep px-5 font-display text-sm font-semibold text-paper transition-colors hover:bg-indigo" href="/start">
           {t("landingStart")}
           <ArrowUpRight aria-hidden className="size-4" />
@@ -174,7 +171,6 @@ function VisionSection() {
         <div className="mt-14 grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
           <div className="max-w-3xl">
             <p className="font-display text-[clamp(2.4rem,5vw,4.5rem)] font-semibold leading-[0.95] tracking-[-0.04em]">{t("landingClosingTitle")}</p>
-            <p className="mt-3 text-sm text-paper/65">{t("landingClosingBody")}</p>
           </div>
           <div className="flex flex-wrap gap-3">
             <Link className="inline-flex min-h-12 items-center gap-2 rounded-[4px] bg-saffron px-5 font-display text-sm font-semibold text-ink transition-colors hover:bg-paper" href="/start">
@@ -229,6 +225,7 @@ export function LandingScreen() {
     <main className="break-words bg-paper text-ink">
       <LandingHeader />
       <Hero onWatch={() => setIsVideoOpen(true)} />
+      <ContinuitySection />
       <WhyPublic id="why" />
       <AlreadyHere id="here" />
       <OriginStory />

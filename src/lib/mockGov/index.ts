@@ -12,9 +12,10 @@ function reference(prefix: string, key: string) {
   return `${prefix}-${String(hash(key) % 10_000_000).padStart(7, "0")}`;
 }
 
-async function mockResponse<T>(key: string, authority: string, data: T): Promise<MockGovResponse<T>> {
+async function mockResponse<T>(key: string, authority: string, data: T, failBeforeSubmission = false): Promise<MockGovResponse<T>> {
   const latency = 400 + (hash(key) % 801);
   await new Promise((resolve) => setTimeout(resolve, latency));
+  if (failBeforeSubmission) throw Object.assign(new Error("Simulated service interruption before submission."), { simulated: true, authority });
   return { simulated: true, authority, data };
 }
 
@@ -82,23 +83,23 @@ export function registerEpfoGrievance(input: { employmentId: string; issue: stri
   });
 }
 
-export function fileRtiRequest(input: { applicantId: string; authority: string; subjectId: string }) {
+export function fileRtiRequest(input: { applicantId: string; authority: string; subjectId: string; simulateFailure?: boolean }) {
   return mockResponse(`rti:${input.applicantId}:${input.subjectId}`, "RTI Online", {
     registrationNumber: reference("RTI", `${input.applicantId}:${input.subjectId}`),
     authority: input.authority,
     fee: 10,
     status: "filed" as const,
     replyDueDays: 30,
-  });
+  }, input.simulateFailure);
 }
 
-export function lodgeGrievance(input: { complainantId: string; authority: string; subjectId: string }) {
+export function lodgeGrievance(input: { complainantId: string; authority: string; subjectId: string; simulateFailure?: boolean }) {
   return mockResponse(`grievance:${input.complainantId}:${input.subjectId}`, "CPGRAMS", {
     registrationNumber: reference("CPGRAMS", `${input.complainantId}:${input.subjectId}`),
     authority: input.authority,
     status: "registered" as const,
     replyDueDays: 30,
-  });
+  }, input.simulateFailure);
 }
 
 export function submitBenefitApplication(input: { benefitId: string; applicantId: string }) {

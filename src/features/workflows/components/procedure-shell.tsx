@@ -51,7 +51,7 @@ export function ProcedureShell({ title, description, authority, steps, currentSt
       </header>
       {personId && showProgress && !complete ? <Preflight personId={personId} procedureId={procedureId} /> : null}
       <section className="min-w-0">{children}</section>
-      <MutationReceipt procedureId={procedureId} />
+      <MutationReceipt procedureId={procedureId} targetId={outcomeTargetId} />
       {personId && complete && outcomeTargetId ? <ResolutionPrompt personId={personId} procedureId={procedureId} targetId={outcomeTargetId} /> : null}
     </Page>
   );

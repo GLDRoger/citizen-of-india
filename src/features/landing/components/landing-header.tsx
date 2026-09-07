@@ -21,7 +21,7 @@ export const landingLinks: HeaderLink[] = [
   { href: "/#why", label: "landingWhyNav" },
   { href: "/#origin", label: "landingOriginNav" },
   { href: "/#graph", label: "landingGraphNav" },
-  { href: "/#project", label: "landingJourneyNav" },
+  { href: "/start#routes", label: "landingJourneyNav" },
   { href: "/manifesto", label: "landingManifestoNav" },
 ];
 
@@ -100,6 +100,7 @@ export function LandingFooter() {
     <footer className="border-t border-paper/15 bg-indigo-deep text-paper/65">
       <div className="mx-auto grid w-full max-w-[1040px] gap-4 px-5 py-7 text-xs sm:grid-cols-[1fr_auto] sm:items-end sm:px-8">
         <div className="grid gap-1">
+          <p className="leading-5">{t("footerDisclosure")}</p>
           <p>{t("independentNotice")}</p>
           <p>{t("landingHackathonCredit")}</p>
         </div>

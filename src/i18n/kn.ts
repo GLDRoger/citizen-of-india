@@ -1,3 +1,4 @@
+import { continuityKn } from "./continuity";
 import { roundTwoKn } from "./round-two";
 import { controlsKn } from "./controls";
 import type { MessageKey } from "./en";
@@ -13,6 +14,7 @@ import { redressKn } from "./redress";
 export const kn: Record<MessageKey, string> = {
   ...controlsKn,
   ...roundTwoKn,
+  ...continuityKn,
   brand: "Citizen",
   simulated: "ಅನುಕರಿಸಲಾಗಿದೆ",
   home: "ಮುಖಪುಟ",
@@ -67,9 +69,7 @@ export const kn: Record<MessageKey, string> = {
   openMenu: "ಮೆನು ತೆರೆಯಿರಿ",
   accountMenu: "ಖಾತೆ ಮೆನು",
   independentPrototype: "ಸ್ವತಂತ್ರ ಮಾದರಿ",
-  footerPrototype: "ಸ್ವತಂತ್ರ ಮಾದರಿ",
-  footerSynthetic: "ಕಾಲ್ಪನಿಕ ಜನರು ಮತ್ತು ಮಾಹಿತಿ",
-  footerSimulated: "ಸರ್ಕಾರಿ ಪ್ರತಿಕ್ರಿಯೆಗಳು ಅನುಕರಿಸಲಾಗಿದೆ",
+  footerDisclosure: "ಸ್ವತಂತ್ರ ಮಾದರಿ · ಕಾಲ್ಪನಿಕ ದಾಖಲೆಗಳು · ಅನುಕರಿಸಿದ ಸರ್ಕಾರಿ ಸೇವೆಗಳು",
   deathService: "ಕುಟುಂಬದಲ್ಲಿ ಮರಣ",
   marriageService: "ವಿವಾಹ ನೋಂದಣಿ",
   epfoService: "EPFO ಪಾಸ್‌ಬುಕ್ ಮತ್ತು ದೂರು",
@@ -174,10 +174,10 @@ export const kn: Record<MessageKey, string> = {
   recordCorrectionError: "ವಿನಂತಿ ಕಳುಹಿಸಲು ಆಗಲಿಲ್ಲ. ಏನೂ ಬದಲಾಗಿಲ್ಲ.",
   recordCorrectionCompleteTitle: "ತಿದ್ದುಪಡಿ ವಿನಂತಿ ಕಳುಹಿಸಲಾಗಿದೆ",
   recordCorrectionCompleteBody:
-    "ಉಲ್ಲೇಖ {reference}. ಪರಿಶೀಲನೆ ಮುಗಿಯುವವರೆಗೆ ಈಗಿನ PAN ಹೆಸರು ಕಾಣುತ್ತದೆ.",
+    "ಉಲ್ಲೇಖ {reference}.",
   recordCorrectionUnavailableTitle: "ತಿದ್ದುಪಡಿ ಮಾಡಲು ಹೆಸರಿನ ವ್ಯತ್ಯಾಸ ಇಲ್ಲ.",
   recordCorrectionUnavailableBody: "ಈ ಪ್ರೊಫೈಲ್‌ನಲ್ಲಿ PAN ಹೆಸರಿನ ವ್ಯತ್ಯಾಸ ಇಲ್ಲ.",
-  recordCorrectionAuthority: "Protean eGov (PAN) · ಅನುಕರಿಸಲಾಗಿದೆ",
+  recordCorrectionAuthority: "Protean eGov (PAN)",
   viewDocuments: "ದಾಖಲೆಗಳನ್ನು ನೋಡಿ",
   expiry: "ಅವಧಿ",
   why: "ಮೂಲ ಮತ್ತು ಬಳಕೆ",
@@ -682,7 +682,7 @@ export const kn: Record<MessageKey, string> = {
   aboutClosingAction: "Citizen ತೆರೆಯಿರಿ",
   aboutBoundary:
     "ಕಾಲ್ಪನಿಕ ಪ್ರೊಫೈಲ್, ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಉಳಿಯುವ ಪ್ರಗತಿ ಮತ್ತು ಅನುಕರಿತ ಸೇವಾ ಪ್ರತಿಕ್ರಿಯೆಗಳಿರುವ ಸ್ವತಂತ್ರ ಮಾದರಿ.",
-  profileAccessNotice: "ಕಾಲ್ಪನಿಕ ಡೇಟಾ. ಬದಲಾವಣೆಗಳು ಈ ಬ್ರೌಸರ್‌ನಲ್ಲೇ ಉಳಿಯುತ್ತವೆ.",
+  profileAccessNotice: "ಕಾಲ್ಪನಿಕ ಪ್ರೊಫೈಲ್‌ಗಳು. ಖಾತೆ ಅಥವಾ ಪಾಸ್‌ವರ್ಡ್ ಅಗತ್ಯವಿಲ್ಲ.",
   openSampleProfile: "ಪ್ರೊಫೈಲ್ ತೆರೆಯಿರಿ",
   serviceJourneyAuthority: "ಕೆಲಸ ಮಾಡುವ ಡೆಮೊ",
   suggestMarriage: "ನನ್ನ ವಿವಾಹ ನೋಂದಾಯಿಸಿ",
@@ -706,12 +706,12 @@ export const kn: Record<MessageKey, string> = {
   moneyServiceError: "ವಿನಂತಿ ಪೂರ್ಣವಾಗಲಿಲ್ಲ. ಏನೂ ಬದಲಾಗಿಲ್ಲ.",
   loanMudraName: "ಮುದ್ರಾ ಕಿಶೋರ್",
   loanMudraNote:
-    "ಅತಿ ಕಡಿಮೆ ತಿಂಗಳ ಕಂತು. ಈಗಾಗಲೇ ಸಲ್ಲಿಸಿದ ರಿಟರ್ನಿನ ITR-V ಸ್ವೀಕೃತಿ ಪಡೆಯಿರಿ.",
+    "ಈ ಹೋಲಿಕೆಯಲ್ಲಿ ಅತಿ ಕಡಿಮೆ ಮಾಸಿಕ ವೆಚ್ಚ.",
   loanBankName: "ಸಣ್ಣ ವ್ಯವಹಾರ ಅವಧಿ ಸಾಲ",
   loanBankNote:
     "ತಿಂಗಳಿಗೆ ₹606 ಮತ್ತು ಐದು ವರ್ಷಗಳಲ್ಲಿ ₹36,360 ಹೆಚ್ಚು ಬಡ್ಡಿ. ಬ್ಯಾಂಕ್ ಹೆಚ್ಚು ಆದಾಯ ಸಾಕ್ಷ್ಯ ಕೇಳಬಹುದು.",
   loanEvidenceNeeded:
-    "ನಿಮ್ಮ ರಿಟರ್ನ್ ಸಲ್ಲಿಸಲಾಗಿದೆ. ಸಾಲದಾತರಿಗೆ {evidence} ಪಡೆಯಿರಿ; ಮತ್ತೊಂದು ತೆರಿಗೆ ರಿಟರ್ನ್ ಸಲ್ಲಿಸಬೇಕಿಲ್ಲ.",
+    "ಬೇಕಿರುವ ದಾಖಲೆ: {evidence}.",
   loanEvidenceReady: "ಅಗತ್ಯ ಸಾಕ್ಷ್ಯ ಲಭ್ಯವಿದೆ.",
   loanRiskDecisionMudra:
     "ನಿರ್ಧಾರ: ಮೊದಲು ITR-V ಪಡೆಯಿರಿ, ನಂತರ ಕಡಿಮೆ ವೆಚ್ಚದ ಮುದ್ರಾ ಆಯ್ಕೆಯನ್ನು ಆರಿಸಿ.",
@@ -808,10 +808,6 @@ export const kn: Record<MessageKey, string> = {
     "ಕಾರಣದೊಂದಿಗೆ ಸಂಬಂಧಿತ ಬಾಧ್ಯತೆಗಳು, ಸೌಲಭ್ಯಗಳು ಮತ್ತು ಸೇವೆಗಳು.",
   landingOriginNextTitle: "ಮುಂದೆ ನಾನು ಏನು ಮಾಡಬೇಕು?",
   landingOriginNextBody: "ಈಗಾಗಲೇ ಸಂಪರ್ಕಿತ ದಾಖಲೆಗಳನ್ನು ಬಳಸಿ ಸರಿಯಾದ ಮುಂದಿನ ಕ್ರಮ.",
-  landingOriginNote:
-    "ವೈಯಕ್ತಿಕ ಸಾರ್ವಜನಿಕ-ಸೇವಾ ಗಜೆಟ್ ಒಬ್ಬ ವ್ಯಕ್ತಿಯ ಖಾಸಗಿ ಸಂಕ್ಷಿಪ್ತ ಮಾಹಿತಿ; ಅದು ಅಧಿಕೃತ ಸರ್ಕಾರಿ ಪ್ರಕಟಣೆ ಅಲ್ಲ.",
-  landingOriginDisclaimer:
-    "ಸ್ವತಂತ್ರ ಪ್ರೋಟೋಟೈಪ್. UMANG, EPFO, DigiLocker ಅಥವಾ ಯಾವುದೇ ಸರ್ಕಾರಿ ಪ್ರಾಧಿಕಾರದೊಂದಿಗೆ ಸಂಬಂಧ ಅಥವಾ ಅನುಮೋದನೆ ಇಲ್ಲ. ಎಲ್ಲಾ ಸೇವಾ ಪ್ರತಿಕ್ರಿಯೆಗಳು ಅನುಕರಿಸಲ್ಪಟ್ಟಿವೆ.",
   landingBeyondTitle: "ಸ್ಪಷ್ಟ ಸುಧಾರಣೆಗಳು ಇಷ್ಟಕ್ಷೆ ಸಾಧಿಸಬಲ್ಲವು.",
   landingBeyondBody:
     "ಸ್ವಚ್ಛ ಪರದೆ, ಚಾಟ್ ಮತ್ತು ಡ್ಯಾಶ್‌ಬೋರ್ಡ್ ಎಲ್ಲವೂ ಸ್ವಲ್ಪ ನೆರವಾಗುತ್ತವೆ. ಯಾವುದೂ ನಿಜವಾದ ಸಮಸ್ಯೆ ಬಗೆಹರಿಸುವುದಿಲ್ಲ: ಪ್ರತಿ ಸೇವೆಯೂ ಮತ್ತೆ ಶೂನ್ಯದಿಂದ ಆರಂಭವಾಗುತ್ತದೆ.",
@@ -833,8 +829,6 @@ export const kn: Record<MessageKey, string> = {
     "ದಂಡ ಪಾವತಿಸಿದಾಗ ಮೊತ್ತ ಬಾಕಿ ಪಟ್ಟಿಯಿಂದ ಹೊರಹೋಗಿ ದಾಖಲೆಗಳಲ್ಲಿ ರಸೀದಿ ಕಾಣುತ್ತದೆ.",
   landingCurrentFour:
     "ಹಂಚಲು ಮೊದಲು ಒಪ್ಪಿಗೆ ಬೇಕು, ಮತ್ತು ಕುಟುಂಬದ ಪ್ರವೇಶವನ್ನು ಯಾವಾಗ ಬೇಕಾದರೂ ತೆಗೆಯಬಹುದು.",
-  landingBoundary:
-    "ಎಲ್ಲ ಜನರು ಮತ್ತು ದಾಖಲೆಗಳು ಕಾಲ್ಪನಿಕ. ಸರ್ಕಾರಿ ಪ್ರತಿಕ್ರಿಯೆಗಳು ಅನುಕರಿಸಲಾಗಿದೆ.",
   landingServiceStatus: "Citizen ಹೇಗೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ",
   landingVisionTitle: "ಏನು ಹಂಚಬೇಕು ಎಂದು ನೀವೇ ನಿರ್ಧರಿಸಿ.",
   landingVisionBody:
@@ -844,7 +838,6 @@ export const kn: Record<MessageKey, string> = {
   landingVisionThree: "ಯಾರು ಏನು ನೋಡಿದರು ತೋರಿಸಿ",
   landingVisionFour: "ತಪ್ಪು ತಿದ್ದಲು ಬಿಡಿ",
   landingClosingTitle: "ಪ್ರೊಫೈಲ್ ತೆರೆಯಿರಿ ಮತ್ತು ಪ್ರಯತ್ನಿಸಿ.",
-  landingClosingBody: "ಎಲ್ಲ ಡೇಟಾ ಕಾಲ್ಪನಿಕ.",
   startBack: "ಯೋಜನೆಗೆ ಮರಳಿ",
   startTitle: "ಪ್ರೊಫೈಲ್ ಆರಿಸಿ",
   startBody:

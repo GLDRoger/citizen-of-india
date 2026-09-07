@@ -1,3 +1,4 @@
+import { continuityEn } from "./continuity";
 import { roundTwoEn } from "./round-two";
 import { controlsEn } from "./controls";
 import { aboutEn } from "./about";
@@ -12,6 +13,7 @@ import { redressEn } from "./redress";
 export const en = {
   ...controlsEn,
   ...roundTwoEn,
+  ...continuityEn,
   brand: "Citizen",
   simulated: "Simulated",
   home: "Home",
@@ -72,9 +74,7 @@ export const en = {
   openMenu: "Open menu",
   accountMenu: "Account menu",
   independentPrototype: "Independent prototype",
-  footerPrototype: "Independent prototype",
-  footerSynthetic: "Fictional people and data",
-  footerSimulated: "Government responses are simulated",
+  footerDisclosure: "Independent prototype · fictional records · simulated government services",
   deathService: "Death in the family",
   marriageService: "Marriage registration",
   epfoService: "EPFO passbook and grievance",
@@ -179,10 +179,10 @@ export const en = {
   recordCorrectionError: "The request could not be sent. Nothing changed.",
   recordCorrectionCompleteTitle: "Correction request sent",
   recordCorrectionCompleteBody:
-    "Reference {reference}. The current PAN name stays visible while the request is reviewed.",
+    "Reference {reference}.",
   recordCorrectionUnavailableTitle: "There is no name mismatch to correct.",
   recordCorrectionUnavailableBody: "This profile has no PAN name mismatch.",
-  recordCorrectionAuthority: "Protean eGov (PAN) · simulated",
+  recordCorrectionAuthority: "Protean eGov (PAN)",
   viewDocuments: "View documents",
   expiry: "Expires",
   why: "Source and access",
@@ -687,7 +687,7 @@ export const en = {
   aboutClosingAction: "Open Citizen",
   aboutBoundary:
     "Independent prototype with fictional profiles, browser-only progress and simulated service responses.",
-  profileAccessNotice: "Fictional data. Changes stay in this browser.",
+  profileAccessNotice: "Fictional profiles. No account or password needed.",
   openSampleProfile: "Open profile",
   serviceJourneyAuthority: "Working demo",
   suggestMarriage: "Register my marriage",
@@ -712,12 +712,12 @@ export const en = {
   moneyServiceError: "The request could not be completed. Nothing changed.",
   loanMudraName: "Mudra Kishor",
   loanMudraNote:
-    "Lowest monthly cost. Retrieve the ITR-V acknowledgement from the return already filed.",
+    "Lowest monthly cost in this comparison.",
   loanBankName: "Small business term loan",
   loanBankNote:
     "₹606 more each month and ₹36,360 more interest over five years. The bank may ask for stronger income proof.",
   loanEvidenceNeeded:
-    "Your return is filed. Retrieve {evidence} for the lender; this is not another tax filing.",
+    "Missing document: {evidence}.",
   loanEvidenceReady: "The required evidence is present.",
   loanRiskDecisionMudra:
     "Decision: wait for the ITR-V, then choose the lower-cost Mudra option.",
@@ -816,10 +816,6 @@ export const en = {
   landingOriginNextTitle: "What should I do next?",
   landingOriginNextBody:
     "The right action, using records already connected to you.",
-  landingOriginNote:
-    "A personal public-service gazette is a private brief for one person, not an official government publication.",
-  landingOriginDisclaimer:
-    "Independent prototype. Not affiliated with or endorsed by UMANG, EPFO, DigiLocker or any government authority. All service responses are simulated.",
   landingBeyondTitle: "The obvious fixes only go so far.",
   landingBeyondBody:
     "Cleaner screens, chat boxes and dashboards each help a little. None of them fixes the real problem: every service still starts from zero.",
@@ -841,8 +837,6 @@ export const en = {
     "A paid challan leaves Money and creates a receipt in Documents.",
   landingCurrentFour:
     "Sharing needs consent, and family access can be removed anytime.",
-  landingBoundary:
-    "All people and records are fictional. Government responses are simulated.",
   landingServiceStatus: "How Citizen works",
   landingVisionTitle: "You control what gets shared.",
   landingVisionBody:
@@ -852,7 +846,6 @@ export const en = {
   landingVisionThree: "Show who accessed what",
   landingVisionFour: "Let people correct mistakes",
   landingClosingTitle: "Open a profile and try it.",
-  landingClosingBody: "All data is fictional.",
   startBack: "Back to the project",
   startTitle: "Choose a profile",
   startBody:

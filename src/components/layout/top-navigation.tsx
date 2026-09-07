@@ -104,6 +104,7 @@ function AccountMenu() {
         <ChevronDown aria-hidden className="size-3 text-white/60 transition group-open:rotate-180" />
       </summary>
       <div className="absolute right-0 top-12 z-50 grid max-h-[calc(100dvh-4.5rem)] w-[min(22rem,calc(100vw-2rem))] gap-2 overflow-y-auto rounded-[3px] border border-paper-line bg-panel p-3 text-ink shadow-[0_6px_18px_rgba(19,28,75,0.14)]">
+        <Link className="flex min-h-11 items-center gap-3 rounded-[2px] px-3 text-sm font-bold text-indigo-deep hover:bg-paper" href="/start#routes" onClick={close}><BookOpenText aria-hidden className="size-4" />{t("routesBack")}</Link>
         <Link className="flex min-h-11 items-center gap-3 rounded-[2px] bg-paper px-3 text-sm font-bold text-ink hover:text-indigo-deep" href="/you" onClick={close}><UserRound aria-hidden className="size-4 text-indigo-deep" />{t("fullProfile")}</Link>
         <Link className="flex min-h-11 items-center gap-3 rounded-[2px] px-3 text-sm font-bold text-ink hover:bg-paper hover:text-indigo-deep" href="/manifesto" onClick={close}><BookOpenText aria-hidden className="size-4 text-indigo-deep" />{t("manifestoNav")}</Link>
         {delegator ? <button className="flex min-h-11 items-center gap-3 rounded-[2px] border border-saffron bg-saffron/15 px-3 text-left text-sm font-bold text-ink hover:bg-saffron/30" onClick={() => { actFor(delegator.id, graph); window.scrollTo(0, 0); close(); router.push("/home"); }} type="button"><UsersRound aria-hidden className="size-4 text-brick" />{t("actFor", { name: delegator.attrs.name.split(" ")[0] })}</button> : null}
@@ -129,7 +130,7 @@ export function TopNavigation() {
     <>
       <header className="sticky top-0 z-40 border-b border-white/10 bg-indigo-deep text-white shadow-[0_1px_0_rgba(0,0,0,0.08)]">
         <div className="mx-auto flex min-h-16 w-full max-w-[1180px] items-center justify-between gap-3 px-5 sm:px-8 lg:px-10">
-          <div className="flex min-w-0 items-center gap-2"><Link className="flex shrink-0 items-center gap-2 font-display text-xl font-extrabold tracking-[0.02em] text-paper" href="/home"><CitizenMark className="size-7 text-saffron" />{t("brand").toUpperCase()}</Link><span className="hidden whitespace-nowrap text-xs text-paper/50 lg:inline">{t("independentPrototype")}</span></div>
+          <div className="flex min-w-0 items-center gap-2"><Link className="flex shrink-0 items-center gap-2 font-display text-xl font-extrabold tracking-[0.02em] text-paper" href="/home"><CitizenMark className="size-7 text-saffron" />{t("brand").toUpperCase()}</Link></div>
           <DesktopNavigation />
           <div className="flex shrink-0 items-center gap-2"><Link aria-label={t("information")} className="flex min-h-11 items-center gap-2 rounded-[2px] border border-paper/20 bg-paper/8 px-3 text-xs font-bold text-paper transition-colors hover:bg-paper/12" href="/about"><Info aria-hidden className="size-4" /><span className="hidden xl:inline">{t("information")}</span></Link><span className="hidden text-xs font-bold uppercase text-paper/65 sm:inline-flex">{languageLabels[language]}</span><AccountMenu /></div>
         </div>

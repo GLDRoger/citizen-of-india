@@ -1,3 +1,4 @@
+import { continuityHi } from "./continuity";
 import { roundTwoHi } from "./round-two";
 import { controlsHi } from "./controls";
 import type { MessageKey } from "./en";
@@ -13,6 +14,7 @@ import { redressHi } from "./redress";
 export const hi: Record<MessageKey, string> = {
   ...controlsHi,
   ...roundTwoHi,
+  ...continuityHi,
   brand: "Citizen",
   simulated: "सिम्युलेटेड",
   home: "होम",
@@ -67,9 +69,7 @@ export const hi: Record<MessageKey, string> = {
   openMenu: "मेन्यू खोलें",
   accountMenu: "अकाउंट मेन्यू",
   independentPrototype: "स्वतंत्र प्रोटोटाइप",
-  footerPrototype: "स्वतंत्र प्रोटोटाइप",
-  footerSynthetic: "काल्पनिक लोग और डेटा",
-  footerSimulated: "सरकारी जवाब सिम्युलेटेड हैं",
+  footerDisclosure: "स्वतंत्र प्रोटोटाइप · काल्पनिक रिकॉर्ड · सिम्युलेटेड सरकारी सेवाएँ",
   deathService: "परिवार में मृत्यु",
   marriageService: "विवाह पंजीकरण",
   epfoService: "EPFO पासबुक और शिकायत",
@@ -173,11 +173,11 @@ export const hi: Record<MessageKey, string> = {
   recordCorrectionError: "अनुरोध नहीं भेजा जा सका। कुछ नहीं बदला।",
   recordCorrectionCompleteTitle: "सुधार अनुरोध भेजा गया",
   recordCorrectionCompleteBody:
-    "संदर्भ {reference}। जाँच पूरी होने तक PAN पर मौजूदा नाम दिखेगा।",
+    "संदर्भ {reference}।",
   recordCorrectionUnavailableTitle: "सुधारने के लिए नाम का कोई अंतर नहीं है।",
   recordCorrectionUnavailableBody:
     "इस प्रोफ़ाइल में PAN नाम का कोई अंतर नहीं है।",
-  recordCorrectionAuthority: "Protean eGov (PAN) · सिम्युलेटेड",
+  recordCorrectionAuthority: "Protean eGov (PAN)",
   viewDocuments: "दस्तावेज़ देखें",
   expiry: "समाप्ति",
   why: "स्रोत और उपयोग",
@@ -675,7 +675,7 @@ export const hi: Record<MessageKey, string> = {
   aboutClosingAction: "Citizen खोलें",
   aboutBoundary:
     "काल्पनिक प्रोफ़ाइल, ब्राउज़र में रहने वाली प्रगति और सिम्युलेटेड सेवा जवाब वाला स्वतंत्र प्रोटोटाइप।",
-  profileAccessNotice: "काल्पनिक डेटा। बदलाव इसी ब्राउज़र में रहते हैं।",
+  profileAccessNotice: "काल्पनिक प्रोफ़ाइल। खाते या पासवर्ड की ज़रूरत नहीं।",
   openSampleProfile: "प्रोफ़ाइल खोलें",
   serviceJourneyAuthority: "चलता हुआ डेमो",
   suggestMarriage: "मेरी शादी रजिस्टर करें",
@@ -700,12 +700,12 @@ export const hi: Record<MessageKey, string> = {
   moneyServiceError: "अनुरोध पूरा नहीं हुआ। कुछ नहीं बदला।",
   loanMudraName: "मुद्रा किशोर",
   loanMudraNote:
-    "सबसे कम मासिक किस्त। पहले से जमा रिटर्न की ITR-V पावती निकालें।",
+    "इस तुलना में सबसे कम मासिक लागत।",
   loanBankName: "लघु व्यवसाय सावधि लोन",
   loanBankNote:
     "हर महीने ₹606 और पाँच साल में ₹36,360 अधिक ब्याज। बैंक मज़बूत आय प्रमाण माँग सकता है।",
   loanEvidenceNeeded:
-    "आपका रिटर्न जमा है। लोन देने वाले के लिए {evidence} निकालें; नया रिटर्न जमा नहीं करना है।",
+    "बाकी दस्तावेज़: {evidence}।",
   loanEvidenceReady: "ज़रूरी प्रमाण मौजूद हैं।",
   loanRiskDecisionMudra:
     "निर्णय: पहले ITR-V पाएँ, फिर कम लागत वाला मुद्रा विकल्प चुनें।",
@@ -801,10 +801,6 @@ export const hi: Record<MessageKey, string> = {
   landingOriginNextTitle: "अब मुझे क्या करना चाहिए?",
   landingOriginNextBody:
     "आपसे पहले से जुड़े रिकॉर्ड इस्तेमाल करके सही अगला कदम।",
-  landingOriginNote:
-    "निजी सार्वजनिक-सेवा गज़ट एक व्यक्ति के लिए निजी जानकारी है, कोई आधिकारिक सरकारी प्रकाशन नहीं।",
-  landingOriginDisclaimer:
-    "स्वतंत्र प्रोटोटाइप। UMANG, EPFO, DigiLocker या किसी सरकारी प्राधिकरण से संबद्ध या समर्थित नहीं। सभी सेवा जवाब सिम्युलेटेड हैं।",
   landingBeyondTitle: "स्पष्ट सुधार सिर्फ़ इतना ही कर सकते हैं।",
   landingBeyondBody:
     "साफ़ स्क्रीन, चैट और डैशबोर्ड सब थोड़ा मदद करते हैं। कोई भी असली समस्या नहीं सुलझाता: हर सेवा फिर से शून्य से शुरू होती है।",
@@ -825,8 +821,6 @@ export const hi: Record<MessageKey, string> = {
     "चालान भरने पर राशि देय सूची से हटती है और दस्तावेज़ों में रसीद आती है।",
   landingCurrentFour:
     "साझा करने से पहले सहमति चाहिए, और पारिवारिक पहुँच कभी भी हटाई जा सकती है।",
-  landingBoundary:
-    "सभी लोग और रिकॉर्ड काल्पनिक हैं। सरकारी जवाब सिम्युलेटेड हैं।",
   landingServiceStatus: "Citizen कैसे काम करता है",
   landingVisionTitle: "क्या साझा हो, यह आप तय करें।",
   landingVisionBody:
@@ -836,7 +830,6 @@ export const hi: Record<MessageKey, string> = {
   landingVisionThree: "दिखाएँ कि किसने क्या देखा",
   landingVisionFour: "गलतियाँ सुधारने दें",
   landingClosingTitle: "प्रोफ़ाइल खोलें और आज़माएँ।",
-  landingClosingBody: "सारा डेटा काल्पनिक है।",
   startBack: "परियोजना पर लौटें",
   startTitle: "प्रोफ़ाइल चुनें",
   startBody:

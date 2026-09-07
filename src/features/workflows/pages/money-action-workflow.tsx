@@ -3,7 +3,6 @@
 import { ArrowRight, CheckCircle2, Landmark } from "lucide-react";
 import { useState } from "react";
 import { Button, LinkButton } from "@/components/ui/button";
-import { SimulatedChip } from "@/components/ui/status";
 import { useAuthStore } from "@/features/auth/store";
 import { getNodeByType } from "@/features/graph/selectors";
 import type { GraphMutation, Verification } from "@/features/graph/schema";
@@ -17,9 +16,9 @@ import { CompletionCard, ProcedureShell, StepCard, type ProcedureStep } from "..
 export type MoneyAction = "gstr3b" | "passport-renewal" | "property-tax" | "refund-track";
 
 const steps: Record<Language, ProcedureStep[]> = {
-  en: [{ id: "action", title: "Review and confirm", description: "This action is part of the demo." }],
-  hi: [{ id: "action", title: "जाँचें और पक्का करें", description: "यह काम केवल डेमो का हिस्सा है।" }],
-  kn: [{ id: "action", title: "ಪರಿಶೀಲಿಸಿ ಖಚಿತಪಡಿಸಿ", description: "ಈ ಕ್ರಮ ಡೆಮೊದ ಭಾಗ ಮಾತ್ರ." }],
+  en: [{ id: "action", title: "Review and confirm", description: "Check the details before confirming." }],
+  hi: [{ id: "action", title: "जाँचें और पक्का करें", description: "पक्का करने से पहले विवरण जाँचें।" }],
+  kn: [{ id: "action", title: "ಪರಿಶೀಲಿಸಿ ಖಚಿತಪಡಿಸಿ", description: "ಖಚಿತಪಡಿಸುವ ಮೊದಲು ವಿವರ ಪರಿಶೀಲಿಸಿ." }],
 };
 
 function verification(source: Verification["source"]): Verification {
@@ -44,8 +43,9 @@ export function MoneyActionWorkflow({ action }: { action: MoneyAction }) {
 
   const title = action === "property-tax" ? t("payPropertyTax") : action === "gstr3b" ? t("fileGstr") : action === "passport-renewal" ? t("passportWorkflowTitle") : t("trackRefund");
   const procedureId = action === "property-tax" ? "property-tax-payment" : action === "gstr3b" ? "gstr3b-filing" : action;
+  const authority = action === "property-tax" ? "BBMP · Karnataka One" : action === "gstr3b" ? "GSTN" : action === "passport-renewal" ? "Passport Seva" : "Income Tax Department";
   if (personId !== "person:arjun") {
-    return <ProcedureShell authority={t("simulatedResponse")} currentStep={0} procedureId={procedureId} showProgress={false} steps={steps[language]} title={title}><StepCard eyebrow={t("profileScopeEyebrow")} title={t("profileScopeTitle")} body={t("moneyProfileScopeBody")}><LinkButton href="/home#attention" variant="secondary">{t("returnHome")}</LinkButton></StepCard></ProcedureShell>;
+    return <ProcedureShell authority={authority} currentStep={0} procedureId={procedureId} showProgress={false} steps={steps[language]} title={title}><StepCard eyebrow={t("profileScopeEyebrow")} title={t("profileScopeTitle")} body={t("moneyProfileScopeBody")}><LinkButton href="/home#attention" variant="secondary">{t("returnHome")}</LinkButton></StepCard></ProcedureShell>;
   }
 
   const propertyTax = getNodeByType(graph, "obl:bbmp-property-tax", "obligation");
@@ -102,7 +102,7 @@ export function MoneyActionWorkflow({ action }: { action: MoneyAction }) {
   const content = action === "property-tax" ? propertyComplete ? (
     <CompletionCard title={t("propertyTaxPaidTitle")} body={t("propertyTaxPaidBody")}><LinkButton href="/documents" variant="inverse">{t("openReceipt")} <ArrowRight aria-hidden className="size-4" /></LinkButton></CompletionCard>
   ) : (
-    <StepCard eyebrow="BBMP · Karnataka One" title={t("propertyTaxTitle")} body={t("propertyTaxBody")}><dl className="grid border-y border-paper-line sm:grid-cols-2"><div className="grid gap-1 py-4 sm:pr-4"><dt className="text-xs text-ink-mute">{t("propertyAddress")}</dt><dd className="text-sm font-bold leading-5">{propertyAddress ? `${propertyAddress.attrs.line1}, ${propertyAddress.attrs.city}` : "—"}</dd></div><div className="grid gap-1 border-t border-paper-line py-4 sm:border-l sm:border-t-0 sm:pl-4"><dt className="text-xs text-ink-mute">{t("propertyKhata")}</dt><dd className="font-display text-lg font-bold tabular-nums">{property ? maskIdentifier(property.attrs.khataNumber) : "—"}</dd></div><div className="grid gap-1 border-t border-paper-line py-4 sm:pr-4"><dt className="text-xs text-ink-mute">{t("dueOn", { date: propertyTax?.attrs.dueDate ? formatDate(propertyTax.attrs.dueDate, language) : "—" })}</dt><dd className="text-sm font-bold">{propertyTax?.attrs.note}</dd></div><div className="grid gap-1 border-t border-paper-line py-4 sm:border-l sm:pl-4"><dt className="text-xs text-ink-mute">{t("propertyAmountDue")}</dt><dd className="font-display text-3xl font-bold tabular-nums">{formatCurrency(propertyTax?.attrs.amount ?? 0)}</dd></div></dl><div className="flex justify-end"><SimulatedChip authority="Karnataka One" /></div><Button loading={loading} onClick={() => void payPropertyTax()}>{t("confirmPropertyTaxPayment")} <CheckCircle2 aria-hidden className="size-4" /></Button></StepCard>
+    <StepCard eyebrow="BBMP · Karnataka One" title={t("propertyTaxTitle")} body={t("propertyTaxBody")}><dl className="grid border-y border-paper-line sm:grid-cols-2"><div className="grid gap-1 py-4 sm:pr-4"><dt className="text-xs text-ink-mute">{t("propertyAddress")}</dt><dd className="text-sm font-bold leading-5">{propertyAddress ? `${propertyAddress.attrs.line1}, ${propertyAddress.attrs.city}` : "—"}</dd></div><div className="grid gap-1 border-t border-paper-line py-4 sm:border-l sm:border-t-0 sm:pl-4"><dt className="text-xs text-ink-mute">{t("propertyKhata")}</dt><dd className="font-display text-lg font-bold tabular-nums">{property ? maskIdentifier(property.attrs.khataNumber) : "—"}</dd></div><div className="grid gap-1 border-t border-paper-line py-4 sm:pr-4"><dt className="text-xs text-ink-mute">{t("dueOn", { date: propertyTax?.attrs.dueDate ? formatDate(propertyTax.attrs.dueDate, language) : "—" })}</dt><dd className="text-sm font-bold">{propertyTax?.attrs.note}</dd></div><div className="grid gap-1 border-t border-paper-line py-4 sm:border-l sm:pl-4"><dt className="text-xs text-ink-mute">{t("propertyAmountDue")}</dt><dd className="font-display text-3xl font-bold tabular-nums">{formatCurrency(propertyTax?.attrs.amount ?? 0)}</dd></div></dl><Button loading={loading} onClick={() => void payPropertyTax()}>{t("confirmPropertyTaxPayment")} <CheckCircle2 aria-hidden className="size-4" /></Button></StepCard>
   ) : action === "gstr3b" ? gstrComplete ? (
     <CompletionCard title={t("gstrFiledTitle")} body={t("gstrFiledBody")}><LinkButton href="/documents" variant="inverse">{t("viewDocuments")} <ArrowRight aria-hidden className="size-4" /></LinkButton></CompletionCard>
   ) : (
@@ -113,5 +113,5 @@ export function MoneyActionWorkflow({ action }: { action: MoneyAction }) {
     refund ? <StepCard eyebrow={refund.attrs.authority} title={t("refundTrackTitle")} body={t("refundTrackBody", { amount: formatCurrency(refund.attrs.amount ?? 0), date: refund.attrs.initiatedOn ? formatDate(refund.attrs.initiatedOn, language) : "—" })}><div className="grid gap-0 border-y border-paper-line"><div className="flex items-center justify-between gap-4 border-b border-paper-line py-3"><span className="text-sm text-ink-mute">{t("refundStarted", { date: refund.attrs.initiatedOn ? formatDate(refund.attrs.initiatedOn, language) : "—" })}</span><strong className="font-display text-2xl font-bold text-ink">{formatCurrency(refund.attrs.amount ?? 0)}</strong></div><p className="py-3 text-sm text-ink-mute">{t("refundExpected")} · {t("refundAccount")}</p></div><LinkButton href="/home#attention" variant="secondary">{t("returnHome")}</LinkButton></StepCard> : <StepCard eyebrow={t("profileScopeEyebrow")} title={t("profileScopeTitle")} body={t("moneyProfileScopeBody")}><LinkButton href="/home#attention" variant="secondary">{t("returnHome")}</LinkButton></StepCard>
   );
 
-  return <ProcedureShell authority={t("simulatedResponse")} complete={complete} outcomeTargetId={action === "property-tax" ? propertyTax?.id : action === "gstr3b" ? gstr?.id : undefined} currentStep={complete ? 1 : 0} procedureId={procedureId} showProgress={action === "property-tax" || action === "gstr3b"} steps={steps[language]} title={title}>{error ? <p className="mb-3 text-sm font-bold text-brick">{error}</p> : null}{content}</ProcedureShell>;
+  return <ProcedureShell authority={authority} complete={complete} outcomeTargetId={action === "property-tax" ? propertyTax?.id : action === "gstr3b" ? gstr?.id : undefined} currentStep={complete ? 1 : 0} procedureId={procedureId} showProgress={action === "property-tax" || action === "gstr3b"} steps={steps[language]} title={title}>{error ? <p className="mb-3 text-sm font-bold text-brick">{error}</p> : null}{content}</ProcedureShell>;
 }

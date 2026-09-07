@@ -7,7 +7,7 @@
 export const aboutEn = {
   aboutRealKicker: "How Citizen works",
   aboutRealTitle: "What is real. What is [[simulated]].",
-  aboutRealBody: "Citizen is an independent prototype for a hackathon. Everything you can tap works, and everything that pretends to be a government says so. This page is the full ledger.",
+  aboutRealBody: "What works in the browser, what is simulated, and what is outside this demo.",
   aboutRealHead: "Real, in your browser",
   aboutRealOne: "The Citizen Graph",
   aboutRealOneBody: "One connected record of people, documents, assets, obligations and applications, seeded from a single file and kept in this browser.",
@@ -62,7 +62,7 @@ export const aboutEn = {
 export const aboutHi = {
   aboutRealKicker: "Citizen कैसे काम करता है",
   aboutRealTitle: "क्या असली है। क्या [[सिम्युलेटेड]] है।",
-  aboutRealBody: "Citizen एक हैकाथॉन के लिए स्वतंत्र प्रोटोटाइप है। जो भी आप टैप कर सकते हैं वह काम करता है, और जो भी सरकार होने का दिखावा करता है वह यह बताता है। यह पेज पूरी सूची है।",
+  aboutRealBody: "ब्राउज़र में क्या काम करता है, क्या सिम्युलेटेड है और क्या इस डेमो से बाहर है।",
   aboutRealHead: "असली, आपके ब्राउज़र में",
   aboutRealOne: "Citizen Graph",
   aboutRealOneBody: "लोगों, दस्तावेज़ों, संपत्तियों, देनदारियों और आवेदनों का एक जुड़ा रिकॉर्ड, एक फ़ाइल से बना और इसी ब्राउज़र में रखा।",
@@ -117,7 +117,7 @@ export const aboutHi = {
 export const aboutKn = {
   aboutRealKicker: "Citizen ಹೇಗೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ",
   aboutRealTitle: "ಏನು ನಿಜ. ಏನು [[ಅನುಕರಣೆ]].",
-  aboutRealBody: "Citizen ಹ್ಯಾಕಥಾನ್‌ಗಾಗಿ ಸ್ವತಂತ್ರ ಮಾದರಿ. ನೀವು ಟ್ಯಾಪ್ ಮಾಡಬಹುದಾದ ಎಲ್ಲವೂ ಕೆಲಸ ಮಾಡುತ್ತದೆ, ಸರಕಾರದಂತೆ ನಟಿಸುವ ಎಲ್ಲವೂ ಹಾಗೆಂದು ಹೇಳುತ್ತದೆ. ಈ ಪುಟ ಪೂರ್ಣ ಪಟ್ಟಿ.",
+  aboutRealBody: "ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಏನು ಕೆಲಸ ಮಾಡುತ್ತದೆ, ಏನು ಅನುಕರಿಸಲಾಗಿದೆ ಮತ್ತು ಏನು ಈ ಡೆಮೊಗೆ ಹೊರತಾಗಿದೆ.",
   aboutRealHead: "ನಿಜ, ನಿಮ್ಮ ಬ್ರೌಸರ್‌ನಲ್ಲಿ",
   aboutRealOne: "Citizen Graph",
   aboutRealOneBody: "ಜನರು, ದಾಖಲೆಗಳು, ಆಸ್ತಿಗಳು, ಬಾಧ್ಯತೆಗಳು ಮತ್ತು ಅರ್ಜಿಗಳ ಒಂದು ಜೋಡಿತ ದಾಖಲೆ, ಒಂದೇ ಫೈಲ್‌ನಿಂದ ಬಿತ್ತಿ ಈ ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಇಟ್ಟದ್ದು.",

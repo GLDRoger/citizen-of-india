@@ -8,7 +8,7 @@ import { useI18n } from "@/i18n/use-i18n";
 const additions: MessageKey[] = [
   "roundTwoBrief", "roundTwoReady", "roundTwoOwner", "roundTwoConsent",
   "roundTwoFamily", "roundTwoOutcome", "roundTwoRedress", "roundTwoHistory",
-  "roundTwoRecords", "roundTwoRecovery", "roundTwoClarity", "roundTwoStory",
+  "roundTwoRecords", "roundTwoRecovery", "roundTwoClarity", "roundTwoStory", "roundTwoContinuity",
 ];
 const lessons: MessageKey[] = [
   "roundTwoLessonRecord", "roundTwoLessonReady", "roundTwoLessonTrust",

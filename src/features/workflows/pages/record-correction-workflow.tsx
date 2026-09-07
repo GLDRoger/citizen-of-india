@@ -4,6 +4,7 @@ import { ArrowRight, Check, FileCheck2 } from "lucide-react";
 import { useState } from "react";
 import { Button, LinkButton } from "@/components/ui/button";
 import { VerificationBadge } from "@/components/ui/status";
+import { caseBriefHref } from "@/features/cases/model";
 import { useAuthStore } from "@/features/auth/store";
 import { getApplications, getDocuments, getPerson } from "@/features/graph/selectors";
 import type { GraphMutation } from "@/features/graph/schema";
@@ -46,7 +47,7 @@ export function RecordCorrectionWorkflow() {
   const aadhaar = documents.find((document) => document.attrs.kind === "aadhaar");
   const application = getApplications(graph, personId).find((candidate) => candidate.id === "app:pan-name-correction");
   const submitted = application?.attrs.status === "submitted";
-  const canSubmit = person && pan?.verification.state === "mismatch" && application?.attrs.status === "draft";
+  const canSubmit = person && aadhaar && pan?.verification.state === "mismatch" && application?.attrs.status === "draft";
   const steps = stepsByLanguage[language];
 
   const submit = async () => {
@@ -90,7 +91,9 @@ export function RecordCorrectionWorkflow() {
 
   const content = submitted ? (
     <CompletionCard title={t("recordCorrectionCompleteTitle")} body={t("recordCorrectionCompleteBody", { reference: application.attrs.reference ?? "—" })}>
-      <LinkButton href="/documents" variant="inverse">{t("viewDocuments")} <ArrowRight aria-hidden className="size-4" /></LinkButton>
+      {pan && person ? <div className="grid gap-2 border-y border-paper/30 py-4"><h3 className="text-lg font-bold">{t("panNotFixedTitle")}</h3><p className="text-sm leading-6">{t("panNotFixedBody", { current: pan.attrs.holderName, requested: person.attrs.name })}</p></div> : null}
+      <LinkButton href={caseBriefHref(application.id)} variant="inverse">{t("briefOpen")} <ArrowRight aria-hidden className="size-4" /></LinkButton>
+      <LinkButton href="/documents" variant="inverseQuiet">{t("viewDocuments")} <ArrowRight aria-hidden className="size-4" /></LinkButton>
     </CompletionCard>
   ) : canSubmit && person && pan && aadhaar ? (
     <StepCard eyebrow={t("recordCorrectionEyebrow")} title={t("recordCorrectionReviewTitle")} body={t("recordCorrectionReviewBody")}>

@@ -2,7 +2,7 @@ export const productEn = {
   timelineNav: "Timeline",
   timelineTitle: "Your history with government.",
   timelineBody:
-    "Every change to your record, in order: what happened, who did it, which authority stands behind it, and exactly which records moved. Nothing is deleted; ended relationships stay visible.",
+    "See each action, who took it and which records changed. Open an entry for its source and details.",
   timelineOnRecord: "On record before this demo",
   timelineDuringDemo: "During this demo",
   timelineBy: "By {name}",
@@ -34,7 +34,7 @@ export const productHi: Record<keyof typeof productEn, string> = {
   timelineNav: "समयरेखा",
   timelineTitle: "सरकार के साथ आपका इतिहास।",
   timelineBody:
-    "आपके रिकॉर्ड का हर बदलाव क्रम से: क्या हुआ, किसने किया, कौन-सा प्राधिकरण उसके पीछे है और ठीक कौन-से रिकॉर्ड बदले। कुछ भी हटाया नहीं जाता; समाप्त संबंध भी दिखते रहते हैं।",
+    "हर कार्रवाई, उसे करने वाला व्यक्ति और बदले रिकॉर्ड देखें। स्रोत और विवरण के लिए प्रविष्टि खोलें।",
   timelineOnRecord: "इस डेमो से पहले का रिकॉर्ड",
   timelineDuringDemo: "इस डेमो के दौरान",
   timelineBy: "{name} द्वारा",
@@ -66,7 +66,7 @@ export const productKn: Record<keyof typeof productEn, string> = {
   timelineNav: "ಕಾಲರೇಖೆ",
   timelineTitle: "ಸರಕಾರದೊಂದಿಗೆ ನಿಮ್ಮ ಇತಿಹಾಸ.",
   timelineBody:
-    "ನಿಮ್ಮ ದಾಖಲೆಯ ಪ್ರತಿ ಬದಲಾವಣೆ ಕ್ರಮವಾಗಿ: ಏನಾಯಿತು, ಯಾರು ಮಾಡಿದರು, ಯಾವ ಪ್ರಾಧಿಕಾರ ಅದರ ಹಿಂದಿದೆ ಮತ್ತು ಯಾವ ದಾಖಲೆಗಳು ಬದಲಾದವು. ಯಾವುದನ್ನೂ ಅಳಿಸಲಾಗುವುದಿಲ್ಲ; ಮುಗಿದ ಸಂಬಂಧಗಳೂ ಕಾಣುತ್ತವೆ.",
+    "ಪ್ರತಿ ಕ್ರಮ, ಅದನ್ನು ಕೈಗೊಂಡವರು ಮತ್ತು ಬದಲಾದ ದಾಖಲೆಗಳನ್ನು ನೋಡಿ. ಮೂಲ ಮತ್ತು ವಿವರಗಳಿಗೆ ದಾಖಲೆಯನ್ನು ತೆರೆಯಿರಿ.",
   timelineOnRecord: "ಈ ಡೆಮೊಗೂ ಮೊದಲಿನ ದಾಖಲೆ",
   timelineDuringDemo: "ಈ ಡೆಮೊದಲ್ಲಿ",
   timelineBy: "{name} ಅವರಿಂದ",

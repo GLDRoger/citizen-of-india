@@ -9,7 +9,7 @@ import { useI18n } from "@/i18n/use-i18n";
 import { localizeNodeTitle } from "@/i18n/content";
 
 /**
- * The department says done. The citizen decides whether the real problem is
+ * An action is recorded. The citizen decides whether the real problem is
  * fixed. "No" keeps the record open with all its context and offers the next
  * route instead of a restart.
  */

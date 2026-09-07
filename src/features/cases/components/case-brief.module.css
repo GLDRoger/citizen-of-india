@@ -1,0 +1,19 @@
+.brief { max-width: 56rem; }
+.printOnly { display: none; }
+
+@media print {
+  @page { size: A4; margin: 15mm; }
+  :global(body:has([data-case-brief])) { background: white !important; color: #161923 !important; }
+  :global(body:has([data-case-brief]) .citizen-app) { display: block !important; padding: 0 !important; min-height: 0 !important; background: white !important; }
+  :global(body:has([data-case-brief]) .citizen-app > :not(main)) { display: none !important; }
+  .screenOnly { display: none !important; }
+  .printOnly { display: block; }
+  .brief { display: block; max-width: none; padding: 0; animation: none !important; transform: none !important; }
+  .brief article { display: block; font-size: 10pt; }
+  .brief header, .brief section { margin-bottom: 6mm; }
+  .brief h1 { font-size: 26pt; }
+  .brief h2 { break-after: avoid; font-size: 15pt; }
+  .brief h3 { break-after: avoid; }
+  .brief li, .brief dl > div { break-inside: avoid; }
+  .brief p, .brief li { orphans: 3; widows: 3; }
+}

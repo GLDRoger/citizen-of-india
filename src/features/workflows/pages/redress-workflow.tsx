@@ -6,6 +6,7 @@ import { Suspense, useEffect, useRef, useState, type ReactNode } from "react";
 import { Button, LinkButton } from "@/components/ui/button";
 import { PageSkeleton } from "@/components/ui/feedback";
 import { StatusPill } from "@/components/ui/status";
+import { caseBriefHref } from "@/features/cases/model";
 import { useAuthStore } from "@/features/auth/store";
 import { describeEventTargets } from "@/features/graph/describe-mutation";
 import { getApplicationOwnership, getObligationOwnership } from "@/features/graph/ownership";
@@ -40,8 +41,8 @@ const remedies = {
 export const redressKinds: readonly string[] = [remedies.rti.kind, remedies.grievance.kind];
 
 function addDays(date: string, days: number) {
-  const next = new Date(`${date}T00:00:00+05:30`);
-  next.setDate(next.getDate() + days);
+  const next = new Date(`${date}T00:00:00Z`);
+  next.setUTCDate(next.getUTCDate() + days);
   return next.toISOString().slice(0, 10);
 }
 
@@ -96,6 +97,8 @@ function RedressJourney({ about, remedy }: { about: string | null; remedy: Remed
   const { draft, save } = useDraft(spec.procedureId, personId);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [failNextSend, setFailNextSend] = useState(false);
+  const inFlight = useRef(false);
   const draftAbout = typeof draft.about === "string" ? draft.about : null;
   const applied = useRef(false);
   // A link that names a record ("?about=") starts a fresh request about it, once; the citizen can still change their mind.
@@ -127,14 +130,15 @@ function RedressJourney({ about, remedy }: { about: string | null; remedy: Remed
   const defaultText = matter
     ? t(remedy === "rti" ? "redressRtiDefaultQuestion" : "redressGrievanceDefaultText", { title: matterTitle, authority: matter.attrs.authority, reference: matterReference ? t("redressReferenceSuffix", { reference: matterReference }) : "", date: formatDate(since, language) })
     : "";
-  const text = typeof draft.text === "string" && draft.text.trim() ? draft.text : defaultText;
+  const text = typeof draft.text === "string" ? draft.text : defaultText;
 
   const choose = (id: string) => save({ about: id, text: null });
   const proceed = () => save({ screen: "write", text: text });
   const back = () => save({ screen: "choose" });
 
   const send = async () => {
-    if (!matter || existing) return;
+    if (!matter || existing || !text.trim() || inFlight.current) return;
+    inFlight.current = true;
     setLoading(true);
     setError("");
     try {
@@ -142,8 +146,8 @@ function RedressJourney({ about, remedy }: { about: string | null; remedy: Remed
       const relatedKey = matter.id.slice(matter.id.indexOf(":") + 1);
       const applicationId = `app:${personKey}-${spec.kind}-${relatedKey}`;
       const response = remedy === "rti"
-        ? await fileRtiRequest({ applicantId: personId, authority: matter.attrs.authority, subjectId: matter.id })
-        : await lodgeGrievance({ complainantId: personId, authority: matter.attrs.authority, subjectId: matter.id });
+        ? await fileRtiRequest({ applicantId: personId, authority: matter.attrs.authority, subjectId: matter.id, simulateFailure: failNextSend })
+        : await lodgeGrievance({ complainantId: personId, authority: matter.attrs.authority, subjectId: matter.id, simulateFailure: failNextSend });
       const replyDue = addDays(DEMO_TODAY, response.data.replyDueDays);
       const mutations: GraphMutation[] = [
         {
@@ -181,8 +185,10 @@ function RedressJourney({ about, remedy }: { about: string | null; remedy: Remed
         mutations,
       });
     } catch {
-      setError(t("redressError"));
+      setError(t(failNextSend ? "sendFailureMessage" : "redressError"));
+      setFailNextSend(false);
     } finally {
+      inFlight.current = false;
       setLoading(false);
     }
   };
@@ -211,7 +217,8 @@ function RedressJourney({ about, remedy }: { about: string | null; remedy: Remed
           <div className="grid gap-1"><dt className="text-xs text-paper/65">{t("redressReplyDue")}</dt><dd className="font-display text-xl font-bold">{formatDate(replyDue, language)}</dd></div>
         </dl>
         <div className="flex flex-wrap gap-3">
-          <LinkButton href="/home#attention" variant="inverse">{t("returnHome")} <ArrowRight aria-hidden className="size-4" /></LinkButton>
+          <LinkButton href={caseBriefHref(existing.id)} variant="inverse">{t("briefOpen")} <ArrowRight aria-hidden className="size-4" /></LinkButton>
+          <LinkButton href="/home#attention" variant="inverseQuiet">{t("returnHome")} <ArrowRight aria-hidden className="size-4" /></LinkButton>
           <button className="min-h-11 px-2 text-sm font-bold text-paper underline decoration-paper/40 underline-offset-4" onClick={() => save({ about: null, screen: "choose", text: null })} type="button">{t("redressChangeMatter")}</button>
         </div>
       </CompletionCard>,
@@ -235,7 +242,7 @@ function RedressJourney({ about, remedy }: { about: string | null; remedy: Remed
     <StepCard title={t(remedy === "rti" ? "redressWriteRtiTitle" : "redressWriteGrievanceTitle", { authority: matter.attrs.authority, title: matterTitle })} body={t(remedy === "rti" ? "redressWriteRtiBody" : "redressWriteGrievanceBody")}>
       <label className="grid gap-2">
         <span className="text-sm font-bold text-ink">{t("redressTextLabel")}</span>
-        <textarea className="min-h-36 w-full resize-y rounded-[3px] border border-paper-line bg-paper p-4 text-base leading-7 text-ink outline-none focus:border-indigo-deep focus:ring-4 focus:ring-indigo-tint" maxLength={1200} onChange={(event) => save({ text: event.target.value })} value={text} />
+        <textarea disabled={loading} className="min-h-36 w-full resize-y rounded-[3px] border border-paper-line bg-paper p-4 text-base leading-7 text-ink outline-none focus:border-indigo-deep focus:ring-4 focus:ring-indigo-tint" maxLength={1200} onChange={(event) => save({ text: event.target.value })} value={text} />
       </label>
       <dl className="grid gap-3 border-y border-paper-line py-4 text-sm sm:grid-cols-2">
         <div className="grid gap-1">
@@ -244,10 +251,19 @@ function RedressJourney({ about, remedy }: { about: string | null; remedy: Remed
         </div>
         {remedy === "rti" ? <div className="grid gap-1"><dt className="text-xs font-extrabold uppercase tracking-[0.12em] text-saffron">{t("redressFee")}</dt><dd className="leading-6 text-ink">{t("redressFeePaidInDemo")}</dd></div> : null}
       </dl>
+      <aside className="grid gap-2 border-y border-paper-line py-4">
+        <h3 className="text-sm font-bold">{t("briefReview")}</h3>
+        <p className="text-sm leading-6 text-ink-mute">{t("briefReviewBody")}</p>
+        <LinkButton className="justify-self-start" href={caseBriefHref(matter.id)} variant="secondary">{t("briefOpen")}</LinkButton>
+      </aside>
+      <label className="flex min-h-11 items-start gap-3 text-sm leading-6">
+        <input checked={failNextSend} className="mt-1.5 size-4 shrink-0" disabled={loading} onChange={(event) => setFailNextSend(event.target.checked)} type="checkbox" />
+        <span><strong className="block">{t("sendFailureOption")}</strong><span className="text-ink-mute">{t("sendFailureHelp")}</span></span>
+      </label>
       {error ? <p className="text-sm font-bold text-brick" role="alert">{error}</p> : null}
       <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-        <Button disabled={!text.trim()} loading={loading} onClick={() => void send()}>{t(remedy === "rti" ? "redressSendRti" : "redressSendGrievance")} <ArrowRight aria-hidden className="size-4" /></Button>
-        <button className="min-h-11 px-2 text-sm font-bold text-indigo-deep underline decoration-indigo-deep/30 underline-offset-4" onClick={back} type="button">{t("redressChangeMatter")}</button>
+        <Button disabled={!text.trim()} loading={loading} onClick={() => void send()}>{error ? t("sendRetry") : t(remedy === "rti" ? "redressSendRti" : "redressSendGrievance")} <ArrowRight aria-hidden className="size-4" /></Button>
+        <button className="min-h-11 px-2 text-sm font-bold text-indigo-deep underline decoration-indigo-deep/30 underline-offset-4" disabled={loading} onClick={back} type="button">{t("redressChangeMatter")}</button>
       </div>
     </StepCard>,
   );

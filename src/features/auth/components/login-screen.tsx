@@ -13,6 +13,7 @@ import { languageLabels, languages, type MessageKey } from "@/i18n/messages";
 import { useI18n } from "@/i18n/use-i18n";
 import { getInitials } from "@/lib/format";
 import { useAuthStore } from "../store";
+import { DemoRoutes } from "./demo-routes";
 
 const profileRoleKeys: Record<string, MessageKey> = {
   "person:arjun": "sampleArjunRole",
@@ -50,7 +51,8 @@ export function LoginScreen() {
           <p className="max-w-2xl text-sm leading-7 text-ink-mute sm:text-base">{t("startBody")}</p>
         </div>
 
-        <form className="grid gap-6" onSubmit={(event) => { event.preventDefault(); open(); }}>
+        <DemoRoutes />
+        <form className="grid gap-6 border-t border-paper-line pt-6" onSubmit={(event) => { event.preventDefault(); open(); }}>
           <div className="grid gap-2" role="group" aria-label={t("chooseProfile")}>
             {seedLogins.map((login) => {
               const person = getPerson(graph, login.personId);

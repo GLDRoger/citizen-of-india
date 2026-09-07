@@ -101,7 +101,7 @@ export function IntentComposer() {
 
   return (
     <section className="grid min-w-0 gap-4">
-      <FilePanel aside={<SimulatedChip authority={t("intentAssistant")} />} className="grid gap-4" label={t("newRequest")}>
+      <FilePanel className="grid gap-4" label={t("newRequest")}>
         <label>
           <span className="sr-only">{t("needPrompt")}</span>
           <textarea aria-describedby={error ? "intent-error" : undefined} aria-invalid={Boolean(error)} className="min-h-28 w-full resize-none rounded-[3px] border border-paper-line bg-paper p-4 font-display text-[1.65rem] font-medium leading-[1.08] text-ink outline-none placeholder:text-ink-mute focus:border-indigo-deep focus:ring-4 focus:ring-indigo-tint sm:text-[1.9rem]" maxLength={800} onChange={(event) => { setText(event.target.value); setError(""); setResult(null); }} onKeyDown={(event) => { if ((event.metaKey || event.ctrlKey) && event.key === "Enter") void submit(); }} placeholder={t("intentPlaceholder")} value={text} />
