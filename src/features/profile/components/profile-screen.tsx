@@ -216,7 +216,7 @@ function RecordSections({ personId }: { personId: string }) {
 
       <section className="grid gap-5"><SectionHeader eyebrow={`${relationships.length}`} title={t("relationships")} /><div className="border-y border-paper-line">{relationships.map((view) => <RelationshipRow key={view.person.id} view={view} />)}</div></section>
 
-      <FamilyConnectionsPanel personId={personId} />
+      <FamilyConnectionsPanel compact personId={personId} />
 
       <section className="grid gap-5"><SectionHeader title={t("workAndBusiness")} />{employment ? <div className="flex min-h-24 items-center gap-4 border-y border-paper-line py-4"><Building2 aria-hidden className="size-5 shrink-0 text-indigo-deep" /><div className="min-w-0 flex-1"><strong className="block text-sm leading-5 text-ink [overflow-wrap:anywhere]">{employment.attrs.employer}</strong><span className="text-xs text-ink-mute">{employment.attrs.designation} · {employment.attrs.location}</span></div><VerificationBadge verification={employment.verification} /></div> : null}{assets.filter((asset) => asset.type === "business").map((asset) => <AssetRow asset={asset} key={asset.id} />)}</section>
 

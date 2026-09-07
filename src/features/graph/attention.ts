@@ -1,7 +1,7 @@
 import { DEMO_TODAY } from "@/lib/demo-clock";
 import { getActiveDelegation } from "./delegation";
-import { getConnectionInvitations, getFamilySharing } from "./family";
-import { getApplications, getNotices, getObligations, getPerson, getThingsToDo, type NoticeView, type TaskView } from "./selectors";
+import { getConnectionInvitations, getFamilySharedAlerts, getFamilySharing } from "./family";
+import { getApplications, getNotices, getObligations, getPerson, getRelationshipViews, getThingsToDo, type NoticeView, type TaskView } from "./selectors";
 import type { CitizenGraph } from "./schema";
 
 export const attentionCategories = ["personal", "business", "family", "financial"] as const;
@@ -21,6 +21,8 @@ export interface AttentionItem {
   read?: boolean;
   task?: TaskView;
   notice?: NoticeView;
+  familyMemberName?: string;
+  familyRelationship?: string;
 }
 
 function relatedType(graph: CitizenGraph, id?: string) {
@@ -95,11 +97,12 @@ export function getAttentionItems(graph: CitizenGraph, personId: string): Attent
   for (const invitation of getConnectionInvitations(graph, personId).filter((item) => item.attrs.status === "requested")) {
     const incoming = invitation.attrs.inviteeId === personId;
     const other = getPerson(graph, incoming ? invitation.attrs.inviterId : invitation.attrs.inviteeId);
+    if (other && getRelationshipViews(graph, personId).some((view) => view.person.id === other.id)) continue;
     items.push({
       id: invitation.id,
       title: incoming ? `${other?.attrs.name ?? "Family member"} invited you` : `Invitation to ${other?.attrs.name ?? "family member"}`,
       meta: incoming ? "Your answer is needed" : "Waiting for their answer",
-      href: "/you#family-connections",
+      href: "/family#requests",
       categories: ["family"],
       state: incoming ? "action" : "waiting",
       source: "connection",
@@ -114,11 +117,26 @@ export function getAttentionItems(graph: CitizenGraph, personId: string): Attent
       id: `${delegation.id}:shared`,
       title: recipient ? `${other.attrs.name} shared authorised updates with you` : `Authorised updates shared with ${other.attrs.name}`,
       meta: `Access ends ${delegation.attrs.expiresOn}`,
-      href: "/you#family-connections",
+      href: "/family#access",
       categories: ["family"],
       state: "information",
       source: "shared",
       urgent: false,
+    });
+  }
+
+  for (const alert of getFamilySharedAlerts(graph, personId)) {
+    items.push({
+      id: `family-alert:${alert.id}`,
+      title: alert.title,
+      meta: alert.meta,
+      href: alert.href,
+      categories: ["family", ...(alert.kind === "obligation" ? ["financial" as const] : [])],
+      state: "information",
+      source: "shared",
+      urgent: false,
+      familyMemberName: alert.ownerName,
+      familyRelationship: alert.relationship,
     });
   }
 

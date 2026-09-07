@@ -18,7 +18,7 @@ import { useCitizenStore } from "@/features/graph/store";
 import { IntentComposer } from "@/features/intent/components/intent-composer";
 import { useI18n } from "@/i18n/use-i18n";
 import { localizeNodeTitle } from "@/i18n/content";
-import { getDocumentKindMessageKey, getStatusMessageKey } from "@/i18n/formatters";
+import { getDocumentKindMessageKey, getRelationshipMessageKey, getStatusMessageKey } from "@/i18n/formatters";
 import { daysUntil, formatCurrency, formatDate } from "@/lib/format";
 import { DEMO_TODAY } from "@/lib/demo-clock";
 import { HomeRecords } from "./home-records";
@@ -53,7 +53,10 @@ function TaskLedgerRow({ application, index, item, obligation, personId }: { app
       ? t("statusPrefix", { status: localizedStatus })
       : task ? localizedStatus ?? localizedMeta : t(item.state === "action" ? "attentionActionRequired" : item.state === "waiting" ? "attentionWaiting" : "attentionInformation");
   const documentKindKey = task?.documentKind ? getDocumentKindMessageKey(task.documentKind) : undefined;
-  const title = task?.titleKey
+  const relationshipKey = item.familyRelationship ? getRelationshipMessageKey(item.familyRelationship) : undefined;
+  const title = item.familyMemberName
+    ? t("familyAlertTitle", { relationship: relationshipKey ? t(relationshipKey) : t("relationshipOther"), name: item.familyMemberName, title: item.title })
+    : task?.titleKey
     ? t(task.titleKey, { document: documentKindKey ? t(documentKindKey) : task.documentKind ?? "" })
     : application?.attrs.kind === "benefit" && application.attrs.relatedTo
     ? t("benefitApplicationTitle", { benefit: localizeNodeTitle(language, application.attrs.relatedTo, task?.title ?? item.title) })
@@ -67,6 +70,7 @@ function TaskLedgerRow({ application, index, item, obligation, personId }: { app
             : application?.attrs.status === "partner-consent-pending" && task?.urgent ? t("respond")
               : item.source === "notice" ? t("noticeLensHomeAction")
                 : item.source === "connection" ? t("familyConnectionsTitle")
+                  : item.familyMemberName ? t("familyViewSharedAlert")
                   : t("view");
 
   return (
