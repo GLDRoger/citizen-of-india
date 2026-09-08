@@ -10,6 +10,9 @@ import { manifestoKn } from "./manifesto";
 import { productKn } from "./product";
 import { recordsKn } from "./records";
 import { redressKn } from "./redress";
+import { attentionKn } from "./attention";
+import { familyKn } from "./family";
+import { noticeLensKn } from "./notice-lens";
 
 export const kn: Record<MessageKey, string> = {
   ...controlsKn,
@@ -896,4 +899,7 @@ export const kn: Record<MessageKey, string> = {
   ...productKn,
   ...recordsKn,
   ...redressKn,
+  ...attentionKn,
+  ...familyKn,
+  ...noticeLensKn,
 };

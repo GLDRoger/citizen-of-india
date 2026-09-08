@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import { InboxScreen } from "@/features/inbox/components/inbox-screen";
 
 export default function InboxPage() {
-  redirect("/home");
+  return <InboxScreen />;
 }

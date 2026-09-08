@@ -264,6 +264,27 @@ const noticeNodeSchema = z.object({
     period: z.string().optional(),
     legitimacy: z.enum(["legitimate", "unknown"]),
     relatedTo: z.string().optional(),
+    /** Original text saved through Notice Lens, when it differs from the seeded body. */
+    lensText: z.string().max(20_000).optional(),
+    lensSavedOn: z.iso.date().optional(),
+    lensSampleId: z.string().max(80).optional(),
+  }),
+  verification: verificationSchema,
+});
+
+const connectionRelationshipSchema = z.enum(["parent", "child", "sibling", "partner", "other"]);
+
+const connectionInvitationNodeSchema = z.object({
+  id: z.string().startsWith("inv:"),
+  type: z.literal("connectionInvitation"),
+  attrs: z.object({
+    title: z.string(),
+    inviterId: z.string().startsWith("person:"),
+    inviteeId: z.string().startsWith("person:"),
+    relationship: connectionRelationshipSchema,
+    requestedOn: z.iso.date(),
+    respondedOn: z.iso.date().optional(),
+    status: z.enum(["requested", "accepted", "declined", "cancelled"]),
   }),
   verification: verificationSchema,
 });
@@ -294,6 +315,7 @@ export const graphNodeSchema = z.discriminatedUnion("type", [
   applicationNodeSchema,
   obligationNodeSchema,
   noticeNodeSchema,
+  connectionInvitationNodeSchema,
   delegationNodeSchema,
 ]);
 
@@ -302,7 +324,8 @@ const spouseEdgeAttrsSchema = z.object({ marriageRegisteredAt: z.string().option
 const employmentEdgeAttrsSchema = z.object({ endReason: z.string().optional() });
 const nomineeEdgeAttrsSchema = z.object({ instrument: z.string(), share: z.number().min(0).max(1) });
 const legalHeirEdgeAttrsSchema = z.object({ share: z.number().min(0).max(1), consent: z.enum(["pending", "granted"]) });
-const delegateEdgeAttrsSchema = z.object({ scopes: z.array(z.string()), expiresOn: z.iso.date() });
+const delegateEdgeAttrsSchema = z.object({ delegationId: z.string().startsWith("dlg:").optional(), scopes: z.array(z.string()), expiresOn: z.iso.date() });
+const familyEdgeAttrsSchema = z.object({ relationship: connectionRelationshipSchema });
 const subjectEdgeAttrsSchema = z.object({
   role: z.string().optional(),
   read: z.boolean().optional(),
@@ -329,6 +352,7 @@ export const graphEdgeSchema = z.discriminatedUnion("type", [
   edgeBaseSchema.extend({ type: z.literal("holds"), attrs: emptyEdgeAttrsSchema }),
   edgeBaseSchema.extend({ type: z.literal("nomineeOf"), attrs: nomineeEdgeAttrsSchema }),
   edgeBaseSchema.extend({ type: z.literal("legalHeirOf"), attrs: legalHeirEdgeAttrsSchema }),
+  edgeBaseSchema.extend({ type: z.literal("familyOf"), attrs: familyEdgeAttrsSchema }),
   edgeBaseSchema.extend({ type: z.literal("delegateOf"), attrs: delegateEdgeAttrsSchema }),
   edgeBaseSchema.extend({ type: z.literal("subjectOf"), attrs: subjectEdgeAttrsSchema }),
 ]);

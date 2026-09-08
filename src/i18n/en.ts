@@ -9,6 +9,9 @@ import { manifestoEn } from "./manifesto";
 import { productEn } from "./product";
 import { recordsEn } from "./records";
 import { redressEn } from "./redress";
+import { attentionEn } from "./attention";
+import { familyEn } from "./family";
+import { noticeLensEn } from "./notice-lens";
 
 export const en = {
   ...controlsEn,
@@ -904,6 +907,9 @@ export const en = {
   ...productEn,
   ...recordsEn,
   ...redressEn,
+  ...attentionEn,
+  ...familyEn,
+  ...noticeLensEn,
 } as const;
 
 export type MessageKey = keyof typeof en;

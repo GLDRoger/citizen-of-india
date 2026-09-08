@@ -8,6 +8,7 @@ const nodeTypeKeys: Record<NodeType, MessageKey> = {
   application: "mutationNodeApplication",
   benefit: "mutationNodeBenefit",
   business: "mutationNodeBusiness",
+  connectionInvitation: "mutationNodeConnectionInvitation",
   delegation: "mutationNodeDelegation",
   document: "mutationNodeDocument",
   employment: "mutationNodeEmployment",
@@ -61,7 +62,7 @@ export function describeMutation(mutation: GraphMutation, t: Translate): string[
  * the timeline can print "Source: UIDAI" without a second bookkeeping path.
  */
 export function describeEventSources(graph: CitizenGraph, event: GraphEvent): Verification["source"][] {
-  if (["eventOutcomeSolved", "eventOutcomeUnresolved", "eventDocumentSaved"].includes(event.labelKey ?? "")) return ["Self"];
+  if (["eventOutcomeSolved", "eventOutcomeUnresolved", "eventDocumentSaved", "eventNoticeLensSaved", "eventNoticeRead"].includes(event.labelKey ?? "")) return ["Self"];
   const sources = new Set<Verification["source"]>();
   for (const mutation of event.mutations) {
     if (mutation.type === "addNode") sources.add(mutation.node.verification.source);

@@ -1,5 +1,6 @@
 import type { CitizenGraph, GraphNode } from "./schema";
-import { getActiveDelegation as getDelegationFor } from "./delegation";
+import { DEMO_TODAY } from "@/lib/demo-clock";
+import { getActiveDelegations, LEGACY_DELEGATION_ID, getActiveDelegation as getDelegationFor } from "./delegation";
 import {
   getApplications,
   getDocuments,
@@ -31,12 +32,6 @@ function hasEpfNominee(graph: CitizenGraph) {
   );
 }
 
-function hasActiveDelegation(graph: CitizenGraph, delegatorId: string) {
-  return graph.nodes.some(
-    (node) => node.type === "delegation" && node.attrs.delegatorId === delegatorId && node.attrs.status === "active",
-  );
-}
-
 /** The active delegation this person may act under, if any (they are the delegate). */
 export { getActiveDelegation as getDelegationFor } from "./delegation";
 
@@ -59,16 +54,20 @@ export function getProactiveNudges(graph: CitizenGraph, personId: string): Nudge
   if (personId === "person:arjun" && isMarried(graph) && !hasEpfNominee(graph)) {
     nudges.push({ id: "nudge:epf-nominee", kind: "epf-nominee", href: "/workflows/marriage" });
   }
-  if (personId === "person:sunita" && !hasActiveDelegation(graph, personId)) {
+  const guidedAccessActive = getActiveDelegations(graph, "person:arjun", "person:sunita").some((node) => node.id === LEGACY_DELEGATION_ID);
+  const guidedRequestPending = graph.nodes.some((node) => node.type === "delegation" && node.id === LEGACY_DELEGATION_ID
+    && node.attrs.delegatorId === "person:sunita" && node.attrs.delegateId === "person:arjun"
+    && node.attrs.status === "requested" && node.attrs.expiresOn >= DEMO_TODAY);
+  if (personId === "person:sunita" && !guidedAccessActive) {
     nudges.push({ id: "nudge:delegation", kind: "delegation", href: "/you#delegation" });
   }
-  if (personId === "person:arjun" && !graph.nodes.some((node) => node.type === "delegation" && node.attrs.delegatorId === "person:sunita" && node.attrs.status !== "revoked" && node.attrs.status !== "expired")) {
+  if (personId === "person:arjun" && !guidedAccessActive && !guidedRequestPending) {
     nudges.push({ id: "nudge:ask-access", kind: "ask-access", href: "/you#delegation" });
   }
   const delegation = getDelegationFor(graph, personId);
   if (delegation) {
     const delegator = graph.nodes.find((node) => node.id === delegation.attrs.delegatorId);
-    nudges.push({ id: "nudge:act-for", kind: "act-for", personName: delegator?.type === "person" ? delegator.attrs.name : undefined, href: "/you#delegation" });
+    nudges.push({ id: "nudge:act-for", kind: "act-for", personName: delegator?.type === "person" ? delegator.attrs.name : undefined, href: delegation.id === LEGACY_DELEGATION_ID ? "/you#delegation" : "/family#access" });
   }
   return nudges;
 }

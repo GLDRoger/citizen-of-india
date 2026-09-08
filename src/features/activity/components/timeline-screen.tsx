@@ -30,7 +30,7 @@ function eventHref(graph: CitizenGraph, event: GraphEvent) {
     if (node.type === "obligation") return obligationHrefs[node.id] ?? "/home#attention";
     if (node.type === "document") return "/documents";
     if (node.type === "delegation") return "/you";
-    if (node.type === "notice") return "/home#attention";
+    if (node.type === "notice") return `/inbox#${encodeURIComponent(node.id)}`;
   }
   return undefined;
 }

@@ -39,6 +39,9 @@ const relationshipKeys: Record<string, MessageKey> = {
   "historical spouse": "relationshipHistoricalSpouse",
   parent: "relationshipParent",
   spouse: "relationshipSpouse",
+  sibling: "relationshipSibling",
+  partner: "relationshipPartner",
+  other: "relationshipOther",
 };
 
 export function getStatusMessageKey(status: string) {

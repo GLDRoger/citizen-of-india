@@ -1,0 +1,151 @@
+import type { MessageKey } from "@/i18n/messages";
+import { getApplicationOwnership, getObligationOwnership } from "./ownership";
+import { getConnectionInvitations, getFamilySharedAlerts, getActiveFamilySharing } from "./family";
+import { getApplications, getNotices, getObligations, getPerson, getRelationshipViews, getThingsToDo, type NoticeView, type TaskView } from "./selectors";
+import type { CitizenGraph } from "./schema";
+
+export const attentionCategories = ["personal", "business", "family", "financial"] as const;
+export type AttentionCategory = typeof attentionCategories[number];
+export type AttentionState = "action" | "waiting" | "information";
+export type AttentionSource = "task" | "notice" | "connection" | "shared";
+
+export interface AttentionItem {
+  id: string;
+  title: string;
+  titleKey?: MessageKey;
+  titleParams?: Record<string, string>;
+  recordId?: string;
+  meta: string;
+  href: string;
+  categories: AttentionCategory[];
+  state: AttentionState;
+  source: AttentionSource;
+  urgent: boolean;
+  read?: boolean;
+  task?: TaskView;
+  notice?: NoticeView;
+  familyMemberName?: string;
+  familyRelationship?: string;
+}
+
+function relatedType(graph: CitizenGraph, id?: string) {
+  return id ? graph.nodes.find((node) => node.id === id)?.type : undefined;
+}
+
+function taskCategories(graph: CitizenGraph, task: TaskView): AttentionCategory[] {
+  const text = `${task.id} ${task.title}`.toLowerCase();
+  const relatedId = task.id.replace(/:follow-up$/, "");
+  const type = relatedType(graph, relatedId);
+  const categories = new Set<AttentionCategory>();
+  if (/(business|gstr|gst|loan|udyam|start-business|business)/.test(text) || type === "business") categories.add("business");
+  if (/(family|marriage|consent|mother|sunita|parent|pension)/.test(text) || type === "person") categories.add("family");
+  if (/(payment|payable|receivable|refund|tax|challan|loan|money|financial)/.test(text)) categories.add("financial");
+  if (categories.size === 0 || /(pan|passport|epfo|document|record|personal)/.test(text)) categories.add("personal");
+  return Array.from(categories);
+}
+
+function taskState(graph: CitizenGraph, personId: string, task: TaskView): AttentionState {
+  const id = task.id.replace(/:follow-up$/, "");
+  const application = getApplications(graph, personId).find((node) => node.id === id);
+  if (application) return getApplicationOwnership(graph, application, personId)?.holder === "you" ? "action" : "waiting";
+  const obligation = getObligations(graph, personId).find((node) => node.id === id);
+  if (obligation) return getObligationOwnership(obligation)?.holder === "you" ? "action" : "waiting";
+  return "action";
+}
+
+function noticeCategories(notice: NoticeView): AttentionCategory[] {
+  const text = `${notice.node.id} ${notice.node.attrs.subject} ${notice.node.attrs.relatedTo ?? ""}`.toLowerCase();
+  const categories = new Set<AttentionCategory>();
+  if (/(family|marriage|pension|sunita|parent)/.test(text)) categories.add("family");
+  if (/(business|gst|gstr|udyam|loan)/.test(text)) categories.add("business");
+  if (/(refund|tax|payment|challan|money)/.test(text)) categories.add("financial");
+  if (categories.size === 0) categories.add("personal");
+  return Array.from(categories);
+}
+
+function noticeIsCoveredByTask(notice: NoticeView, tasks: TaskView[]) {
+  return Boolean(notice.node.attrs.relatedTo && tasks.some((task) => task.id.replace(/:follow-up$/, "") === notice.node.attrs.relatedTo));
+}
+
+export function getAttentionItems(graph: CitizenGraph, personId: string): AttentionItem[] {
+  const tasks = getThingsToDo(graph, personId);
+  const items: AttentionItem[] = tasks.map((task) => ({
+    id: task.id,
+    title: task.title,
+    meta: task.meta,
+    href: task.href,
+    categories: taskCategories(graph, task),
+    state: taskState(graph, personId, task),
+    source: "task",
+    urgent: task.urgent,
+    task,
+  }));
+
+  for (const notice of getNotices(graph, personId)) {
+    if (!notice.node.attrs.lensSavedOn || noticeIsCoveredByTask(notice, tasks)) continue;
+    items.push({
+      id: `notice:${notice.node.id}`,
+      title: notice.node.attrs.subject,
+      recordId: notice.node.id,
+      meta: notice.node.attrs.sender,
+      href: `/inbox#${encodeURIComponent(notice.node.id)}`,
+      categories: noticeCategories(notice),
+      state: notice.node.attrs.legitimacy === "unknown" ? "information" : notice.read ? "information" : "action",
+      source: "notice",
+      urgent: false,
+      read: notice.read,
+      notice,
+    });
+  }
+
+  for (const invitation of getConnectionInvitations(graph, personId).filter((item) => item.attrs.status === "requested")) {
+    const incoming = invitation.attrs.inviteeId === personId;
+    const other = getPerson(graph, incoming ? invitation.attrs.inviterId : invitation.attrs.inviteeId);
+    if (other && getRelationshipViews(graph, personId).some((view) => view.person.id === other.id)) continue;
+    items.push({
+      id: invitation.id,
+      title: incoming ? `${other?.attrs.name ?? "Family member"} invited you` : `Invitation to ${other?.attrs.name ?? "family member"}`,
+      titleKey: incoming ? "familyInviteFrom" : "familyInviteSentTo",
+      titleParams: { name: other?.attrs.name ?? "" },
+      meta: incoming ? "Your answer is needed" : "Waiting for their answer",
+      href: "/family#requests",
+      categories: ["family"],
+      state: incoming ? "action" : "waiting",
+      source: "connection",
+      urgent: incoming,
+    });
+  }
+
+  for (const { delegation, other } of getActiveFamilySharing(graph, personId)) {
+    const recipient = delegation.attrs.delegateId === personId;
+    items.push({
+      id: `${delegation.id}:shared`,
+      title: recipient ? `${other.attrs.name} shared authorised updates with you` : `Authorised updates shared with ${other.attrs.name}`,
+      titleKey: "attentionSharedUpdate",
+      meta: `Access ends ${delegation.attrs.expiresOn}`,
+      href: "/family#access",
+      categories: ["family"],
+      state: "information",
+      source: "shared",
+      urgent: false,
+    });
+  }
+
+  for (const alert of getFamilySharedAlerts(graph, personId)) {
+    items.push({
+      id: `family-alert:${alert.id}`,
+      title: alert.title,
+      recordId: alert.recordId,
+      meta: alert.meta,
+      href: alert.href,
+      categories: ["family", ...(alert.kind === "obligation" ? ["financial" as const] : [])],
+      state: "information",
+      source: "shared",
+      urgent: false,
+      familyMemberName: alert.ownerName,
+      familyRelationship: alert.relationship,
+    });
+  }
+
+  return items;
+}

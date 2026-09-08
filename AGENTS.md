@@ -22,7 +22,7 @@ Read before building anything:
 - Derived views (obligations, money, things-to-do, eligibility, ownership/"who has the ball") are selector functions over the graph, recomputed after every mutation. Public-page numbers come from `src/features/graph/seed-facts.ts`.
 - The demo clock is frozen: `src/lib/demo-clock.ts` pins today to 28 Aug 2026 IST for due-day counts, ages and event timestamps, so the story never drifts with the real date.
 - Benefit eligibility evaluates the `rules` arrays in seed data.
-- Delegated access is a scoped view, not a profile impersonation: only shared property records and documents are visible. Check active, unexpired permission and relationship records at the view and mutation boundaries; document caching is the only delegated write implemented in this prototype.
+- Delegated access is a scoped view, not a profile impersonation: only explicitly shared property records, documents and authorised pension/tax alerts are visible. Check active, unexpired permission and relationship records at the view and mutation boundaries; document caching is the only delegated write implemented in this prototype.
 - Outcome feedback names an explicit application or obligation in the active profile. Never infer the target from the latest global procedure event. An unresolved issue can be marked resolved later without resetting its history.
 - Saved demos carry a seed revision. Offer an explicit update/reset when sample records change; never silently overwrite saved progress. Reset clears workflow drafts as well as the graph.
 - Simulated government: `src/lib/mockGov/` — async functions with 400–1200 ms latency and believable, deterministic responses.
