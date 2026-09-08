@@ -62,9 +62,16 @@ export function NoticeDetail({
   const { language, t } = useI18n();
   const graph = useCitizenStore((state) => state.graph);
   const [explained, setExplained] = useState(false);
-  const analysis = notice.node.attrs.lensText
-    ? analyzeNotice(notice.node.attrs.lensText, graph, personId, language)
-    : undefined;
+  const currentAnalysis = analyzeNotice(
+    notice.node.attrs.lensText ?? notice.node.attrs.body,
+    graph,
+    personId,
+    language,
+  );
+  const analysis =
+    notice.node.attrs.lensText || currentAnalysis.match === "supported"
+      ? currentAnalysis
+      : undefined;
   const uncertain = analysis?.match === "unknown";
   const authority =
     uncertain ||
@@ -86,14 +93,20 @@ export function NoticeDetail({
   let explanation: ExplainResponse | undefined;
   if (explained) {
     try {
-      if (!analysis || analysis.match === "supported")
-        explanation = createFallbackExplanation(notice.node.id, language);
+      if (!analysis || analysis.match === "supported") {
+        const original = createFallbackExplanation(notice.node.id, language);
+        explanation = {
+          ...original,
+          plainLanguage: analysis?.plainLanguage ?? original.plainLanguage,
+          whatItMeans: analysis?.whatItMeans ?? original.whatItMeans,
+          nextAction: analysis?.nextAction ?? original.nextAction,
+        };
+      }
     } catch {
       /* A saved unknown message has no invented explanation. */
     }
   }
   const unknown = uncertain || (explained && !explanation);
-  const canRespond = !analysis || analysis.match === "supported";
   const explain = () => setExplained(true);
 
   return (
@@ -148,17 +161,14 @@ export function NoticeDetail({
             {t("explain")}
           </Button>
         )}
-        {canRespond && notice.node.attrs.relatedTo === "obl:echallan-500" ? (
-          <LinkButton href="/workflows/obligations">
-            {t("respond")}
+        {analysis?.workflowHref ? (
+          <LinkButton href={analysis.workflowHref}>
+            {t(
+              analysis.action === "action" ? "noticeLensOpenWorkflow" : "view",
+            )}
             <ArrowRight aria-hidden className="size-4" />
           </LinkButton>
-        ) : canRespond && notice.node.id === "ntc:epfo-passbook" ? (
-          <LinkButton href="/workflows/epfo">
-            {t("epfoService")}
-            <ArrowRight aria-hidden className="size-4" />
-          </LinkButton>
-        ) : canRespond && notice.node.id === "ntc:marriage-ripple" ? (
+        ) : !analysis && notice.node.id === "ntc:marriage-ripple" ? (
           <LinkButton href="/workflows/marriage">
             {t("view")}
             <ArrowRight aria-hidden className="size-4" />

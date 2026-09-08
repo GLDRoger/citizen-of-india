@@ -1,4 +1,15 @@
 export const noticeLensEn = {
+  noticePaid: "This challan is already paid.",
+  noticeReceived: "Your tax refund has been received.",
+  noticeCompleted: "This matter is marked complete.",
+  noticeSettledBody: "This is an earlier notice. Your current record shows the matter is settled.",
+  noticeSettledNext: "Keep this notice for reference; no further action is needed.",
+  noticePaymentProcessing: "This challan payment is being processed.",
+  noticeProcessingBody: "Your record already has a payment in progress.",
+  noticeProcessingNext: "Wait for the payment result. Do not pay again.",
+  noticeUnresolved: "You marked this matter unresolved.",
+  noticeUnresolvedBody: "The recorded transaction did not resolve the issue you reported.",
+  noticeUnresolvedNext: "Follow up from the existing matter instead of starting or paying again.",
   noticeLensSavedByYou: "Saved by you",
   noticeRead: "Read",
   noticeLensViewSaved: "View saved notice",
@@ -40,6 +51,17 @@ export const noticeLensEn = {
 };
 
 export const noticeLensHi: Record<keyof typeof noticeLensEn, string> = {
+  noticePaid: "यह चालान पहले ही भरा जा चुका है।",
+  noticeReceived: "आपका टैक्स रिफ़ंड मिल चुका है।",
+  noticeCompleted: "यह मामला पूरा दर्ज है।",
+  noticeSettledBody: "यह पुराना नोटिस है। आपके मौजूदा रिकॉर्ड में मामला पूरा है।",
+  noticeSettledNext: "यह नोटिस संदर्भ के लिए रखें; आगे कोई कार्रवाई आवश्यक नहीं है।",
+  noticePaymentProcessing: "इस चालान का भुगतान अभी प्रक्रिया में है।",
+  noticeProcessingBody: "आपके रिकॉर्ड में भुगतान पहले से जारी है।",
+  noticeProcessingNext: "भुगतान के परिणाम का इंतज़ार करें। दोबारा भुगतान न करें।",
+  noticeUnresolved: "आपने इस मामले को अनसुलझा बताया है।",
+  noticeUnresolvedBody: "दर्ज लेन-देन से आपकी बताई समस्या हल नहीं हुई।",
+  noticeUnresolvedNext: "फिर से शुरू करने या भुगतान करने के बजाय इसी मामले से आगे की कार्रवाई करें।",
   noticeLensSavedByYou: "आपने सहेजा",
   noticeRead: "पढ़ा गया",
   noticeLensViewSaved: "सहेजा नोटिस देखें",
@@ -81,6 +103,17 @@ export const noticeLensHi: Record<keyof typeof noticeLensEn, string> = {
 };
 
 export const noticeLensKn: Record<keyof typeof noticeLensEn, string> = {
+  noticePaid: "ಈ ದಂಡವನ್ನು ಈಗಾಗಲೇ ಪಾವತಿಸಲಾಗಿದೆ.",
+  noticeReceived: "ನಿಮ್ಮ ತೆರಿಗೆ ಮರುಪಾವತಿ ಬಂದಿದೆ.",
+  noticeCompleted: "ಈ ವಿಷಯವನ್ನು ಪೂರ್ಣಗೊಂಡಿದೆ ಎಂದು ದಾಖಲಿಸಲಾಗಿದೆ.",
+  noticeSettledBody: "ಇದು ಹಿಂದಿನ ಸೂಚನೆ. ಈಗಿನ ದಾಖಲೆಯಲ್ಲಿ ವಿಷಯ ಇತ್ಯರ್ಥವಾಗಿದೆ.",
+  noticeSettledNext: "ಈ ಸೂಚನೆಯನ್ನು ಉಲ್ಲೇಖಕ್ಕಾಗಿ ಇಡಿ; ಮುಂದಿನ ಕ್ರಮ ಅಗತ್ಯವಿಲ್ಲ.",
+  noticePaymentProcessing: "ಈ ದಂಡದ ಪಾವತಿ ಪ್ರಕ್ರಿಯೆಯಲ್ಲಿದೆ.",
+  noticeProcessingBody: "ನಿಮ್ಮ ದಾಖಲೆಯಲ್ಲಿ ಈಗಾಗಲೇ ಪಾವತಿ ಪ್ರಗತಿಯಲ್ಲಿದೆ.",
+  noticeProcessingNext: "ಪಾವತಿ ಫಲಿತಾಂಶಕ್ಕಾಗಿ ಕಾಯಿರಿ. ಮತ್ತೆ ಪಾವತಿಸಬೇಡಿ.",
+  noticeUnresolved: "ಈ ವಿಷಯ ಇನ್ನೂ ಬಗೆಹರಿದಿಲ್ಲ ಎಂದು ನೀವು ಗುರುತಿಸಿದ್ದೀರಿ.",
+  noticeUnresolvedBody: "ದಾಖಲಾದ ವ್ಯವಹಾರದಿಂದ ನೀವು ತಿಳಿಸಿದ ಸಮಸ್ಯೆ ಬಗೆಹರಿದಿಲ್ಲ.",
+  noticeUnresolvedNext: "ಮತ್ತೆ ಪ್ರಾರಂಭಿಸುವ ಅಥವಾ ಪಾವತಿಸುವ ಬದಲು ಇದೇ ವಿಷಯದಿಂದ ಮುಂದುವರಿಯಿರಿ.",
   noticeLensSavedByYou: "ನೀವು ಉಳಿಸಿದ್ದು",
   noticeRead: "ಓದಲಾಗಿದೆ",
   noticeLensViewSaved: "ಉಳಿಸಿದ ಸೂಚನೆ ನೋಡಿ",

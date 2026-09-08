@@ -23,9 +23,16 @@ Use a fresh demo in one browser. All names and messages below are synthetic. Swi
 - `npm run build`
 - `npx eslint .`
 - `npx tsc --noEmit --incremental false`
-- Fourteen one-off executable regression groups against the real graph, selectors and procedure builders: multilingual recognition, conflicting input, record confirmation, profile-local deduplication, reload parsing, invitation permissions/cancellation, reciprocal relationships, scope updates, owner-only revocation, legacy permission isolation, expiry/edge pairing, attention ownership, and pension/tax boundaries.
+- Nineteen one-off executable regression groups against the real graph, selectors and procedure builders: multilingual recognition, conflicting input, record confirmation, profile-local deduplication, reload parsing, invitation permissions/cancellation, reciprocal relationships, scope updates, owner-only revocation, legacy permission isolation, expiry/edge pairing, attention ownership, pension/tax boundaries, settled/processing notice actions, local-save provenance, pair-specific nudges, and exact saved-notice attention links.
 - Browser verification of the core notice and family flows, including the previously failing saved-notice navigation and legacy wrong-recipient revoke/regrant scenarios.
 - Existing continuity checks for case-brief ownership, linked follow-ups, cycles, navigation, simulated failure and deterministic retry.
+
+## PR-review follow-up
+
+- Pay the challan, then explain its original notice: it must say the challan is already paid, with no payment CTA or overdue consequence. The saved-notice detail must agree. Processing payments must not prompt a retry payment; an explicitly unresolved matter must link to its grievance instead.
+- Saving a seeded notice must produce a citizen-sourced Timeline event without changing the notice issuer's verification.
+- A Sunita → Priya permission must not suppress the separate guided Sunita → Arjun share/request nudges. Expired guided permission restores those nudges.
+- Open a saved-notice attention row from Home: the exact notice must open and become read. Timeline notice links use the same destination.
 
 ## Deliberate boundaries
 

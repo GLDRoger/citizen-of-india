@@ -88,7 +88,7 @@ export function getAttentionItems(graph: CitizenGraph, personId: string): Attent
       title: notice.node.attrs.subject,
       recordId: notice.node.id,
       meta: notice.node.attrs.sender,
-      href: "/inbox",
+      href: `/inbox#${encodeURIComponent(notice.node.id)}`,
       categories: noticeCategories(notice),
       state: notice.node.attrs.legitimacy === "unknown" ? "information" : notice.read ? "information" : "action",
       source: "notice",

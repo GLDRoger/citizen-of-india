@@ -1,3 +1,4 @@
+import { getMessage } from "@/i18n/messages";
 import type { Language } from "@/i18n/messages";
 import { localizeNodeTitle, localizeNoticeBody } from "@/i18n/content";
 import { createFallbackExplanation } from "./fallback";
@@ -82,12 +83,58 @@ export function analyzeNotice(
     sample &&
     getNotices(graph, personId).find(({ node }) => node.id === sample.id)?.node;
   if (!sample || !notice) return { match: "unknown", action: "uncertain" };
-  const explanation = createFallbackExplanation(sample.id, language);
+  let explanation = createFallbackExplanation(sample.id, language);
   const related = graph.nodes.find(
     (node) => node.id === notice.attrs.relatedTo,
   );
   const obligation = related?.type === "obligation" ? related : undefined;
   const isChallan = sample.id === "ntc:echallan";
+  const unresolved = obligation?.attrs.citizenOutcome === "unresolved";
+  const settled =
+    !unresolved &&
+    ["paid", "received", "completed"].includes(
+      obligation?.attrs.status ?? "due",
+    );
+  const paymentProcessing =
+    !unresolved && isChallan && obligation?.attrs.status === "processing";
+  let workflowHref: string | undefined = isChallan
+    ? "/workflows/obligations"
+    : sample.id === "ntc:epfo-passbook"
+      ? "/workflows/epfo"
+      : "/workflows/refund-track";
+  let action: NoticeAction = isChallan ? "action" : "no-action";
+  if (unresolved && obligation) {
+    explanation = {
+      ...explanation,
+      plainLanguage: getMessage(language, "noticeUnresolved"),
+      whatItMeans: getMessage(language, "noticeUnresolvedBody"),
+      nextAction: getMessage(language, "noticeUnresolvedNext"),
+    };
+    workflowHref = `/workflows/grievance?about=${encodeURIComponent(obligation.id)}`;
+    action = "action";
+  } else if (settled || paymentProcessing) {
+    const titleKey = paymentProcessing
+      ? "noticePaymentProcessing"
+      : obligation?.attrs.status === "paid"
+        ? "noticePaid"
+        : obligation?.attrs.status === "received"
+          ? "noticeReceived"
+          : "noticeCompleted";
+    explanation = {
+      ...explanation,
+      plainLanguage: getMessage(language, titleKey),
+      whatItMeans: getMessage(
+        language,
+        paymentProcessing ? "noticeProcessingBody" : "noticeSettledBody",
+      ),
+      nextAction: getMessage(
+        language,
+        paymentProcessing ? "noticeProcessingNext" : "noticeSettledNext",
+      ),
+    };
+    workflowHref = undefined;
+    action = "no-action";
+  }
   return {
     match: "supported",
     sampleId: sample.id,
@@ -98,14 +145,16 @@ export function analyzeNotice(
       ? sample.text.en.match(/\b[A-Z]{2,}[A-Z0-9-]*-\d{4}-\d{4,}\b/)?.[0]
       : undefined,
     amount: notice.attrs.amount ?? obligation?.attrs.amount,
-    deadline: isChallan ? obligation?.attrs.dueDate : undefined,
-    consequence: obligation?.attrs.consequence,
+    deadline:
+      isChallan && !settled && !paymentProcessing && !unresolved
+        ? obligation?.attrs.dueDate
+        : undefined,
+    consequence:
+      settled || paymentProcessing || unresolved
+        ? undefined
+        : obligation?.attrs.consequence,
     relatedRecordId: notice.attrs.relatedTo,
-    workflowHref: isChallan
-      ? "/workflows/obligations"
-      : sample.id === "ntc:epfo-passbook"
-        ? "/workflows/epfo"
-        : "/workflows/refund-track",
-    action: isChallan ? "action" : "no-action",
+    workflowHref,
+    action,
   };
 }
