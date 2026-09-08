@@ -1,338 +1,362 @@
 [
   {
     "text": "Your government record already exists —",
-    "startMs": 220,
-    "endMs": 2353,
+    "startMs": 230,
+    "endMs": 2569,
     "timestampMs": null,
-    "confidence": 1,
+    "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "split across portals that never talk.",
-    "startMs": 2353,
-    "endMs": 4487,
+    "startMs": 2570,
+    "endMs": 5000,
     "timestampMs": null,
-    "confidence": 1,
+    "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "Fix a name here, pay a fine there;",
-    "startMs": 4487,
-    "endMs": 7331,
+    "startMs": 5030,
+    "endMs": 7069,
     "timestampMs": null,
-    "confidence": 1,
+    "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "nothing remembers what you did last week.",
-    "startMs": 7331,
-    "endMs": 9820,
+    "startMs": 7070,
+    "endMs": 9730,
     "timestampMs": null,
-    "confidence": 1,
-    "pageBreakAfter": false
+    "confidence": null,
+    "pageBreakAfter": true
   },
   {
     "text": "Citizen is one living record.",
-    "startMs": 10253,
-    "endMs": 12164,
+    "startMs": 10063,
+    "endMs": 12809,
     "timestampMs": null,
-    "confidence": 1,
+    "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "It knows what changed, what applies to you,",
-    "startMs": 12164,
-    "endMs": 15222,
+    "startMs": 12810,
+    "endMs": 15280,
     "timestampMs": null,
-    "confidence": 1,
+    "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "and what to do next.",
-    "startMs": 15222,
-    "endMs": 17133,
+    "startMs": 15340,
+    "endMs": 17000,
     "timestampMs": null,
-    "confidence": 1,
-    "pageBreakAfter": false
+    "confidence": null,
+    "pageBreakAfter": true
   },
   {
     "text": "Arjun opens Home. It already knows:",
-    "startMs": 17653,
-    "endMs": 19878,
+    "startMs": 17463,
+    "endMs": 20649,
     "timestampMs": null,
-    "confidence": 1,
+    "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "his PAN doesn't match Aadhaar,",
-    "startMs": 19878,
-    "endMs": 21732,
+    "startMs": 20650,
+    "endMs": 22020,
     "timestampMs": null,
-    "confidence": 1,
+    "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "a challan is due,",
-    "startMs": 21732,
-    "endMs": 23215,
+    "startMs": 22490,
+    "endMs": 23779,
     "timestampMs": null,
-    "confidence": 1,
+    "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "and his mother may need help with her property papers.",
-    "startMs": 23215,
-    "endMs": 26923,
+    "startMs": 23780,
+    "endMs": 26890,
     "timestampMs": null,
-    "confidence": 1,
-    "pageBreakAfter": false
+    "confidence": null,
+    "pageBreakAfter": true
   },
   {
     "text": "He types “pay my challan”.",
-    "startMs": 27353,
-    "endMs": 29324,
+    "startMs": 27163,
+    "endMs": 28340,
     "timestampMs": null,
-    "confidence": 1,
+    "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "Citizen finds the fine on his record, matches it to his scooter,",
-    "startMs": 29324,
-    "endMs": 34053,
+    "startMs": 29470,
+    "endMs": 33199,
     "timestampMs": null,
-    "confidence": 1,
+    "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "and he pays in one tap.",
-    "startMs": 34053,
-    "endMs": 36418,
+    "startMs": 33200,
+    "endMs": 35370,
     "timestampMs": null,
-    "confidence": 1,
+    "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "Money, Documents and History update together —",
-    "startMs": 36418,
-    "endMs": 39177,
+    "startMs": 35550,
+    "endMs": 38520,
     "timestampMs": null,
-    "confidence": 1,
+    "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "one write, no copies.",
-    "startMs": 39177,
-    "endMs": 40753,
+    "startMs": 38650,
+    "endMs": 41317,
     "timestampMs": null,
-    "confidence": 1,
-    "pageBreakAfter": false
+    "confidence": null,
+    "pageBreakAfter": true
   },
   {
     "text": "Say Arjun and Priya want to register their marriage.",
-    "startMs": 41587,
-    "endMs": 44803,
+    "startMs": 41397,
+    "endMs": 44649,
     "timestampMs": null,
-    "confidence": 1,
+    "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "He invites her from the app;",
-    "startMs": 44803,
-    "endMs": 46948,
+    "startMs": 44650,
+    "endMs": 46410,
     "timestampMs": null,
-    "confidence": 1,
+    "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "on her own phone, Priya sees exactly what she is sharing,",
-    "startMs": 46948,
-    "endMs": 50880,
+    "text": "from her own profile, Priya sees exactly what she is sharing,",
+    "startMs": 46500,
+    "endMs": 49719,
     "timestampMs": null,
-    "confidence": 1,
+    "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "and consents. Both records update.",
-    "startMs": 50880,
-    "endMs": 52667,
+    "startMs": 49720,
+    "endMs": 52917,
     "timestampMs": null,
-    "confidence": 1,
-    "pageBreakAfter": false
-  },
-  {
-    "text": "After round one we read the rest of the top 250:",
-    "startMs": 53187,
-    "endMs": 57304,
-    "timestampMs": null,
-    "confidence": 1,
+    "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "mostly assistants, portals and wallets.",
-    "startMs": 57304,
-    "endMs": 59175,
+    "text": "The request was sent.",
+    "startMs": 53290,
+    "endMs": 54829,
     "timestampMs": null,
-    "confidence": 1,
+    "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "None keep a living record with consent and consequences.",
-    "startMs": 59175,
-    "endMs": 62543,
+    "text": "But Arjun's PAN still has the wrong name.",
+    "startMs": 54830,
+    "endMs": 58917,
     "timestampMs": null,
-    "confidence": 1,
+    "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "That is where we went deeper —",
-    "startMs": 62543,
-    "endMs": 65163,
+    "text": "He marks it unresolved.",
+    "startMs": 58997,
+    "endMs": 61000,
     "timestampMs": null,
-    "confidence": 1,
+    "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "and put the hard questions to ourselves.",
-    "startMs": 65163,
-    "endMs": 67783,
+    "text": "Citizen carries the original reference and history",
+    "startMs": 61150,
+    "endMs": 63579,
     "timestampMs": null,
-    "confidence": 1,
-    "pageBreakAfter": false
-  },
-  {
-    "text": "No. Those are a directory and a wallet.",
-    "startMs": 68720,
-    "endMs": 71814,
-    "timestampMs": null,
-    "confidence": 1,
+    "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Citizen connects records to the work:",
-    "startMs": 71814,
-    "endMs": 74135,
+    "text": "into a grievance, without asking him to start again.",
+    "startMs": 63580,
+    "endMs": 66917,
     "timestampMs": null,
-    "confidence": 1,
+    "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "every document, relative, job and asset on one map —",
-    "startMs": 74135,
-    "endMs": 78003,
+    "text": "The send fails. Nothing was submitted.",
+    "startMs": 67310,
+    "endMs": 70730,
     "timestampMs": null,
-    "confidence": 1,
+    "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "and Home speaks first, from rules, not a chatbot.",
-    "startMs": 78003,
-    "endMs": 81484,
+    "text": "His draft stays.",
+    "startMs": 70840,
+    "endMs": 72260,
     "timestampMs": null,
-    "confidence": 1,
-    "pageBreakAfter": false
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "Reload, retry, and just one follow-up",
+    "startMs": 72430,
+    "endMs": 75399,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "joins the original matter.",
+    "startMs": 75400,
+    "endMs": 77917,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "His case brief keeps the evidence, actions",
+    "startMs": 78010,
+    "endMs": 80470,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "and reference numbers together.",
+    "startMs": 80520,
+    "endMs": 82369,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "Ready to print or save.",
+    "startMs": 82370,
+    "endMs": 84430,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "The problem may remain unresolved.",
+    "startMs": 84510,
+    "endMs": 87029,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "His record does not start over.",
+    "startMs": 87030,
+    "endMs": 89350,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
   },
   {
     "text": "Sunita never fills a form.",
-    "startMs": 82187,
-    "endMs": 84114,
+    "startMs": 89860,
+    "endMs": 91769,
     "timestampMs": null,
-    "confidence": 1,
+    "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "Arjun asks for access, she approves,",
-    "startMs": 84114,
-    "endMs": 86428,
+    "startMs": 91770,
+    "endMs": 94459,
     "timestampMs": null,
-    "confidence": 1,
+    "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "and he sees only her property papers — nothing else.",
-    "startMs": 86428,
-    "endMs": 90283,
+    "text": "and he sees the shared records, not her whole profile.",
+    "startMs": 94460,
+    "endMs": 98200,
     "timestampMs": null,
-    "confidence": 1,
+    "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "When the permission is revoked, the link ends —",
-    "startMs": 90283,
-    "endMs": 93753,
+    "text": "When permission is revoked, the link ends,",
+    "startMs": 98430,
+    "endMs": 102049,
     "timestampMs": null,
-    "confidence": 1,
+    "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "never deleted, so the history stays.",
-    "startMs": 93753,
-    "endMs": 96067,
+    "text": "but the history stays.",
+    "startMs": 102050,
+    "endMs": 104050,
     "timestampMs": null,
-    "confidence": 1,
-    "pageBreakAfter": false
-  },
-  {
-    "text": "The old PAN stays until the authority answers.",
-    "startMs": 96887,
-    "endMs": 99876,
-    "timestampMs": null,
-    "confidence": 1,
+    "confidence": null,
     "pageBreakAfter": true
-  },
-  {
-    "text": "A bad result can be marked unresolved,",
-    "startMs": 99876,
-    "endMs": 102491,
-    "timestampMs": null,
-    "confidence": 1,
-    "pageBreakAfter": true
-  },
-  {
-    "text": "without losing what happened.",
-    "startMs": 102491,
-    "endMs": 103985,
-    "timestampMs": null,
-    "confidence": 1,
-    "pageBreakAfter": false
   },
   {
     "text": "Every change names who made it.",
-    "startMs": 104320,
-    "endMs": 106441,
+    "startMs": 104590,
+    "endMs": 106520,
     "timestampMs": null,
-    "confidence": 1,
+    "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "One log holds the whole story you just watched.",
-    "startMs": 106441,
-    "endMs": 109622,
+    "startMs": 106610,
+    "endMs": 110183,
     "timestampMs": null,
-    "confidence": 1,
-    "pageBreakAfter": false
-  },
-  {
-    "text": "Ukraine has one. Estonia has one.",
-    "startMs": 110453,
-    "endMs": 112903,
-    "timestampMs": null,
-    "confidence": 1,
+    "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Nobody has built it for 1.4 billion people.",
-    "startMs": 112903,
-    "endMs": 116170,
+    "text": "India built UPI for payments.",
+    "startMs": 110670,
+    "endMs": 112489,
     "timestampMs": null,
-    "confidence": 1,
+    "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Why can't India be the first?",
-    "startMs": 116170,
-    "endMs": 118620,
+    "text": "Why not do the same for public services?",
+    "startMs": 112490,
+    "endMs": 114659,
     "timestampMs": null,
-    "confidence": 1,
-    "pageBreakAfter": false
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "One country. A billion lives.",
+    "startMs": 114660,
+    "endMs": 116529,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "One connected record.",
+    "startMs": 116530,
+    "endMs": 118360,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
   }
 ]

@@ -2,12 +2,14 @@ import { spawn } from "node:child_process";
 import { mkdir, unlink } from "node:fs/promises";
 import { join } from "node:path";
 
+const outputName = process.env.VIDEO_OUTPUT_NAME ?? "citizen-hackathon-demo";
+if (!/^[a-z0-9-]+$/i.test(outputName)) throw new Error("VIDEO_OUTPUT_NAME must be a simple filename without an extension.");
 const outputDirectory = new URL("../out/", import.meta.url);
 const untrimmedPath = join(
   outputDirectory.pathname,
-  "citizen-hackathon-demo.untrimmed.mp4",
+  `${outputName}.untrimmed.mp4`,
 );
-const finalPath = join(outputDirectory.pathname, "citizen-hackathon-demo.mp4");
+const finalPath = join(outputDirectory.pathname, `${outputName}.mp4`);
 
 const run = (command, args) =>
   new Promise((resolve, reject) => {
@@ -40,8 +42,16 @@ await run("ffmpeg", [
   untrimmedPath,
   "-t",
   "120",
-  "-c",
+  "-c:v",
   "copy",
+  "-af",
+  "loudnorm=I=-16:TP=-1.5:LRA=9",
+  "-c:a",
+  "aac",
+  "-b:a",
+  "192k",
+  "-ar",
+  "48000",
   "-movflags",
   "+faststart",
   finalPath,

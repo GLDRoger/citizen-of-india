@@ -1,6 +1,6 @@
 import console from "node:console";
 import { execFileSync } from "node:child_process";
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 mkdirSync("public/audio/sfx", { recursive: true });
 const sounds = [];
 function render(name, duration, sources, filters) {
@@ -33,8 +33,8 @@ const sub = (amp, d) =>
     d,
   );
 for (const [name, amp, d] of [
-  ["impact-sub-big", 0.88, 0.45],
-  ["impact-sub-small", 0.53, 0.35],
+  ["impact-sub-big", 0.88, 0.4],
+  ["impact-sub-small", 0.53, 0.28],
 ])
   render(
     name,
@@ -44,8 +44,8 @@ for (const [name, amp, d] of [
   );
 render(
   "stamp-thud",
-  0.18,
-  [sub(0.52, 0.18), noise(0.18)],
+  0.16,
+  [sub(0.52, 0.16), noise(0.16)],
   "[1:a]highpass=f=200,lowpass=f=400,volume=2,afade=t=out:st=0:d=0.13[n];[0:a][n]amix=inputs=2:normalize=0[mix]",
 );
 render(
@@ -71,8 +71,8 @@ for (const [name, gain] of [
 ])
   render(
     name,
-    name === "tap" ? 0.035 : 0.005,
-    [noise(name === "tap" ? 0.035 : 0.005)],
+    name === "tap" ? 0.06 : 0.04,
+    [noise(name === "tap" ? 0.06 : 0.04)],
     `[0:a]highpass=f=1100,lowpass=f=6500,volume=${gain},afade=t=in:st=0:d=0.0005[mix]`,
   );
 render(
@@ -100,6 +100,6 @@ render(
 );
 writeFileSync(
   "public/audio/sfx/manifest.json",
-  JSON.stringify(sounds, null, 2) + "\n",
+  JSON.stringify([...JSON.parse(readFileSync("public/audio/sfx/manifest.json", "utf8")).filter(({ name }) => !sounds.some((sound) => sound.name === name)), ...sounds], null, 2) + "\n",
 );
 console.log(sounds);

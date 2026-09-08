@@ -60,6 +60,8 @@ assert(Math.abs(duck.sidechainDip(100, [100]) - 10 ** (-9 / 20)) < 1e-10);
 assert.equal(duck.sidechainDip(124, [100]), 1);
 assert.equal(duck.musicVolume(3600, 0.5), 0.5);
 const sounds = JSON.parse(readFileSync("public/audio/sfx/manifest.json"));
+const runtimeDurations = moduleFrom("src/motion/audio/Sfx.tsx", { "@remotion/media": await import("@remotion/media") }).soundDurations;
+assert.deepEqual(Object.fromEntries(sounds.map(({ name, duration }) => [name, duration])), JSON.parse(JSON.stringify(runtimeDurations)));
 const checks = [];
 for (const { name, duration } of sounds) {
   const file = `public/audio/sfx/${name}.wav`;
@@ -105,5 +107,5 @@ writeFileSync(
   JSON.stringify(checks, null, 2),
 );
 console.log(
-  "PASS: stamp landing, digit events, exact spiral, gain bounds/recovery; 12 WAV formats, durations, non-silence and peak limits.",
+  "PASS: stamp landing, digit events, exact spiral, gain bounds/recovery; 15 WAV formats, durations, non-silence and peak limits.",
 );

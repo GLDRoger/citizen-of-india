@@ -3,18 +3,32 @@
   "model": "gemini-3.1-flash-tts-preview",
   "voice": "Sulafat",
   "language": "en-IN",
-  "generatedAt": "2026-09-06T13:15:02.380Z",
+  "generatedAt": "2026-09-07T19:32:02.848Z",
   "sceneIds": [
     "problem",
     "thesis",
     "home",
     "challan",
     "marriage",
-    "after-round-one",
-    "umang",
+    "case-pending",
+    "case-followup",
+    "case-recovery",
+    "case-brief",
     "delegation",
-    "wrong",
     "timeline",
     "close"
+  ],
+  "generatedScenes": [
+    {
+      "id": "close",
+      "model": "gemini-3.1-flash-tts-preview",
+      "voice": "Sulafat",
+      "language": "en-IN",
+      "interactionId": "v1_ChdMUkdmYXFHTkxlRE9nOFVQa0xlMC1RVRIXTFJHZmFxR05MZURPZzhVUGtMZTAtUVU",
+      "mimeType": "audio/l16; rate=24000; channels=1",
+      "sourceDurationSeconds": 9.72,
+      "finalSpeechDurationSeconds": 8.267,
+      "tempo": 1.1758
+    }
   ]
 }
