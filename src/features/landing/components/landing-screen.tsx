@@ -33,7 +33,7 @@ const surfaceItems: Array<{ body: MessageKey; title: MessageKey }> = [
   { body: "landingSurfaceThreeBody", title: "landingSurfaceThreeTitle" },
 ];
 
-const demoVideoUrl = "https://www.youtube-nocookie.com/embed/Ci6c__wK4uM?autoplay=1&rel=0";
+const demoVideoUrl = "https://www.youtube-nocookie.com/embed/Sk7ebH2UKM8?autoplay=1&rel=0";
 
 function Hero({ onWatch }: { onWatch: () => void }) {
   const { t } = useI18n();
