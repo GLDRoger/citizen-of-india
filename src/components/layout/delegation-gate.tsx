@@ -34,7 +34,7 @@ export function DelegationGate({ children }: { children: ReactNode }) {
     : [];
   return (
     <Page className="grid gap-7">
-      <PageHeader title={t("sharedRecordTitle")} description={t("sharedRecordBody")} />
+      <PageHeader backdrop="mysore-palace" title={t("sharedRecordTitle")} description={t("sharedRecordBody")} />
       {!permission || outsideScope ? <p className="border-l-4 border-brick bg-brick-tint p-4 text-sm text-brick" role="status">{t(!permission ? "sharedExpired" : "sharedUnavailable")}</p> : null}
       {permission ? <>
         {scopes.includes("documents") ? <div><LinkButton href="/documents">{t("sharedDocuments")}</LinkButton></div> : null}

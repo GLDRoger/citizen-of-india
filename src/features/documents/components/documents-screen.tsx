@@ -75,7 +75,7 @@ export function DocumentsScreen() {
 
   return (
     <Page className="grid gap-6">
-      <PageHeader eyebrow={t("documentCount", { count: documents.length })} title={t("documents")} description={t("documentsPageBody")} />
+      <PageHeader backdrop="charminar" eyebrow={t("documentCount", { count: documents.length })} title={t("documents")} description={t("documentsPageBody")} />
       <label className="relative block max-w-xl">
         <span className="sr-only">{t("searchDocuments")}</span>
         <Search aria-hidden className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-ink-mute" />

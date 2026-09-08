@@ -391,7 +391,7 @@ export function getThingsToDo(graph: CitizenGraph, personId: string): TaskView[]
       metaKey: needsPartnerConsent(node, personId)
         ? "consentNeeded"
         : undefined,
-      href: getApplicationHref(node) ?? "/you#government-dealings",
+      href: getApplicationHref(node) ?? `/case-brief?record=${encodeURIComponent(node.id)}`,
       urgent: needsPartnerConsent(node, personId),
     });
   const urgentApplicationTasks = applications

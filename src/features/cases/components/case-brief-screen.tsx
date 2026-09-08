@@ -6,7 +6,7 @@ import { Suspense } from "react";
 import { Printer } from "lucide-react";
 import { PageSkeleton } from "@/components/ui/feedback";
 import { Button, LinkButton } from "@/components/ui/button";
-import { Page, PageHeader } from "@/components/ui/page";
+import { Backdrop, Page, PageHeader } from "@/components/ui/page";
 import { VerificationBadge } from "@/components/ui/status";
 import { useAuthStore } from "@/features/auth/store";
 import { getApplicationHref } from "@/features/graph/navigation";
@@ -47,7 +47,7 @@ function CaseBriefView() {
   const personId = useAuthStore((state) => state.personId);
   const actorId = useAuthStore((state) => state.actorId);
   const brief = personId && !actorId ? getCaseBrief(graph, personId, recordId) : undefined;
-  if (!brief) return <Page className="grid gap-6"><PageHeader title={t("briefUnavailable")} description={t("briefUnavailableBody")} /><LinkButton href="/start" variant="secondary">{t("chooseProfile")}</LinkButton></Page>;
+  if (!brief) return <Page className="grid gap-6"><PageHeader backdrop="vidhana-soudha" title={t("briefUnavailable")} description={t("briefUnavailableBody")} /><LinkButton href="/start" variant="secondary">{t("chooseProfile")}</LinkButton></Page>;
   const originalHref = brief.root.type === "application" ? getApplicationHref(brief.root) : "/home#attention";
   return (
     <Page className={`grid gap-8 ${styles.brief}`}>
@@ -56,7 +56,8 @@ function CaseBriefView() {
         <Button onClick={() => window.print()}><Printer aria-hidden className="size-4" />{t("briefPrint")}</Button>
       </div>
       <article className="grid min-w-0 gap-8" data-case-brief>
-        <header className="grid gap-3 border-b-2 border-ink pb-6">
+        <header className="relative isolate grid gap-3 overflow-hidden border-b-2 border-ink pb-6">
+          <Backdrop name="vidhana-soudha" variant="compact" />
           <p className="text-xs font-bold uppercase tracking-[0.12em] text-indigo-deep">Citizen · {t("simulated")}</p>
           <h1 className="font-display text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">{t("briefTitle")}</h1>
           <p className="font-bold">{t("briefPreparedFor", { name: brief.person.attrs.name })}</p>

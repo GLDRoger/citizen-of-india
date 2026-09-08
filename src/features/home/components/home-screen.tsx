@@ -119,7 +119,7 @@ export function HomeScreen() {
     <Page className="grid gap-10 lg:gap-12">
       <section className="grid content-start gap-6 lg:grid-cols-[minmax(16rem,0.68fr)_minmax(0,1.32fr)] lg:items-start lg:gap-10 lg:pt-3">
         <div className="relative isolate grid gap-4 lg:min-h-[26rem] lg:content-start lg:pt-6">
-          <Backdrop className="-bottom-3 h-auto w-[min(46vw,17rem)] max-w-none sm:w-[min(36vw,22rem)] lg:-bottom-1 lg:w-full" name="taj-mahal" />
+          <Backdrop className="-bottom-3 h-auto w-[min(46vw,17rem)] max-w-none sm:w-[min(36vw,22rem)] lg:-bottom-1 lg:w-full" variant="home" name="taj-mahal" />
           <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-y-2 border-ink py-2 text-xs font-extrabold uppercase tracking-[0.12em] text-ink"><span>{t("homeEdition", { name: profile.person.attrs.name.split(" ")[0] })}</span><span className="text-ink-mute">{formatDate(DEMO_TODAY, language)}</span></div>
           <p className="text-sm text-ink-mute">{t(greetingKey())}, {profile.person.attrs.name.split(" ")[0]}</p>
           <h1 className="max-w-2xl font-display text-[clamp(3rem,6vw,5rem)] font-semibold leading-[0.92] tracking-[-0.045em] text-ink"><RichText entrance="load" text={t("homeHeadline")} /></h1>

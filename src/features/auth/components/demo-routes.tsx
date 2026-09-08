@@ -3,6 +3,7 @@
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import { Button } from "@/components/ui/button";
 import { seedLogins } from "@/features/graph/seed";
 import { useCitizenStore } from "@/features/graph/store";
@@ -13,7 +14,7 @@ import { useI18n } from "@/i18n/use-i18n";
 const routes: Array<{ id: string; title: MessageKey; body: MessageKey; steps: MessageKey[]; action: MessageKey; personId: string; href: string }> = [
   { id: "route-primary", title: "routePrimary", body: "routePrimaryBody", steps: ["routePrimaryOne", "routePrimaryTwo", "routePrimaryThree", "routePrimaryFour", "routePrimaryFive"], action: "routePrimaryStart", personId: "person:arjun", href: "/workflows/record-correction" },
   { id: "route-marriage", title: "routeMarriage", body: "routeMarriageBody", steps: ["routeMarriageOne", "routeMarriageTwo", "routeMarriageThree"], action: "routeMarriageStart", personId: "person:priya", href: "/workflows/marriage" },
-  { id: "route-family", title: "routeFamily", body: "routeFamilyBody", steps: ["routeFamilyOne", "routeFamilyTwo", "routeFamilyThree"], action: "routeFamilyStart", personId: "person:sunita", href: "/you#delegation" },
+  { id: "route-family", title: "routeFamily", body: "routeFamilyBody", steps: ["routeFamilyOne", "routeFamilyTwo", "routeFamilyThree"], action: "routeFamilyStart", personId: "person:sunita", href: "/family#delegation" },
 ];
 
 export function DemoRoutes() {
@@ -22,6 +23,7 @@ export function DemoRoutes() {
   const openProfile = useAuthStore((state) => state.openProfile);
   const resetDemo = useCitizenStore((state) => state.resetDemo);
   const [reset, setReset] = useState(false);
+  const [resetOpen, setResetOpen] = useState(false);
   useEffect(() => {
     // Keep native disclosure controls, while opening the route named by a landing-page link.
     const openLinkedRoute = () => {
@@ -52,7 +54,8 @@ export function DemoRoutes() {
       </div>
       <p className="text-sm font-semibold leading-6 text-indigo-deep">{t("routesDevice")}</p>
       <p className="text-xs leading-5 text-ink-mute">{t("routesSaved")}</p>
-      <button className="min-h-11 justify-self-start text-xs font-bold text-ink-mute underline underline-offset-4 hover:text-ink focus-visible:outline-2 focus-visible:outline-indigo-deep" onClick={() => { if (window.confirm(t("resetConfirm"))) { resetDemo(); setReset(true); } }} type="button">{t("routesReset")}</button>
+      <button className="min-h-11 justify-self-start text-xs font-bold text-ink-mute underline underline-offset-4 hover:text-ink focus-visible:outline-2 focus-visible:outline-indigo-deep" onClick={() => setResetOpen(true)} type="button">{t("routesReset")}</button>
+      <ConfirmDialog open={resetOpen} title={t("routesReset")} description={t("resetConfirm")} confirmLabel={t("resetProgress")} cancelLabel={t("familyCancel")} onCancel={() => setResetOpen(false)} onConfirm={() => { setResetOpen(false); resetDemo(); setReset(true); }} />
       {reset ? <p className="text-sm text-green-deep" role="status">{t("routesResetDone")}</p> : null}
     </section>
   );

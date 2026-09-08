@@ -86,7 +86,7 @@ export const hi: Record<MessageKey, string> = {
   back: "पीछे",
   done: "पूरा",
   resetProgress: "प्रगति रीसेट करें",
-  resetConfirm: "शर्मा परिवार की सभी प्रोफ़ाइल प्रगति रीसेट करें?",
+  resetConfirm: "इस ब्राउज़र में सभी नमूना प्रोफ़ाइल रीसेट होंगी और काम के सहेजे गए मसौदे मिटेंगे। इसे वापस नहीं किया जा सकता।",
   switchPerson: "व्यक्ति बदलें",
   signOut: "साइन आउट",
   language: "भाषा",

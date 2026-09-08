@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Monument, type MonumentName } from "@/components/ui/monuments";
-import { Page, PageHeader } from "@/components/ui/page";
+import { type MonumentName } from "@/components/ui/monuments";
+import { Backdrop, Page, PageHeader } from "@/components/ui/page";
 import { StatusPill } from "@/components/ui/status";
 import { useAuthStore } from "@/features/auth/store";
 import { getApplications, getDocuments, getObligations } from "@/features/graph/selectors";
@@ -61,7 +61,7 @@ function ServiceCard({ application, index, obligation, service }: { application?
   return (
     <li>
       <Link className={cn(styles.card, "group grid content-start gap-5 rounded-[3px] border border-paper-line bg-panel p-5 md:min-h-56 md:gap-6")} data-category={service.category} href={service.slug === "digilocker" ? "/documents" : `/workflows/${service.slug}`}>
-        <Monument className={styles.landmark} name={service.landmark} />
+        <Backdrop className={styles.landmark} name={service.landmark} variant="card" />
         <span className="flex items-start justify-between gap-3">
           <span className="font-display text-sm font-semibold tabular-nums text-ink-mute">{String(index).padStart(2, "0")}</span>
           {status ? <StatusPill label={statusKey ? t(statusKey) : status} tone={complete ? "success" : "info"} /> : null}

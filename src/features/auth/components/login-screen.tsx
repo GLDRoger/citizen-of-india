@@ -6,6 +6,7 @@ import { ArrowRight, Check } from "lucide-react";
 import { useState } from "react";
 import { CitizenMark } from "@/components/citizen-mark";
 import { Button } from "@/components/ui/button";
+import { Backdrop } from "@/components/ui/page";
 import { seedLogins } from "@/features/graph/seed";
 import { getPerson } from "@/features/graph/selectors";
 import { useCitizenStore } from "@/features/graph/store";
@@ -45,7 +46,8 @@ export function LoginScreen() {
       <header className="border-b border-white/10 bg-indigo-deep text-white"><div className="mx-auto flex min-h-16 w-full max-w-[1040px] items-center justify-between gap-4 px-5 sm:px-8"><Link className="flex items-center gap-2 font-display text-xl font-extrabold tracking-[0.02em]" href="/"><CitizenMark className="size-7 text-saffron" />{t("brand").toUpperCase()}</Link><Link className="min-h-11 content-center text-xs font-bold text-white/70 underline decoration-white/30 underline-offset-4 hover:text-white" href="/about">{t("about")}</Link></div></header>
 
       <section className="mx-auto grid w-full max-w-[760px] gap-6 px-5 py-5 sm:gap-8 sm:px-8 sm:py-16">
-        <div className="grid gap-4 border-b border-paper-line pb-6 sm:pb-8">
+        <div className="relative isolate grid gap-4 overflow-hidden border-b border-paper-line pb-6 sm:pb-8">
+          <Backdrop name="vidhana-soudha" variant="compact" />
           <Link className="min-h-11 content-center justify-self-start text-xs font-bold text-ink-mute underline underline-offset-4" href="/">← {t("startBack")}</Link>
           <h1 className="max-w-3xl font-display text-[clamp(2.8rem,7vw,4.8rem)] font-semibold leading-[0.94] tracking-[-0.045em]">{t("startTitle")}</h1>
           <p className="max-w-2xl text-sm leading-7 text-ink-mute sm:text-base">{t("startBody")}</p>

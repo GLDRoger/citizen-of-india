@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { BookOpenText, ChevronDown, FileText, Gauge, House, Info, LogOut, RotateCcw, UserRound, UsersRound } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import { CitizenMark } from "@/components/citizen-mark";
 import { useAuthStore } from "@/features/auth/store";
 import { getDelegationFor } from "@/features/graph/insights";
@@ -62,6 +63,7 @@ function MobileNavigation() {
 function AccountMenu() {
   const router = useRouter();
   const detailsRef = useRef<HTMLDetailsElement>(null);
+  const [resetOpen, setResetOpen] = useState(false);
   const { t } = useI18n();
   const graph = useCitizenStore((state) => state.graph);
   const resetDemo = useCitizenStore((state) => state.resetDemo);
@@ -82,21 +84,23 @@ function AccountMenu() {
 
   useEffect(() => {
     const closeOnOutsidePointer = (event: PointerEvent) => {
+      if (resetOpen) return;
       if (event.target instanceof Node && !detailsRef.current?.contains(event.target)) detailsRef.current?.removeAttribute("open");
     };
     document.addEventListener("pointerdown", closeOnOutsidePointer);
     return () => document.removeEventListener("pointerdown", closeOnOutsidePointer);
-  }, []);
+  }, [resetOpen]);
 
   const close = () => detailsRef.current?.removeAttribute("open");
   const reset = () => {
-    if (!window.confirm(t("resetConfirm"))) return;
+    setResetOpen(false);
     resetDemo();
     close();
     router.push("/home");
   };
 
   return (
+    <>
     <details className="group relative" ref={detailsRef}>
       <summary aria-label={`${person?.attrs.name ?? t("brand")} ${t("accountMenu")}`} className="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-[2px] border border-paper/20 bg-paper/8 p-1.5 pr-2.5 text-paper transition-colors hover:bg-paper/12 focus-visible:outline-2 focus-visible:outline-paper">
         <span className="grid size-7 place-items-center rounded-[2px] bg-saffron font-display text-xs font-bold text-ink">{person ? getInitials(person.attrs.name) : "CO"}</span>
@@ -117,9 +121,11 @@ function AccountMenu() {
         })}</div>
         <div className="grid gap-1 border-t border-paper-line pt-3"><p className="eyebrow">{t("language")}</p><div className="flex flex-wrap gap-2">{languages.map((option) => <button aria-pressed={language === option} className={cn("min-h-11 rounded-[2px] px-3 py-2 text-xs font-bold", language === option ? "bg-indigo-deep text-paper" : "bg-paper text-ink-mute")} key={option} onClick={() => { setLanguage(option); close(); }} type="button">{languageLabels[option]}</button>)}</div></div>
         <label className="flex min-h-11 cursor-pointer items-center justify-between gap-4 border-t border-paper-line pt-3 text-sm font-bold"><span className="flex items-center gap-2"><Gauge aria-hidden className="size-4 text-indigo-deep" />{t("dataSaver")}</span><input checked={dataSaver} className="toggle" onChange={(event) => setDataSaver(event.target.checked)} type="checkbox" /></label>
-        <div className="grid grid-cols-2 gap-2"><button className="flex min-h-11 items-center justify-center gap-2 rounded-[2px] bg-paper text-xs font-bold text-ink" onClick={reset} type="button"><RotateCcw aria-hidden className="size-3.5" />{t("resetProgress")}</button><button className="flex min-h-11 items-center justify-center gap-2 rounded-[2px] text-xs font-bold text-ink-mute hover:bg-paper" onClick={() => { close(); signOut(); window.scrollTo(0, 0); }} type="button"><LogOut aria-hidden className="size-3.5" />{t("signOut")}</button></div>
+        <div className="grid grid-cols-2 gap-2"><button className="flex min-h-11 items-center justify-center gap-2 rounded-[2px] bg-paper text-xs font-bold text-ink" onClick={() => setResetOpen(true)} type="button"><RotateCcw aria-hidden className="size-3.5" />{t("resetProgress")}</button><button className="flex min-h-11 items-center justify-center gap-2 rounded-[2px] text-xs font-bold text-ink-mute hover:bg-paper" onClick={() => { close(); signOut(); window.scrollTo(0, 0); }} type="button"><LogOut aria-hidden className="size-3.5" />{t("signOut")}</button></div>
       </div>
     </details>
+    <ConfirmDialog open={resetOpen} title={t("resetProgress")} description={t("resetConfirm")} confirmLabel={t("resetProgress")} cancelLabel={t("familyCancel")} onCancel={() => setResetOpen(false)} onConfirm={reset} />
+    </>
   );
 }
 

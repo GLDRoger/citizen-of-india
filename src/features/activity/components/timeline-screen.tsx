@@ -26,10 +26,10 @@ function eventHref(graph: CitizenGraph, event: GraphEvent) {
   for (const id of describeEventTargets(event)) {
     const node = graph.nodes.find((candidate) => candidate.id === id);
     if (!node) continue;
-    if (node.type === "application") return getApplicationHref(node) ?? "/you#government-dealings";
+    if (node.type === "application") return getApplicationHref(node) ?? `/case-brief?record=${encodeURIComponent(node.id)}`;
     if (node.type === "obligation") return obligationHrefs[node.id] ?? "/home#attention";
     if (node.type === "document") return "/documents";
-    if (node.type === "delegation") return "/you";
+    if (node.type === "delegation") return "/family";
     if (node.type === "notice") return `/inbox#${encodeURIComponent(node.id)}`;
   }
   return undefined;
@@ -103,7 +103,7 @@ export function TimelineScreen() {
 
   return (
     <Page className="grid gap-10">
-      <PageHeader description={t("timelineBody")} eyebrow={t("timelineCount", { count: events.length })} title={t("timelineTitle")} />
+      <PageHeader backdrop="howrah-bridge" description={t("timelineBody")} eyebrow={t("timelineCount", { count: events.length })} title={t("timelineTitle")} />
       <section className="grid gap-4">
         <h2 className="eyebrow text-indigo-deep">{t("timelineDuringDemo")}</h2>
         {demoEvents.length ? (

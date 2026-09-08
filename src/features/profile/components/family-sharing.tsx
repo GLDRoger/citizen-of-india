@@ -270,7 +270,7 @@ export function ConnectionCard({
                 <p>{t("familyExistingAccess")}</p>
                 <Link
                   className="min-h-11 content-center font-bold text-indigo-deep underline underline-offset-4"
-                  href="/you#delegation"
+                  href="/family#delegation"
                 >
                   {t("familyManageLegacy")}
                 </Link>

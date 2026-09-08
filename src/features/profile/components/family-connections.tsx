@@ -6,7 +6,7 @@ import { formatDate } from "@/lib/format";
 import { useState } from "react";
 import { Check, UserPlus, X } from "lucide-react";
 import { Button, LinkButton } from "@/components/ui/button";
-import { SectionHeader } from "@/components/ui/page";
+import { PageHeader, SectionHeader } from "@/components/ui/page";
 import { StatusPill } from "@/components/ui/status";
 import {
   getActiveFamilySharing,
@@ -184,14 +184,12 @@ export function FamilyConnectionsPanel({
 
   return (
     <section className="grid scroll-mt-24 gap-7" id="family-connections">
-      <div className="flex flex-wrap items-end justify-between gap-3">
-        <div className="grid gap-1">
-          <p className="eyebrow">{connections.length}</p>
-          <h1 className="font-display text-4xl font-semibold leading-tight tracking-[-0.03em] text-ink">
-            {t("familyTitle")}
-          </h1>
-        </div>
-        {people.length ? (
+      <PageHeader
+        backdrop="mysore-palace"
+        eyebrow={String(connections.length)}
+        title={t("familyTitle")}
+        description={t("familySubtitle")}
+        action={people.length ? (
           <Button
             onClick={() => {
               setAdding((current) => !current);
@@ -202,11 +200,8 @@ export function FamilyConnectionsPanel({
             <UserPlus aria-hidden className="size-4" />
             {t("familyAddConnection")}
           </Button>
-        ) : null}
-      </div>
-      <p className="max-w-2xl text-base leading-7 text-ink-mute">
-        {t("familySubtitle")}
-      </p>
+        ) : undefined}
+      />
       <div className="grid grid-cols-3 divide-x divide-paper-line border-y border-paper-line py-5">
         <div className="grid gap-1 pr-4">
           <span className="text-xs text-ink-mute">

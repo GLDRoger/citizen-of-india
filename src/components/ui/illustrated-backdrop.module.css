@@ -1,0 +1,49 @@
+@layer components {
+  .artwork {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    width: min(60%, 30rem);
+    aspect-ratio: 3 / 2;
+    max-height: 100%;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+  }
+
+  .outline {
+    width: 100%;
+    height: 100%;
+    color: rgb(38 29 22 / 13%);
+  }
+
+  .hidden { visibility: hidden; }
+
+  .image {
+    object-fit: contain;
+    opacity: 0;
+    mask-image: linear-gradient(to right, transparent, black 24%, black 94%, transparent);
+  }
+
+  .loaded { opacity: 0.58; }
+  .compact { width: min(42%, 20rem); }
+  .compact .loaded { opacity: 0.22; }
+  .card { width: min(65%, 15rem); }
+  .card .loaded { opacity: 0.25; }
+
+  @media (max-width: 639px) {
+    .header {
+      top: -0.5rem;
+      bottom: auto;
+      width: 12rem;
+      max-width: 72%;
+      mask-image: linear-gradient(to bottom, black 65%, transparent 98%);
+    }
+    .loaded { opacity: 0.36; }
+    .compact .loaded { opacity: 0.16; }
+  }
+
+  @media print {
+    .artwork { display: none; }
+  }
+}

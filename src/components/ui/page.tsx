@@ -1,13 +1,14 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
-import { Monument, type MonumentName } from "./monuments";
+import type { MonumentName } from "./monuments";
+import { IllustratedBackdrop } from "./illustrated-backdrop";
 
 /**
- * A faint architectural etching behind a page header: a nod to the country the
- * app serves, never louder than the words in front of it. Decorative only.
+ * One artwork path for the demo. Its inline SVG remains the data-saver,
+ * loading and failed-image fallback; no imagery is generated at runtime.
  */
-export function Backdrop({ name, className }: { name: MonumentName; className?: string }) {
-  return <Monument className={cn("pointer-events-none absolute right-0 bottom-0 -z-10 h-[96%] w-auto max-w-[72%] text-ink/[0.13]", className)} name={name} />;
+export function Backdrop({ name, className, variant }: { name: MonumentName; className?: string; variant?: "header" | "home" | "card" | "compact" }) {
+  return <IllustratedBackdrop className={className} key={name} name={name} variant={variant} />;
 }
 
 export function Page({ children, className }: { children: ReactNode; className?: string }) {
@@ -28,7 +29,7 @@ export function PageHeader({
   backdrop?: MonumentName;
 }) {
   return (
-    <header className={cn("relative isolate grid gap-4 overflow-hidden border-b border-paper-line pb-6 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end", backdrop && "min-h-[13rem] content-end sm:min-h-[16rem]")}>
+    <header className={cn("relative isolate grid gap-4 overflow-hidden border-b border-paper-line pb-6 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end", backdrop && "min-h-[16rem] content-end pt-28 sm:pt-0")}>
       {backdrop ? <Backdrop name={backdrop} /> : null}
       <div className="grid gap-2">
         {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import type { ReactNode } from "react";
-import { Page } from "@/components/ui/page";
+import { Backdrop, Page } from "@/components/ui/page";
 import { FilePanel } from "@/components/ui/file-panel";
 import { SimulatedChip, StatusPill } from "@/components/ui/status";
 import { useI18n } from "@/i18n/use-i18n";
@@ -13,6 +13,7 @@ import { StepTimeline } from "./step-timeline";
 import { MutationReceipt } from "./mutation-receipt";
 import { Preflight } from "./preflight";
 import { ResolutionPrompt } from "./resolution-prompt";
+import { getProcedureMonument } from "../monuments";
 
 export interface ProcedureStep {
   id: string;
@@ -42,7 +43,8 @@ export function ProcedureShell({ title, description, authority, steps, currentSt
     <Page className="grid gap-4 lg:gap-7">
       <div className="flex items-center justify-end gap-4 min-[900px]:justify-between"><Link className="hidden min-h-11 items-center gap-2 text-xs font-bold text-ink-mute transition-colors hover:text-ink min-[900px]:inline-flex" href="/services"><ArrowLeft aria-hidden className="size-4" />{t("back")}</Link><SimulatedChip authority={authority} /></div>
       <header className="grid gap-3 border-t-2 border-ink pt-4 sm:gap-4">
-        <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
+        <div className="relative isolate grid gap-4 overflow-hidden md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
+          <Backdrop name={getProcedureMonument(procedureId)} variant="compact" />
           <div className="grid max-w-4xl gap-2"><p className="eyebrow text-indigo-deep">{authority}</p><h1 className="font-display text-[clamp(2.3rem,5vw,4.35rem)] font-semibold leading-[0.96] tracking-[-0.04em] text-ink">{title}</h1>{description ? <p className="max-w-2xl text-sm leading-6 text-ink-mute sm:text-base">{description}</p> : null}</div>
           {showProgress ? <div className="hidden items-center gap-3 border-y border-paper-line py-2 text-xs font-bold text-ink-mute md:flex"><span>{complete ? t("completed") : `${t("nextStep")} ${Math.min(currentStep + 1, steps.length)}`}</span><strong className="text-indigo-deep">{progress}%</strong></div> : null}
         </div>

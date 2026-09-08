@@ -91,7 +91,7 @@ export const en = {
   back: "Back",
   done: "Done",
   resetProgress: "Reset progress",
-  resetConfirm: "Reset all progress for the Sharma family profiles?",
+  resetConfirm: "This resets all sample profiles and clears saved workflow drafts in this browser. You cannot undo this.",
   switchPerson: "Switch person",
   signOut: "Sign out",
   language: "Language",

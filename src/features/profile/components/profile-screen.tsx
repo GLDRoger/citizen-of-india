@@ -1,37 +1,28 @@
 "use client";
 
-import { BriefcaseBusiness, Building2, CarFront, ChevronRight, FileText, Home, KeyRound, Landmark, List, ShieldCheck, UserRound, UsersRound, Waypoints } from "lucide-react";
+import { BriefcaseBusiness, Building2, CarFront, ChevronRight, FileText, Home, List, ShieldCheck, Waypoints } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { Button } from "@/components/ui/button";
 import { Page, PageHeader, SectionHeader } from "@/components/ui/page";
-import { StatusPill, VerificationBadge } from "@/components/ui/status";
+import { VerificationBadge } from "@/components/ui/status";
 import { useAuthStore } from "@/features/auth/store";
 import {
-  getApplications,
   getDocuments,
   getEmployment,
-  getNodeByType,
-  getObligations,
   getOwnedAssets,
   getProfileSummary,
   getRelationshipViews,
-  type RelationshipView,
 } from "@/features/graph/selectors";
-import { getActiveDelegations, LEGACY_DELEGATION_ID } from "@/features/graph/delegation";
-import { preparePaperworkAccess, PAPERWORK_EXPIRES } from "@/features/graph/paperwork-procedures";
-import { revokeFamily } from "@/features/graph/family-procedures";
 import { useCitizenStore } from "@/features/graph/store";
 import { useI18n } from "@/i18n/use-i18n";
 import { localizeNodeTitle } from "@/i18n/content";
-import { getDocumentKindMessageKey, getRelationshipMessageKey, getStatusMessageKey } from "@/i18n/formatters";
+import { getDocumentKindMessageKey } from "@/i18n/formatters";
 import { formatCurrency, formatDate, maskIdentifier } from "@/lib/format";
 import { cn } from "@/lib/cn";
 import { buildRecordMap } from "../record-map/model";
 import { RecordDetail } from "../record-map/record-detail";
 import { RecordMap } from "../record-map/record-map";
-import { GovernmentHealthCard } from "./government-health";
 import { FamilyConnectionsPanel } from "./family-connections";
 
 function AssetRow({ asset }: { asset: ReturnType<typeof getOwnedAssets>[number] }) {
@@ -48,94 +39,11 @@ function AssetRow({ asset }: { asset: ReturnType<typeof getOwnedAssets>[number] 
   return null;
 }
 
-function RelationshipRow({ view }: { view: RelationshipView }) {
-  const { language, t } = useI18n();
-  const relationshipKey = getRelationshipMessageKey(view.relationship);
-  return (
-    <article className="flex min-h-20 items-center gap-4 border-b border-paper-line py-3 last:border-b-0">
-      <UserRound aria-hidden className="size-5 shrink-0 text-ink-mute" />
-      <div className="min-w-0">
-        <strong className="block text-sm leading-5 text-ink [overflow-wrap:anywhere]">{view.person.attrs.name}</strong>
-        <span className="text-xs text-ink-mute">{relationshipKey ? t(relationshipKey) : view.relationship}{view.person.attrs.deceasedOn ? ` · ${t("diedOn", { date: formatDate(view.person.attrs.deceasedOn, language) })}` : ""}</span>
-      </div>
-    </article>
-  );
-}
-
 function DocumentRow({ document }: { document: ReturnType<typeof getDocuments>[number] }) {
   const { language, t } = useI18n();
   const kindKey = getDocumentKindMessageKey(document.attrs.kind);
   const title = kindKey ? t(kindKey) : localizeNodeTitle(language, document.id, document.attrs.kind.replaceAll("-", " "));
   return <Link className="group flex min-h-20 items-center gap-4 border-b border-paper-line py-3 transition-colors last:border-b-0 hover:bg-paper-shade/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-deep" href={`/documents#${document.id}`}><FileText aria-hidden className="size-5 shrink-0 text-indigo-deep" /><div className="min-w-0 flex-1"><strong className="block text-sm capitalize leading-5 text-ink [overflow-wrap:anywhere]">{title}</strong><span className="text-xs text-ink-mute">{document.attrs.numberMasked ? maskIdentifier(document.attrs.numberMasked) : document.attrs.holderName} · {formatDate(document.attrs.issuedOn, language)}</span></div><VerificationBadge verification={document.verification} /><ChevronRight aria-hidden className="size-4 shrink-0 text-ink-mute transition-transform group-hover:translate-x-0.5" /></Link>;
-}
-
-function GovernmentRow({ authority, detail, status, title }: { authority: string; detail?: string; status?: string; title: string }) {
-  const { t } = useI18n();
-  const statusKey = status ? getStatusMessageKey(status) : undefined;
-  const complete = status === "completed" || status === "paid" || status === "received";
-  return <article className="grid min-h-20 grid-cols-[auto_minmax(0,1fr)] items-center gap-x-4 gap-y-2 border-b border-paper-line py-3 last:border-b-0 sm:grid-cols-[auto_minmax(0,1fr)_auto]"><Landmark aria-hidden className="size-5 shrink-0 text-indigo-deep" /><div className="min-w-0"><strong className="block text-sm leading-5 text-ink [overflow-wrap:anywhere]">{title}</strong><span className="text-xs leading-5 text-ink-mute">{authority}{detail ? ` · ${detail}` : ""}</span></div><div className="col-start-2 w-fit sm:col-start-3"><StatusPill label={statusKey ? t(statusKey) : status ?? t("pending")} tone={complete ? "success" : status === "due" ? "warning" : "info"} /></div></article>;
-}
-
-const DELEGATION_ID = LEGACY_DELEGATION_ID;
-/**
- * Sunita ↔ Arjun shared access. Arjun can ask; only Sunita can grant or revoke.
- * The delegation node walks requested → active → revoked; nothing is deleted.
- */
-function DelegationPanel({ personId }: { personId: string }) {
-  const { language, t } = useI18n();
-  const actorId = useAuthStore((state) => state.actorId);
-  const actFor = useAuthStore((state) => state.actFor);
-  const router = useRouter();
-  const graph = useCitizenStore((state) => state.graph);
-  const commit = useCitizenStore((state) => state.commit);
-  const [error, setError] = useState(false);
-  const isSunita = personId === "person:sunita";
-  const isArjun = personId === "person:arjun";
-  const delegation = getNodeByType(graph, DELEGATION_ID, "delegation");
-  if (!isSunita && !isArjun) return null;
-  const status = delegation?.attrs.status;
-  const active = getActiveDelegations(graph, "person:arjun", "person:sunita").some((permission) => permission.id === DELEGATION_ID);
-  const requested = status === "requested";
-  const ended = status === "revoked" || status === "expired";
-  const familyProperty = getNodeByType(graph, "prop:jpnagar-house", "property");
-  const expires = formatDate(delegation?.attrs.expiresOn ?? PAPERWORK_EXPIRES, language);
-
-  const saveAccess = (action: "request" | "grant" | "revoke") => {
-    try {
-      const current = useCitizenStore.getState().graph;
-      const mutations = action === "revoke" ? revokeFamily(current, personId, DELEGATION_ID) : preparePaperworkAccess(current, personId, action);
-      commit({ actorId: personId, labelKey: action === "request" ? "eventAccessRequested" : action === "grant" ? "eventPaperworkDelegated" : "eventPaperworkRevoked", procedureId: "delegation", mutations });
-      setError(false);
-    } catch { setError(true); }
-  };
-
-  const title = active ? t("delegationActiveTitle")
-    : requested ? t(isSunita ? "delegationRequestedTitle" : "delegationRequestSentTitle")
-    : ended ? t("delegationEndedTitle")
-    : t(isSunita ? "delegationSetupTitle" : "delegationRequestAction");
-  const body = active ? t("delegationActiveBody", { date: expires })
-    : requested ? t(isSunita ? "delegationRequestedBody" : "delegationRequestSentBody", { date: expires })
-    : ended ? t("delegationEndedBody")
-    : isSunita ? t("delegationSetupBody", { date: expires })
-    : t("delegationRequestHint");
-
-  const action = actorId && isSunita
-    ? <p className="border-l-2 border-saffron pl-3 text-xs leading-5 text-paper/80">{t("actingNotDelegable", { name: "Sunita" })}</p>
-    : isSunita && !active ? <Button onClick={() => saveAccess("grant")} variant="inverse">{t("delegationGrantAction")}</Button>
-    : isSunita && active ? <Button onClick={() => saveAccess("revoke")} variant="inverseQuiet">{t("revoke")}</Button>
-    : isArjun && active && !actorId ? <Button onClick={() => { actFor("person:sunita", graph); window.scrollTo(0, 0); router.push("/home"); }} variant="saffron"><UsersRound aria-hidden className="size-4" />{t("actFor", { name: "Sunita" })}</Button>
-    : isArjun && !active && !requested && !actorId ? <Button onClick={() => saveAccess("request")} variant="inverse">{t("delegationRequestAction")}</Button>
-    : null;
-
-  return (
-    <section className="grid scroll-mt-20 gap-5 rounded-[3px] bg-indigo-deep p-6 text-paper" id="delegation">
-      <div className="flex items-start justify-between gap-4"><KeyRound aria-hidden className="size-5 text-saffron" />{delegation ? <StatusPill label={t(getStatusMessageKey(delegation.attrs.status) ?? "pending")} tone={active ? "success" : requested ? "info" : "neutral"} /> : null}</div>
-      <div className="grid gap-2"><p className="text-xs font-bold uppercase tracking-[0.12em] text-paper/55">{t("delegation")}</p><h2 className="font-display text-3xl font-semibold leading-none">{title}</h2><p className="text-xs leading-5 text-paper/72">{body}</p></div>
-      {active && isArjun ? <div className="grid divide-y divide-paper/15 border-y border-paper/15 text-xs"><div className="grid gap-1 py-3"><span className="capitalize text-paper/60">{familyProperty?.attrs.kind ?? t("propertyAndVehicles")}</span><strong className="text-sm text-paper">{familyProperty?.attrs.authority ?? "BBMP"} · {familyProperty?.attrs.khataNumber ?? ""}</strong></div></div> : null}
-      {action}
-      {error ? <p className="text-sm font-bold text-paper" role="alert">{t("sharedSaveError")}</p> : null}
-    </section>
-  );
 }
 
 type RecordView = "map" | "list";
@@ -165,32 +73,34 @@ function usePrefersReducedMotion() {
 }
 
 function RecordSections({ personId }: { personId: string }) {
-  const { language, t } = useI18n();
+  const { t } = useI18n();
   const graph = useCitizenStore((state) => state.graph);
-  const relationships = getRelationshipViews(graph, personId);
   const assets = getOwnedAssets(graph, personId);
   const employment = getEmployment(graph, personId);
   const documents = getDocuments(graph, personId);
-  const applications = getApplications(graph, personId);
-  const obligations = getObligations(graph, personId);
   return (
     <>
       <section className="grid gap-5"><SectionHeader eyebrow={`${documents.length}`} title={t("documents")} action={<Link className="text-sm font-bold text-indigo-deep underline decoration-indigo-deep/25 underline-offset-4" href="/documents">{t("recordsAllDocuments")}</Link>} /><div className="border-y border-paper-line">{documents.map((document) => <DocumentRow document={document} key={document.id} />)}</div></section>
-
-      <section className="grid gap-5"><SectionHeader eyebrow={`${relationships.length}`} title={t("relationships")} /><div className="border-y border-paper-line">{relationships.map((view) => <RelationshipRow key={view.person.id} view={view} />)}</div></section>
-
-      <FamilyConnectionsPanel compact personId={personId} />
 
       <section className="grid gap-5"><SectionHeader title={t("workAndBusiness")} />{employment ? <div className="flex min-h-24 items-center gap-4 border-y border-paper-line py-4"><Building2 aria-hidden className="size-5 shrink-0 text-indigo-deep" /><div className="min-w-0 flex-1"><strong className="block text-sm leading-5 text-ink [overflow-wrap:anywhere]">{employment.attrs.employer}</strong><span className="text-xs text-ink-mute">{employment.attrs.designation} · {employment.attrs.location}</span></div><VerificationBadge verification={employment.verification} /></div> : null}{assets.filter((asset) => asset.type === "business").map((asset) => <AssetRow asset={asset} key={asset.id} />)}</section>
 
       <section className="grid gap-5"><SectionHeader title={t("propertyAndVehicles")} />{assets.filter((asset) => asset.type !== "business").length ? <div>{assets.filter((asset) => asset.type !== "business").map((asset) => <AssetRow asset={asset} key={asset.id} />)}</div> : <p className="border-y border-paper-line py-6 text-sm text-ink-mute">{t("noPropertyVehicles")}</p>}</section>
 
-      <section className="grid scroll-mt-24 gap-5" id="government-dealings"><SectionHeader eyebrow={`${applications.length + obligations.length}`} title={t("governmentDealings")} /><div className="border-y border-paper-line">{applications.map((application) => <GovernmentRow authority={application.attrs.authority} detail={formatDate(application.attrs.createdOn, language)} key={application.id} status={application.attrs.status} title={localizeNodeTitle(language, application.id, application.attrs.title)} />)}{obligations.map((obligation) => <GovernmentRow authority={obligation.attrs.authority} detail={obligation.attrs.amount !== undefined ? formatCurrency(obligation.attrs.amount) : obligation.attrs.dueDate ? formatDate(obligation.attrs.dueDate, language) : undefined} key={obligation.id} status={obligation.attrs.status ?? "due"} title={localizeNodeTitle(language, obligation.id, obligation.attrs.title)} />)}</div></section>
     </>
   );
 }
 
 export function ProfileScreen() {
+  const router = useRouter();
+  useEffect(() => {
+    const followLegacyLink = () => {
+      if (window.location.hash === "#delegation") router.replace("/family#delegation");
+      if (window.location.hash === "#government-dealings") router.replace("/activity");
+    };
+    followLegacyLink();
+    window.addEventListener("hashchange", followLegacyLink);
+    return () => window.removeEventListener("hashchange", followLegacyLink);
+  }, [router]);
   const { language, t } = useI18n();
   const personId = useAuthStore((state) => state.personId);
   const dataSaver = useAuthStore((state) => state.dataSaver);
@@ -216,7 +126,7 @@ export function ProfileScreen() {
       <PageHeader backdrop="vidhana-soudha" eyebrow={t("you")} title={profile.person.attrs.name} description={t(profile.documentCount === 1 ? "profileSummaryOne" : "profileSummary", { age: profile.age, place: profile.residence ?? t("addressPending"), count: profile.documentCount })} action={<VerificationBadge verification={profile.person.verification} />} />
       <div className="flex flex-wrap items-center justify-between gap-3">
         <ViewToggle onChange={setChosenView} view={view} />
-        <p className="text-xs leading-5 text-ink-mute">{t("recordsMapOptional")}</p>
+        <p className="text-xs leading-5 text-ink-mute">{t("recordsPurpose")}</p>
         {view === "list" && dataSaver && !chosenView ? <p className="text-xs text-ink-mute">{t("recordsListSaver")}</p> : null}
       </div>
       {map ? (
@@ -224,20 +134,16 @@ export function ProfileScreen() {
           <RecordMap map={map} onSelect={setSelectedId} selectedId={selectedId} />
           <div className="grid scroll-mt-24 content-start gap-5" ref={detailRef}>
             <RecordDetail graph={graph} node={selected} personId={personId} />
-            <GovernmentHealthCard personId={personId} />
-            <DelegationPanel personId={personId} />
+            <FamilyConnectionsPanel compact personId={personId} />
           </div>
         </div>
       ) : (
         <div className="grid gap-7 lg:grid-cols-[1.25fr_0.75fr]">
-          <div className="order-2 lg:order-none lg:col-start-2 lg:row-start-1">
-            <GovernmentHealthCard personId={personId} />
-          </div>
-          <div className="order-1 grid gap-7 lg:order-none lg:col-start-1 lg:row-span-2 lg:row-start-1">
+          <div className="grid content-start gap-7">
             <RecordSections personId={personId} />
           </div>
-          <div className="order-3 grid content-start gap-5 lg:order-none lg:col-start-2 lg:row-start-2">
-            <DelegationPanel personId={personId} />
+          <div className="grid content-start gap-5">
+            <FamilyConnectionsPanel compact personId={personId} />
             <div className="grid gap-4 border-y border-paper-line py-5"><div className="flex items-center gap-3"><ShieldCheck aria-hidden className="size-5 text-green-deep" /><strong className="text-sm text-ink">{t("recordHealth")}</strong></div><div className="grid grid-cols-2 gap-4"><div><span className="block text-xs text-ink-mute">{t("verified")}</span><strong className="font-display text-2xl text-ink">{profile.verifiedDocumentCount}/{profile.documentCount}</strong></div><div><span className="block text-xs text-ink-mute">{t("relationships")}</span><strong className="font-display text-2xl text-ink">{relationshipCount}</strong></div></div></div>
           </div>
         </div>
