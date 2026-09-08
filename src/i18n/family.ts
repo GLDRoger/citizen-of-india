@@ -1,4 +1,9 @@
 export const familyEn = {
+  familyNoSharedRecords: "No records match this permission yet.",
+  familyUnavailableProfile: "Family connections without a demo profile can be viewed, but cannot respond or use shared access here.",
+  familyManageLegacy: "Manage Sunita → Arjun access",
+  familyCancelInvitation: "Cancel invitation",
+  eventConnectionCancelled: "Family connection invitation cancelled",
   familyNav: "Family",
   familyTitle: "Family centre",
   familySubtitle: "Keep family connections, requests and record access in one clear place.",
@@ -35,7 +40,7 @@ export const familyEn = {
   familyConnectionsIntro: "A connection describes your relationship. Sharing records is always a separate choice.",
   familyAddConnection: "Add a family connection",
   familyChoosePerson: "Choose a fictional profile",
-  familyChooseRelationship: "How are you connected?",
+  familyChooseRelationship: "How is this person related to you?",
   familyInvite: "Send invitation",
   familyInvitationSent: "Invitation sent",
   familyInvitationIncoming: "Invitation received",
@@ -73,6 +78,11 @@ export const familyEn = {
 };
 
 export const familyHi: Record<keyof typeof familyEn, string> = {
+  familyNoSharedRecords: "इस अनुमति में अभी कोई रिकॉर्ड उपलब्ध नहीं है।",
+  familyUnavailableProfile: "जिन सदस्यों की डेमो प्रोफ़ाइल नहीं है, उनके संबंध देख सकते हैं। वे यहाँ जवाब नहीं दे सकते या साझा रिकॉर्ड नहीं खोल सकते।",
+  familyManageLegacy: "सुनीता → अर्जुन की अनुमति सँभालें",
+  familyCancelInvitation: "निमंत्रण रद्द करें",
+  eventConnectionCancelled: "परिवार का निमंत्रण रद्द हुआ",
   familyNav: "परिवार",
   familyTitle: "परिवार केंद्र",
   familySubtitle: "परिवार के संबंध, अनुरोध और रिकॉर्ड की पहुँच एक स्पष्ट जगह पर रखें।",
@@ -109,7 +119,7 @@ export const familyHi: Record<keyof typeof familyEn, string> = {
   familyConnectionsIntro: "संबंध बताता है कि आप कैसे जुड़े हैं। रिकॉर्ड साझा करना हमेशा अलग अनुमति है।",
   familyAddConnection: "परिवार का संबंध जोड़ें",
   familyChoosePerson: "काल्पनिक प्रोफ़ाइल चुनें",
-  familyChooseRelationship: "आप कैसे जुड़े हैं?",
+  familyChooseRelationship: "यह व्यक्ति आपका क्या लगता है?",
   familyInvite: "आमंत्रण भेजें",
   familyInvitationSent: "आमंत्रण भेजा गया",
   familyInvitationIncoming: "आमंत्रण मिला",
@@ -147,6 +157,11 @@ export const familyHi: Record<keyof typeof familyEn, string> = {
 };
 
 export const familyKn: Record<keyof typeof familyEn, string> = {
+  familyNoSharedRecords: "ಈ ಅನುಮತಿಗೆ ಹೊಂದುವ ದಾಖಲೆಗಳು ಈಗಿಲ್ಲ.",
+  familyUnavailableProfile: "ಡೆಮೊ ಪ್ರೊಫೈಲ್ ಇಲ್ಲದ ಸದಸ್ಯರ ಸಂಬಂಧಗಳನ್ನು ನೋಡಬಹುದು. ಅವರು ಇಲ್ಲಿ ಪ್ರತಿಕ್ರಿಯಿಸಲು ಅಥವಾ ಹಂಚಿದ ದಾಖಲೆಗಳನ್ನು ತೆರೆಯಲು ಸಾಧ್ಯವಿಲ್ಲ.",
+  familyManageLegacy: "ಸುನೀತಾ → ಅರ್ಜುನ್ ಅನುಮತಿ ನಿರ್ವಹಿಸಿ",
+  familyCancelInvitation: "ಆಹ್ವಾನ ರದ್ದುಮಾಡಿ",
+  eventConnectionCancelled: "ಕುಟುಂಬದ ಆಹ್ವಾನ ರದ್ದಾಗಿದೆ",
   familyNav: "ಕುಟುಂಬ",
   familyTitle: "ಕುಟುಂಬ ಕೇಂದ್ರ",
   familySubtitle: "ಕುಟುಂಬ ಸಂಪರ್ಕಗಳು, ವಿನಂತಿಗಳು ಮತ್ತು ದಾಖಲೆ ಪ್ರವೇಶವನ್ನು ಒಂದೇ ಸ್ಪಷ್ಟ ಸ್ಥಳದಲ್ಲಿ ಇಡಿ.",
@@ -183,7 +198,7 @@ export const familyKn: Record<keyof typeof familyEn, string> = {
   familyConnectionsIntro: "ಸಂಪರ್ಕವು ನಿಮ್ಮ ಸಂಬಂಧವನ್ನು ಹೇಳುತ್ತದೆ. ದಾಖಲೆ ಹಂಚಿಕೆ ಯಾವಾಗಲೂ ಪ್ರತ್ಯೇಕ ಆಯ್ಕೆ.",
   familyAddConnection: "ಕುಟುಂಬ ಸಂಪರ್ಕ ಸೇರಿಸಿ",
   familyChoosePerson: "ಕಾಲ್ಪನಿಕ ಪ್ರೊಫೈಲ್ ಆಯ್ಕೆಮಾಡಿ",
-  familyChooseRelationship: "ನಿಮ್ಮ ಸಂಪರ್ಕ ಹೇಗೆ?",
+  familyChooseRelationship: "ಈ ವ್ಯಕ್ತಿ ನಿಮಗೆ ಯಾವ ಸಂಬಂಧ?",
   familyInvite: "ಆಹ್ವಾನ ಕಳುಹಿಸಿ",
   familyInvitationSent: "ಆಹ್ವಾನ ಕಳುಹಿಸಲಾಗಿದೆ",
   familyInvitationIncoming: "ಆಹ್ವಾನ ಬಂದಿದೆ",

@@ -1,3 +1,5 @@
+import { familyRelationship } from "./relationships";
+import { DEMO_TODAY } from "@/lib/demo-clock";
 import { demoNow } from "@/lib/demo-clock";
 import { daysUntil } from "@/lib/format";
 import type { MessageKey } from "@/i18n/messages";
@@ -454,14 +456,15 @@ export function getRelationshipViews(graph: CitizenGraph, personId: string): Rel
     .filter(
       (edge) =>
         (edge.type === "childOf" || edge.type === "spouseOf" || edge.type === "familyOf") &&
-        (edge.from === personId || edge.to === personId),
+        (edge.from === personId || edge.to === personId)
+        && (edge.type !== "familyOf" || (edge.status === "active" && !edge.validTo && edge.validFrom.slice(0, 10) <= DEMO_TODAY)),
     )
     .flatMap((edge): RelationshipView[] => {
       const relativeId = edge.from === personId ? edge.to : edge.from;
       const person = getPerson(graph, relativeId);
       if (!person) return [];
       const relationship = edge.type === "familyOf"
-        ? edge.attrs.relationship
+        ? familyRelationship(edge.attrs.relationship, edge.from === personId)
         : edge.type === "spouseOf"
         ? edge.status === "ended" ? "historical spouse" : "spouse"
         : edge.from === personId ? "parent" : "child";

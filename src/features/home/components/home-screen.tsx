@@ -55,12 +55,13 @@ function TaskLedgerRow({ application, index, item, obligation, personId }: { app
   const documentKindKey = task?.documentKind ? getDocumentKindMessageKey(task.documentKind) : undefined;
   const relationshipKey = item.familyRelationship ? getRelationshipMessageKey(item.familyRelationship) : undefined;
   const title = item.familyMemberName
-    ? t("familyAlertTitle", { relationship: relationshipKey ? t(relationshipKey) : t("relationshipOther"), name: item.familyMemberName, title: item.title })
+    ? t("familyAlertTitle", { relationship: relationshipKey ? t(relationshipKey) : t("relationshipOther"), name: item.familyMemberName, title: localizeNodeTitle(language, item.recordId ?? item.id, item.title) })
+    : item.titleKey ? t(item.titleKey, item.titleParams)
     : task?.titleKey
     ? t(task.titleKey, { document: documentKindKey ? t(documentKindKey) : task.documentKind ?? "" })
     : application?.attrs.kind === "benefit" && application.attrs.relatedTo
     ? t("benefitApplicationTitle", { benefit: localizeNodeTitle(language, application.attrs.relatedTo, task?.title ?? item.title) })
-    : task ? localizeNodeTitle(language, application?.id ?? obligation?.id ?? task.id, task.title) : item.title;
+    : task ? localizeNodeTitle(language, application?.id ?? obligation?.id ?? task.id, task.title) : localizeNodeTitle(language, item.recordId ?? item.id, item.title);
   const actionLabel = task?.metaKey === "outcomeUnresolvedMeta" ? t("followUp")
     : task?.id === "obl:echallan-500" ? t("pay")
     : task?.id === "obl:bbmp-property-tax" ? t("payPropertyTax")

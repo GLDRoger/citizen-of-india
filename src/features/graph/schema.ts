@@ -284,7 +284,7 @@ const connectionInvitationNodeSchema = z.object({
     relationship: connectionRelationshipSchema,
     requestedOn: z.iso.date(),
     respondedOn: z.iso.date().optional(),
-    status: z.enum(["requested", "accepted", "declined"]),
+    status: z.enum(["requested", "accepted", "declined", "cancelled"]),
   }),
   verification: verificationSchema,
 });
@@ -324,7 +324,7 @@ const spouseEdgeAttrsSchema = z.object({ marriageRegisteredAt: z.string().option
 const employmentEdgeAttrsSchema = z.object({ endReason: z.string().optional() });
 const nomineeEdgeAttrsSchema = z.object({ instrument: z.string(), share: z.number().min(0).max(1) });
 const legalHeirEdgeAttrsSchema = z.object({ share: z.number().min(0).max(1), consent: z.enum(["pending", "granted"]) });
-const delegateEdgeAttrsSchema = z.object({ scopes: z.array(z.string()), expiresOn: z.iso.date() });
+const delegateEdgeAttrsSchema = z.object({ delegationId: z.string().startsWith("dlg:").optional(), scopes: z.array(z.string()), expiresOn: z.iso.date() });
 const familyEdgeAttrsSchema = z.object({ relationship: connectionRelationshipSchema });
 const subjectEdgeAttrsSchema = z.object({
   role: z.string().optional(),

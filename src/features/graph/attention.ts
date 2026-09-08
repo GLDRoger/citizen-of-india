@@ -1,6 +1,6 @@
-import { DEMO_TODAY } from "@/lib/demo-clock";
-import { getActiveDelegation } from "./delegation";
-import { getConnectionInvitations, getFamilySharedAlerts, getFamilySharing } from "./family";
+import type { MessageKey } from "@/i18n/messages";
+import { getApplicationOwnership, getObligationOwnership } from "./ownership";
+import { getConnectionInvitations, getFamilySharedAlerts, getActiveFamilySharing } from "./family";
 import { getApplications, getNotices, getObligations, getPerson, getRelationshipViews, getThingsToDo, type NoticeView, type TaskView } from "./selectors";
 import type { CitizenGraph } from "./schema";
 
@@ -12,6 +12,9 @@ export type AttentionSource = "task" | "notice" | "connection" | "shared";
 export interface AttentionItem {
   id: string;
   title: string;
+  titleKey?: MessageKey;
+  titleParams?: Record<string, string>;
+  recordId?: string;
   meta: string;
   href: string;
   categories: AttentionCategory[];
@@ -44,9 +47,9 @@ function taskCategories(graph: CitizenGraph, task: TaskView): AttentionCategory[
 function taskState(graph: CitizenGraph, personId: string, task: TaskView): AttentionState {
   const id = task.id.replace(/:follow-up$/, "");
   const application = getApplications(graph, personId).find((node) => node.id === id);
-  if (application && ["submitted", "processing"].includes(application.attrs.status)) return "waiting";
+  if (application) return getApplicationOwnership(graph, application, personId)?.holder === "you" ? "action" : "waiting";
   const obligation = getObligations(graph, personId).find((node) => node.id === id);
-  if (obligation?.attrs.status === "processing") return "waiting";
+  if (obligation) return getObligationOwnership(obligation)?.holder === "you" ? "action" : "waiting";
   return "action";
 }
 
@@ -83,6 +86,7 @@ export function getAttentionItems(graph: CitizenGraph, personId: string): Attent
     items.push({
       id: `notice:${notice.node.id}`,
       title: notice.node.attrs.subject,
+      recordId: notice.node.id,
       meta: notice.node.attrs.sender,
       href: "/inbox",
       categories: noticeCategories(notice),
@@ -101,6 +105,8 @@ export function getAttentionItems(graph: CitizenGraph, personId: string): Attent
     items.push({
       id: invitation.id,
       title: incoming ? `${other?.attrs.name ?? "Family member"} invited you` : `Invitation to ${other?.attrs.name ?? "family member"}`,
+      titleKey: incoming ? "familyInviteFrom" : "familyInviteSentTo",
+      titleParams: { name: other?.attrs.name ?? "" },
       meta: incoming ? "Your answer is needed" : "Waiting for their answer",
       href: "/family#requests",
       categories: ["family"],
@@ -110,12 +116,12 @@ export function getAttentionItems(graph: CitizenGraph, personId: string): Attent
     });
   }
 
-  for (const { delegation, other } of getFamilySharing(graph, personId).filter(({ delegation }) => delegation.attrs.status === "active" && delegation.attrs.expiresOn >= DEMO_TODAY)) {
+  for (const { delegation, other } of getActiveFamilySharing(graph, personId)) {
     const recipient = delegation.attrs.delegateId === personId;
-    if (!getActiveDelegation(graph, delegation.attrs.delegateId, delegation.attrs.delegatorId)) continue;
     items.push({
       id: `${delegation.id}:shared`,
       title: recipient ? `${other.attrs.name} shared authorised updates with you` : `Authorised updates shared with ${other.attrs.name}`,
+      titleKey: "attentionSharedUpdate",
       meta: `Access ends ${delegation.attrs.expiresOn}`,
       href: "/family#access",
       categories: ["family"],
@@ -129,6 +135,7 @@ export function getAttentionItems(graph: CitizenGraph, personId: string): Attent
     items.push({
       id: `family-alert:${alert.id}`,
       title: alert.title,
+      recordId: alert.recordId,
       meta: alert.meta,
       href: alert.href,
       categories: ["family", ...(alert.kind === "obligation" ? ["financial" as const] : [])],

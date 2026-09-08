@@ -1,8 +1,10 @@
+import { seedLogins } from "./seed";
 import type { CitizenGraph, GraphNode } from "./schema";
-import { delegatedScopes, getActiveDelegation } from "./delegation";
+import { delegatedScopes, getActiveDelegations } from "./delegation";
 import { getNotices, getObligations, getOwnedAssets, getPerson, getRelationshipViews } from "./selectors";
 
-export type ConnectionRelationship = "parent" | "child" | "sibling" | "partner" | "other";
+import type { ConnectionRelationship } from "./relationships";
+export type { ConnectionRelationship } from "./relationships";
 export type ConnectionInvitation = Extract<GraphNode, { type: "connectionInvitation" }>;
 export const familySharingScopes = ["documents", "property", "pension", "tax"] as const;
 export type FamilySharingScope = typeof familySharingScopes[number];
@@ -15,7 +17,7 @@ export function getConnectionInvitations(graph: CitizenGraph, personId: string) 
 }
 
 export function getConnectedPersonIds(graph: CitizenGraph, personId: string) {
-  return new Set(getRelationshipViews(graph, personId).map((view) => view.person.id));
+  return new Set(getRelationshipViews(graph, personId).filter((view) => view.relationship !== "historical spouse" && !view.person.attrs.deceasedOn).map((view) => view.person.id));
 }
 
 export function getAvailableConnectionPeople(graph: CitizenGraph, personId: string) {
@@ -25,6 +27,7 @@ export function getAvailableConnectionPeople(graph: CitizenGraph, personId: stri
     .map((invitation) => invitation.attrs.inviterId === personId ? invitation.attrs.inviteeId : invitation.attrs.inviterId));
   return graph.nodes
     .filter((node): node is Extract<GraphNode, { type: "person" }> => node.type === "person"
+      && seedLogins.some((login) => login.personId === node.id) && !node.attrs.deceasedOn
       && node.id !== personId && !connected.has(node.id) && !invited.has(node.id))
     .sort((first, second) => first.attrs.name.localeCompare(second.attrs.name));
 }
@@ -42,7 +45,7 @@ export function getFamilySharing(graph: CitizenGraph, personId: string) {
 
 export function getActiveFamilySharing(graph: CitizenGraph, personId: string) {
   return getFamilySharing(graph, personId).filter(({ delegation }) =>
-    delegation.attrs.status === "active" && Boolean(getActiveDelegation(graph, delegation.attrs.delegateId, delegation.attrs.delegatorId)),
+    getActiveDelegations(graph, delegation.attrs.delegateId, delegation.attrs.delegatorId).some((active) => active.id === delegation.id),
   );
 }
 
@@ -73,6 +76,8 @@ export interface FamilySharedAlert {
   relationship: RelationshipForAlert;
   title: string;
   meta: string;
+  recordId: string;
+  dueDate?: string;
   href: string;
   relatedTo?: string;
   kind: "obligation" | "notice";
@@ -104,7 +109,9 @@ export function getFamilySharedAlerts(graph: CitizenGraph, delegateId: string): 
         ownerName: other.attrs.name,
         relationship: relationshipByPerson.get(ownerId) ?? "other",
         title: obligation.attrs.title,
-        meta: `${obligation.attrs.authority}${obligation.attrs.dueDate ? ` · Due ${obligation.attrs.dueDate}` : ""}`,
+        meta: obligation.attrs.authority,
+        dueDate: obligation.attrs.dueDate,
+        recordId: obligation.id,
         href: "/family#shared-alerts",
         relatedTo: obligation.id,
         kind: "obligation",
@@ -113,7 +120,7 @@ export function getFamilySharedAlerts(graph: CitizenGraph, delegateId: string): 
     for (const notice of getNotices(graph, ownerId)) {
       if (!matchesAnyScope(graph, ownerId, notice.node.attrs.relatedTo, scopes, notice.node.attrs.subject)) continue;
       const alertKey = `${ownerId}:${notice.node.id}`;
-      if (seen.has(alertKey) || alerts.some((alert) => alert.relatedTo === notice.node.attrs.relatedTo)) continue;
+      if (seen.has(alertKey) || alerts.some((alert) => alert.ownerId === ownerId && alert.relatedTo === notice.node.attrs.relatedTo)) continue;
       seen.add(alertKey);
       alerts.push({
         id: `${delegation.id}:${notice.node.id}`,
@@ -121,7 +128,8 @@ export function getFamilySharedAlerts(graph: CitizenGraph, delegateId: string): 
         ownerName: other.attrs.name,
         relationship: relationshipByPerson.get(ownerId) ?? "other",
         title: notice.node.attrs.subject,
-        meta: `${notice.node.attrs.sender} · Shared notice`,
+        meta: notice.node.attrs.sender,
+        recordId: notice.node.id,
         href: "/family#shared-alerts",
         relatedTo: notice.node.attrs.relatedTo,
         kind: "notice",

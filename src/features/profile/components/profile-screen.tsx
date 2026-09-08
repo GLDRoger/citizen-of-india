@@ -19,7 +19,9 @@ import {
   getRelationshipViews,
   type RelationshipView,
 } from "@/features/graph/selectors";
-import type { GraphMutation } from "@/features/graph/schema";
+import { getActiveDelegations, LEGACY_DELEGATION_ID } from "@/features/graph/delegation";
+import { preparePaperworkAccess, PAPERWORK_EXPIRES } from "@/features/graph/paperwork-procedures";
+import { revokeFamily } from "@/features/graph/family-procedures";
 import { useCitizenStore } from "@/features/graph/store";
 import { useI18n } from "@/i18n/use-i18n";
 import { localizeNodeTitle } from "@/i18n/content";
@@ -74,11 +76,7 @@ function GovernmentRow({ authority, detail, status, title }: { authority: string
   return <article className="grid min-h-20 grid-cols-[auto_minmax(0,1fr)] items-center gap-x-4 gap-y-2 border-b border-paper-line py-3 last:border-b-0 sm:grid-cols-[auto_minmax(0,1fr)_auto]"><Landmark aria-hidden className="size-5 shrink-0 text-indigo-deep" /><div className="min-w-0"><strong className="block text-sm leading-5 text-ink [overflow-wrap:anywhere]">{title}</strong><span className="text-xs leading-5 text-ink-mute">{authority}{detail ? ` · ${detail}` : ""}</span></div><div className="col-start-2 w-fit sm:col-start-3"><StatusPill label={statusKey ? t(statusKey) : status ?? t("pending")} tone={complete ? "success" : status === "due" ? "warning" : "info"} /></div></article>;
 }
 
-const DELEGATION_ID = "dlg:sunita-arjun-paperwork";
-const DELEGATION_EXPIRES = "2026-11-22";
-const DELEGATION_SCOPES = ["property", "documents"] as const;
-const selfDeclared = { source: "Self", state: "self-declared", asOf: "2026-08-28" } as const;
-
+const DELEGATION_ID = LEGACY_DELEGATION_ID;
 /**
  * Sunita ↔ Arjun shared access. Arjun can ask; only Sunita can grant or revoke.
  * The delegation node walks requested → active → revoked; nothing is deleted.
@@ -90,61 +88,25 @@ function DelegationPanel({ personId }: { personId: string }) {
   const router = useRouter();
   const graph = useCitizenStore((state) => state.graph);
   const commit = useCitizenStore((state) => state.commit);
+  const [error, setError] = useState(false);
   const isSunita = personId === "person:sunita";
   const isArjun = personId === "person:arjun";
-  const delegation = graph.nodes
-    .filter((node) => node.type === "delegation")
-    .find((node) => node.attrs.delegatorId === personId || node.attrs.delegateId === personId);
-  if (!delegation && !isSunita && !isArjun) return null;
+  const delegation = getNodeByType(graph, DELEGATION_ID, "delegation");
+  if (!isSunita && !isArjun) return null;
   const status = delegation?.attrs.status;
-  const active = status === "active";
+  const active = getActiveDelegations(graph, "person:arjun", "person:sunita").some((permission) => permission.id === DELEGATION_ID);
   const requested = status === "requested";
   const ended = status === "revoked" || status === "expired";
   const familyProperty = getNodeByType(graph, "prop:jpnagar-house", "property");
-  const expires = formatDate(delegation?.attrs.expiresOn ?? DELEGATION_EXPIRES, language);
+  const expires = formatDate(delegation?.attrs.expiresOn ?? PAPERWORK_EXPIRES, language);
 
-  const delegationNode = (nextStatus: "requested" | "active"): GraphMutation => delegation
-    ? { type: "patchAttrs", nodeId: delegation.id, attrs: { status: nextStatus, expiresOn: DELEGATION_EXPIRES } }
-    : {
-      type: "addNode",
-      node: {
-        id: DELEGATION_ID,
-        type: "delegation",
-        attrs: { title: "Property records and documents", delegateId: "person:arjun", delegatorId: "person:sunita", scopes: [...DELEGATION_SCOPES], expiresOn: DELEGATION_EXPIRES, status: nextStatus },
-        verification: selfDeclared,
-      },
-    };
-
-  const request = () => commit({ actorId: personId, labelKey: "eventAccessRequested", procedureId: "delegation", mutations: [delegationNode("requested")] });
-
-  const grant = () => {
-    const mutations: GraphMutation[] = [
-      delegationNode("active"),
-      {
-        type: "addEdge",
-        edge: {
-          id: `e:arjun-delegateof-sunita:${crypto.randomUUID()}`,
-          type: "delegateOf",
-          from: "person:arjun",
-          to: "person:sunita",
-          attrs: { scopes: [...DELEGATION_SCOPES], expiresOn: DELEGATION_EXPIRES },
-          validFrom: "2026-08-28",
-          status: "active",
-          verification: selfDeclared,
-        },
-      },
-    ];
-    commit({ actorId: personId, labelKey: "eventPaperworkDelegated", procedureId: "delegation", mutations });
-  };
-
-  const revoke = () => {
-    if (!delegation) return;
-    const activeEdge = graph.edges.find((edge) => edge.type === "delegateOf" && edge.from === delegation.attrs.delegateId && edge.to === delegation.attrs.delegatorId && edge.status === "active");
-    const mutations: GraphMutation[] = [
-      { type: "patchAttrs", nodeId: delegation.id, attrs: { status: "revoked" } },
-      ...(activeEdge ? [{ type: "endEdge" as const, edgeId: activeEdge.id, validTo: "2026-08-28" }] : []),
-    ];
-    commit({ actorId: personId, labelKey: "eventPaperworkRevoked", procedureId: "delegation", mutations });
+  const saveAccess = (action: "request" | "grant" | "revoke") => {
+    try {
+      const current = useCitizenStore.getState().graph;
+      const mutations = action === "revoke" ? revokeFamily(current, personId, DELEGATION_ID) : preparePaperworkAccess(current, personId, action);
+      commit({ actorId: personId, labelKey: action === "request" ? "eventAccessRequested" : action === "grant" ? "eventPaperworkDelegated" : "eventPaperworkRevoked", procedureId: "delegation", mutations });
+      setError(false);
+    } catch { setError(true); }
   };
 
   const title = active ? t("delegationActiveTitle")
@@ -159,10 +121,10 @@ function DelegationPanel({ personId }: { personId: string }) {
 
   const action = actorId && isSunita
     ? <p className="border-l-2 border-saffron pl-3 text-xs leading-5 text-paper/80">{t("actingNotDelegable", { name: "Sunita" })}</p>
-    : isSunita && !active ? <Button onClick={grant} variant="inverse">{t("delegationGrantAction")}</Button>
-    : isSunita && active ? <Button onClick={revoke} variant="inverseQuiet">{t("revoke")}</Button>
+    : isSunita && !active ? <Button onClick={() => saveAccess("grant")} variant="inverse">{t("delegationGrantAction")}</Button>
+    : isSunita && active ? <Button onClick={() => saveAccess("revoke")} variant="inverseQuiet">{t("revoke")}</Button>
     : isArjun && active && !actorId ? <Button onClick={() => { actFor("person:sunita", graph); window.scrollTo(0, 0); router.push("/home"); }} variant="saffron"><UsersRound aria-hidden className="size-4" />{t("actFor", { name: "Sunita" })}</Button>
-    : isArjun && !active && !requested && !actorId ? <Button onClick={request} variant="inverse">{t("delegationRequestAction")}</Button>
+    : isArjun && !active && !requested && !actorId ? <Button onClick={() => saveAccess("request")} variant="inverse">{t("delegationRequestAction")}</Button>
     : null;
 
   return (
@@ -171,6 +133,7 @@ function DelegationPanel({ personId }: { personId: string }) {
       <div className="grid gap-2"><p className="text-xs font-bold uppercase tracking-[0.12em] text-paper/55">{t("delegation")}</p><h2 className="font-display text-3xl font-semibold leading-none">{title}</h2><p className="text-xs leading-5 text-paper/72">{body}</p></div>
       {active && isArjun ? <div className="grid divide-y divide-paper/15 border-y border-paper/15 text-xs"><div className="grid gap-1 py-3"><span className="capitalize text-paper/60">{familyProperty?.attrs.kind ?? t("propertyAndVehicles")}</span><strong className="text-sm text-paper">{familyProperty?.attrs.authority ?? "BBMP"} · {familyProperty?.attrs.khataNumber ?? ""}</strong></div></div> : null}
       {action}
+      {error ? <p className="text-sm font-bold text-paper" role="alert">{t("sharedSaveError")}</p> : null}
     </section>
   );
 }
