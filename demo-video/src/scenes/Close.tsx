@@ -2,8 +2,8 @@ import { AbsoluteFill, Sequence } from "remotion";
 import { colors } from "../components/Editorial";
 import { EndCard, LanguageMorph } from "../motion/Identity";
 
-/** 1:48–2:00 — the last question, three scripts, the end card. */
-export const CLOSE_MORPH_AT = 40;
+/** 1:50–2:00 — three scripts and the Citizen end card. */
+export const CLOSE_MORPH_AT = 0;
 export const CLOSE_END_CARD_AT = 200;
 
 export function Close() {
@@ -11,7 +11,7 @@ export function Close() {
     <AbsoluteFill style={{ backgroundColor: colors.paper, justifyContent: "center", alignItems: "center" }}>
       <Sequence from={CLOSE_MORPH_AT} durationInFrames={CLOSE_END_CARD_AT - CLOSE_MORPH_AT} name="three scripts">
         <AbsoluteFill style={{ justifyContent: "center", alignItems: "center" }}>
-          <LanguageMorph at={0} hold={30} />
+          <LanguageMorph at={0} hold={50} />
         </AbsoluteFill>
       </Sequence>
       <Sequence from={CLOSE_END_CARD_AT} name="end card">

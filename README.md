@@ -6,7 +6,7 @@
 
 An independent, mobile-first prototype for handling life events, bills and deadlines, benefits, and government paperwork in plain language. Every person and record in the repository is fictional, and all government responses run in a clearly labelled simulated mode.
 
-[Try Citizen](https://citizen-of-india.vercel.app) · [Watch the two-minute demo](https://youtu.be/OuqARZ-FIg4)
+[Try Citizen](https://citizen-of-india.vercel.app) · [Watch the enhanced Round 2 demo](https://youtu.be/Sk7ebH2UKM8)
 
 ## Run locally
 
@@ -58,7 +58,7 @@ npm run lint
 npm run render
 ```
 
-The rendered MP4 is excluded from Git. You can watch the published edit on [YouTube](https://youtu.be/OuqARZ-FIg4).
+The rendered MP4 is excluded from Git. You can watch the enhanced Round 2 demo on [YouTube](https://youtu.be/Sk7ebH2UKM8).
 
 Music: [“Bombay Summer” by Shane Ivers](https://www.silvermansound.com/free-music/bombay-summer), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). See [`demo-video/MUSIC-CREDITS.md`](demo-video/MUSIC-CREDITS.md) for the full attribution.
 

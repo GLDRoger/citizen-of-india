@@ -21,6 +21,7 @@ const sceneSchema = z.object({
   direction: z.string().min(1),
   narration: z.string().min(1),
   captions: z.array(z.string().min(1)).min(1),
+  speechSeconds: z.number().positive().optional(),
 });
 const scriptSchema = z
   .array(sceneSchema)
@@ -286,7 +287,7 @@ try {
       "-i",
       sourcePath,
       "-af",
-      `atempo=${tempo.toFixed(6)},adelay=220:all=1,apad,atrim=duration=${sceneDuration.toFixed(3)},afade=t=in:st=0:d=0.08,afade=t=out:st=${Math.max(0, 0.22 + speechDuration - 0.16).toFixed(3)}:d=0.16,loudnorm=I=-17:TP=-1.5:LRA=9`,
+      `atempo=${tempo.toFixed(6)},adelay=220:all=1,apad,atrim=duration=${sceneDuration.toFixed(3)},afade=t=in:st=0:d=0.08,afade=t=out:st=${Math.max(0, 0.22 + speechDuration - 0.16).toFixed(3)}:d=0.16,loudnorm=I=-17:TP=-1.5:LRA=9,aresample=48000,apad,atrim=end_sample=${scene.durationInFrames * 1600},asetpts=N/SR/TB`,
       "-ar",
       "48000",
       "-ac",
@@ -319,7 +320,7 @@ try {
     ]),
   );
   const captions = script.flatMap((scene) =>
-    makeCaptions(scene, durationById.get(scene.id) ?? speechTargetFor(scene)),
+    makeCaptions(scene, durationById.get(scene.id) ?? scene.speechSeconds ?? speechTargetFor(scene)),
   );
   await writeFile(captionPath, `${JSON.stringify(captions, null, 2)}\n`);
   await writeFile(
@@ -332,6 +333,7 @@ try {
         language,
         generatedAt: new Date().toISOString(),
         sceneIds: script.map(({ id }) => id),
+        generatedScenes: metadata,
       },
       null,
       2,

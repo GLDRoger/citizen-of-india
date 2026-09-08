@@ -1,4 +1,3 @@
-import { questionLandingFrames } from "./components/QuestionTrack";
 import type { Sound } from "./motion/audio/Sfx";
 import { at, scenes } from "./timeline";
 
@@ -48,27 +47,25 @@ export const cues: Cue[] = [
   ...stamp(at("marriage", 186)),
   small(at("marriage", 195)), big(at("marriage", 200)),
   pulse(at("marriage", 240)), pulse(at("marriage", 280)), big(at("marriage", 320)),
-  // After round one: the gather, the surviving file.
-  big(at("after-round-one", 4)),
-  heavy(at("after-round-one", 120)),
-  pulse(at("after-round-one", 148)), pulse(at("after-round-one", 156)), pulse(at("after-round-one", 164)), big(at("after-round-one", 172)),
-  // The five question cards, wherever they land.
-  ...questionLandingFrames.flatMap((frame) => [heavy(frame), ...stamp(frame)]),
-  // UMANG: the map opens, the drag, the PAN detail, the cut to Home.
-  pulse(at("umang", 14)), pulse(at("umang", 75)), pulse(at("umang", 160)),
-  big(at("umang", 285)), pulse(at("umang", 293)),
+  // Continuity: the unchanged name, carried reference, failed send, retry and brief.
+  pulse(at("case-pending", 10)),
+  tap(at("case-followup", 7)), pulse(at("case-followup", 26)),
+  tap(at("case-followup", 49)), pulse(at("case-followup", 85)),
+  tap(at("case-recovery", 16)), small(at("case-recovery", 48), 0.55),
+  soft(at("case-recovery", 106)), tap(at("case-recovery", 171)),
+  ...stamp(at("case-recovery", 197)),
+  soft(at("case-brief", 60)), soft(at("case-brief", 114)),
+  soft(at("case-brief", 201)), soft(at("case-brief", 288)),
   // Delegation: phones, the grant tap, the edge, acting, revoke, edge ends.
   pulse(at("delegation", 6)), pulse(at("delegation", 12)),
   tap(at("delegation", 81)), pulse(at("delegation", 90)),
   tap(at("delegation", 136)), pulse(at("delegation", 142)),
   big(at("delegation", 150)), tap(at("delegation", 220)), pulse(at("delegation", 226)),
   tap(at("delegation", 291)), pulse(at("delegation", 297)), heavy(at("delegation", 315)),
-  // Wrong: the send, the "not yet".
-  tap(at("wrong", 55)), big(at("wrong", 70)), tap(at("wrong", 182)), big(at("wrong", 192)),
   // Timeline: rows.
   pulse(at("timeline", 12)), pulse(at("timeline", 40)), pulse(at("timeline", 70)), pulse(at("timeline", 100)),
   // Close: the language switches, the end card and its stamp.
-  pulse(at("close", 40)), pulse(at("close", 85)), pulse(at("close", 130)),
+  pulse(at("close", 0)), pulse(at("close", 65)), pulse(at("close", 130)),
   heavy(at("close", 200)), pulse(at("close", 207)),
   ...stamp(at("close", 241)),
 ];

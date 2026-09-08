@@ -4,7 +4,7 @@ import { colors } from "../components/Editorial";
 import { HighlightEdge } from "../motion/GraphNative";
 import { PhonePair } from "../motion/PhoneFrame";
 
-/** 1:18–1:31 — Arjun asks, Sunita grants, Arjun acts, Sunita revokes; the edge ends but stays. */
+/** 1:29–1:44 — Arjun asks, Sunita grants, Arjun acts, Sunita revokes; the edge ends but stays. */
 export const DELEGATION_GRANT_AT = 100;
 export const DELEGATION_EDGE_AT = 142;
 export const DELEGATION_ACT_AT = 150;

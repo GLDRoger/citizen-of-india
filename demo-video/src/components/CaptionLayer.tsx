@@ -18,7 +18,7 @@ const captions = z.array(captionSchema).parse(rawCaptions);
 export function CaptionLayer() {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  if (frame >= 3560) return null;
+  if (frame >= 3595) return null;
   const timeMs = (frame / fps) * 1000;
   const caption = captions.find(
     (candidate) => candidate.startMs <= timeMs && candidate.endMs > timeMs,

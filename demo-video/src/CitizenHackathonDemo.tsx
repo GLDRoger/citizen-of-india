@@ -3,9 +3,7 @@ import { AbsoluteFill, interpolate, Sequence, staticFile } from "remotion";
 import type { CitizenDemoProps } from "./Composition";
 import { CaptionLayer } from "./components/CaptionLayer";
 import { CutFlash } from "./components/CutFlash";
-import { QuestionTrack } from "./components/QuestionTrack";
 import { colors } from "./components/Editorial";
-import { AfterRoundOne } from "./scenes/AfterRoundOne";
 import { Challan } from "./scenes/Challan";
 import { Close } from "./scenes/Close";
 import { Delegation } from "./scenes/Delegation";
@@ -14,8 +12,7 @@ import { Marriage } from "./scenes/Marriage";
 import { Problem } from "./scenes/Problem";
 import { Thesis } from "./scenes/Thesis";
 import { Timeline } from "./scenes/Timeline";
-import { Umang } from "./scenes/Umang";
-import { Wrong } from "./scenes/Wrong";
+import { CasePending, CaseFollowup, CaseRecovery, CaseBrief } from "./scenes/Continuity";
 import { cues, impactFrames } from "./cues";
 import { Hit } from "./motion/audio/Sfx";
 import { musicVolume, sidechainDip } from "./motion/audio/ducking";
@@ -27,10 +24,11 @@ const sceneComponents: Record<string, React.FC> = {
   home: Home,
   challan: Challan,
   marriage: Marriage,
-  "after-round-one": AfterRoundOne,
-  umang: Umang,
+  "case-pending": CasePending,
+  "case-followup": CaseFollowup,
+  "case-recovery": CaseRecovery,
+  "case-brief": CaseBrief,
   delegation: Delegation,
-  wrong: Wrong,
   timeline: Timeline,
   close: Close,
 };
@@ -70,7 +68,6 @@ export function CitizenHackathonDemo({ musicVolume: musicVolumeBase, showCaption
           </Sequence>
         );
       })}
-      <QuestionTrack />
       <CutFlash />
       {showCaptions ? <CaptionLayer /> : null}
       <Audio
@@ -79,7 +76,9 @@ export function CitizenHackathonDemo({ musicVolume: musicVolumeBase, showCaption
           interpolate(frame, [0, 45, TOTAL_FRAMES - 150, TOTAL_FRAMES - 1], [0, 1, 0.7, 0], {
             extrapolateLeft: "clamp",
             extrapolateRight: "clamp",
-          }) * musicVolume(frame, musicVolumeBase) * sidechainDip(frame, impactFrames)
+          }) * musicVolume(frame, musicVolumeBase) * sidechainDip(frame, impactFrames) *
+          // Let the closing question land, then hold the mark without a music tail.
+          interpolate(frame, [3540, 3555], [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })
         }
       />
       <VoiceoverTrack volume={voiceoverVolume} />

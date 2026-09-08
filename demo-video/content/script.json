@@ -70,79 +70,87 @@
     "endPaddingInFrames": 12,
     "maximumTempo": 1.3,
     "direction": "Warm; this is two people. 'Say Arjun and Priya…' like setting up a story. Gentle emphasis on 'exactly'. 'Both records update' with a small smile.",
-    "narration": "Say Arjun and Priya want to register their marriage. He invites her from the app; on her own phone, Priya sees exactly what she is sharing, and consents. Both records update.",
+    "narration": "Say Arjun and Priya want to register their marriage. He invites her from the app; from her own profile, Priya sees exactly what she is sharing, and consents. Both records update.",
     "captions": [
       "Say Arjun and Priya want to register their marriage.",
       "He invites her from the app;",
-      "on her own phone, Priya sees exactly what she is sharing,",
+      "from her own profile, Priya sees exactly what she is sharing,",
       "and consents. Both records update."
-    ],
-    "speechSeconds": 11.08
+    ]
   },
   {
-    "id": "after-round-one",
+    "id": "case-pending",
     "startFrame": 1589,
-    "durationInFrames": 466,
-    "endPaddingInFrames": 12,
-    "maximumTempo": 1.3,
-    "direction": "Two beats. First the finding, plain and factual, with a slight shrug on 'mostly assistants, portals and wallets'. Then a turn on 'That is where we went deeper' — quieter, decided; 'the hard questions to ourselves' with a small smile. Brisk, about 165 words per minute.",
-    "narration": "After round one we read the rest of the top two-fifty: mostly assistants, portals and wallets. None keep a living record with consent and consequences. That is where we went deeper — and put the hard questions to ourselves.",
+    "durationInFrames": 180,
+    "endPaddingInFrames": 18,
+    "maximumTempo": 1.18,
+    "direction": "Matter-of-fact contrast. Acknowledge the submitted request, then land clearly on the unchanged name.",
+    "narration": "The request was sent. But Arjun's PAN still has the wrong name.",
     "captions": [
-      "After round one we read the rest of the top 250:",
-      "mostly assistants, portals and wallets.",
-      "None keep a living record with consent and consequences.",
-      "That is where we went deeper —",
-      "and put the hard questions to ourselves."
-    ],
-    "speechSeconds": 14.596
+      "The request was sent.",
+      "But Arjun's PAN still has the wrong name."
+    ]
   },
   {
-    "id": "umang",
-    "startFrame": 2055,
-    "durationInFrames": 404,
-    "maximumTempo": 1.3,
-    "direction": "Brisk, about 165 words per minute, never rushed. 'No.' is its own beat. The list is quick and even. 'not a chatbot' dry.",
-    "narration": "No. Those are a directory and a wallet. Citizen connects records to the work: every document, relative, job and asset on one map — and Home speaks first, from rules, not a chatbot.",
+    "id": "case-followup",
+    "startFrame": 1769,
+    "durationInFrames": 240,
+    "endPaddingInFrames": 18,
+    "maximumTempo": 1.18,
+    "direction": "One continuous action. Put the emphasis on original reference and history, not on the word grievance.",
+    "narration": "He marks it unresolved. Citizen carries the original reference and history into a grievance, without asking him to start again.",
     "captions": [
-      "No. Those are a directory and a wallet.",
-      "Citizen connects records to the work:",
-      "every document, relative, job and asset on one map —",
-      "and Home speaks first, from rules, not a chatbot."
-    ],
-    "endPaddingInFrames": 12,
-    "speechSeconds": 12.764
+      "He marks it unresolved.",
+      "Citizen carries the original reference and history",
+      "into a grievance, without asking him to start again."
+    ]
+  },
+  {
+    "id": "case-recovery",
+    "startFrame": 2009,
+    "durationInFrames": 330,
+    "endPaddingInFrames": 18,
+    "maximumTempo": 1.18,
+    "direction": "A short, calm interruption, not a dramatic failure. Leave a beat after fails; make recovery feel ordinary.",
+    "narration": "The send fails. Nothing was submitted. His draft stays. Reload, retry, and just one follow-up joins the original matter.",
+    "captions": [
+      "The send fails. Nothing was submitted.",
+      "His draft stays.",
+      "Reload, retry, and just one follow-up",
+      "joins the original matter."
+    ]
+  },
+  {
+    "id": "case-brief",
+    "startFrame": 2339,
+    "durationInFrames": 343,
+    "endPaddingInFrames": 18,
+    "maximumTempo": 1.18,
+    "direction": "Give the brief room to be read. Warm but precise. The final contrast is the point of the film.",
+    "narration": "His case brief keeps the evidence, actions and reference numbers together. Ready to print or save. The problem may remain unresolved. His record does not start over.",
+    "captions": [
+      "His case brief keeps the evidence, actions",
+      "and reference numbers together.",
+      "Ready to print or save.",
+      "The problem may remain unresolved.",
+      "His record does not start over."
+    ]
   },
   {
     "id": "delegation",
-    "startFrame": 2459,
+    "startFrame": 2682,
     "durationInFrames": 441,
     "maximumTempo": 1.3,
     "direction": "Plain and kind. 'nothing else' firm. Slow slightly on 'When the permission is revoked, the link ends' and let 'so the history stays' sit — it is the point of the film.",
-    "narration": "Sunita never fills a form. Arjun asks for access, she approves, and he sees only her property papers — nothing else. When the permission is revoked, the link ends — never deleted, so the history stays.",
+    "narration": "Sunita never fills a form. Arjun asks for access, she approves, and he sees the shared records, not her whole profile. When permission is revoked, the link ends, but the history stays.",
     "captions": [
       "Sunita never fills a form.",
       "Arjun asks for access, she approves,",
-      "and he sees only her property papers — nothing else.",
-      "When the permission is revoked, the link ends —",
-      "never deleted, so the history stays."
+      "and he sees the shared records, not her whole profile.",
+      "When permission is revoked, the link ends,",
+      "but the history stays."
     ],
-    "endPaddingInFrames": 12,
-    "speechSeconds": 13.88
-  },
-  {
-    "id": "wrong",
-    "startFrame": 2900,
-    "durationInFrames": 223,
-    "maximumTempo": 1.3,
-    "direction": "Matter-of-fact, reassuring. Brisk.",
-    "narration": "The old PAN stays until the authority answers. A bad result can be marked unresolved, without losing what happened.",
-    "captions": [
-      "The old PAN stays until the authority answers.",
-      "A bad result can be marked unresolved,",
-      "without losing what happened."
-    ],
-    "endPaddingInFrames": 12,
-    "speechSeconds": 7.099
+    "endPaddingInFrames": 12
   },
   {
     "id": "timeline",
@@ -162,15 +170,15 @@
     "id": "close",
     "startFrame": 3307,
     "durationInFrames": 293,
-    "endPaddingInFrames": 120,
-    "maximumTempo": 1.3,
-    "direction": "Three short facts, each a beat: 'Ukraine has one. Estonia has one.' Then 'one point four billion' with weight. The final question is not rhetorical bravado — ask it sincerely, slightly slower, and stop.",
-    "narration": "Ukraine has one. Estonia has one. Nobody has built it for one point four billion people. Why can't India be the first?",
+    "endPaddingInFrames": 45,
+    "maximumTempo": 1.18,
+    "direction": "Deliver this entire 23-word close briskly within eight seconds, around 175 words per minute. No long pauses between sentences, no drawn-out words. Say UPI as U P I. The public services question has rising curiosity; One connected record ends with firm downward conviction. Speak only the transcript.",
+    "narration": "India built UPI for payments. Why not do the same for public services? One country. A billion lives. One connected record.",
     "captions": [
-      "Ukraine has one. Estonia has one.",
-      "Nobody has built it for 1.4 billion people.",
-      "Why can't India be the first?"
-    ],
-    "speechSeconds": 8.167
+      "India built UPI for payments.",
+      "Why not do the same for public services?",
+      "One country. A billion lives.",
+      "One connected record."
+    ]
   }
 ]
