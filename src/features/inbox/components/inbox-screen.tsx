@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { Page, PageHeader } from "@/components/ui/page";
 import { Button } from "@/components/ui/button";
@@ -26,18 +26,26 @@ function noticeFromHash() {
   }
 }
 
+function subscribeToNoticeHash(onChange: () => void) {
+  window.addEventListener("hashchange", onChange);
+  window.addEventListener("popstate", onChange);
+  return () => {
+    window.removeEventListener("hashchange", onChange);
+    window.removeEventListener("popstate", onChange);
+  };
+}
+
 function InboxForPerson({ personId }: { personId: string }) {
   const { language, t } = useI18n();
   const graph = useCitizenStore((state) => state.graph);
-  const [selectedId, setSelectedId] = useState(noticeFromHash);
+  const selectedId = useSyncExternalStore(
+    subscribeToNoticeHash,
+    noticeFromHash,
+    () => "",
+  );
   const detailRef = useRef<HTMLDivElement>(null);
   const notices = getNotices(graph, personId);
   const selected = notices.find(({ node }) => node.id === selectedId);
-  useEffect(() => {
-    const changed = () => setSelectedId(noticeFromHash());
-    window.addEventListener("hashchange", changed);
-    return () => window.removeEventListener("hashchange", changed);
-  }, []);
   useEffect(() => {
     if (!selectedId) return;
     const { graph: currentGraph, commit } = useCitizenStore.getState();
@@ -67,8 +75,8 @@ function InboxForPerson({ personId }: { personId: string }) {
       });
   }, [personId, selectedId]);
   const openId = (noticeId: string) => {
-    setSelectedId(noticeId);
     window.history.replaceState(null, "", `#${encodeURIComponent(noticeId)}`);
+    window.dispatchEvent(new HashChangeEvent("hashchange"));
   };
   return (
     <Page className="grid gap-7">
