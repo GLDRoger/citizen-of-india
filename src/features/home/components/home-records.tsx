@@ -1,20 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, ChevronDown, MessageSquareText } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { useRef, useState } from "react";
-import { Button, LinkButton } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/feedback";
 import { ListRow } from "@/components/ui/list-row";
-import { SimulatedChip, StatusPill, VerificationBadge } from "@/components/ui/status";
+import { StatusPill, VerificationBadge } from "@/components/ui/status";
 import { getActivityEvents, getDocuments, getNotices, getPerson, type NoticeView } from "@/features/graph/selectors";
 import type { CitizenGraph, GraphEvent } from "@/features/graph/schema";
 import { useCitizenStore } from "@/features/graph/store";
-import { createFallbackExplanation } from "@/features/inbox/fallback";
-import type { ExplainResponse } from "@/features/inbox/schema";
-import { NoticeLens } from "@/features/inbox/components/notice-lens";
+import { Button } from "@/components/ui/button";
+import { NoticeDetail, getNoticeAuthority } from "@/features/inbox/components/notice-detail";
 import { useI18n } from "@/i18n/use-i18n";
-import { localizeNodeTitle, localizeNoticeBody } from "@/i18n/content";
+import { localizeNodeTitle } from "@/i18n/content";
 import { getDocumentKindMessageKey, localizeEventLabel } from "@/i18n/formatters";
 import { formatDate, formatDateTime } from "@/lib/format";
 
@@ -22,53 +20,6 @@ import { formatDate, formatDateTime } from "@/lib/format";
 function actedByOther(graph: CitizenGraph, event: GraphEvent, personId: string) {
   if (event.actorId === personId || event.id.startsWith("evt:seed-")) return undefined;
   return getPerson(graph, event.actorId)?.attrs.name ?? event.actorId;
-}
-
-function getNoticeAuthority(graph: CitizenGraph, notice: NoticeView) {
-  const related = notice.node.attrs.relatedTo
-    ? graph.nodes.find((node) => node.id === notice.node.attrs.relatedTo)
-    : undefined;
-  if (related?.type === "application" || related?.type === "benefit" || related?.type === "document" || related?.type === "obligation") {
-    return related.attrs.authority ?? notice.node.verification.source;
-  }
-  return notice.node.verification.source;
-}
-
-function getLinkedRecordTitle(graph: CitizenGraph, notice: NoticeView, language: "en" | "hi" | "kn") {
-  const relatedId = notice.node.attrs.relatedTo;
-  if (!relatedId) return "—";
-  const related = graph.nodes.find((node) => node.id === relatedId);
-  if (!related) return "—";
-  if (related.type === "application" || related.type === "obligation") return localizeNodeTitle(language, related.id, related.attrs.title);
-  if (related.type === "benefit") return localizeNodeTitle(language, related.id, related.attrs.name);
-  if (related.type === "employment") return `${related.attrs.employer} · ${related.attrs.designation}`;
-  if (related.type === "document") return localizeNodeTitle(language, related.id, related.attrs.kind.replaceAll("-", " "));
-  return localizeNodeTitle(language, related.id, notice.node.attrs.subject);
-}
-
-function LegitimateNoticeDetail({ authority, linkedRecord, notice }: { authority: string; linkedRecord: string; notice: NoticeView }) {
-  const { language, t } = useI18n();
-  const [explanation, setExplanation] = useState<ExplainResponse | null>(null);
-  const [unknown, setUnknown] = useState(false);
-
-  const explain = () => {
-    setUnknown(false);
-    try {
-      setExplanation(createFallbackExplanation(notice.node.id, language));
-    } catch {
-      setUnknown(true);
-    }
-  };
-
-  return (
-    <article className="grid gap-6 rounded-[3px] border border-paper-line bg-paper p-5 sm:p-7">
-      <div className="flex flex-wrap items-center justify-between gap-3"><div className="grid gap-1"><p className="eyebrow">{authority}</p><h3 className="font-display text-3xl font-semibold leading-tight tracking-[-0.035em] text-ink">{localizeNodeTitle(language, notice.node.id, notice.node.attrs.subject)}</h3></div><div className="flex flex-wrap gap-2"><VerificationBadge verification={notice.node.verification} /><SimulatedChip authority={authority} /></div></div>
-      <blockquote className="border-y border-paper-line py-5 text-sm leading-7 text-ink-mute">{notice.node.attrs.lensText ?? localizeNoticeBody(language, notice.node.id, notice.node.attrs.body)}</blockquote>
-      {explanation ? <div className="grid gap-4 rounded-[3px] bg-indigo-tint p-5"><div className="flex items-center justify-between gap-3"><p className="eyebrow">{t("explain")}</p><SimulatedChip authority={explanation.authority} /></div><p className="font-display text-xl font-semibold leading-snug text-ink">{explanation.plainLanguage}</p><p className="grid gap-1 text-xs leading-5 text-ink-mute"><strong className="text-ink">{t("whatItMeans")}</strong>{explanation.whatItMeans}</p><p className="grid gap-1 text-xs leading-5 text-ink-mute"><strong className="text-ink">{t("nextAction")}</strong>{explanation.nextAction}</p></div> : unknown ? <div className="rounded-[3px] bg-paper-shade p-5 text-sm leading-6 text-ink-mute">{t("noticeLensUnknownBody")}</div> : null}
-      <div className="flex flex-col gap-2 sm:flex-row">{explanation || unknown ? null : <Button onClick={explain} variant="secondary"><MessageSquareText aria-hidden className="size-4" />{t("explain")}</Button>}{notice.node.attrs.relatedTo === "obl:echallan-500" ? <LinkButton href="/workflows/obligations">{t("respond")}<ArrowRight aria-hidden className="size-4" /></LinkButton> : notice.node.id === "ntc:epfo-passbook" ? <LinkButton href="/workflows/epfo">{t("epfoService")}<ArrowRight aria-hidden className="size-4" /></LinkButton> : notice.node.id === "ntc:marriage-ripple" ? <LinkButton href="/workflows/marriage">{t("view")}<ArrowRight aria-hidden className="size-4" /></LinkButton> : null}</div>
-      <details className="group border-t border-paper-line pt-4"><summary className="flex min-h-11 items-center justify-between text-xs font-bold text-ink-mute">{t("source")}<ChevronDown aria-hidden className="size-3.5 transition-transform group-open:rotate-180" /></summary><div className="grid gap-1 pb-2 pt-3 text-xs leading-5 text-ink-mute"><span><strong className="text-ink">{t("authority")}:</strong> {authority}</span><span><strong className="text-ink">{t("checked")}:</strong> {formatDate(notice.node.verification.asOf, language)}</span><span><strong className="text-ink">{t("linkedRecord")}:</strong> {linkedRecord}</span></div></details>
-    </article>
-  );
 }
 
 function DocumentsRail({ personId }: { personId: string }) {
@@ -115,12 +66,11 @@ export function HomeRecords({ personId }: { personId: string }) {
         <details className="group overflow-hidden rounded-[3px] border border-paper-line bg-panel px-5" onToggle={(event) => setInboxOpen(event.currentTarget.open)} open={inboxOpen}>
           <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 font-display text-2xl font-semibold text-ink [&::-webkit-details-marker]:hidden"><span>{t("governmentInbox")}</span><span className="flex items-center gap-3 text-base tabular-nums text-ink-mute">{notices.length}<ChevronDown aria-hidden className="size-4 transition-transform group-open:rotate-180" /></span></summary>
           <div className="grid gap-5 border-t border-paper-line">
-            {notices.length ? <div>{notices.map((notice) => { const title = localizeNodeTitle(language, notice.node.id, notice.node.attrs.subject); return <ListRow action={<Button aria-label={`${t("view")}: ${title}`} onClick={() => openNotice(notice)} variant="quiet">{t("view")}</Button>} key={notice.node.id} meta={`${getNoticeAuthority(graph, notice)} · ${formatDate(notice.node.attrs.receivedOn, language)}`} status={<StatusPill label={notice.read ? t("done") : t("unread")} tone={notice.read ? "neutral" : "info"} />} title={title} />; })}</div> : <EmptyState title={t("noItems")} />}
-            {selected ? <div className="pb-5" ref={detailRef}><LegitimateNoticeDetail authority={getNoticeAuthority(graph, selected)} key={selected.node.id} linkedRecord={getLinkedRecordTitle(graph, selected, language)} notice={selected} /></div> : null}
+            {notices.length ? <div>{notices.map((notice) => { const title = localizeNodeTitle(language, notice.node.id, notice.node.attrs.subject); return <ListRow action={<Button aria-label={`${t("view")}: ${title}`} onClick={() => openNotice(notice)} variant="quiet">{t("view")}</Button>} key={notice.node.id} meta={`${notice.node.attrs.lensSavedOn && notice.node.verification.source === "Self" ? t("noticeLensSavedByYou") : getNoticeAuthority(graph, notice)} · ${formatDate(notice.node.attrs.receivedOn, language)}`} status={<StatusPill label={notice.read ? t("noticeRead") : t("unread")} tone={notice.read ? "neutral" : "info"} />} title={title} />; })}</div> : <EmptyState title={t("noItems")} />}
+            {selected ? <div className="pb-5" ref={detailRef}><NoticeDetail key={selected.node.id} notice={selected} personId={personId} /></div> : null}
           </div>
         </details>
-        <NoticeLens personId={personId} />
-        <Link className="min-h-11 content-center justify-self-start text-xs font-bold text-indigo-deep underline decoration-indigo-deep/25 underline-offset-4" href="/inbox">{t("noticeLensInboxAction")}</Link>
+        <Link className="min-h-11 content-center justify-self-start text-xs font-bold text-indigo-deep underline decoration-indigo-deep/25 underline-offset-4" href="/inbox">{t("noticeLensTitle")}</Link>
         <section>{events.length ? <details className="group overflow-hidden rounded-[3px] border border-paper-line bg-panel px-5"><summary className="flex min-h-16 items-center justify-between font-display text-2xl font-semibold text-ink">{t("recentActivity")}<ChevronDown aria-hidden className="size-4 text-ink-mute transition-transform group-open:rotate-180" /></summary><ol className="border-t border-paper-line">{events.slice(0, 4).map((event) => <li className="grid grid-cols-[auto_minmax(0,1fr)] gap-4 border-b border-paper-line py-4 last:border-b-0" key={event.id}><span className="mt-1.5 size-2 rounded-full bg-green-deep" /><div><strong className="block text-sm text-ink">{localizeEventLabel(event, language)}</strong><span className="text-xs text-ink-mute">{formatDateTime(event.occurredAt, language)}{actedByOther(graph, event, personId) ? ` · ${t("recentBy", { name: actedByOther(graph, event, personId) ?? "" })}` : ""}</span></div></li>)}</ol></details> : <EmptyState title={t("noActivity")} />}</section>
       </section>
       <DocumentsRail personId={personId} />

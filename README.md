@@ -39,6 +39,12 @@ Codex (gpt-5.6) wrote the code, working from design and review direction by the 
 
 `src/data/seed.json` is the sole source of sample profile data. Components never mutate the graph directly: workflow procedures emit typed mutations through `src/features/graph/mutations.ts`, and selector functions derive every citizen-facing view from the graph.
 
+## Family and notices
+
+`/family` keeps connections separate from record-sharing permissions. Arjun, Priya and Sunita can send, accept, decline or cancel invitations. Sharing is explicit, scoped and revocable; changing or ending one permission does not change another person's access. Other family members remain read-only seed context.
+
+`/inbox` explains the three supported notice samples in English, Hindi and Kannada. Changed or unfamiliar messages stay uncertain and can be saved for review without invented facts or a guessed workflow. Saved notices belong to the active profile; opening one does not mark the underlying government task as completed.
+
 ## Verification
 
 ```bash

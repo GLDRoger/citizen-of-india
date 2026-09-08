@@ -1,4 +1,7 @@
 export const noticeLensEn = {
+  noticeLensSavedByYou: "Saved by you",
+  noticeRead: "Read",
+  noticeLensViewSaved: "View saved notice",
   noticeLensTitle: "Understand a notice",
   noticeLensIntro: "Paste a fictional SMS, email or letter and Citizen will explain only what this demo recognises.",
   noticeLensPaste: "Paste the message",
@@ -37,6 +40,9 @@ export const noticeLensEn = {
 };
 
 export const noticeLensHi: Record<keyof typeof noticeLensEn, string> = {
+  noticeLensSavedByYou: "आपने सहेजा",
+  noticeRead: "पढ़ा गया",
+  noticeLensViewSaved: "सहेजा नोटिस देखें",
   noticeLensTitle: "नोटिस समझें",
   noticeLensIntro: "काल्पनिक SMS, ईमेल या पत्र चिपकाएँ। Citizen केवल वही समझाएगा जिसे यह डेमो पहचानता है।",
   noticeLensPaste: "संदेश चिपकाएँ",
@@ -75,6 +81,9 @@ export const noticeLensHi: Record<keyof typeof noticeLensEn, string> = {
 };
 
 export const noticeLensKn: Record<keyof typeof noticeLensEn, string> = {
+  noticeLensSavedByYou: "ನೀವು ಉಳಿಸಿದ್ದು",
+  noticeRead: "ಓದಲಾಗಿದೆ",
+  noticeLensViewSaved: "ಉಳಿಸಿದ ಸೂಚನೆ ನೋಡಿ",
   noticeLensTitle: "ಸೂಚನೆಯನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಿ",
   noticeLensIntro: "ಕಾಲ್ಪನಿಕ SMS, ಇಮೇಲ್ ಅಥವಾ ಪತ್ರವನ್ನು ಅಂಟಿಸಿ. ಈ ಡೆಮೊ ಗುರುತಿಸುವ ವಿಷಯವನ್ನಷ್ಟೇ Citizen ವಿವರಿಸುತ್ತದೆ.",
   noticeLensPaste: "ಸಂದೇಶ ಅಂಟಿಸಿ",
